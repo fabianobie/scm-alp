@@ -30,7 +30,7 @@ import br.com.ap.comum.util.UtilLog;
 
 /**
  * Classe responsável pelo tratamento de arquivos.
- * 
+ *
  * @author adrianop
  */
 public final class UtilArquivo {

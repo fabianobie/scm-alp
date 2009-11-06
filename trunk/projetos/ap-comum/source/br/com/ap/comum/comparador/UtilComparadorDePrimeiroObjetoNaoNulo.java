@@ -13,7 +13,7 @@ package br.com.ap.comum.comparador;
  * 
  * @author adrianop
  */
-public final class UtilComparadorDePrimeiroObjetoNaoNulo extends
+public class UtilComparadorDePrimeiroObjetoNaoNulo extends
 		UtilComparadorAbstrato<Object> {
 
 	/**
