@@ -16,7 +16,6 @@ import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
 
 import br.com.ap.arquitetura.dao.CrudDao;
-import br.com.ap.arquitetura.dao.DAO;
 import br.com.ap.comum.javabean.entidade.Entidade;
 import br.com.ap.comum.javabean.entidade.ExclusaoLogica;
 
@@ -26,7 +25,7 @@ import br.com.ap.comum.javabean.entidade.ExclusaoLogica;
  * @author adrianop
  * @param <T> Tipo da entidade
  */
-public class HibernateCrudDaoAbstrato<T extends Entidade> extends
+public abstract class HibernateCrudDaoAbstrato<T extends Entidade> extends
         HibernateDaoAbstrato<T> implements CrudDao<T> {
 
 	/**
@@ -37,7 +36,7 @@ public class HibernateCrudDaoAbstrato<T extends Entidade> extends
 
 		if (isReferencia(entidade)) {
 			registrarAcaoDeAlteracao();
-			getSession().update(entidade);
+			getHibernateTemplate().update(entidade);
 		}
 	}
 
@@ -81,8 +80,8 @@ public class HibernateCrudDaoAbstrato<T extends Entidade> extends
 				removerLogicamente(entidade);
 			} else {
 				registrarAcaoDeExclusao();
-				getSession().delete(entidade);
-				getSession().flush();
+				getHibernateTemplate().delete(entidade);
+				getHibernateTemplate().flush();
 			}
 		}
 	}
@@ -109,26 +108,11 @@ public class HibernateCrudDaoAbstrato<T extends Entidade> extends
 
 		if (isReferencia(entidade)) {
 			registrarAcaoDeInclusao();
-			resultado = (R) getSession().save(entidade);
+			resultado = (R) getHibernateTemplate().save(entidade);
 		}
 		return resultado;
 	}
 
-	/**
-	 * @see DAO#obter(Serializable)
-	 */
-	@SuppressWarnings("unchecked")
-	public T obter(Serializable pk) {
-		T resultado = null;
-
-		if (isReferencia(pk)) {
-			registrarAcaoDeConsulta();
-			Class<T> tipo = getTipoDaEntidade();
-			resultado = (T) getSession().get(tipo, pk);
-		}
-		return resultado;
-	}
-	
 	/**
 	 * @see br.com.ap.arquitetura.util.CRUD#obter(br.com.ap.comum.javabean.JavaBean)
 	 */
@@ -138,7 +122,10 @@ public class HibernateCrudDaoAbstrato<T extends Entidade> extends
 		T resultado = null;
 
 		if (isReferencia(entidade)) {
-			resultado = obter(entidade.getIdentificador());
+			registrarAcaoDeConsulta();
+			Class<T> tipo = getTipoDaEntidade();
+			Serializable pk = entidade.getIdentificador();
+			resultado = (T) getHibernateTemplate().get(tipo, pk);
 		}
 		return resultado;
 	}
@@ -156,7 +143,7 @@ public class HibernateCrudDaoAbstrato<T extends Entidade> extends
 				registrarAcaoDeInclusao();
 			}
 
-			getSession().saveOrUpdate(entidade);
+			getHibernateTemplate().saveOrUpdate(entidade);
 		}
 	}
 
