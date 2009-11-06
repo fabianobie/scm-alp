@@ -79,7 +79,7 @@ public final class UtilObjeto {
 	 * @return Classe
 	 */
 	@SuppressWarnings("unchecked")
-	public static <T extends Object> Class<T> getClasse(T objeto) {
+	public static <T> Class<T> getClasse(T objeto) {
 		Class<T> classe = null;
 
 		if (isReferencia(objeto)) {
