@@ -1,0 +1,5 @@
+Passos para execução do teste.
+
+1) Crie o banco de dados no My-SQL, use os arquivos na pasta teste\banco;
+2) Configure o acesso ao banco de dados no arquivo hibernate.cfg.xml;
+3) Crie a massa de dados no respectivo banco, o script de carga está na pasta teste\banco.
