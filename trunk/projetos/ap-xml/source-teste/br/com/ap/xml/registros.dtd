@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!ELEMENT registros (registro)*>
+<!ELEMENT registro (nome, endereco, nascimento)>
+<!ELEMENT nome (#PCDATA)>
+<!ELEMENT endereco (#PCDATA)>
+<!ELEMENT nascimento (#PCDATA)>
+
+<!ATTLIST registro 
+	id CDATA #REQUIRED>
