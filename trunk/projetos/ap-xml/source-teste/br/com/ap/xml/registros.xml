@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<registros>
+	<registro id="1598878">
+		<nome>Adriano Pamplona</nome>
+		<endereco>CSB 05 Lote 02 ap. 703</endereco>
+		<nascimento>23/10/1978</nascimento>
+	</registro>
+	<registro id="159874">
+		<nome>Fulano de Tal</nome>
+		<endereco>QSB 05 casa 18</endereco>
+		<nascimento>11/06/1970</nascimento>
+	</registro>
+</registros>

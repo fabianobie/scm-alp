@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="util-comum" basedir="." default="init">
+	<property file="build.properties"/>
+	
+	<path id="classpath">
+		<fileset dir="${classpath.path}">
+			<include name="**/*jar"/>
+		</fileset>
+	</path>
+	
+	<target name="init">
+		<antcall target="compile"/>
+		<antcall target="package-bin"/>
+		<antcall target="package-src"/>
+		<antcall target="package-dep"/>
+	</target>
+			
+	<target name="compile">
+		<delete>
+			<fileset dir="${source.path}">
+				<include name="**/*.class"/>
+			</fileset>
+		</delete>
+		
+		<javac srcdir="${source.path}" destdir="${source.path}" debug="true" classpathref="classpath"/>
+	</target>
+
+	<target name="package-bin">
+		<zip destfile="${package.path}${package.bin.name}">
+			<fileset dir="${source.path}">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</zip>
+	</target>
+
+	<target name="package-src">
+		<zip destfile="${package.path}${package.src.name}">
+			<fileset dir="${source.path}">
+				<exclude name="**/*.class"/>
+			</fileset>
+		</zip>
+	</target>
+
+	<target name="package-dep">
+		<zip destfile="${package.path}${package.dep.name}">
+			<fileset dir="${source.lib}" excludes="${package.dep.exclude}">
+			</fileset>
+		</zip>
+	</target>
+	
+	<target name="copiar-para-dependentes">
+		<copy file="${package.path}${package.bin.name}" todir="C:/desenvolvimento/projetos/ap-hibernate/build/lib/"/>
+	</target>
+
+</project>
