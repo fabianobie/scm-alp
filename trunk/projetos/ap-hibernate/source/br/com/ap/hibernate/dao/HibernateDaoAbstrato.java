@@ -10,11 +10,12 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.ScrollableResults;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
@@ -26,6 +27,7 @@ import org.hibernate.criterion.SimpleExpression;
 import org.hibernate.impl.CriteriaImpl;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.transform.ResultTransformer;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import br.com.ap.arquitetura.dao.DAO;
 import br.com.ap.arquitetura.holder.PaginacaoHolder;
@@ -52,31 +54,17 @@ import br.com.ap.reflexao.UtilReflexaoPropriedade;
  * @param <T> Tipo do objeto tratado pela DAO
  * @author AdrianoP
  */
-public abstract class HibernateDaoAbstrato<T extends Entidade> implements DAO<T> {
-	
-	private SessionFactory sessionFactory;
-	
-	/**
-	 * @return sessionFactory
-	 */
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
+public class HibernateDaoAbstrato<T extends Entidade> extends
+        HibernateDaoSupport implements DAO<T> {
 
 	/**
-	 * @param sessionFactory Atribui sessionFactory
-	 */
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-	
-	/**
-	 * Retornar a Session.
+	 * Configura o SessionFactory do hibernate.
 	 * 
-	 * @return Session
+	 * @param sessionFactory SessionFactory do hibernate
 	 */
-	public Session getSession() {
-		return getSessionFactory().openSession();
+	@Resource(name = "mySessionFactory")
+	protected void bindSessionFactory(SessionFactory sessionFactory) {
+		setSessionFactory(sessionFactory);
 	}
 
 	/**
@@ -89,7 +77,7 @@ public abstract class HibernateDaoAbstrato<T extends Entidade> implements DAO<T>
 		if (isReferencia(entidade) && !isPersistente(entidade)) {
 			registrarAcaoDeConsulta();
 			Serializable pk = entidade.getIdentificador();
-			getSession().load(entidade, pk);
+			getHibernateTemplate().load(entidade, pk);
 		}
 	}
 
@@ -900,6 +888,4 @@ public abstract class HibernateDaoAbstrato<T extends Entidade> implements DAO<T>
 	protected void registrarAcaoDeInclusao() {
 		HibernateHolder.setAcaoDeInclusao();
 	}
-
-
 }
