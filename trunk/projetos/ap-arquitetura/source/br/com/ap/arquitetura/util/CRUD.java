@@ -18,15 +18,6 @@ import br.com.ap.comum.javabean.JavaBean;
  */
 public interface CRUD<T extends JavaBean> {
 
-	/**
-     * Busca a entidade pelo seu identificador.
-     * 
-     * @param entidade Código do identificador (integer, long etc).
-     * 
-     * @return Entidade pesquisada
-     */
-	public T obter(Serializable pk);
-	
     /**
      * Busca a entidade pelo seu identificador.
      * 
