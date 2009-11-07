@@ -1,5 +1,5 @@
 /*
- * ICrud.java
+ * CRUD.java
  * 
  * Data de criação: 19/03/2009
  */
