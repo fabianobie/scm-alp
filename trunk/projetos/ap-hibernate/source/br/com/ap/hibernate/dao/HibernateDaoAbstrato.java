@@ -16,6 +16,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.ScrollableResults;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.MatchMode;
@@ -27,7 +28,6 @@ import org.hibernate.criterion.SimpleExpression;
 import org.hibernate.impl.CriteriaImpl;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.transform.ResultTransformer;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import br.com.ap.arquitetura.dao.DAO;
 import br.com.ap.arquitetura.holder.PaginacaoHolder;
@@ -51,40 +51,61 @@ import br.com.ap.reflexao.UtilReflexaoPropriedade;
 /**
  * Classe responsável pela persistência usando hibernate.
  * 
- * @param <T> Tipo do objeto tratado pela DAO
+ * @param <T>
+ *            Tipo do objeto tratado pela DAO
  * @author AdrianoP
  */
-public class HibernateDaoAbstrato<T extends Entidade> extends
-        HibernateDaoSupport implements DAO<T> {
+public class HibernateDaoAbstrato<T extends Entidade> implements DAO<T> {
+
+	private SessionFactory	sessionFactory;
+	private Session			session;
+	
+	/**
+	 * @return SessionFactory
+	 */
+	public SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
 
 	/**
-	 * Configura o SessionFactory do hibernate.
-	 * 
-	 * @param sessionFactory SessionFactory do hibernate
+	 * @param sessionFactory
+	 *            Atribui o SessionFactory do hibernate
 	 */
-	@Resource(name = "mySessionFactory")
-	protected void bindSessionFactory(SessionFactory sessionFactory) {
-		setSessionFactory(sessionFactory);
+	@Resource(name = "sessionFactory")
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+	/**
+	 * @return Session
+	 */
+	protected Session getSession() {
+		if (!UtilObjeto.isReferencia(session)) {
+			session = getSessionFactory().openSession();
+		}
+		return session;
 	}
 
 	/**
 	 * Efetua o load da entidade caso esta não seja uma entidade persistente.
 	 * 
-	 * @param entidade Entidade que será carregada como persistente.
+	 * @param entidade
+	 *            Entidade que será carregada como persistente.
 	 */
 	protected void carregarEntidadePersistente(T entidade) {
 
 		if (isReferencia(entidade) && !isPersistente(entidade)) {
 			registrarAcaoDeConsulta();
 			Serializable pk = entidade.getIdentificador();
-			getHibernateTemplate().load(entidade, pk);
+			getSession().load(entidade, pk);
 		}
 	}
 
 	/**
 	 * Retorna true se a entidade for persistente.
 	 * 
-	 * @param entidade Entidade validada.
+	 * @param entidade
+	 *            Entidade validada.
 	 * @return true se a entidade for persistente.
 	 */
 	protected boolean isPersistente(T entidade) {
@@ -95,7 +116,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	 * Configura a paginação para o criterio informado.<br/>
 	 * As configurações de paginação são definidas no PaginacaoHolder.
 	 * 
-	 * @param criteria Critério de consulta.
+	 * @param criteria
+	 *            Critério de consulta.
 	 * @see PaginacaoHolder
 	 */
 	protected void configurarPaginacao(Criteria criteria) {
@@ -109,16 +131,14 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 				pagina = new Integer(1);
 			}
 
-			double calculo = Math.ceil((double) total.intValue()
-			        / regsPag.intValue());
+			double calculo = Math.ceil((double) total.intValue() / regsPag.intValue());
 			int numeroPag = new Double(calculo).intValue();
 			if (numeroPag < pagina.intValue()) {
 				pagina = numeroPag;
 			}
 
 			if ((total.intValue() > regsPag.intValue())) {
-				int inicio = (pagina.intValue() * regsPag.intValue())
-				        - regsPag.intValue();
+				int inicio = (pagina.intValue() * regsPag.intValue()) - regsPag.intValue();
 				criteria.setFirstResult(inicio);
 				criteria.setMaxResults(regsPag);
 			}
@@ -132,7 +152,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	 * Configura a paginação para a query informada.<br/>
 	 * As configurações de paginação são definidas no PaginacaoHolder.
 	 * 
-	 * @param query Query de consulta.
+	 * @param query
+	 *            Query de consulta.
 	 * @see PaginacaoHolder
 	 */
 	protected void configurarPaginacao(Query query) {
@@ -146,16 +167,14 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 				pagina = new Integer(1);
 			}
 
-			double calculo = Math.ceil((double) total.intValue()
-			        / regsPag.intValue());
+			double calculo = Math.ceil((double) total.intValue() / regsPag.intValue());
 			int numeroPag = new Double(calculo).intValue();
 			if (numeroPag < pagina.intValue()) {
 				pagina = numeroPag;
 			}
 
 			if ((total.intValue() > regsPag.intValue())) {
-				int inicio = (pagina.intValue() * regsPag.intValue())
-				        - regsPag.intValue();
+				int inicio = (pagina.intValue() * regsPag.intValue()) - regsPag.intValue();
 				query.setFirstResult(inicio);
 				query.setMaxResults(regsPag);
 			}
@@ -169,7 +188,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	 * Configura a paginação para a query informada.<br/>
 	 * As configurações de paginação são definidas no PaginacaoHolder.
 	 * 
-	 * @param query Query de consulta.
+	 * @param query
+	 *            Query de consulta.
 	 * @see PaginacaoHolder
 	 */
 	protected void configurarPaginacao(SQLQueryNativo query) {
@@ -183,16 +203,14 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 				pagina = new Integer(1);
 			}
 
-			double calculo = Math.ceil((double) total.intValue()
-			        / regsPag.intValue());
+			double calculo = Math.ceil((double) total.intValue() / regsPag.intValue());
 			int numeroPag = new Double(calculo).intValue();
 			if (numeroPag < pagina.intValue()) {
 				pagina = numeroPag;
 			}
 
 			if ((total.intValue() > regsPag.intValue())) {
-				int inicio = (pagina.intValue() * regsPag.intValue())
-				        - regsPag.intValue();
+				int inicio = (pagina.intValue() * regsPag.intValue()) - regsPag.intValue();
 				query.setFirstResult(inicio);
 				query.setMaxResults(regsPag);
 			}
@@ -205,7 +223,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Efetua a consulta de um criteria.
 	 * 
-	 * @param criteria Critéria que será executada.
+	 * @param criteria
+	 *            Critéria que será executada.
 	 * @return Coleção de entidades.
 	 */
 	@SuppressWarnings("unchecked")
@@ -219,7 +238,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Efetua a consulta de uma query.
 	 * 
-	 * @param query Query que será executada.
+	 * @param query
+	 *            Query que será executada.
 	 * @return Coleção de entidades.
 	 */
 	@SuppressWarnings("unchecked")
@@ -233,8 +253,10 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Efetua a consulta de uma query.
 	 * 
-	 * @param <O> Tipo de objeto retornado.
-	 * @param query Query que será executada.
+	 * @param <O>
+	 *            Tipo de objeto retornado.
+	 * @param query
+	 *            Query que será executada.
 	 * @return Coleção de entidades.
 	 */
 	protected <O> Collection<O> consultar(SQLQueryNativo query) {
@@ -247,7 +269,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Efetua a consulta de um hql.
 	 * 
-	 * @param hql HQL que será executado.
+	 * @param hql
+	 *            HQL que será executado.
 	 * @return Coleção de entidades.
 	 */
 	protected Collection<T> consultar(String hql) {
@@ -259,7 +282,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	 * Efetua a consulta de uma query definida no arquivo XML. A query
 	 * identificada pelo ID informado será recuperado do XML e executada.
 	 * 
-	 * @param identificador HQL que será executado.
+	 * @param identificador
+	 *            HQL que será executado.
 	 * @return Coleção de entidades.
 	 */
 	protected Collection<T> consultarQueryPeloID(String identificador) {
@@ -275,7 +299,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Executa um update ou delete na query passada por parâmetro.
 	 * 
-	 * @param query Query
+	 * @param query
+	 *            Query
 	 * @return quantidade de registros afetados.
 	 */
 	protected int executar(Query query) {
@@ -291,7 +316,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Consulta uma entidade do critério passado por parâmetro.
 	 * 
-	 * @param criteria Criteria que será executado.
+	 * @param criteria
+	 *            Criteria que será executado.
 	 * @return Entidade
 	 */
 	protected T obter(Criteria criteria) {
@@ -307,7 +333,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Consulta uma entidade da query passado por parâmetro.
 	 * 
-	 * @param query Query que será executado.
+	 * @param query
+	 *            Query que será executado.
 	 * @return Entidade
 	 */
 	@SuppressWarnings("unchecked")
@@ -320,7 +347,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Consulta uma entidade da query passado por parâmetro.
 	 * 
-	 * @param hql HQL que será executado.
+	 * @param hql
+	 *            HQL que será executado.
 	 * @return Entidade
 	 */
 	protected T obter(String hql) {
@@ -337,8 +365,10 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	 * Retorna uma alias da consulta atual, caso o alias não exista ele será
 	 * criado.
 	 * 
-	 * @param query Query
-	 * @param alias Alias
+	 * @param query
+	 *            Query
+	 * @param alias
+	 *            Alias
 	 * @return alias da consulta atual
 	 */
 	protected Criteria getAlias(Criteria query, String alias) {
@@ -370,8 +400,10 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	 * Retorna uma sub criteria da consulta atual, caso a sub criteira não
 	 * exista ela será criada.
 	 * 
-	 * @param query Query
-	 * @param alias Alias
+	 * @param query
+	 *            Query
+	 * @param alias
+	 *            Alias
 	 * @return sub criteria da consulta atual
 	 */
 	protected Criteria getCriteria(Criteria query, String alias) {
@@ -392,7 +424,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna a quantidade total de registros da consulta.
 	 * 
-	 * @param criteria Critério da consulta.
+	 * @param criteria
+	 *            Critério da consulta.
 	 * @return quantidade total de registros da consulta.
 	 */
 	@SuppressWarnings( { "boxing", "unchecked" })
@@ -406,10 +439,9 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 				Projection pj = ((CriteriaImpl) criteria).getProjection();
 
 				// removendo os orders para evitar erro na consulta com count
-				List<CriteriaImpl.OrderEntry> orders = getColecaoFactory()
-				        .novoArrayList();
+				List<CriteriaImpl.OrderEntry> orders = getColecaoFactory().novoArrayList();
 				Iterator<CriteriaImpl.OrderEntry> iterator = ((CriteriaImpl) criteria)
-				        .iterateOrderings();
+						.iterateOrderings();
 				while (iterator.hasNext()) {
 					orders.add(iterator.next());
 					iterator.remove();
@@ -436,7 +468,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna a quantidade total de registros da consulta.
 	 * 
-	 * @param query Critério da consulta.
+	 * @param query
+	 *            Critério da consulta.
 	 * @return quantidade total de registros da consulta.
 	 */
 	@SuppressWarnings("boxing")
@@ -454,15 +487,15 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna a quantidade total de registros da consulta.
 	 * 
-	 * @param query Critério da consulta.
+	 * @param query
+	 *            Critério da consulta.
 	 * @return quantidade total de registros da consulta.
 	 */
 	@SuppressWarnings("boxing")
 	protected Integer getQuantidadeTotalDeRegistros(SQLQueryNativo query) {
 		Integer resultado = getNumeroFactory().novoInteger(0);
 		if (isReferencia(query)) {
-			SQLQueryNativo count = UtilCriarQueryDeCount.criar(getSession(),
-			        query);
+			SQLQueryNativo count = UtilCriarQueryDeCount.criar(getSession(), query);
 
 			Number total = (Number) count.uniqueResult();
 			resultado = total.intValue();
@@ -473,7 +506,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna a quantidade total de registros da consulta.
 	 * 
-	 * @param hql HQL da consulta.
+	 * @param hql
+	 *            HQL da consulta.
 	 * @return quantidade total de registros da consulta.
 	 */
 	protected Integer getQuantidadeTotalDeRegistros(String hql) {
@@ -484,7 +518,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna a quantidade total de registros da consulta.
 	 * 
-	 * @param scrollable Critério da consulta.
+	 * @param scrollable
+	 *            Critério da consulta.
 	 * @return quantidade total de registros da consulta.
 	 */
 	protected Integer getQuantidadeTotalDeRegistros(ScrollableResults scrollable) {
@@ -501,7 +536,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna nova query.
 	 * 
-	 * @param identificador Identificador do HQL mapeado no arquivo XML.
+	 * @param identificador
+	 *            Identificador do HQL mapeado no arquivo XML.
 	 * @return nova query.
 	 */
 	protected Query getQuery(String identificador) {
@@ -512,15 +548,16 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	 * @return instância da entidade tratada pela DAO.
 	 */
 	@SuppressWarnings("unchecked")
-    protected T getInstanciaDaEntidade() {
+	protected T getInstanciaDaEntidade() {
 		Class<?> tipo = getTipoDaEntidade();
-		return (T)UtilReflexaoConstrutor.invocar(tipo);
+		return (T) UtilReflexaoConstrutor.invocar(tipo);
 	}
 
 	/**
 	 * Retorna nova query mapeado no xml.
 	 * 
-	 * @param identificador SQL
+	 * @param identificador
+	 *            SQL
 	 * @return nova query.
 	 */
 	protected SQLQueryNativo getSQLQuery(String identificador) {
@@ -550,7 +587,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna true se a entidade possui exclusão lógica.
 	 * 
-	 * @param entidade Entidade
+	 * @param entidade
+	 *            Entidade
 	 * @return true se a entidade possui exclusão lógica.
 	 */
 	protected boolean isEntidadeComExclusaoLogica(T entidade) {
@@ -558,7 +596,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	}
 
 	/**
-	 * @param objetos Objetos que serão validados.
+	 * @param objetos
+	 *            Objetos que serão validados.
 	 * @return true se o objeto tiver referência.
 	 * @see UtilObjeto#isReferencia(Object)
 	 */
@@ -567,7 +606,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	}
 
 	/**
-	 * @param strings Strings que serão validadas.
+	 * @param strings
+	 *            Strings que serão validadas.
 	 * @return true se a string for vazia.
 	 * @see UtilString#isVazio(String)
 	 */
@@ -578,7 +618,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna true se a coleção estiver vazia.
 	 * 
-	 * @param colecao Coleção validada
+	 * @param colecao
+	 *            Coleção validada
 	 * @return true se a coleção estiver vazia.
 	 */
 	protected boolean isVazio(Collection<?> colecao) {
@@ -588,7 +629,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna true se o valor passado for zero ou nulo.
 	 * 
-	 * @param valor Valor que será validado
+	 * @param valor
+	 *            Valor que será validado
 	 * @return true se o valor passado for zero ou nulo.
 	 */
 	@SuppressWarnings("boxing")
@@ -599,7 +641,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna nova ordenação ASC.
 	 * 
-	 * @param propriedade propriedade que será ordenada.
+	 * @param propriedade
+	 *            propriedade que será ordenada.
 	 * @return ordenação ASC
 	 */
 	protected Order novaOrdenacaoASC(String propriedade) {
@@ -609,7 +652,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna nova ordenação DESC.
 	 * 
-	 * @param propriedade propriedade que será ordenada.
+	 * @param propriedade
+	 *            propriedade que será ordenada.
 	 * @return ordenação DESC
 	 */
 	protected Order novaOrdenacaoDESC(String propriedade) {
@@ -619,7 +663,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna nova query.
 	 * 
-	 * @param hql HQL
+	 * @param hql
+	 *            HQL
 	 * @return nova query.
 	 */
 	protected Query novaQuery(String hql) {
@@ -639,22 +684,26 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna novo critério.
 	 * 
-	 * @param propriedade Propriedade
-	 * @param arg0 Argumento
-	 * @param arg1 Argumento
+	 * @param propriedade
+	 *            Propriedade
+	 * @param arg0
+	 *            Argumento
+	 * @param arg1
+	 *            Argumento
 	 * @return critério
 	 * @see Restrictions#between(String, Object, Object)
 	 */
-	protected Criterion novoCriterioBetween(String propriedade, Object arg0,
-	        Object arg1) {
+	protected Criterion novoCriterioBetween(String propriedade, Object arg0, Object arg1) {
 		return Restrictions.between(propriedade, arg0, arg1);
 	}
 
 	/**
 	 * Retorna novo critério.
 	 * 
-	 * @param propriedade Propriedade
-	 * @param arg0 Argumento
+	 * @param propriedade
+	 *            Propriedade
+	 * @param arg0
+	 *            Argumento
 	 * @return critério
 	 * @see Restrictions#eq(String, Object)
 	 */
@@ -665,8 +714,10 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna novo critério.
 	 * 
-	 * @param propriedade Propriedade
-	 * @param arg0 Argumento
+	 * @param propriedade
+	 *            Propriedade
+	 * @param arg0
+	 *            Argumento
 	 * @return critério
 	 * @see Restrictions#eq(String, Object)
 	 */
@@ -679,8 +730,10 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna novo critério.
 	 * 
-	 * @param propriedade Propriedade
-	 * @param colecao Coleção de parâmetros
+	 * @param propriedade
+	 *            Propriedade
+	 * @param colecao
+	 *            Coleção de parâmetros
 	 * @return critério
 	 */
 	protected Criterion novoCriterioIN(String propriedade, Collection<?> colecao) {
@@ -700,8 +753,10 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna novo critério.
 	 * 
-	 * @param propriedade Propriedade
-	 * @param arg0 Argumento
+	 * @param propriedade
+	 *            Propriedade
+	 * @param arg0
+	 *            Argumento
 	 * @return critério
 	 * @see Restrictions#like(String, Object)
 	 */
@@ -715,8 +770,10 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna novo critério.
 	 * 
-	 * @param propriedade Propriedade
-	 * @param arg0 Argumento
+	 * @param propriedade
+	 *            Propriedade
+	 * @param arg0
+	 *            Argumento
 	 * @return critério
 	 * @see Restrictions#like(String, Object)
 	 */
@@ -730,8 +787,10 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna novo critério.
 	 * 
-	 * @param propriedade Propriedade
-	 * @param arg0 Argumento
+	 * @param propriedade
+	 *            Propriedade
+	 * @param arg0
+	 *            Argumento
 	 * @return critério
 	 * @see Restrictions#ne(String, Object)
 	 */
@@ -742,7 +801,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna nova query.
 	 * 
-	 * @param sql SQL
+	 * @param sql
+	 *            SQL
 	 * @return nova query.
 	 */
 	protected SQLQueryNativo novoSQLQuery(String sql) {
@@ -753,7 +813,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Retorna nova query da entidade.
 	 * 
-	 * @param sql SQL
+	 * @param sql
+	 *            SQL
 	 * @return nova query da entidade.
 	 */
 	protected SQLQueryNativo novoSQLQueryDaEntidade(String sql) {
@@ -771,7 +832,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	 * tipo 'select max' para obter o maior ID da entidade. É necessário que a
 	 * entidade possuia um atributo identificador.
 	 * 
-	 * @param <R> Tipo do objeto que será retornado. Pode ser Integer ou Long,
+	 * @param <R>
+	 *            Tipo do objeto que será retornado. Pode ser Integer ou Long,
 	 *            dependendo do tipo da entidade.
 	 * @return maior identificador da entidade.
 	 */
@@ -811,7 +873,8 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	 * informado seja uma subcriteria, será recuperado o criterio pai até chegar
 	 * ao criterio principal
 	 * 
-	 * @param query Criterio
+	 * @param query
+	 *            Criterio
 	 * @return criterio principal.
 	 */
 	private Criteria getCriteriaPrincipal(Criteria query) {
@@ -834,8 +897,10 @@ public class HibernateDaoAbstrato<T extends Entidade> extends
 	/**
 	 * Recupera uma sub criteria da query passada por parâmetro.
 	 * 
-	 * @param query Query
-	 * @param alias Alias
+	 * @param query
+	 *            Query
+	 * @param alias
+	 *            Alias
 	 * @return sub criteria da query passada por parâmetro.
 	 */
 	@SuppressWarnings("unchecked")
