@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import br.com.ap.reflexao.UtilReflexaoPropriedade;
 import br.com.ap.reflexao.excecao.ReflexaoException;
 
 /**
