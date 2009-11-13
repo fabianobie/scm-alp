@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<process name="SolicitarDemanda" xmlns="http://jbpm.org/4.0/jpdl">
+	<description>Solicitação de uma demanda para a área técnica.</description>
+	<start g="116,25,80,40">
+		<transition to="Solicitar Demanda"/>
+	</start>
+
+	<task g="76,106,126,40" name="Solicitar Demanda" form="formulario.ftl">
+		<transition to="Conferir Demanda"/>
+	</task>
+	
+	<task g="75,182,126,40" name="Conferir Demanda">
+		<transition to="Solicitar Informação" g="243,232:-42,6" name="MaisInformacao"/>
+		<transition to="Finalizar Solicitação" name="FinalizarSolicitacao"/>
+	</task>
+
+	<task g="289,179,135,40" name="Solicitar Informação">
+		<transition g="242,168:" to="Conferir Demanda"/>
+	</task>
+	
+	<end g="114,259,80,40" name="Finalizar Solicitação"/>
+</process>
