@@ -33,11 +33,13 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.URI;
 import java.util.Properties;
 
 import br.com.ap.comum.arquivo.UtilArquivo;
+import br.com.ap.comum.constante.Encode;
 
 /**
  * Fábrica de objetos IO.
@@ -489,7 +491,11 @@ public final class ArquivoFactory extends FactoryAbstrata {
 	public Reader novoInputStreamReader(InputStream is) {
 		Reader resultado = null;
 		if (isReferencia(is)) {
-			resultado = new InputStreamReader(is);
+			try {
+				resultado = new InputStreamReader(is, Encode.getISO8859_1());
+			} catch (UnsupportedEncodingException e) {
+				getLog().error(e);
+			}
 		}
 		return resultado;
 	}
