@@ -235,6 +235,22 @@ public class UtilArquivoTest extends TesteAbstrato {
 
 	/**
 	 * Test method for
+	 * {@link br.com.ap.comum.arquivo.UtilArquivo#getTextoDoInputStream(InputStream)}.
+	 */
+	@Test
+	public final void testGetTextoDoInputStream() {
+		String path = "./log4j.properties";
+		InputStream is = getArquivoFactory().novoInputStream(path);
+		
+		String texto = UtilArquivo.getTextoDoInputStream(is);
+		assertNotNull(texto);
+		
+		texto = UtilArquivo.getTextoDoInputStream(null);
+		assertEquals("", texto);
+	}
+
+	/**
+	 * Test method for
 	 * {@link br.com.ap.comum.arquivo.UtilArquivo#isExiste(java.io.File)}.
 	 */
 	@Test
