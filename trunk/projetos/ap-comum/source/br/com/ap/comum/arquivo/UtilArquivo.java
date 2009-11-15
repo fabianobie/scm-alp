@@ -212,6 +212,22 @@ public final class UtilArquivo {
 	}
 
 	/**
+	 * Retorna o texto do inputstream passado por parâmetro.
+	 * 
+	 * @param inputStream InputStream
+	 * @return Texto do arquivo.
+	 */
+	public static String getTextoDoInputStream(InputStream inputStream) {
+		String texto = getStringFactory().novaString();
+
+		if (isReferencia(inputStream)) {
+			BufferedReader br = getArquivoFactory().novoBufferedReader(inputStream);
+			texto = getTextoDoArquivo(br, true);
+		}
+		return texto;
+	}
+	
+	/**
 	 * Retorna o texto do arquivo passado por parâmetro.
 	 * 
 	 * @param path Arquivo
