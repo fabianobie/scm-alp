@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering 
+  SYSTEM "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+
+	<schema-selection match-schema="DB001" />
+
+	<type-mapping>
+	<!--
+		<sql-type jdbc-type="VARCHAR" length='20' hibernate-type="SomeUserType" />
+		<sql-type jdbc-type="VARCHAR" length='1' hibernate-type="yes_no" />
+		<sql-type jdbc-type="NUMERIC" precision='1' hibernate-type="boolean" />
+		<sql-type jdbc-type="NUMERIC" hibernate-type="java.lang.Long" />
+    -->
+		<sql-type jdbc-type="TINYINT" hibernate-type="java.lang.Integer" />
+	</type-mapping>
+
+	<!-- Exclude DoNotWantIt from all catalogs/schemas -->
+	<!-- BIN$ is recycle bin tables in Oracle -->
+    <table-filter match-name="BIN$.*" exclude="true" />
+
+	<!-- exclude all tables from the schema SCHEMA in catalog BAD. -->
+	<!--
+	<table-filter match-catalog="BAD" match-schema="SCHEMA" match-name=".*" exclude="true" /> 
+	-->
+  	
+  	<!-- used to select the schema that you want to process -->
+  	<!--
+  	<schema-selection match-schema="MY_SCHEMA"/>
+  	-->
+  	
+  	<!--
+  	<table name="cliente" catalog="DB001">
+  		<meta attribute="class-code">
+	// Código extra, incluído através do revenge.xml
+		</meta>
+  		<primary-key>
+  			<generator class="increment"/>
+  			<key-column name="COD_CLI"/>
+  		</primary-key>
+  	</table>
+  	-->
+  	<!--
+  	-->
+</hibernate-reverse-engineering>

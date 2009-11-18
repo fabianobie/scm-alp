@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="source" path="source"/>
+	<classpathentry kind="src" output="source-gerado" path="source-gerado"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="build/lib/asm-attrs.jar"/>
+	<classpathentry kind="lib" path="build/lib/asm.jar"/>
+	<classpathentry kind="lib" path="build/lib/cglib-2.1.3.jar"/>
+	<classpathentry kind="lib" path="build/lib/commons-collections-2.1.1.jar"/>
+	<classpathentry kind="lib" path="build/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="build/lib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="build/lib/ejb3-persistence.jar"/>
+	<classpathentry kind="lib" path="build/lib/freemarker.jar"/>
+	<classpathentry kind="lib" path="build/lib/hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="build/lib/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="build/lib/hibernate-entitymanager.jar"/>
+	<classpathentry kind="lib" path="build/lib/hibernate-tools.jar" sourcepath="C:/desenvolvimento/recursos/hibernate-3.2.6.ga/src"/>
+	<classpathentry kind="lib" path="build/lib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="build/lib/javassist.jar"/>
+	<classpathentry kind="lib" path="build/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="build/lib/bsh-2.0b1.jar"/>
+	<classpathentry kind="lib" path="build/lib/jtidy-r8-20060801.jar"/>
+	<classpathentry kind="lib" path="build/lib-externa/spring-2.5.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ANT_LIB"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ap-arquitetura"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ap-comum"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/ap-hibernate"/>
+	<classpathentry kind="lib" path="build/lib-externa/mysql-connector-java-3.0.15-ga-bin.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
