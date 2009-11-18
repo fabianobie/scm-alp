@@ -1,0 +1,5 @@
+paga debugar
+coloque a linha abaixo como parametro da vm no buildfile
+-Xdebug -agentlib:jdwp=transport=dt_socket,server=y,address=8000
+
+chame o buildfile e depois chame o debug remoto
