@@ -9,5 +9,9 @@
 	<classpathentry kind="lib" path="build/lib/ap-comum.jar"/>
 	<classpathentry kind="lib" path="build/lib/ap-hibernate.jar"/>
 	<classpathentry kind="lib" path="build/lib/ap-reflexao.jar"/>
+	<classpathentry kind="lib" path="C:/desenvolvimento/projetos/unb-ceam/projeto/WebContent/WEB-INF/lib/struts2-core-2.1.8.jar"/>
+	<classpathentry kind="lib" path="C:/desenvolvimento/projetos/unb-ceam/projeto/WebContent/WEB-INF/lib/struts2-dojo-plugin-2.1.8.jar"/>
+	<classpathentry kind="lib" path="C:/desenvolvimento/projetos/unb-ceam/projeto/WebContent/WEB-INF/lib/struts2-spring-plugin-2.1.8.jar"/>
+	<classpathentry kind="lib" path="C:/desenvolvimento/projetos/unb-ceam/projeto/WebContent/WEB-INF/lib/struts2-tiles-plugin-2.1.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

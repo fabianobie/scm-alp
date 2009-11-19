@@ -6,7 +6,6 @@
 package br.com.ap.test.jbpm;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -22,8 +21,8 @@ import org.jbpm.pvm.internal.model.ProcessDefinitionImpl;
 
 import br.com.ap.comum.colecao.UtilColecao;
 import br.com.ap.comum.objeto.UtilObjeto;
-import br.com.ap.comum.string.UtilString;
 import br.com.ap.test.TesteAbstrato;
+import freemarker.template.TemplateException;
 
 /**
  * @author AdrianoP
@@ -40,7 +39,10 @@ public class MainTest extends TesteAbstrato {
 
 		NewDeployment deployment = getRepositoryService().createDeployment();
 		deployment.addResourceFromClasspath("process.jpdl.xml");
-		deployment.addResourceFromClasspath("formulario.ftl");
+		deployment.addResourceFromClasspath("taskform-start.ftl");
+		deployment.addResourceFromClasspath("taskform-conferir-demanda.ftl");
+		deployment.addResourceFromClasspath("taskform-solicitar-demanda.ftl");
+		deployment.addResourceFromClasspath("taskform-solicitar-informacao.ftl");
 
 		deployID = deployment.deploy();
 		println("Deploy: " + deployID);
@@ -65,6 +67,24 @@ public class MainTest extends TesteAbstrato {
 		}
 	}
 
+	public void test_recuperarFormularioStart() throws IOException, TemplateException {
+		println("recuperarFormularioStart");
+		println("---------------");
+
+		ProcessDefinitionQuery pdQuery = getRepositoryService().createProcessDefinitionQuery();
+		pdQuery.processDefinitionId(ultimoProcessoID);
+		ProcessDefinition processo = (ProcessDefinitionImpl) pdQuery.uniqueResult();
+		
+		String atividade = null;
+		List<String> nomes = getRepositoryService().getStartActivityNames(processo.getId());
+		for (String nome : nomes) {
+			atividade = nome;
+		}
+		String form = getRepositoryService().getStartFormResourceName(processo.getId(), atividade);
+		
+		System.out.println("Form: "+ form);
+	}
+	
 	public void test_criarInstanciaDoProcesso() {
 		println("criarInstanciaDoProcesso");
 		println("------------------------");
@@ -88,7 +108,20 @@ public class MainTest extends TesteAbstrato {
 		}
 	}
 	
-	public void teste_recuperarFormulario() throws IOException {
+	public void test_listarInstancias() {
+		println("listarInstancias");
+		println("------------------------");
+		
+		TaskQuery query = getTaskService().createTaskQuery();
+		query.unassigned();
+		List<Task> tarefas = query.list();
+		if (!UtilColecao.isVazio(tarefas)) {
+			for (Task tarefa : tarefas) {
+				System.out.println("Tarefa: "+ tarefa.getActivityName());
+			}
+		}
+	}
+	public void test_recuperarFormulario() throws IOException {
 		println("recuperarFormulario");
 		println("-------------------");
 		
@@ -112,8 +145,5 @@ public class MainTest extends TesteAbstrato {
 				
 		System.out.println("Form....: "+ form);
 		System.out.println("String 0: "+ s0);
-		
-		
-		
 	}
 }
