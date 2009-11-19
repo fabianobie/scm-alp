@@ -9,12 +9,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import br.com.ap.comum.javabean.entidade.Entidade;
 
@@ -49,12 +48,11 @@ public class Categoria implements Entidade {
 	/**
 	 * @return codigo
 	 */
-	// MYSQL: @GeneratedValue(strategy = GenerationType.AUTO)
 	// DB2: @GenericGenerator(name = "generator", 
 	// strategy = "sequence", parameters = { @Parameter(name = "sequence", value = "DB001.SEQ_CATEGORIA") })
+	//@GenericGenerator(name="seq_id", strategy="increment")
 	@Id
-	@GenericGenerator(name="seq_id", strategy="increment")
-	@GeneratedValue(generator="seq_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "cod_cat", unique = true, nullable = false)
 	public Integer getCodigo() {
 		return this.codigo;

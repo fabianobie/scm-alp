@@ -27,7 +27,16 @@ public class MainTest extends TesteAbstrato {
 		IClienteDAO dao = novaClienteDAO();
 		Collection<Cliente> clientes = dao.consultar();
 		assertNotNull(clientes);
-		assertTrue(clientes.size() > 0);
+		for (Cliente cliente : clientes) {
+			System.out.println(cliente.getIdentificador() +"\t"+ cliente.getNome());
+		}
+		
+		Cliente c = new Cliente();
+		c.setCodigo(new Integer(10));
+		
+		c = dao.obter(c);
+		System.out.println(c.getCodigo());
+		System.out.println(c.getNome());
 	}
 
 	/**

@@ -16,7 +16,6 @@ import org.hibernate.criterion.Example;
 import org.hibernate.criterion.MatchMode;
 
 import br.com.ap.arquitetura.dao.CrudDao;
-import br.com.ap.comum.javabean.entidade.Entidade;
 import br.com.ap.comum.javabean.entidade.ExclusaoLogica;
 
 /**
@@ -25,7 +24,7 @@ import br.com.ap.comum.javabean.entidade.ExclusaoLogica;
  * @author adrianop
  * @param <T> Tipo da entidade
  */
-public abstract class HibernateCrudDaoAbstrato<T extends Entidade> extends
+public abstract class HibernateCrudDaoAbstrato<T extends Object> extends
         HibernateDaoAbstrato<T> implements CrudDao<T> {
 
 	/**
@@ -114,18 +113,37 @@ public abstract class HibernateCrudDaoAbstrato<T extends Entidade> extends
 	}
 
 	/**
+	 * @see br.com.ap.arquitetura.util.CRUD#obter(java.util.Serializable)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public T obter(Serializable pk) {
+		T resultado = null;
+
+		if (isReferencia(pk)) {
+			registrarAcaoDeConsulta();
+			Class<T> tipo = getTipoDaEntidade();
+			resultado = (T) getSession().get(tipo, pk);
+		}
+		return resultado;
+	}
+
+	/**
 	 * @see br.com.ap.arquitetura.util.CRUD#obter(br.com.ap.comum.javabean.JavaBean)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public T obter(T entidade) {
 		T resultado = null;
-
+		
 		if (isReferencia(entidade)) {
 			registrarAcaoDeConsulta();
 			Class<T> tipo = getTipoDaEntidade();
-			Serializable pk = entidade.getIdentificador();
-			resultado = (T) getSession().get(tipo, pk);
+			Serializable pk = getIdentificador(entidade);
+			
+			if (isReferencia(pk)) {
+				resultado = (T) getSession().get(tipo, pk);
+			}
 		}
 		return resultado;
 	}
@@ -137,7 +155,7 @@ public abstract class HibernateCrudDaoAbstrato<T extends Entidade> extends
 	public void salvar(T entidade) {
 
 		if (isReferencia(entidade)) {
-			if (isReferencia(entidade.getIdentificador())) {
+			if (isReferencia(getIdentificador(entidade))) {
 				registrarAcaoDeAlteracao();
 			} else {
 				registrarAcaoDeInclusao();

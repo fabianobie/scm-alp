@@ -33,7 +33,7 @@ public class CrudTest extends TesteAbstrato {
 	@Test
 	public void testGetCodigoDoProximoRegistro() {
 		ICategoriaDAO dao = novaCategoriaDAO();
-		assertEquals(new Long(4), dao.getCodigoDoProximoRegistro());
+		assertNotNull(dao.getCodigoDoProximoRegistro().intValue());
 	}
 
 	/**
@@ -56,16 +56,14 @@ public class CrudTest extends TesteAbstrato {
 	public void testObter_Serializable() {
 		ICategoriaDAO dao = novaCategoriaDAO();
 
-		Categoria codigo = new Categoria();
-		Categoria c = dao.obter(codigo);
+		Categoria categoria = dao.obter(null);
+		assertNull(categoria);
+		
+		categoria = dao.obter(getCodigo());
 
-		codigo.setCodigo(getCodigo());
-		c = novaCategoriaIncluida();
-		c = dao.obter(c);
-
-		assertNotNull(c);
-		assertNotNull(c.getCodigo());
-		assertNotNull(c.getDescricao());
+		assertNotNull(categoria);
+		assertNotNull(categoria.getCodigo());
+		assertNotNull(categoria.getDescricao());
 	}
 
 	/**
@@ -92,11 +90,10 @@ public class CrudTest extends TesteAbstrato {
 	 */
 	@Test
 	public void testSalvar_T() {
-		Categoria c = novaCategoria();
 		ICategoriaDAO dao = novaCategoriaDAO();
-
 		dao.salvar(null);
 
+		Categoria c = novaCategoria();
 		dao.salvar(c);
 		assertNotNull(c);
 		assertFalse(c.getCodigo() == getCodigo());
@@ -111,7 +108,7 @@ public class CrudTest extends TesteAbstrato {
 		Collection<Categoria> r = dao.consultar();
 
 		assertNotNull(r);
-		assertTrue(r.size() >= 2);
+		assertTrue(r.size() > 0);
 	}
 
 	/**
@@ -122,14 +119,14 @@ public class CrudTest extends TesteAbstrato {
 		ICategoriaDAO dao = novaCategoriaDAO();
 
 		Collection<Categoria> r = dao.consultar(null);
-		assertNull(r);
+		assertNotNull(r);
 
 		Categoria c = novaCategoria();
 		c.setDescricao("Categoria Teste");
 
 		r = dao.consultar(c);
 		assertNotNull(r);
-		assertTrue(r.size() >= 1);
+		assertTrue(r.size() > 0);
 	}
 
 	/**
