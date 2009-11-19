@@ -3,7 +3,7 @@
  * 
  * Data de criação: 20/11/2008
  *
- * Desenvolvido por Politec Ltda.
+ * 
  * Fábrica de Software - Brasília
  */
 package br.com.ap.hibernate.util.fabrica;
