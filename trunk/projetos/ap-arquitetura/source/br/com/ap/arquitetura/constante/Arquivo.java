@@ -28,6 +28,6 @@ public final class Arquivo {
 	 * @return path do arquivo mensagem-infra.properties.
 	 */
 	public static String getPathArquivoMensagemProperties() {
-		return "/br/com/politec/infra/resource/mensagem-infra.properties";
+		return "/br/com/ap/arquitetura/resource/mensagem-infra.properties";
 	}
 }
