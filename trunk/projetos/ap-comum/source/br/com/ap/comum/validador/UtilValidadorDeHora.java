@@ -3,7 +3,7 @@
  * Data: 26/01/2007
  * 
  *  
- * Fábrica de Projetos - Brasília
+ * 
  */
 package br.com.ap.comum.validador;
 
