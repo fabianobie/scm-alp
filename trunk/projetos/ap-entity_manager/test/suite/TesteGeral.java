@@ -3,7 +3,7 @@
  * 
  * Data de criação: 21/04/2007
  * 
- * Desenvolvido por Politec Ltda. 
+ *  
  * Fábrica de Software - Brasília
  */
 package suite;
