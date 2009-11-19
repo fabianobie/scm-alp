@@ -8,7 +8,6 @@
  */
 package br.com.ap.arquitetura.dao;
 
-import br.com.ap.comum.javabean.JavaBean;
 
 /**
  * Interface que representa uma DAO da arquitetura.
@@ -16,6 +15,6 @@ import br.com.ap.comum.javabean.JavaBean;
  * @param <T> Tipo do objeto tratado pela DAO
  * @author adrianop
  */
-public interface DAO<T extends JavaBean> {
+public interface DAO<T extends Object> {
     // interface
 }
