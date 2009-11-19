@@ -8,16 +8,23 @@ package br.com.ap.arquitetura.util;
 import java.io.Serializable;
 import java.util.Collection;
 
-import br.com.ap.comum.javabean.JavaBean;
-
 /**
  * Interface que representa um CRUD.
  * 
  * @param <T> Tipo do Objeto manipulado pelo CRUD.
  * @author AdrianoP
  */
-public interface CRUD<T extends JavaBean> {
+public interface CRUD<T extends Object> {
 
+	/**
+     * Busca a entidade pelo seu identificador.
+     * 
+     * @param entidade Código do identificador (integer, long etc).
+     * 
+     * @return Entidade pesquisada
+     */
+	public T obter(Serializable pk);
+	
     /**
      * Busca a entidade pelo seu identificador.
      * 
