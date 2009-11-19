@@ -13,6 +13,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.hibernate.Criteria;
+import org.hibernate.EntityMode;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.ScrollableResults;
@@ -36,7 +37,6 @@ import br.com.ap.comum.colecao.UtilColecao;
 import br.com.ap.comum.estrategia.UtilEstrategiaDeConversores;
 import br.com.ap.comum.fabrica.ColecaoFactory;
 import br.com.ap.comum.fabrica.NumeroFactory;
-import br.com.ap.comum.javabean.entidade.Entidade;
 import br.com.ap.comum.javabean.entidade.ExclusaoLogica;
 import br.com.ap.comum.objeto.UtilObjeto;
 import br.com.ap.comum.string.UtilString;
@@ -55,7 +55,7 @@ import br.com.ap.reflexao.UtilReflexaoPropriedade;
  *            Tipo do objeto tratado pela DAO
  * @author AdrianoP
  */
-public class HibernateDaoAbstrato<T extends Entidade> implements DAO<T> {
+public class HibernateDaoAbstrato<T extends Object> implements DAO<T> {
 
 	private SessionFactory	sessionFactory;
 	private Session			session;
@@ -77,6 +77,16 @@ public class HibernateDaoAbstrato<T extends Entidade> implements DAO<T> {
 	}
 
 	/**
+	 * @param entidade Entidade
+	 * @return valor da chave primária da entidade.
+	 */
+	protected Serializable getIdentificador(T entidade) {
+		Class<T> classe = UtilObjeto.getClasse(entidade);
+		ClassMetadata metadata = getSessionFactory().getClassMetadata(classe);
+		return metadata.getIdentifier(entidade, EntityMode.POJO);
+	}
+	
+	/**
 	 * @return Session
 	 */
 	protected Session getSession() {
@@ -96,7 +106,7 @@ public class HibernateDaoAbstrato<T extends Entidade> implements DAO<T> {
 
 		if (isReferencia(entidade) && !isPersistente(entidade)) {
 			registrarAcaoDeConsulta();
-			Serializable pk = entidade.getIdentificador();
+			Serializable pk = getIdentificador(entidade);
 			getSession().load(entidade, pk);
 		}
 	}
