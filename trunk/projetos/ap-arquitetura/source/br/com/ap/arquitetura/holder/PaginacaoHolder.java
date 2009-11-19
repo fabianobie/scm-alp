@@ -3,8 +3,8 @@
  * 
  * Data de criação: 20/06/2008
  *
- * Desenvolvido por Politec Ltda.
- * Fábrica de Projetos - Brasília
+ * 
+ * 
  */
 
 package br.com.ap.arquitetura.holder;
