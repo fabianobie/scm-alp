@@ -28,7 +28,7 @@ public final class Constante {
 	 * @return Appender do log
 	 */
 	public static String getAppenderDoLog() {
-		return "br.com.politec.infra";
+		return "br.com.ap.arquitetura";
 	}
 	
 	/**
