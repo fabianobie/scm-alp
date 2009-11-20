@@ -38,11 +38,12 @@ public class MainTest extends TesteAbstrato {
 		println("------");
 
 		NewDeployment deployment = getRepositoryService().createDeployment();
-		deployment.addResourceFromClasspath("process.jpdl.xml");
-		deployment.addResourceFromClasspath("taskform-start.ftl");
-		deployment.addResourceFromClasspath("taskform-conferir-demanda.ftl");
-		deployment.addResourceFromClasspath("taskform-solicitar-demanda.ftl");
-		deployment.addResourceFromClasspath("taskform-solicitar-informacao.ftl");
+		deployment.addResourceFromClasspath("br/com/ap/test/jbpm/deploy/process.jpdl.xml");
+		deployment.addResourceFromClasspath("br/com/ap/test/jbpm/deploy/process.png");
+		deployment.addResourceFromClasspath("br/com/ap/test/jbpm/deploy/taskform-start.ftl");
+		deployment.addResourceFromClasspath("br/com/ap/test/jbpm/deploy/taskform-conferir-demanda.ftl");
+		deployment.addResourceFromClasspath("br/com/ap/test/jbpm/deploy/taskform-solicitar-demanda.ftl");
+		deployment.addResourceFromClasspath("br/com/ap/test/jbpm/deploy/taskform-solicitar-informacao.ftl");
 
 		deployID = deployment.deploy();
 		println("Deploy: " + deployID);
