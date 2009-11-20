@@ -3,15 +3,11 @@
 	<classpathentry kind="src" path="source-test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JBPM_LIB"/>
-	<classpathentry kind="lib" path="build/lib/spring-2.5.4.jar"/>
-	<classpathentry kind="lib" path="build/lib-externa/testng-5.9-jdk15.jar"/>
 	<classpathentry kind="lib" path="build/lib/ap-arquitetura.jar"/>
 	<classpathentry kind="lib" path="build/lib/ap-comum.jar"/>
 	<classpathentry kind="lib" path="build/lib/ap-hibernate.jar"/>
 	<classpathentry kind="lib" path="build/lib/ap-reflexao.jar"/>
-	<classpathentry kind="lib" path="C:/desenvolvimento/projetos/unb-ceam/projeto/WebContent/WEB-INF/lib/struts2-core-2.1.8.jar"/>
-	<classpathentry kind="lib" path="C:/desenvolvimento/projetos/unb-ceam/projeto/WebContent/WEB-INF/lib/struts2-dojo-plugin-2.1.8.jar"/>
-	<classpathentry kind="lib" path="C:/desenvolvimento/projetos/unb-ceam/projeto/WebContent/WEB-INF/lib/struts2-spring-plugin-2.1.8.jar"/>
-	<classpathentry kind="lib" path="C:/desenvolvimento/projetos/unb-ceam/projeto/WebContent/WEB-INF/lib/struts2-tiles-plugin-2.1.6.jar"/>
+	<classpathentry kind="lib" path="build/lib/spring-2.5.4.jar"/>
+	<classpathentry kind="lib" path="build/lib-externa/testng-5.9-jdk15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
