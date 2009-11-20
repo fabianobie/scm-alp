@@ -848,7 +848,7 @@ public class HibernateDaoAbstrato<T extends Object> implements DAO<T> {
 	 * @return maior identificador da entidade.
 	 */
 	@SuppressWarnings( { "unchecked" })
-	protected <R extends Number> R obterMaiorIdentificar() {
+	protected <R extends Number> R obterMaiorIdentificador() {
 		ClassMetadata cm = getClassMetadata();
 		String propriedadePK = cm.getIdentifierPropertyName();
 
@@ -865,8 +865,8 @@ public class HibernateDaoAbstrato<T extends Object> implements DAO<T> {
 	 * @return maior identificador da entidade.
 	 */
 	@SuppressWarnings("boxing")
-	protected Long obterProximoIdentificar() {
-		return UtilSomadoresDeNumero.somar(obterMaiorIdentificar(), 1);
+	protected Long obterProximoIdentificador() {
+		return UtilSomadoresDeNumero.somar(obterMaiorIdentificador(), 1);
 	}
 
 	/**
