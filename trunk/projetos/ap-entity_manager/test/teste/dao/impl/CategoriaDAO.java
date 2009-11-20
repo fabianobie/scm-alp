@@ -18,6 +18,6 @@ public class CategoriaDAO extends EntityManagerDAOAbstrato<Categoria> implements
 	 * @see ICategoriaDAO#getCodigoDoProximoRegistro()
 	 */
 	public Long getCodigoDoProximoRegistro() {
-		return obterProximoIdentificar();
+		return obterProximoIdentificador();
 	}
 }
