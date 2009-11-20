@@ -527,7 +527,7 @@ public abstract class EntityManagerDAOAbstrato<T extends Entidade> implements
 	 * @return maior identificador da entidade.
 	 */
 	@SuppressWarnings("boxing")
-	protected Long obterProximoIdentificar() {
+	protected Long obterProximoIdentificador() {
 		return UtilSomadoresDeNumero.somar(obterMaiorIdentificador(), 1);
 	}
 
