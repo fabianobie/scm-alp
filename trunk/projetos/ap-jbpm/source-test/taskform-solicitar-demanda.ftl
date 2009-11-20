@@ -11,7 +11,7 @@
 		</label>	
 	</fieldset>
 	<p class="form-legenda">
-		<em>*</em> Campo obrigat&oacute;rio
+		<em>*</em> Campo obrigat&oacute;rio	
 	</p>
 	<p class="form-barra-botoes-fim-fluxo">
 		<@s.submit value="Cancelar" action="Atividade" method="acaoCancelar" cssClass="form-button"/>
