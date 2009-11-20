@@ -18,7 +18,7 @@ public class CategoriaDAO extends HibernateCrudDaoAbstrato<Categoria> implements
 	 * @see ICategoriaDAO#getCodigoDoProximoRegistro()
 	 */
 	public Long getCodigoDoProximoRegistro() {
-		return obterProximoIdentificar();
+		return obterProximoIdentificador();
 	}
 
 }
