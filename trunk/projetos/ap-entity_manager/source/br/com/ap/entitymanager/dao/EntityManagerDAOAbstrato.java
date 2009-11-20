@@ -506,7 +506,7 @@ public abstract class EntityManagerDAOAbstrato<T extends Entidade> implements
 	 * @return maior identificador da entidade.
 	 */
 	@SuppressWarnings("unchecked")
-	protected <N extends Number> N obterMaiorIdentificar() {
+	protected <N extends Number> N obterMaiorIdentificador() {
 		N resultado = (N) getNumeroFactory().novoInteger(0);
 
 		Class<?> entidade = getTipoDaEntidade();
@@ -528,7 +528,7 @@ public abstract class EntityManagerDAOAbstrato<T extends Entidade> implements
 	 */
 	@SuppressWarnings("boxing")
 	protected Long obterProximoIdentificar() {
-		return UtilSomadoresDeNumero.somar(obterMaiorIdentificar(), 1);
+		return UtilSomadoresDeNumero.somar(obterMaiorIdentificador(), 1);
 	}
 
 	/**
