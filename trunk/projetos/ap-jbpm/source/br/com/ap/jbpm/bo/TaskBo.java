@@ -12,6 +12,8 @@ import javax.annotation.Resource;
 import org.jbpm.api.task.Task;
 import org.springframework.stereotype.Component;
 
+import br.com.ap.comum.objeto.UtilObjeto;
+import br.com.ap.comum.string.UtilString;
 import br.com.ap.jbpm.dao.TaskDao;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
@@ -48,10 +50,30 @@ public class TaskBo {
 	}
 
 	public TaskDecorator obterFormulario(TaskDecorator task) {
-		return taskDao.obterFormulario(task);
+		TaskDecorator resultado = null;
+		if (UtilObjeto.isReferencia(task)) {
+			Task tarefa = taskDao.obter(task.getId());
+			
+		}
+		return resultado;
 	}
 
 	public void locarTarefa(TaskDecorator task, UserDecorator user) {
-		taskDao.locarTarefa(task, user);
+		
+		if (!isTarefaLocada(task, user)) {
+			taskDao.locarTarefa(task, user);
+		}
+	}
+
+	public boolean isTarefaLocada(TaskDecorator task, UserDecorator user) {
+		boolean resultado = false;
+		if (UtilObjeto.isReferenciaTodos(task, user)) {
+			Task tarefa = taskDao.obter(task.getId());
+
+			resultado = UtilObjeto.isReferencia(tarefa)
+					&& UtilString.isStringsIguais(tarefa.getAssignee(), user
+							.getGivenName());
+		}
+		return resultado;
 	}
 }

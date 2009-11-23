@@ -13,6 +13,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
+import org.jbpm.api.TaskQuery;
 import org.jbpm.api.TaskService;
 import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.task.TaskImpl;
@@ -74,7 +75,6 @@ public class TaskDaoImpl extends HibernateCrudDaoAbstrato<TaskImpl> implements
 
 	@Override
 	public TaskDecorator obterFormulario(TaskDecorator task) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
