@@ -15,6 +15,7 @@ import org.jbpm.api.NewDeployment;
 import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessDefinitionQuery;
 import org.jbpm.api.ProcessInstance;
+import org.jbpm.api.ProcessInstanceQuery;
 import org.jbpm.api.TaskQuery;
 import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.model.ProcessDefinitionImpl;

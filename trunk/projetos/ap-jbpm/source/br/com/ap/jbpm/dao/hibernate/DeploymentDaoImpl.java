@@ -35,7 +35,7 @@ public class DeploymentDaoImpl extends HibernateCrudDaoAbstrato<DeploymentImpl>
 
 	@Override
 	public DeploymentDecorator publicar(DeploymentDecorator deployment) {
-
+		
 		NewDeployment novoDeploy = repositoryService.createDeployment();
 		novoDeploy.addResourceFromClasspath(deployment.getClasspathJpdl());
 		novoDeploy.addResourceFromClasspath(deployment.getClasspathImagem());
@@ -47,7 +47,6 @@ public class DeploymentDaoImpl extends HibernateCrudDaoAbstrato<DeploymentImpl>
 	}
 
 	public Collection<ProcessDefinition> consultarDefinicaoDeProcesso() {
-		
 		ProcessDefinitionQuery query = repositoryService.createProcessDefinitionQuery();
 		return query.list();
 	}
