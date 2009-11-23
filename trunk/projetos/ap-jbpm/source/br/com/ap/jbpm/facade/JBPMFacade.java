@@ -36,6 +36,8 @@ public interface JBPMFacade {
 	
 	public void completarTarefa(TaskDecorator task);
 	
+	public void locarTarefa(TaskDecorator task, UserDecorator user);
+	
 	public TaskDecorator obterFormulario(TaskDecorator task);
 	
 	public ProcessDefinitionDecorator obterFormularioInicial(ProcessDefinitionDecorator processDefinition);

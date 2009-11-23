@@ -50,4 +50,8 @@ public class TaskBo {
 	public TaskDecorator obterFormulario(TaskDecorator task) {
 		return taskDao.obterFormulario(task);
 	}
+
+	public void locarTarefa(TaskDecorator task, UserDecorator user) {
+		taskDao.locarTarefa(task, user);
+	}
 }

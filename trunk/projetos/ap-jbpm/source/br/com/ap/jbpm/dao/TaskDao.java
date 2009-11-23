@@ -32,4 +32,6 @@ public interface TaskDao extends CrudDao<TaskImpl> {
 	public void completarTarefa(TaskDecorator task);
 	
 	public TaskDecorator obterFormulario(TaskDecorator task);
+
+	public void locarTarefa(TaskDecorator task, UserDecorator user);
 }
