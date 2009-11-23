@@ -123,6 +123,19 @@ public class MainTest extends TesteAbstrato {
 			}
 		}
 	}
+	
+	public void test_listarTarefas() {
+		println("listarTarefas");
+		println("------------------------");
+		
+		TaskQuery query = getTaskService().createTaskQuery();
+		List<Task> tarefas = query.list();
+		if (!UtilColecao.isVazio(tarefas)) {
+			for (Task tarefa : tarefas) {
+				System.out.println("Tarefa: "+ tarefa.getActivityName());
+			}
+		}
+	}
 	public void test_recuperarFormulario() throws IOException {
 		println("recuperarFormulario");
 		println("-------------------");
