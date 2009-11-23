@@ -98,4 +98,9 @@ public class JBPMFacadeImpl implements JBPMFacade {
 		taskBo.salvarTarefa(task);
 	}
 
+	@Override
+	public void locarTarefa(TaskDecorator task, UserDecorator user) {
+		taskBo.locarTarefa(task, user);
+	}
+
 }

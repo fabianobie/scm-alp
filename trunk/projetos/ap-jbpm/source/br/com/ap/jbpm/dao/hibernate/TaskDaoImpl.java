@@ -83,4 +83,10 @@ public class TaskDaoImpl extends HibernateCrudDaoAbstrato<TaskImpl> implements
 		
 		taskService.setVariables(task.getId(), task.getMapaVariables());
 	}
+
+	@Override
+	public void locarTarefa(TaskDecorator task, UserDecorator user) {
+		
+		taskService.takeTask(task.getId(), user.getGivenName());
+	}
 }
