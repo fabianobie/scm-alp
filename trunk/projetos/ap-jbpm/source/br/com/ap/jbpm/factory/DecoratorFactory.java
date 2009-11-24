@@ -6,9 +6,11 @@
 package br.com.ap.jbpm.factory;
 
 import org.jbpm.api.Deployment;
+import org.jbpm.api.identity.User;
 import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.task.TaskImpl;
 
+import br.com.ap.jbpm.decorator.ActivityDecorator;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.ExecutionDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
@@ -126,5 +128,33 @@ public final class DecoratorFactory {
 		TaskDecorator decorator = novoTaskDecorator();
 		decorator.setTask(task);
 		return decorator;
+	}
+
+	/**
+	 * @param user Usuário
+	 * @return UserDecorator
+	 */
+	public UserDecorator novoUserDecorator(User user) {
+		UserDecorator decorator = novoUserDecorator();
+		decorator.setUser(user);
+		return decorator;
+	}
+
+	/**
+	 * @param nome Nome da atividade
+	 * @return ActivityDecorator
+	 */
+	public ActivityDecorator novaActivityDecorator(String nome) {
+		ActivityDecorator decorator = novaActivityDecorator();
+		decorator.setName(nome);
+
+		return decorator;
+	}
+	
+	/**
+	 * @return ActivityDecorator
+	 */
+	public ActivityDecorator novaActivityDecorator() {
+		return new ActivityDecorator();
 	}
 }

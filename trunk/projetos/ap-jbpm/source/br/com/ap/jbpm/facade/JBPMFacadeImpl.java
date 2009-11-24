@@ -10,11 +10,14 @@ import java.util.Collection;
 import javax.annotation.Resource;
 
 import org.jbpm.api.ProcessDefinition;
+import org.jbpm.api.ProcessInstance;
 import org.jbpm.api.task.Task;
 import org.springframework.stereotype.Service;
 
 import br.com.ap.jbpm.bo.DeploymentBo;
+import br.com.ap.jbpm.bo.ExecutionBo;
 import br.com.ap.jbpm.bo.TaskBo;
+import br.com.ap.jbpm.bo.UserBo;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
@@ -31,6 +34,12 @@ public class JBPMFacadeImpl implements JBPMFacade {
 
 	@Resource
 	private TaskBo taskBo;
+
+	@Resource
+	private UserBo userBo;
+
+	@Resource
+	private ExecutionBo executionBo;
 
 	@Override
 	public void cancelarTarefa(TaskDecorator task) {
@@ -66,8 +75,7 @@ public class JBPMFacadeImpl implements JBPMFacade {
 
 	@Override
 	public boolean isUsuarioExiste(UserDecorator user) {
-		// TODO Auto-generated method stub
-		return false;
+		return userBo.isUsuarioExiste(user);
 	}
 
 	@Override
@@ -76,16 +84,14 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public ProcessDefinitionDecorator obterFormularioInicial(
+	public TaskDecorator obterFormularioInicial(
 			ProcessDefinitionDecorator processDefinition) {
-		// TODO Auto-generated method stub
-		return null;
+		return deploymentBo.obterFormularioInicial(processDefinition);
 	}
 
 	@Override
-	public UserDecorator obterUsuario(UserDecorator user) {
-		// TODO Auto-generated method stub
-		return null;
+	public UserDecorator obterUsuarioPeloNome(UserDecorator user) {
+		return userBo.obterUsuarioPeloNome(user);
 	}
 
 	@Override
@@ -101,6 +107,17 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	@Override
 	public void locarTarefa(TaskDecorator task, UserDecorator user) {
 		taskBo.locarTarefa(task, user);
+	}
+
+	@Override
+	public ProcessInstance iniciarProcesso(
+			ProcessDefinitionDecorator processDefinition) {
+		return executionBo.iniciarProcesso(processDefinition);
+	}
+
+	@Override
+	public TaskDecorator obterTarefa(TaskDecorator task) {
+		return taskBo.obterTarefa(task);
 	}
 
 }

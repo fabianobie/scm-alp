@@ -15,6 +15,7 @@ import org.jbpm.api.task.Task;
  */
 public class TaskDecorator extends JbpmDecoratorAbstrato {
 	private Task task;
+	private String id;
 	private Map<String, Object> mapaVariables;
 	private String textoFormulario;
 
@@ -79,7 +80,18 @@ public class TaskDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.getTask().Task#getId()
 	 */
 	public String getId() {
-		return getTask().getId();
+		String resultado = getTask().getId();
+		if (isVazio(resultado) || isZero(resultado)) {
+			resultado = id;
+		}
+		return resultado;
+	}
+	
+	/**
+	 * @param id Atribui id.
+	 */
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	/**
@@ -186,5 +198,6 @@ public class TaskDecorator extends JbpmDecoratorAbstrato {
 	public void setTextoFormulario(String textoFormulario) {
 		this.textoFormulario = textoFormulario;
 	}
+
 
 }

@@ -5,19 +5,20 @@
  */
 package br.com.ap.jbpm.dao.hibernate;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import javax.annotation.Resource;
 
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.SimpleExpression;
-import org.jbpm.api.TaskQuery;
 import org.jbpm.api.TaskService;
 import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.task.TaskImpl;
+import org.springframework.stereotype.Repository;
 
+import br.com.ap.comum.fabrica.NumeroFactory;
+import br.com.ap.comum.objeto.UtilObjeto;
 import br.com.ap.hibernate.dao.HibernateCrudDaoAbstrato;
 import br.com.ap.jbpm.dao.TaskDao;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
@@ -29,6 +30,7 @@ import br.com.ap.jbpm.decorator.UserDecorator;
  * @author adriano.pamplona
  * 
  */
+@Repository
 public class TaskDaoImpl extends HibernateCrudDaoAbstrato<TaskImpl> implements
 		TaskDao {
 	
@@ -53,7 +55,7 @@ public class TaskDaoImpl extends HibernateCrudDaoAbstrato<TaskImpl> implements
 		criteria.add(
 			Restrictions.or(
 				Restrictions.eq("assignee", user.getGivenName()),
-				Restrictions.isEmpty("assignee"))
+				Restrictions.isNull("assignee"))
 			);
 		return criteria.list();
 	}
@@ -90,5 +92,14 @@ public class TaskDaoImpl extends HibernateCrudDaoAbstrato<TaskImpl> implements
 	public void locarTarefa(TaskDecorator task, UserDecorator user) {
 		
 		taskService.takeTask(task.getId(), user.getGivenName());
+	}
+	
+	@Override
+	public TaskImpl obter(Serializable id) {
+		Long parametro = null;
+		if (UtilObjeto.isString(id)) {
+			parametro = NumeroFactory.getInstancia().novoLong((String) id);
+		}
+		return super.obter(parametro);
 	}
 }

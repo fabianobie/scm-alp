@@ -6,12 +6,13 @@
 package br.com.ap.jbpm.dao;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.jbpm.api.ProcessDefinition;
-import org.jbpm.api.ProcessDefinitionQuery;
 import org.jbpm.pvm.internal.repository.DeploymentImpl;
 
 import br.com.ap.arquitetura.dao.CrudDao;
+import br.com.ap.jbpm.decorator.ActivityDecorator;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
@@ -29,4 +30,12 @@ public interface DeploymentDao extends CrudDao<DeploymentImpl> {
 	public ProcessDefinition obterDefinicaoDeProcesso(ProcessDefinitionDecorator processDefinition);
 	
 	public TaskDecorator obterFormulario(DeploymentDecorator deployment, TaskDecorator task);
+	
+	public List<String> obterNomesAtividadeStart(
+			ProcessDefinitionDecorator processDefinition);
+
+	public TaskDecorator obterFormularioInicial(
+			DeploymentDecorator deployment,
+			ProcessDefinitionDecorator processDefinition,
+			ActivityDecorator activity);
 }

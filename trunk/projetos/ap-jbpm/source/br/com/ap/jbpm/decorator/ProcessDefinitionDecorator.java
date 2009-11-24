@@ -5,6 +5,8 @@
  */
 package br.com.ap.jbpm.decorator;
 
+import java.util.Map;
+
 import org.jbpm.api.ProcessDefinition;
 
 /**
@@ -13,6 +15,7 @@ import org.jbpm.api.ProcessDefinition;
  */
 public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 	private ProcessDefinition processDefinition;
+	private Map<String, Object> mapaVariables;
 	private String id;
 	
 	/**
@@ -105,6 +108,23 @@ public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 	 */
 	public void setProcessDefinition(ProcessDefinition processDefinition) {
 		this.processDefinition = processDefinition;
+	}
+
+	/**
+	 * @return retorna mapaVariables.
+	 */
+	public Map<String, Object> getMapaVariables() {
+		if (!isReferencia(mapaVariables)) {
+			mapaVariables = getColecaoFactory().novoHashMap();
+		}
+		return mapaVariables;
+	}
+
+	/**
+	 * @param mapaVariables Atribui mapaVariables.
+	 */
+	public void setMapaVariables(Map<String, Object> mapaVariables) {
+		this.mapaVariables = mapaVariables;
 	}
 
 	

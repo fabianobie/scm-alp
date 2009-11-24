@@ -9,7 +9,8 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import br.com.ap.arquitetura.dao.CrudDao;
-import br.com.ap.arquitetura.dao.DAO;
+import br.com.ap.jbpm.factory.DecoratorFactory;
+import br.com.ap.jbpm.factory.EntidadeFactory;
 
 /**
  * @author AdrianoP
@@ -63,4 +64,18 @@ public abstract class CrudBoAbstrato<T extends Object> implements CrudDao<T> {
 	}
 
 	protected abstract CrudDao<T> getDao();
+
+	/**
+	 * @return EntidadeFactory
+	 */
+	protected EntidadeFactory getEntidadeFactory() {
+		return EntidadeFactory.getInstancia();
+	}
+
+	/**
+	 * @return DecoratorFactory
+	 */
+	protected DecoratorFactory getDecoratorFactory() {
+		return DecoratorFactory.getInstancia();
+	}
 }

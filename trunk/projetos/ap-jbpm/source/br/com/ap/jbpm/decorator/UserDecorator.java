@@ -13,6 +13,7 @@ import org.jbpm.api.identity.User;
  */
 public class UserDecorator extends JbpmDecoratorAbstrato {
 	private User user;
+	private String givenName;
 
 	/**
 	 * @return
@@ -35,7 +36,18 @@ public class UserDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.identity.User#getGivenName()
 	 */
 	public String getGivenName() {
-		return getUser().getGivenName();
+		String resultado = getUser().getGivenName();
+		if (isVazio(resultado)) {
+			resultado = givenName;
+		}
+		return resultado;
+	}
+	
+	/**
+	 * @param givenName Atribui givenName.
+	 */
+	public void setGivenName(String givenName) {
+		this.givenName = givenName;
 	}
 
 	/**
@@ -62,4 +74,7 @@ public class UserDecorator extends JbpmDecoratorAbstrato {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	
+
 }

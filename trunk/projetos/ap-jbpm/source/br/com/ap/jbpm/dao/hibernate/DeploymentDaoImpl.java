@@ -6,7 +6,9 @@
 package br.com.ap.jbpm.dao.hibernate;
 
 import java.io.InputStream;
+import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -18,8 +20,11 @@ import org.jbpm.pvm.internal.repository.DeploymentImpl;
 import org.springframework.stereotype.Repository;
 
 import br.com.ap.comum.arquivo.UtilArquivo;
+import br.com.ap.comum.conversor.UtilConversorDeString;
+import br.com.ap.comum.objeto.UtilObjeto;
 import br.com.ap.hibernate.dao.HibernateCrudDaoAbstrato;
 import br.com.ap.jbpm.dao.DeploymentDao;
+import br.com.ap.jbpm.decorator.ActivityDecorator;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
@@ -89,5 +94,40 @@ public class DeploymentDaoImpl extends HibernateCrudDaoAbstrato<DeploymentImpl>
 		resultado.setTextoFormulario(texto);
 		
 		return resultado;
+	}
+
+
+
+	@Override
+	public List<String> obterNomesAtividadeStart(
+			ProcessDefinitionDecorator processDefinition) {
+		
+		return repositoryService.getStartActivityNames(processDefinition.getId());
+	}
+
+	@Override
+	public TaskDecorator obterFormularioInicial(
+			DeploymentDecorator deployment,
+			ProcessDefinitionDecorator processDefinition,
+			ActivityDecorator activity) {
+		
+		TaskDecorator resultado = getDecoratorFactory().novoTaskDecorator();
+		
+		String form = repositoryService.getStartFormResourceName(processDefinition.getId(), activity.getName());
+		String deploymentId = deployment.getId();
+		InputStream is = repositoryService.getResourceAsStream(deploymentId, form);
+		String texto = UtilArquivo.getTextoDoInputStream(is);
+		resultado.setTextoFormulario(texto);
+		
+		return resultado;
+	}
+	
+	@Override
+	public DeploymentImpl obter(Serializable id) {
+		Serializable parametro = id;
+		if (UtilObjeto.isString(id)) {
+			parametro = UtilConversorDeString.converterParaLong((String) id);
+		}
+		return super.obter(parametro);
 	}
 }

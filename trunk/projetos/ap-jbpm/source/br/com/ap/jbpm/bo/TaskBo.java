@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 
 import org.jbpm.api.Deployment;
 import org.jbpm.api.Execution;
+import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.task.TaskImpl;
 import org.springframework.stereotype.Component;
@@ -86,10 +87,10 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 			Execution execucao = executionBo.obter(executionDecorator);
 
 			String definicaoId = execucao.getProcessDefinitionId();
-			ProcessDefinitionDecorator definicao = getDecoratorFactory()
-					.novoProcessDefinitionDecorator(definicaoId);
-
-			Deployment deployment = deploymentBo.obter(definicao.getId());
+			ProcessDefinitionDecorator definitionDecorator = getDecoratorFactory().novoProcessDefinitionDecorator(definicaoId);
+			ProcessDefinition process = deploymentBo.obterDefinicaoDeProcesso(definitionDecorator);
+			
+			Deployment deployment = deploymentBo.obter(process.getDeploymentId());
 			DeploymentDecorator deploymentDecorator = getDecoratorFactory()
 					.novoDeploymentDecorator(deployment);
 			TaskDecorator taskDecorator = getDecoratorFactory().novoTaskDecorator(tarefa);
@@ -126,5 +127,15 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 	@Override
 	protected TaskDao getDao() {
 		return taskDao;
+	}
+
+	public TaskDecorator obterTarefa(TaskDecorator task) {
+		TaskDecorator resultado = null;
+		
+		if (UtilObjeto.isReferencia(task)) {
+			Task temp = obter(task.getId());
+			resultado = getDecoratorFactory().novoTaskDecorator(temp);
+		}
+		return resultado;
 	}
 }

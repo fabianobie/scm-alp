@@ -5,11 +5,19 @@
  */
 package br.com.ap.test.jbpm;
 
+import java.util.Collection;
+
 import junit.framework.TestCase;
 
+import org.jbpm.api.ProcessDefinition;
+import org.jbpm.api.ProcessInstance;
+import org.jbpm.api.task.Task;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
+import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
+import br.com.ap.jbpm.decorator.TaskDecorator;
+import br.com.ap.jbpm.decorator.UserDecorator;
 import br.com.ap.jbpm.facade.JBPMFacade;
 import br.com.ap.jbpm.facade.JBPMFacadeImpl;
 
@@ -29,14 +37,74 @@ public class JBPMFacadeTest extends TestCase {
 		decorator.getColecaoClasspathFormulario().add("br/com/ap/test/jbpm/deploy/taskform-solicitar-demanda.ftl");
 		decorator.getColecaoClasspathFormulario().add("br/com/ap/test/jbpm/deploy/taskform-solicitar-informacao.ftl");
 		
-		decorator = getJBPMFacade().publicar(decorator);
-		System.out.println(decorator.getId());
+		decorator = getFacade().publicar(decorator);
+		System.out.println("Deploy: "+ decorator.getId());
+	}
+	
+	public void testConsultarDefinicaoDeProcesso() {
+		Collection<ProcessDefinition> definicoes = getFacade().consultarDefinicaoDeProcesso();
+		System.out.println("Total: "+ definicoes.size());
+		for (ProcessDefinition definicao : definicoes) {
+			System.out.println("Id...: "+ definicao.getId());
+			System.out.println("Name.: "+ definicao.getName());
+		}
+	}
+	
+	public void testObterDefinicaoDeProcesso() {
+		ProcessDefinitionDecorator decorator = new ProcessDefinitionDecorator();
+		decorator.setId("SolicitarDemanda-1");
+		
+		ProcessDefinition processDefinition = getFacade().obterDefinicaoDeProcesso(decorator);
+		System.out.println("Id...: "+ processDefinition.getId());
+		System.out.println("Name.: "+ processDefinition.getName());
+	}
+	
+	public void testObterFormularioInicial() {
+		ProcessDefinitionDecorator decorator = new ProcessDefinitionDecorator();
+		decorator.setId("SolicitarDemanda-1");
+		
+		TaskDecorator taskDecorator = getFacade().obterFormularioInicial(decorator);
+		System.out.println(taskDecorator.getTextoFormulario());
+	}
+
+	public void testIniciarProcesso() {
+		ProcessDefinitionDecorator decorator = new ProcessDefinitionDecorator();
+		decorator.setId("SolicitarDemanda-1");
+		
+		ProcessInstance processInstance = getFacade().iniciarProcesso(decorator);
+		System.out.println(processInstance.getKey());
+		System.out.println(processInstance.getId());
+		System.out.println(processInstance.getState());
+	}
+	
+	public void testConsultarTarefa() {
+		UserDecorator user = new UserDecorator();
+		user.setGivenName("alex");
+		
+		Collection<Task> tarefas = getFacade().consultarTarefa(user);
+		for (Task tarefa : tarefas) {
+			System.out.println("tarefa id..: "+ tarefa.getId());
+			System.out.println("assignee...: "+ tarefa.getAssignee());
+			System.out.println("name.......: "+ tarefa.getName());
+		}
+	}
+	
+	public void testLocarTarefa() {
+		TaskDecorator task = new TaskDecorator();
+		task.setId("1");
+		
+		UserDecorator user = new UserDecorator();
+		user.setGivenName("alex");
+		
+		getFacade().locarTarefa(task, user);
+		task = getFacade().obterTarefa(task);
+		System.out.println("assignee...: "+ task.getAssignee());
 	}
 	
 	/**
 	 * @return JBPMFacade
 	 */
-	protected JBPMFacade getJBPMFacade() {
+	private JBPMFacade getFacade() {
 		return (JBPMFacade) getContexto().getBean(JBPMFacadeImpl.class.getSimpleName());
 	}
 	
