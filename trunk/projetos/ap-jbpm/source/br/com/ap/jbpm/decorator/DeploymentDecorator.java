@@ -26,7 +26,7 @@ public class DeploymentDecorator extends JbpmDecoratorAbstrato {
 	 */
 	public String getId() {
 		String resultado = getDeployment().getId();
-		if (isVazio(resultado)) {
+		if (isVazio(resultado) || isZero(resultado)) {
 			resultado = id;
 		}
 		return resultado;

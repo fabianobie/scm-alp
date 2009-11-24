@@ -7,14 +7,14 @@ package br.com.ap.jbpm.bo;
 
 import javax.annotation.Resource;
 
-import org.jbpm.api.Execution;
+import org.apache.tools.ant.taskdefs.condition.IsReference;
+import org.jbpm.api.ProcessInstance;
 import org.jbpm.pvm.internal.model.ExecutionImpl;
 import org.springframework.stereotype.Component;
 
-import br.com.ap.arquitetura.dao.CrudDao;
 import br.com.ap.comum.objeto.UtilObjeto;
 import br.com.ap.jbpm.dao.ExecutionDao;
-import br.com.ap.jbpm.decorator.ExecutionDecorator;
+import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 
 /**
  * @author adriano.pamplona
@@ -22,21 +22,23 @@ import br.com.ap.jbpm.decorator.ExecutionDecorator;
  */
 @Component
 public class ExecutionBo extends CrudBoAbstrato<ExecutionImpl> {
-	@Resource(name = "ExecutionDaoImpl")
-	private ExecutionDao	executionDao;
-
-	public Execution obter(ExecutionDecorator executionDecorator) {
-		Execution resultado = null;
-
-		if (UtilObjeto.isReferencia(executionDecorator)) {
-			resultado = executionDao.obter(executionDecorator.getId());
-		}
-		return resultado;
-	}
+	@Resource(name = "executionDaoImpl")
+	private ExecutionDao executionDao;
 
 	@Override
 	protected ExecutionDao getDao() {
 		return executionDao;
+	}
+
+	public ProcessInstance iniciarProcesso(
+			ProcessDefinitionDecorator processDefinition) {
+		
+		ProcessInstance resultado = null;
+		
+		if (UtilObjeto.isReferencia(processDefinition)) {
+			resultado = getDao().iniciarProcesso(processDefinition);
+		}
+		return resultado;
 	}
 
 }

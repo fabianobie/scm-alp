@@ -8,9 +8,12 @@ package br.com.ap.jbpm.factory;
 import org.jbpm.api.Deployment;
 import org.jbpm.api.Execution;
 import org.jbpm.api.ProcessDefinition;
+import org.jbpm.api.ProcessInstance;
 import org.jbpm.api.identity.User;
 import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.identity.impl.UserImpl;
+import org.jbpm.pvm.internal.model.Activity;
+import org.jbpm.pvm.internal.model.ActivityImpl;
 import org.jbpm.pvm.internal.model.ExecutionImpl;
 import org.jbpm.pvm.internal.model.ProcessDefinitionImpl;
 import org.jbpm.pvm.internal.repository.DeploymentImpl;
@@ -70,5 +73,12 @@ public final class EntidadeFactory {
 	 */
 	public Execution novoExecution() {
 		return new ExecutionImpl();
+	}
+
+	/**
+	 * @return Activity
+	 */
+	public Activity novaActivity() {
+		return new ActivityImpl();
 	}
 }

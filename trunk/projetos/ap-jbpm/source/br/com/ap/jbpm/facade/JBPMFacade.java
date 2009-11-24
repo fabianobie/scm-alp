@@ -8,6 +8,7 @@ package br.com.ap.jbpm.facade;
 import java.util.Collection;
 
 import org.jbpm.api.ProcessDefinition;
+import org.jbpm.api.ProcessInstance;
 import org.jbpm.api.task.Task;
 
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
@@ -40,12 +41,13 @@ public interface JBPMFacade {
 	
 	public TaskDecorator obterFormulario(TaskDecorator task);
 	
-	public ProcessDefinitionDecorator obterFormularioInicial(ProcessDefinitionDecorator processDefinition);
+	public TaskDecorator obterFormularioInicial(ProcessDefinitionDecorator processDefinition);
 	
-	public UserDecorator obterUsuario(UserDecorator user);
+	public UserDecorator obterUsuarioPeloNome(UserDecorator user);
 	
 	public boolean isUsuarioExiste(UserDecorator user);
 	
-	
-	
+	public ProcessInstance iniciarProcesso(ProcessDefinitionDecorator processDefinition);
+
+	public TaskDecorator obterTarefa(TaskDecorator task);
 }
