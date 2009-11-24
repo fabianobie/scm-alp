@@ -11,6 +11,7 @@ import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.task.TaskImpl;
 
 import br.com.ap.arquitetura.dao.CrudDao;
+import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.decorator.UserDecorator;
@@ -31,7 +32,7 @@ public interface TaskDao extends CrudDao<TaskImpl> {
 	
 	public void completarTarefa(TaskDecorator task);
 	
-	public TaskDecorator obterFormulario(TaskDecorator task);
+	public TaskDecorator obterFormulario(DeploymentDecorator deployment, TaskDecorator task);
 
 	public void locarTarefa(TaskDecorator task, UserDecorator user);
 }

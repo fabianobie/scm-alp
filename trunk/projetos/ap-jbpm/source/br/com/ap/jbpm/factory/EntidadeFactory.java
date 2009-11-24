@@ -6,10 +6,12 @@
 package br.com.ap.jbpm.factory;
 
 import org.jbpm.api.Deployment;
+import org.jbpm.api.Execution;
 import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.identity.User;
 import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.identity.impl.UserImpl;
+import org.jbpm.pvm.internal.model.ExecutionImpl;
 import org.jbpm.pvm.internal.model.ProcessDefinitionImpl;
 import org.jbpm.pvm.internal.repository.DeploymentImpl;
 import org.jbpm.pvm.internal.task.TaskImpl;
@@ -61,5 +63,12 @@ public final class EntidadeFactory {
 	 */
 	public User novoUser() {
 		return new UserImpl();
+	}
+
+	/**
+	 * @return Execution
+	 */
+	public Execution novoExecution() {
+		return new ExecutionImpl();
 	}
 }

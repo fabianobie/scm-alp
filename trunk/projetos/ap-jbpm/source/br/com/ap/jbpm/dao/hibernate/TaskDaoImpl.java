@@ -20,6 +20,7 @@ import org.jbpm.pvm.internal.task.TaskImpl;
 
 import br.com.ap.hibernate.dao.HibernateCrudDaoAbstrato;
 import br.com.ap.jbpm.dao.TaskDao;
+import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.decorator.UserDecorator;
@@ -66,7 +67,7 @@ public class TaskDaoImpl extends HibernateCrudDaoAbstrato<TaskImpl> implements
 		criteria.add(
 			Restrictions.or(
 				Restrictions.eq("assignee", user.getGivenName()),
-				Restrictions.isEmpty("assignee"))
+				Restrictions.isNull("assignee"))
 			);
 		Criteria execution = criteria.createCriteria("execution");
 		execution.add(Restrictions.eq("processDefinitionId", processDefinition.getId()));
@@ -74,7 +75,8 @@ public class TaskDaoImpl extends HibernateCrudDaoAbstrato<TaskImpl> implements
 	}
 
 	@Override
-	public TaskDecorator obterFormulario(TaskDecorator task) {
+	public TaskDecorator obterFormulario(DeploymentDecorator deployment, TaskDecorator task) {
+		
 		return null;
 	}
 

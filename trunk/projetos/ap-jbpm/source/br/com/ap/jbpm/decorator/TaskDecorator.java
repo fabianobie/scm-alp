@@ -16,6 +16,7 @@ import org.jbpm.api.task.Task;
 public class TaskDecorator extends JbpmDecoratorAbstrato {
 	private Task task;
 	private Map<String, Object> mapaVariables;
+	private String textoFormulario;
 
 	/**
 	 * @return
@@ -170,6 +171,20 @@ public class TaskDecorator extends JbpmDecoratorAbstrato {
 	 */
 	public void setMapaVariables(Map<String, Object> mapaVariables) {
 		this.mapaVariables = mapaVariables;
+	}
+
+	/**
+	 * @return textoFormulario
+	 */
+	public String getTextoFormulario() {
+		return textoFormulario;
+	}
+
+	/**
+	 * @param textoFormulario Atribui textoFormulario
+	 */
+	public void setTextoFormulario(String textoFormulario) {
+		this.textoFormulario = textoFormulario;
 	}
 
 }
