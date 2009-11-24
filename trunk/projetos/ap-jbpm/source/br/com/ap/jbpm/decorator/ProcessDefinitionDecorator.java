@@ -13,7 +13,8 @@ import org.jbpm.api.ProcessDefinition;
  */
 public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 	private ProcessDefinition processDefinition;
-
+	private String id;
+	
 	/**
 	 * @return
 	 * @see org.jbpm.api.ProcessDefinition#getDeploymentId()
@@ -35,9 +36,20 @@ public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.ProcessDefinition#getId()
 	 */
 	public String getId() {
-		return getProcessDefinition().getId();
+		String resultado = getProcessDefinition().getId();
+		if (isVazio(resultado)) {
+			resultado = id;
+		}
+		return resultado;
 	}
 
+	/**
+	 * @param id Atribui id
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	/**
 	 * @return
 	 * @see org.jbpm.api.ProcessDefinition#getImageResourceName()
@@ -94,4 +106,6 @@ public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 	public void setProcessDefinition(ProcessDefinition processDefinition) {
 		this.processDefinition = processDefinition;
 	}
+
+	
 }

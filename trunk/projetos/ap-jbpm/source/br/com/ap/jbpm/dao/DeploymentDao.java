@@ -14,6 +14,7 @@ import org.jbpm.pvm.internal.repository.DeploymentImpl;
 import br.com.ap.arquitetura.dao.CrudDao;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
+import br.com.ap.jbpm.decorator.TaskDecorator;
 
 /**
  * @author adriano.pamplona
@@ -26,4 +27,6 @@ public interface DeploymentDao extends CrudDao<DeploymentImpl> {
 	public Collection<ProcessDefinition> consultarDefinicaoDeProcesso();
 
 	public ProcessDefinition obterDefinicaoDeProcesso(ProcessDefinitionDecorator processDefinition);
+	
+	public TaskDecorator obterFormulario(DeploymentDecorator deployment, TaskDecorator task);
 }
