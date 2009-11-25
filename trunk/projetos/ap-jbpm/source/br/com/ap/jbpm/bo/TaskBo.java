@@ -82,11 +82,8 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 		TaskDecorator resultado = null;
 		if (UtilObjeto.isReferencia(task)) {
 			Task tarefa = taskDao.obter(task.getId());
-			String tarefaId = tarefa.getId();
 
-			ExecutionDecorator executionDecorator = getDecoratorFactory().novoExecutionDecorator(
-					tarefaId);
-			Execution execucao = executionBo.obter(executionDecorator);
+			Execution execucao = executionBo.obter(tarefa.getExecutionId());
 
 			String definicaoId = execucao.getProcessDefinitionId();
 			ProcessDefinitionDecorator definitionDecorator = getDecoratorFactory().novoProcessDefinitionDecorator(definicaoId);

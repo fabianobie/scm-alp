@@ -5,6 +5,7 @@
  */
 package br.com.ap.jbpm.dao.hibernate;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -36,5 +37,10 @@ public class ExecutionDaoImpl extends HibernateCrudDaoAbstrato<ExecutionImpl> im
 		String id = processDefinition.getId();
 		Map<String, Object> mapaVariables = processDefinition.getMapaVariables();
 		return executionService.startProcessInstanceById(id, mapaVariables);
+	}
+	
+	@Override
+	public ExecutionImpl obter(Serializable id) {
+		return (ExecutionImpl) executionService.findExecutionById((String) id);
 	}
 }
