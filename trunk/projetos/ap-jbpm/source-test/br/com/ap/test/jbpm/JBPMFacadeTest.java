@@ -8,15 +8,19 @@ package br.com.ap.test.jbpm;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import junit.framework.TestCase;
 
 import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
+import org.jbpm.api.TaskQuery;
+import org.jbpm.api.TaskService;
 import org.jbpm.api.task.Task;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import br.com.ap.comum.colecao.UtilColecao;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
@@ -103,6 +107,21 @@ public class JBPMFacadeTest extends TestCase {
 			System.out.println("name.......: "+ tarefa.getName());
 		}
 	}
+
+	public void testConsultarTarefa_user_processDefinition() {
+		UserDecorator user = new UserDecorator();
+		user.setGivenName("alex");
+		
+		ProcessDefinitionDecorator processDefinition = new ProcessDefinitionDecorator();
+		processDefinition.setId("SolicitarDemanda-1");
+		
+		Collection<Task> tarefas = getFacade().consultarTarefa(user, processDefinition);
+		for (Task tarefa : tarefas) {
+			System.out.println("tarefa id..: "+ tarefa.getId());
+			System.out.println("assignee...: "+ tarefa.getAssignee());
+			System.out.println("name.......: "+ tarefa.getName());
+		}
+	}
 	
 	public void testCancelarTarefa() {
 		TaskDecorator task = new TaskDecorator();
@@ -138,13 +157,38 @@ public class JBPMFacadeTest extends TestCase {
 		task.setId("1");
 		
 		getFacade().completarTarefa(task);
-		task = getFacade().obterTarefa(task);
-		
-		System.out.println("tarefa id..: "+ task.getId());
-		System.out.println("assignee...: "+ task.getAssignee());
-		System.out.println("name.......: "+ task.getName());
 	}
 	
+	public void testObterFormulario() {
+		UserDecorator user = new UserDecorator();
+		user.setGivenName("alex");
+		
+		TaskService taskService = (TaskService) getContexto().getBean("taskService");
+		TaskQuery query = taskService.createTaskQuery();
+		List<Task> tarefas = query.list();
+		Task tarefa = UtilColecao.getElementoDoIndice(tarefas, 0);
+		
+		TaskDecorator decorator = new TaskDecorator();
+		decorator.setTask(tarefa);
+		TaskDecorator resultado = getFacade().obterFormulario(decorator);
+		System.out.println(resultado.getTextoFormulario());
+	}
+	
+	public void testObterUsuarioPeloNome() {
+		UserDecorator user = new UserDecorator();
+		user.setGivenName("alex");
+		
+		user = getFacade().obterUsuarioPeloNome(user);
+		System.out.println(user.getGivenName());
+	}
+
+	public void testIsUsuarioExiste() {
+		UserDecorator user = new UserDecorator();
+		user.setGivenName("alex");
+		
+		boolean existe = getFacade().isUsuarioExiste(user);
+		System.out.println(existe);
+	}
 	
 	
 	/**

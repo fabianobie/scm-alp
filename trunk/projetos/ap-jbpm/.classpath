@@ -6,7 +6,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JBPM_LIB"/>
 	<classpathentry kind="lib" path="build/lib/ap-arquitetura.jar"/>
 	<classpathentry kind="lib" path="build/lib/ap-comum.jar"/>
-	<classpathentry kind="lib" path="build/lib/ap-hibernate.jar"/>
+	<classpathentry kind="lib" path="build/lib/ap-hibernate.jar" sourcepath="/ap-hibernate"/>
 	<classpathentry kind="lib" path="build/lib/ap-reflexao.jar"/>
 	<classpathentry kind="lib" path="build/lib/spring-2.5.4.jar"/>
 	<classpathentry kind="lib" path="build/lib-externa/testng-5.9-jdk15.jar"/>

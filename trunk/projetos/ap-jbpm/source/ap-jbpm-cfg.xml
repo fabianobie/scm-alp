@@ -25,7 +25,7 @@
 		</deployer-manager>
 
 
-		<script-manager default-expression-language="juel" default-script-language="juel" read-contexts="execution, environment, process-engine" write-context="">
+		<script-manager default-expression-language="juel" default-script-language="juel" read-contexts="execution, environment, process-engine, spring" write-context="">
 			<script-language name="juel" factory="org.jbpm.pvm.internal.script.JuelScriptEngineFactory" />
 		</script-manager>
 
@@ -51,7 +51,7 @@
 		<message-session />
 		<timer-session />
 		<history-session />
-		<hibernate-session />
+		<hibernate-session/>
 		<transaction />
 		<identity-session />
 	</transaction-context>
