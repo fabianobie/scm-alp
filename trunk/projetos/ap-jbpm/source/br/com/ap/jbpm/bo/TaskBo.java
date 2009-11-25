@@ -6,9 +6,11 @@
 package br.com.ap.jbpm.bo;
 
 import java.util.Collection;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.tools.ant.taskdefs.condition.IsReference;
 import org.jbpm.api.Deployment;
 import org.jbpm.api.Execution;
 import org.jbpm.api.ProcessDefinition;
@@ -135,6 +137,15 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 		if (UtilObjeto.isReferencia(task)) {
 			Task temp = obter(task.getId());
 			resultado = getDecoratorFactory().novoTaskDecorator(temp);
+		}
+		return resultado;
+	}
+	
+	public Map<String, Object> obterVariables(TaskDecorator task) {
+		Map<String, Object> resultado = null;
+		
+		if (UtilObjeto.isReferencia(task)) {
+			resultado = getDao().obterVariables(task);
 		}
 		return resultado;
 	}

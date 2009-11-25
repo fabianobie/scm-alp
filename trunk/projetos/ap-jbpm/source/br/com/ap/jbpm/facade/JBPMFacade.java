@@ -6,6 +6,7 @@
 package br.com.ap.jbpm.facade;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
@@ -50,4 +51,6 @@ public interface JBPMFacade {
 	public ProcessInstance iniciarProcesso(ProcessDefinitionDecorator processDefinition);
 
 	public TaskDecorator obterTarefa(TaskDecorator task);
+
+	public Map<String, Object> obterVariables(TaskDecorator task);
 }

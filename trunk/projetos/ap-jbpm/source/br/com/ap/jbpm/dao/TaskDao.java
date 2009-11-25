@@ -6,6 +6,7 @@
 package br.com.ap.jbpm.dao;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.task.TaskImpl;
@@ -35,4 +36,6 @@ public interface TaskDao extends CrudDao<TaskImpl> {
 	public TaskDecorator obterFormulario(DeploymentDecorator deployment, TaskDecorator task);
 
 	public void locarTarefa(TaskDecorator task, UserDecorator user);
+	
+	public Map<String, Object> obterVariables(TaskDecorator task);
 }
