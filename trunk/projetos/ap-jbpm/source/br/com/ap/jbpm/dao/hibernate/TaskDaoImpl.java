@@ -7,6 +7,8 @@ package br.com.ap.jbpm.dao.hibernate;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -17,8 +19,7 @@ import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.task.TaskImpl;
 import org.springframework.stereotype.Repository;
 
-import br.com.ap.comum.fabrica.NumeroFactory;
-import br.com.ap.comum.objeto.UtilObjeto;
+import br.com.ap.comum.colecao.UtilColecao;
 import br.com.ap.hibernate.dao.HibernateCrudDaoAbstrato;
 import br.com.ap.jbpm.dao.TaskDao;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
@@ -90,16 +91,25 @@ public class TaskDaoImpl extends HibernateCrudDaoAbstrato<TaskImpl> implements
 
 	@Override
 	public void locarTarefa(TaskDecorator task, UserDecorator user) {
-		
-		taskService.takeTask(task.getId(), user.getGivenName());
+		taskService.assignTask(task.getId(), user.getGivenName());
+		//taskService.takeTask(task.getId(), user.getGivenName());
 	}
 	
 	@Override
 	public TaskImpl obter(Serializable id) {
-		Long parametro = null;
-		if (UtilObjeto.isString(id)) {
-			parametro = NumeroFactory.getInstancia().novoLong((String) id);
+		return (TaskImpl) taskService.getTask((String) id);
+	}
+	
+	public Map<String, Object> obterVariables(TaskDecorator task) {
+		Map<String, Object> resultado = null;
+		String id = task.getId();
+		Set<String> nomes = taskService.getVariableNames(id);
+		if (!UtilColecao.isVazio(nomes)) {
+			resultado = getColecaoFactory().novoHashMap();
+			for (String nome : nomes) {
+				resultado.put(nome, taskService.getVariable(id, nome));
+			}
 		}
-		return super.obter(parametro);
+		return resultado;
 	}
 }

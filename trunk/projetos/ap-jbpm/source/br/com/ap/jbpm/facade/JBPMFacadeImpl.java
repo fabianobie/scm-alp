@@ -6,6 +6,7 @@
 package br.com.ap.jbpm.facade;
 
 import java.util.Collection;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -118,6 +119,11 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	@Override
 	public TaskDecorator obterTarefa(TaskDecorator task) {
 		return taskBo.obterTarefa(task);
+	}
+
+	@Override
+	public Map<String, Object> obterVariables(TaskDecorator task) {
+		return taskBo.obterVariables(task);
 	}
 
 }

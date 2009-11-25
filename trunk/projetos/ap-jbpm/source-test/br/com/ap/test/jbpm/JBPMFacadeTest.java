@@ -6,6 +6,9 @@
 package br.com.ap.test.jbpm;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import junit.framework.TestCase;
 
@@ -77,6 +80,18 @@ public class JBPMFacadeTest extends TestCase {
 		System.out.println(processInstance.getState());
 	}
 	
+	public void testLocarTarefa() {
+		TaskDecorator task = new TaskDecorator();
+		task.setId("1");
+		
+		UserDecorator user = new UserDecorator();
+		user.setGivenName("alex");
+		
+		getFacade().locarTarefa(task, user);
+		task = getFacade().obterTarefa(task);
+		System.out.println("assignee...: "+ task.getAssignee());
+	}
+
 	public void testConsultarTarefa() {
 		UserDecorator user = new UserDecorator();
 		user.setGivenName("alex");
@@ -89,17 +104,48 @@ public class JBPMFacadeTest extends TestCase {
 		}
 	}
 	
-	public void testLocarTarefa() {
+	public void testCancelarTarefa() {
 		TaskDecorator task = new TaskDecorator();
 		task.setId("1");
+		getFacade().cancelarTarefa(task);
 		
-		UserDecorator user = new UserDecorator();
-		user.setGivenName("alex");
-		
-		getFacade().locarTarefa(task, user);
 		task = getFacade().obterTarefa(task);
 		System.out.println("assignee...: "+ task.getAssignee());
 	}
+	
+	public void testSalvarTarefa() {
+		Map<String, Object> variables = new HashMap<String, Object>();
+		variables.put("data", new Date());
+		variables.put("nome", "Adriano");
+		
+		TaskDecorator task = new TaskDecorator();
+		task.setId("1");
+		task.setMapaVariables(variables);
+		
+		getFacade().salvarTarefa(task);
+	}
+
+	public void testObterVariablesTarefa() {
+		TaskDecorator task = new TaskDecorator();
+		task.setId("1");
+		
+		Map<String, Object> mapaVariables = getFacade().obterVariables(task);
+		System.out.println("Variables: "+ mapaVariables);
+	}
+	
+	public void testCompletarTarefa() {
+		TaskDecorator task = new TaskDecorator();
+		task.setId("1");
+		
+		getFacade().completarTarefa(task);
+		task = getFacade().obterTarefa(task);
+		
+		System.out.println("tarefa id..: "+ task.getId());
+		System.out.println("assignee...: "+ task.getAssignee());
+		System.out.println("name.......: "+ task.getName());
+	}
+	
+	
 	
 	/**
 	 * @return JBPMFacade
