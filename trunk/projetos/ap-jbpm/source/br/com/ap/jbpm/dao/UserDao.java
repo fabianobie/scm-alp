@@ -11,10 +11,17 @@ import br.com.ap.arquitetura.dao.CrudDao;
 import br.com.ap.jbpm.decorator.UserDecorator;
 
 /**
- * @author adriano.pamplona
+ * DAO de acesso às informação da task.
  * 
+ * @author adriano.pamplona
  */
 public interface UserDao extends CrudDao<UserImpl> {
-
+	
+	/**
+	 * Consulta o usuário pelo givenName.
+	 * 
+	 * @param user Usuário com givenName informado
+	 * @return Usuário recuperado
+	 */
 	public UserDecorator obterUsuarioPeloNome(UserDecorator user);
 }

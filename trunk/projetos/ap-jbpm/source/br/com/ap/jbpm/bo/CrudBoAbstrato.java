@@ -8,11 +8,21 @@ package br.com.ap.jbpm.bo;
 import java.io.Serializable;
 import java.util.Collection;
 
+import org.jbpm.api.Deployment;
+import org.jbpm.api.task.Task;
+
 import br.com.ap.arquitetura.dao.CrudDao;
+import br.com.ap.comum.objeto.UtilObjeto;
+import br.com.ap.comum.string.UtilString;
+import br.com.ap.jbpm.decorator.DeploymentDecorator;
+import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
+import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.factory.DecoratorFactory;
 import br.com.ap.jbpm.factory.EntidadeFactory;
 
 /**
+ * BO abstrato com recursos comuns aos BO`s.
+ * 
  * @author AdrianoP
  * 
  */
@@ -63,7 +73,42 @@ public abstract class CrudBoAbstrato<T extends Object> implements CrudDao<T> {
 		getDao().salvar(arg0);
 	}
 
+	/**
+	 * @return DAO
+	 */
 	protected abstract CrudDao<T> getDao();
+
+	/**
+	 * Retorna novo TaskDecorator
+	 * 
+	 * @param tarefa Tarefa
+	 * @return TaskDecorator
+	 */
+	protected TaskDecorator novoTaskDecorator(Task tarefa) {
+		return getDecoratorFactory().novoTaskDecorator(tarefa);
+	}
+
+	/**
+	 * Retorna novo deployment decorator.
+	 * 
+	 * @param deployment Deployment
+	 * @return deployment decorator
+	 */
+	protected DeploymentDecorator novoDeploymentDecorator(Deployment deployment) {
+		return getDecoratorFactory().novoDeploymentDecorator(deployment);
+	}
+
+	/**
+	 * Retorna novo ProcessDefinitionDecorator
+	 * 
+	 * @param definicaoId ID
+	 * @return ProcessDefinitionDecorator
+	 */
+	protected ProcessDefinitionDecorator novoProcessDefinitionDecorator(
+			String definicaoId) {
+		return getDecoratorFactory()
+				.novoProcessDefinitionDecorator(definicaoId);
+	}
 
 	/**
 	 * @return EntidadeFactory
@@ -77,5 +122,25 @@ public abstract class CrudBoAbstrato<T extends Object> implements CrudDao<T> {
 	 */
 	protected DecoratorFactory getDecoratorFactory() {
 		return DecoratorFactory.getInstancia();
+	}
+
+	/**
+	 * Retorna true se o objeto tiver referência.
+	 * 
+	 * @param objetos Objetos validados.
+	 * @return true se o objeto tiver referência.
+	 */
+	protected boolean isReferencia(Object... objetos) {
+		return UtilObjeto.isReferenciaTodos(objetos);
+	}
+
+	/**
+	 * Retorna true se a string for vazia.
+	 * 
+	 * @param strings Strings validadas.
+	 * @return true se a string for vazia.
+	 */
+	protected boolean isVazio(String... strings) {
+		return UtilString.isVazioTodos(strings);
 	}
 }
