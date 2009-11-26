@@ -21,6 +21,8 @@ import org.jbpm.api.task.Task;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import br.com.ap.comum.colecao.UtilColecao;
+import br.com.ap.comum.colecao.UtilMapa;
+import br.com.ap.comum.string.UtilString;
 import br.com.ap.jbpm.JBPMFacade;
 import br.com.ap.jbpm.JBPMFacadeImpl;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
@@ -33,6 +35,8 @@ import br.com.ap.jbpm.decorator.UserDecorator;
  */
 public class JBPMFacadeTest extends TestCase {
 	private static ClassPathXmlApplicationContext contexto;
+	private boolean print = false;
+	
 	
 	public void testPublicar() {
 		DeploymentDecorator decorator = new DeploymentDecorator();
@@ -44,15 +48,21 @@ public class JBPMFacadeTest extends TestCase {
 		decorator.getColecaoClasspathFormulario().add("br/com/ap/test/jbpm/deploy/taskform-solicitar-informacao.ftl");
 		
 		decorator = getFacade().publicar(decorator);
-		System.out.println("Deploy: "+ decorator.getId());
+		String id = decorator.getId();
+		assertNotNull(id);
+		
+		print("Deploy: "+ decorator.getId());
 	}
 	
 	public void testConsultarDefinicaoDeProcesso() {
 		Collection<ProcessDefinition> definicoes = getFacade().consultarDefinicaoDeProcesso();
-		System.out.println("Total: "+ definicoes.size());
+		assertNotNull(definicoes);
+		assertFalse(UtilColecao.isVazio(definicoes));
+		
+		print("Total: "+ definicoes.size());
 		for (ProcessDefinition definicao : definicoes) {
-			System.out.println("Id...: "+ definicao.getId());
-			System.out.println("Name.: "+ definicao.getName());
+			print("Id...: "+ definicao.getId());
+			print("Name.: "+ definicao.getName());
 		}
 	}
 	
@@ -61,8 +71,10 @@ public class JBPMFacadeTest extends TestCase {
 		decorator.setId("SolicitarDemanda-1");
 		
 		ProcessDefinition processDefinition = getFacade().obterDefinicaoDeProcesso(decorator);
-		System.out.println("Id...: "+ processDefinition.getId());
-		System.out.println("Name.: "+ processDefinition.getName());
+		assertNotNull(processDefinition);
+		
+		print("Id...: "+ processDefinition.getId());
+		print("Name.: "+ processDefinition.getName());
 	}
 	
 	public void testObterFormularioInicial() {
@@ -70,7 +82,9 @@ public class JBPMFacadeTest extends TestCase {
 		decorator.setId("SolicitarDemanda-1");
 		
 		TaskDecorator taskDecorator = getFacade().obterFormularioInicial(decorator);
-		System.out.println(taskDecorator.getTextoFormulario());
+		assertNotNull(taskDecorator);
+		
+		print(taskDecorator.getTextoFormulario());
 	}
 
 	public void testIniciarProcesso() {
@@ -78,9 +92,11 @@ public class JBPMFacadeTest extends TestCase {
 		decorator.setId("SolicitarDemanda-1");
 		
 		ProcessInstance processInstance = getFacade().iniciarProcesso(decorator);
-		System.out.println(processInstance.getKey());
-		System.out.println(processInstance.getId());
-		System.out.println(processInstance.getState());
+		assertNotNull(processInstance);
+		
+		print(processInstance.getKey());
+		print(processInstance.getId());
+		print(processInstance.getState());
 	}
 	
 	public void testLocarTarefa() {
@@ -92,7 +108,9 @@ public class JBPMFacadeTest extends TestCase {
 		
 		getFacade().locarTarefa(task, user);
 		task = getFacade().obterTarefa(task);
-		System.out.println("assignee...: "+ task.getAssignee());
+		assertNotNull(task);
+		
+		print("assignee...: "+ task.getAssignee());
 	}
 
 	public void testConsultarTarefa() {
@@ -100,10 +118,12 @@ public class JBPMFacadeTest extends TestCase {
 		user.setGivenName("alex");
 		
 		Collection<Task> tarefas = getFacade().consultarTarefa(user);
+		assertFalse(UtilColecao.isVazio(tarefas));
+		
 		for (Task tarefa : tarefas) {
-			System.out.println("tarefa id..: "+ tarefa.getId());
-			System.out.println("assignee...: "+ tarefa.getAssignee());
-			System.out.println("name.......: "+ tarefa.getName());
+			print("tarefa id..: "+ tarefa.getId());
+			print("assignee...: "+ tarefa.getAssignee());
+			print("name.......: "+ tarefa.getName());
 		}
 	}
 
@@ -115,10 +135,12 @@ public class JBPMFacadeTest extends TestCase {
 		processDefinition.setId("SolicitarDemanda-1");
 		
 		Collection<Task> tarefas = getFacade().consultarTarefa(user, processDefinition);
+		assertFalse(UtilColecao.isVazio(tarefas));
+		
 		for (Task tarefa : tarefas) {
-			System.out.println("tarefa id..: "+ tarefa.getId());
-			System.out.println("assignee...: "+ tarefa.getAssignee());
-			System.out.println("name.......: "+ tarefa.getName());
+			print("tarefa id..: "+ tarefa.getId());
+			print("assignee...: "+ tarefa.getAssignee());
+			print("name.......: "+ tarefa.getName());
 		}
 	}
 	
@@ -128,7 +150,9 @@ public class JBPMFacadeTest extends TestCase {
 		getFacade().cancelarTarefa(task);
 		
 		task = getFacade().obterTarefa(task);
-		System.out.println("assignee...: "+ task.getAssignee());
+		assertTrue(UtilString.isVazio(task.getAssignee()));
+		
+		print("assignee...: "+ task.getAssignee());
 	}
 	
 	public void testSalvarTarefa() {
@@ -148,7 +172,8 @@ public class JBPMFacadeTest extends TestCase {
 		task.setId("1");
 		
 		Map<String, Object> mapaVariables = getFacade().obterVariables(task);
-		System.out.println("Variables: "+ mapaVariables);
+		assertFalse(UtilMapa.isVazio(mapaVariables));
+		print("Variables: "+ mapaVariables);
 	}
 	
 	public void testCompletarTarefa() {
@@ -162,6 +187,7 @@ public class JBPMFacadeTest extends TestCase {
 		UserDecorator user = new UserDecorator();
 		user.setGivenName("alex");
 		
+		//TODO: verificar a questão do compartilhamento de sessionfactory
 		TaskService taskService = (TaskService) getContexto().getBean("taskService");
 		TaskQuery query = taskService.createTaskQuery();
 		List<Task> tarefas = query.list();
@@ -170,7 +196,9 @@ public class JBPMFacadeTest extends TestCase {
 		TaskDecorator decorator = new TaskDecorator();
 		decorator.setTask(tarefa);
 		TaskDecorator resultado = getFacade().obterFormulario(decorator);
-		System.out.println(resultado.getTextoFormulario());
+		assertNotNull(resultado);
+		
+		print(resultado.getTextoFormulario());
 	}
 	
 	public void testObterUsuarioPeloNome() {
@@ -178,7 +206,9 @@ public class JBPMFacadeTest extends TestCase {
 		user.setGivenName("alex");
 		
 		user = getFacade().obterUsuarioPeloNome(user);
-		System.out.println(user.getGivenName());
+		
+		assertNotNull(user);
+		print(user.getGivenName());
 	}
 
 	public void testIsUsuarioExiste() {
@@ -186,7 +216,7 @@ public class JBPMFacadeTest extends TestCase {
 		user.setGivenName("alex");
 		
 		boolean existe = getFacade().isUsuarioExiste(user);
-		System.out.println(existe);
+		assertTrue(existe);
 	}
 	
 	
@@ -205,5 +235,15 @@ public class JBPMFacadeTest extends TestCase {
 			contexto = new ClassPathXmlApplicationContext("ap-jbpm-application-context.xml");
 		}
 		return contexto;
+	}
+	
+	/**
+	 * Imprime o texto na tela.
+	 * @param texto
+	 */
+	private void print(String texto) {
+		if (print) {
+			System.out.println(texto);
+		}
 	}
 }
