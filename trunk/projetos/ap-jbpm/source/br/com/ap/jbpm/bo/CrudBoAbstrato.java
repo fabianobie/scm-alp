@@ -53,9 +53,10 @@ public abstract class CrudBoAbstrato<T extends Object> implements CrudDao<T> {
 		getDao().excluirTodos(arg0);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <R extends Serializable> R incluir(T arg0) {
-		return getDao().incluir(arg0);
+		return (R) getDao().incluir(arg0);
 	}
 
 	@Override
