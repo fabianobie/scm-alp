@@ -99,6 +99,16 @@ public class UtilMapaTest extends TesteAbstrato {
 		assertNotNull(mapa);
 	}
 
+	public void testIsVazio() {
+		Map<String, String> mapa = new HashMap<String, String>();
+		mapa.put("semana", "segunda,terça,quarta");
+		mapa.put("mes", "janeiro,fevereiro,março");
+		
+		assertTrue(UtilMapa.isVazio(null));
+		assertFalse(UtilMapa.isVazio(mapa));
+		mapa.clear();
+		assertTrue(UtilMapa.isVazio(mapa));
+	}
 	/**
 	 * @return novo filtro de chave igual
 	 */

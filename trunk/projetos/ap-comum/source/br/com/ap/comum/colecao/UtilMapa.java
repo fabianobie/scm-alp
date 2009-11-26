@@ -117,16 +117,15 @@ public final class UtilMapa {
 		}
 		return resultado;
 	}
-
+	
 	/**
-	 * Retorna true se os objetos tiverem referência.
+	 * Retorna true se a coleção estiver vazia.
 	 * 
-	 * @param objeto0 Objeto validado
-	 * @param objeto1 Objeto validado
-	 * @return true se o objeto tiver referência.
+	 * @param colecao Collection
+	 * @return true se a coleção estiver vazia.
 	 */
-	private static boolean isReferencia(Object objeto0, Object objeto1) {
-		return UtilObjeto.isReferencia(objeto0, objeto1);
+	public static <K, V> boolean isVazio(Map<K, V> mapa) {
+		return (!isReferencia(mapa) || mapa.size() == 0);
 	}
 
 	/**
@@ -134,12 +133,10 @@ public final class UtilMapa {
 	 * 
 	 * @param objeto0 Objeto validado
 	 * @param objeto1 Objeto validado
-	 * @param objeto2 Objeto validado
 	 * @return true se o objeto tiver referência.
 	 */
-	private static boolean isReferencia(Object objeto0, Object objeto1,
-			Object objeto2) {
-		return UtilObjeto.isReferencia(objeto0, objeto1, objeto2);
+	private static boolean isReferencia(Object... objetos) {
+		return UtilObjeto.isReferenciaTodos(objetos);
 	}
 
 	/**
