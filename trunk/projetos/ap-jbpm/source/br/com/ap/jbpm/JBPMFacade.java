@@ -3,7 +3,7 @@
  *
  * Data: 23/11/2009
  */
-package br.com.ap.jbpm.facade;
+package br.com.ap.jbpm;
 
 import java.util.Collection;
 import java.util.Map;
