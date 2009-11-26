@@ -25,22 +25,24 @@ import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.decorator.UserDecorator;
 
 /**
- * @author adriano.pamplona
+ * Implementação da JBPMFacade.
  * 
+ * @author adriano.pamplona
+ * @see JBPMFacade
  */
 @Service
 public class JBPMFacadeImpl implements JBPMFacade {
 	@Resource
-	private DeploymentBo deploymentBo;
+	private DeploymentBo	deploymentBo;
 
 	@Resource
-	private TaskBo taskBo;
+	private TaskBo			taskBo;
 
 	@Resource
-	private UserBo userBo;
+	private UserBo			userBo;
 
 	@Resource
-	private ExecutionBo executionBo;
+	private ExecutionBo		executionBo;
 
 	@Override
 	public void cancelarTarefa(TaskDecorator task) {
@@ -58,8 +60,7 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public ProcessDefinition obterDefinicaoDeProcesso(
-			ProcessDefinitionDecorator processDefinition) {
+	public ProcessDefinition obterDefinicaoDeProcesso(ProcessDefinitionDecorator processDefinition) {
 		return deploymentBo.obterDefinicaoDeProcesso(processDefinition);
 	}
 
@@ -85,8 +86,7 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public TaskDecorator obterFormularioInicial(
-			ProcessDefinitionDecorator processDefinition) {
+	public TaskDecorator obterFormularioInicial(ProcessDefinitionDecorator processDefinition) {
 		return deploymentBo.obterFormularioInicial(processDefinition);
 	}
 
@@ -111,8 +111,7 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public ProcessInstance iniciarProcesso(
-			ProcessDefinitionDecorator processDefinition) {
+	public ProcessInstance iniciarProcesso(ProcessDefinitionDecorator processDefinition) {
 		return executionBo.iniciarProcesso(processDefinition);
 	}
 

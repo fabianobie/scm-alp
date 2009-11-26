@@ -6,6 +6,7 @@
 package br.com.ap.jbpm.factory;
 
 import org.jbpm.api.Deployment;
+import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.identity.User;
 import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.task.TaskImpl;
@@ -18,8 +19,9 @@ import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.decorator.UserDecorator;
 
 /**
- * @author adriano.pamplona
+ * Fábrica de decorators.
  * 
+ * @author adriano.pamplona
  */
 public final class DecoratorFactory {
 	private static DecoratorFactory instancia = new DecoratorFactory();
@@ -53,6 +55,16 @@ public final class DecoratorFactory {
 	}
 
 	/**
+	 * @param deployment Deployment
+	 * @return DeploymentDecorator
+	 */
+	public DeploymentDecorator novoDeploymentDecorator(Deployment deployment) {
+		DeploymentDecorator decorator = novoDeploymentDecorator();
+		decorator.setDeployment(deployment);
+		return decorator;
+	}
+
+	/**
 	 * @param id ID
 	 * @return DeploymentDecorator
 	 */
@@ -70,37 +82,6 @@ public final class DecoratorFactory {
 	}
 
 	/**
-	 * @return TaskDecorator
-	 */
-	public TaskDecorator novoTaskDecorator() {
-		return new TaskDecorator();
-	}
-
-	/**
-	 * @return UserDecorator
-	 */
-	public UserDecorator novoUserDecorator() {
-		return new UserDecorator();
-	}
-
-	/**
-	 * @param id ID
-	 * @return ExecutionDecorator
-	 */
-	public ExecutionDecorator novoExecutionDecorator(String id) {
-		ExecutionDecorator decorator = novoExecutionDecorator();
-		decorator.setId(id);
-		return decorator;
-	}
-	
-	/**
-	 * @return ExecutionDecorator
-	 */
-	public ExecutionDecorator novoExecutionDecorator() {
-		return new ExecutionDecorator();
-	}
-
-	/**
 	 * @param id ID
 	 * @return ProcessDefinitionDecorator
 	 */
@@ -111,13 +92,20 @@ public final class DecoratorFactory {
 	}
 
 	/**
-	 * @param deployment Deployment
-	 * @return DeploymentDecorator
+	 * @param processDefinition ProcessDefinition
+	 * @return ProcessDefinitionDecorator
 	 */
-	public DeploymentDecorator novoDeploymentDecorator(Deployment deployment) {
-		DeploymentDecorator decorator = novoDeploymentDecorator();
-		decorator.setDeployment(deployment);
+	public ProcessDefinitionDecorator novoProcessDefinitionDecorator(ProcessDefinition processDefinition) {
+		ProcessDefinitionDecorator decorator = novoProcessDefinitionDecorator();
+		decorator.setProcessDefinition(processDefinition);
 		return decorator;
+	}
+
+	/**
+	 * @return TaskDecorator
+	 */
+	public TaskDecorator novoTaskDecorator() {
+		return new TaskDecorator();
 	}
 
 	/**
@@ -131,6 +119,13 @@ public final class DecoratorFactory {
 	}
 
 	/**
+	 * @return UserDecorator
+	 */
+	public UserDecorator novoUserDecorator() {
+		return new UserDecorator();
+	}
+
+	/**
 	 * @param user Usuário
 	 * @return UserDecorator
 	 */
@@ -138,6 +133,30 @@ public final class DecoratorFactory {
 		UserDecorator decorator = novoUserDecorator();
 		decorator.setUser(user);
 		return decorator;
+	}
+
+	/**
+	 * @return ExecutionDecorator
+	 */
+	public ExecutionDecorator novoExecutionDecorator() {
+		return new ExecutionDecorator();
+	}
+
+	/**
+	 * @param id ID
+	 * @return ExecutionDecorator
+	 */
+	public ExecutionDecorator novoExecutionDecorator(String id) {
+		ExecutionDecorator decorator = novoExecutionDecorator();
+		decorator.setId(id);
+		return decorator;
+	}
+	
+	/**
+	 * @return ActivityDecorator
+	 */
+	public ActivityDecorator novaActivityDecorator() {
+		return new ActivityDecorator();
 	}
 
 	/**
@@ -149,12 +168,5 @@ public final class DecoratorFactory {
 		decorator.setName(nome);
 
 		return decorator;
-	}
-	
-	/**
-	 * @return ActivityDecorator
-	 */
-	public ActivityDecorator novaActivityDecorator() {
-		return new ActivityDecorator();
 	}
 }

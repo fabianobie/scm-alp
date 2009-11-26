@@ -10,16 +10,16 @@ import br.com.ap.comum.validador.UtilValidadorDeStringsIguais;
 import br.com.ap.jbpm.factory.EntidadeFactory;
 
 /**
- * @author adriano.pamplona
+ * Decorator abstrato para os decoradores das entidades usadas pelo jbpm.
  * 
+ * @author adriano.pamplona
  */
 public abstract class JbpmDecoratorAbstrato extends TOAbstrato {
 
 	/**
 	 * Retorna true se o valor passado for zero ou nulo.
 	 * 
-	 * @param valor
-	 *            Valor que será validado
+	 * @param valor Valor que será validado
 	 * @return true se o valor passado for zero ou nulo.
 	 */
 	@SuppressWarnings("boxing")
@@ -30,15 +30,14 @@ public abstract class JbpmDecoratorAbstrato extends TOAbstrato {
 	/**
 	 * Retorna true se o valor passado for zero ou nulo.
 	 * 
-	 * @param valor
-	 *            Valor que será validado
+	 * @param valor Valor que será validado
 	 * @return true se o valor passado for zero ou nulo.
 	 */
 	@SuppressWarnings("boxing")
 	protected boolean isZero(String valor) {
 		return UtilValidadorDeStringsIguais.validar(valor, "0");
 	}
-	
+
 	/**
 	 * @return EntidadeFactory
 	 */

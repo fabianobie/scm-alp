@@ -8,12 +8,14 @@ package br.com.ap.jbpm.decorator;
 import org.jbpm.api.identity.User;
 
 /**
+ * Decorator da entidade User.
+ * 
  * @author adriano.pamplona
- *
+ * 
  */
 public class UserDecorator extends JbpmDecoratorAbstrato {
-	private User user;
-	private String givenName;
+	private User	user;
+	private String	givenName;
 
 	/**
 	 * @return
@@ -42,7 +44,7 @@ public class UserDecorator extends JbpmDecoratorAbstrato {
 		}
 		return resultado;
 	}
-	
+
 	/**
 	 * @param givenName Atribui givenName.
 	 */
@@ -74,7 +76,5 @@ public class UserDecorator extends JbpmDecoratorAbstrato {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	
 
 }

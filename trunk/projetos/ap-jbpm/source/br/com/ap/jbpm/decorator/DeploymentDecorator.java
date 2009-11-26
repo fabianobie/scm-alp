@@ -10,15 +10,16 @@ import java.util.Collection;
 import org.jbpm.api.Deployment;
 
 /**
- * @author adriano.pamplona
+ * Decorator da entidade Deployment.
  * 
+ * @author adriano.pamplona
  */
 public class DeploymentDecorator extends JbpmDecoratorAbstrato {
-	private Deployment deployment;
-	private String id;
-	private String classpathJpdl;
-	private String classpathImagem;
-	private Collection<String> colecaoClasspathFormulario;
+	private Deployment			deployment;
+	private String				id;
+	private String				classpathJpdl;
+	private String				classpathImagem;
+	private Collection<String>	colecaoClasspathFormulario;
 
 	/**
 	 * @return
@@ -33,8 +34,7 @@ public class DeploymentDecorator extends JbpmDecoratorAbstrato {
 	}
 
 	/**
-	 * @param id
-	 *            Atribui id.
+	 * @param id Atribui id.
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -75,8 +75,7 @@ public class DeploymentDecorator extends JbpmDecoratorAbstrato {
 	}
 
 	/**
-	 * @param deployment
-	 *            Atribui deployment.
+	 * @param deployment Atribui deployment.
 	 */
 	public void setDeployment(Deployment deployment) {
 		this.deployment = deployment;
@@ -90,8 +89,7 @@ public class DeploymentDecorator extends JbpmDecoratorAbstrato {
 	}
 
 	/**
-	 * @param classpathJpdl
-	 *            Atribui classpathJpdl.
+	 * @param classpathJpdl Atribui classpathJpdl.
 	 */
 	public void setClasspathJpdl(String classpathJpdl) {
 		this.classpathJpdl = classpathJpdl;
@@ -105,8 +103,7 @@ public class DeploymentDecorator extends JbpmDecoratorAbstrato {
 	}
 
 	/**
-	 * @param classpathImagem
-	 *            Atribui classpathImagem.
+	 * @param classpathImagem Atribui classpathImagem.
 	 */
 	public void setClasspathImagem(String classpathImagem) {
 		this.classpathImagem = classpathImagem;
@@ -123,11 +120,9 @@ public class DeploymentDecorator extends JbpmDecoratorAbstrato {
 	}
 
 	/**
-	 * @param colecaoClasspathFormulario
-	 *            Atribui colecaoClasspathFormulario.
+	 * @param colecaoClasspathFormulario Atribui colecaoClasspathFormulario.
 	 */
-	public void setColecaoClasspathFormulario(
-			Collection<String> colecaoClasspathFormulario) {
+	public void setColecaoClasspathFormulario(Collection<String> colecaoClasspathFormulario) {
 		this.colecaoClasspathFormulario = colecaoClasspathFormulario;
 	}
 
