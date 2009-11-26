@@ -18,48 +18,48 @@ import br.com.ap.comum.string.UtilString;
  */
 public abstract class TOAbstrato implements TO {
 
-    /**
-     * @param o Objeto
-     * @return resultado da comparação
-     * @see java.lang.Comparable#compareTo(java.lang.Object)
-     */
-    public int compareTo(TO o) {
-	return 0;
-    }
+	/**
+	 * @param o Objeto
+	 * @return resultado da comparação
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(TO o) {
+		return 0;
+	}
 
-    /**
-     * Retorna ColecaoFactory.
-     * 
-     * @return ColecaoFactory
-     */
-    protected ColecaoFactory getColecaoFactory() {
-	return ColecaoFactory.getInstancia();
-    }
+	/**
+	 * Retorna ColecaoFactory.
+	 * 
+	 * @return ColecaoFactory
+	 */
+	protected ColecaoFactory getColecaoFactory() {
+		return ColecaoFactory.getInstancia();
+	}
 
-    /**
-     * @return NumeroFactory
-     */
-    protected NumeroFactory getNumeroFactory() {
-	return NumeroFactory.getInstancia();
-    }
+	/**
+	 * @return NumeroFactory
+	 */
+	protected NumeroFactory getNumeroFactory() {
+		return NumeroFactory.getInstancia();
+	}
 
-    /**
-     * Retorna true se o objeto tiver referência.
-     * 
-     * @param objetos Objetos validados.
-     * @return true se o objeto tiver referência.
-     */
-    protected boolean isReferencia(Object... objetos) {
-	return UtilObjeto.isReferenciaTodos(objetos);
-    }
+	/**
+	 * Retorna true se o objeto tiver referência.
+	 * 
+	 * @param objetos Objetos validados.
+	 * @return true se o objeto tiver referência.
+	 */
+	protected boolean isReferencia(Object... objetos) {
+		return UtilObjeto.isReferenciaTodos(objetos);
+	}
 
-    /**
-     * Retorna true se a string for vazia.
-     * 
-     * @param strings Strings validadas.
-     * @return true se a string for vazia.
-     */
-    protected boolean isVazio(String... strings) {
-	return UtilString.isVazioTodos(strings);
-    }
+	/**
+	 * Retorna true se a string for vazia.
+	 * 
+	 * @param strings Strings validadas.
+	 * @return true se a string for vazia.
+	 */
+	protected boolean isVazio(String... strings) {
+		return UtilString.isVazioTodos(strings);
+	}
 }
