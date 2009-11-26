@@ -11,7 +11,6 @@ import br.com.ap.test.TesteAbstrato;
 
 /**
  * @author adriano.pamplona
- * 
  */
 public class DeployTest extends TesteAbstrato {
 	private static String ultimoDeployID;

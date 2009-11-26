@@ -23,7 +23,7 @@ public class ProcessDefinitionTest extends TesteAbstrato {
 	/**
 	 * 
 	 */
-	public void test() {
+	public void testConsultarTodos() {
 		ProcessDefinitionQuery query = getRepositoryService().createProcessDefinitionQuery();
 		List<ProcessDefinition> processos = query.list();
 		if (!UtilColecao.isVazio(processos)) {
