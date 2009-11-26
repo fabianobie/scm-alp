@@ -30,7 +30,6 @@ import br.com.ap.jbpm.decorator.UserDecorator;
 
 /**
  * @author adriano.pamplona
- *
  */
 public class JBPMFacadeTest extends TestCase {
 	private static ClassPathXmlApplicationContext contexto;
