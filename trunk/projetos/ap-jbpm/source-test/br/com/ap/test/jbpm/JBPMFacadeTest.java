@@ -21,12 +21,12 @@ import org.jbpm.api.task.Task;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import br.com.ap.comum.colecao.UtilColecao;
+import br.com.ap.jbpm.JBPMFacade;
+import br.com.ap.jbpm.JBPMFacadeImpl;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.decorator.UserDecorator;
-import br.com.ap.jbpm.facade.JBPMFacade;
-import br.com.ap.jbpm.facade.JBPMFacadeImpl;
 
 /**
  * @author adriano.pamplona
