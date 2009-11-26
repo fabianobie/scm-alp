@@ -10,14 +10,15 @@ import java.util.Map;
 import org.jbpm.api.ProcessDefinition;
 
 /**
+ * Decorator da entidade ProcessDefinition.
+ * 
  * @author adriano.pamplona
- *
  */
 public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
-	private ProcessDefinition processDefinition;
-	private Map<String, Object> mapaVariables;
-	private String id;
-	
+	private ProcessDefinition	processDefinition;
+	private Map<String, Object>	mapaVariables;
+	private String				id;
+
 	/**
 	 * @return
 	 * @see org.jbpm.api.ProcessDefinition#getDeploymentId()
@@ -40,7 +41,7 @@ public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 	 */
 	public String getId() {
 		String resultado = getProcessDefinition().getId();
-		if (isVazio(resultado)) {
+		if (isVazio(resultado) || isZero(resultado)) {
 			resultado = id;
 		}
 		return resultado;
@@ -52,7 +53,7 @@ public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	/**
 	 * @return
 	 * @see org.jbpm.api.ProcessDefinition#getImageResourceName()
@@ -127,5 +128,4 @@ public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 		this.mapaVariables = mapaVariables;
 	}
 
-	
 }

@@ -11,13 +11,16 @@ import java.util.Map;
 import org.jbpm.api.task.Task;
 
 /**
+ * Decoratora da entidade Task.
+ * 
  * @author adriano.pamplona
  */
 public class TaskDecorator extends JbpmDecoratorAbstrato {
-	private Task task;
-	private String id;
-	private Map<String, Object> mapaVariables;
-	private String textoFormulario;
+	private Task				task;
+	private String				id;
+	private String				textoFormulario;
+	private String				transitionTO;
+	private Map<String, Object>	mapaVariables;
 
 	/**
 	 * @return
@@ -86,7 +89,7 @@ public class TaskDecorator extends JbpmDecoratorAbstrato {
 		}
 		return resultado;
 	}
-	
+
 	/**
 	 * @param id Atribui id.
 	 */
@@ -161,8 +164,7 @@ public class TaskDecorator extends JbpmDecoratorAbstrato {
 	}
 
 	/**
-	 * @param task
-	 *            Atribui getTask().
+	 * @param task Atribui getTask().
 	 */
 	public void setTask(Task task) {
 		this.task = task;
@@ -199,5 +201,18 @@ public class TaskDecorator extends JbpmDecoratorAbstrato {
 		this.textoFormulario = textoFormulario;
 	}
 
+	/**
+	 * @return transitionTO
+	 */
+	public String getTransitionTO() {
+		return transitionTO;
+	}
+
+	/**
+	 * @param transitionTO Atribui transitionTO
+	 */
+	public void setTransitionTO(String transitionTO) {
+		this.transitionTO = transitionTO;
+	}
 
 }

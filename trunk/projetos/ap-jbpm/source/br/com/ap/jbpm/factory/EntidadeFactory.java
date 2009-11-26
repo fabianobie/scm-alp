@@ -8,7 +8,6 @@ package br.com.ap.jbpm.factory;
 import org.jbpm.api.Deployment;
 import org.jbpm.api.Execution;
 import org.jbpm.api.ProcessDefinition;
-import org.jbpm.api.ProcessInstance;
 import org.jbpm.api.identity.User;
 import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.identity.impl.UserImpl;
@@ -20,11 +19,12 @@ import org.jbpm.pvm.internal.repository.DeploymentImpl;
 import org.jbpm.pvm.internal.task.TaskImpl;
 
 /**
- * @author adriano.pamplona
+ * Fábrica de entidades.
  * 
+ * @author adriano.pamplona
  */
 public final class EntidadeFactory {
-	private static EntidadeFactory instancia = new EntidadeFactory();
+	private static EntidadeFactory	instancia	= new EntidadeFactory();
 
 	/**
 	 * Construtor.

@@ -20,86 +20,98 @@ import org.jbpm.pvm.internal.task.TaskImpl;
 import org.springframework.stereotype.Repository;
 
 import br.com.ap.comum.colecao.UtilColecao;
-import br.com.ap.hibernate.dao.HibernateCrudDaoAbstrato;
+import br.com.ap.comum.string.UtilString;
 import br.com.ap.jbpm.dao.TaskDao;
-import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.decorator.UserDecorator;
 
 /**
- * @author adriano.pamplona
+ * DAO de acesso às informação de tarefa.
  * 
+ * @author adriano.pamplona
  */
 @Repository
-public class TaskDaoImpl extends HibernateCrudDaoAbstrato<TaskImpl> implements
-		TaskDao {
-	
-	@Resource
-	private TaskService taskService;
+public class TaskDaoImpl extends JBPMDaoAbstrato<TaskImpl> implements TaskDao {
 
-	@Override
+	@Resource
+	private TaskService	taskService;
+
+	/**
+	 * @see br.com.ap.jbpm.dao.TaskDao#cancelarTarefa(br.com.ap.jbpm.decorator.TaskDecorator)
+	 */
 	public void cancelarTarefa(TaskDecorator task) {
 		taskService.assignTask(task.getId(), null);
 	}
 
-	@Override
+	/**
+	 * @see br.com.ap.jbpm.dao.TaskDao#completarTarefa(br.com.ap.jbpm.decorator.TaskDecorator)
+	 */
 	public void completarTarefa(TaskDecorator task) {
 		taskService.completeTask(task.getId(), task.getMapaVariables());
 	}
 
+	/**
+	 * @see br.com.ap.jbpm.dao.TaskDao#consultarTarefa(br.com.ap.jbpm.decorator.UserDecorator)
+	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public Collection<Task> consultarTarefa(UserDecorator user) {
 		
+		String givenName = user.getGivenName();
+		
 		Criteria criteria = novoCriteria();
-		criteria.add(
-			Restrictions.or(
-				Restrictions.eq("assignee", user.getGivenName()),
-				Restrictions.isNull("assignee"))
-			);
+		criteria.add(Restrictions.or(
+				Restrictions.eq("assignee", givenName), 
+				Restrictions.isNull("assignee")));
 		return criteria.list();
 	}
 
+	/**
+	 * @see br.com.ap.jbpm.dao.TaskDao#consultarTarefa(br.com.ap.jbpm.decorator.UserDecorator, br.com.ap.jbpm.decorator.ProcessDefinitionDecorator)
+	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public Collection<Task> consultarTarefa(UserDecorator user,
 			ProcessDefinitionDecorator processDefinition) {
+
+		String givenName = user.getGivenName();
 		
 		Criteria criteria = novoCriteria();
-		criteria.add(
-			Restrictions.or(
-				Restrictions.eq("assignee", user.getGivenName()),
-				Restrictions.isNull("assignee"))
-			);
+		criteria.add(Restrictions.or(
+				Restrictions.eq("assignee", givenName), 
+				Restrictions.isNull("assignee")));
 		Criteria execution = criteria.createCriteria("execution");
 		execution.add(Restrictions.eq("processDefinitionId", processDefinition.getId()));
 		return criteria.list();
 	}
 
-	@Override
-	public TaskDecorator obterFormulario(DeploymentDecorator deployment, TaskDecorator task) {
-		
-		return null;
-	}
-
-	@Override
+	/**
+	 * @see br.com.ap.jbpm.dao.TaskDao#salvarTarefa(br.com.ap.jbpm.decorator.TaskDecorator)
+	 */
 	public void salvarTarefa(TaskDecorator task) {
-		
+
 		taskService.setVariables(task.getId(), task.getMapaVariables());
 	}
 
-	@Override
+	/**
+	 * @see br.com.ap.jbpm.dao.TaskDao#locarTarefa(br.com.ap.jbpm.decorator.TaskDecorator, br.com.ap.jbpm.decorator.UserDecorator)
+	 */
 	public void locarTarefa(TaskDecorator task, UserDecorator user) {
-		taskService.assignTask(task.getId(), user.getGivenName());
-		//taskService.takeTask(task.getId(), user.getGivenName());
+		
+		taskService.takeTask(task.getId(), user.getGivenName());
 	}
-	
+
+	/**
+	 * @see br.com.ap.hibernate.dao.HibernateCrudDaoAbstrato#obter(java.io.Serializable)
+	 */
 	@Override
 	public TaskImpl obter(Serializable id) {
-		return (TaskImpl) taskService.getTask((String) id);
+		String stringId = UtilString.getString(id);
+		return (TaskImpl) taskService.getTask(stringId);
 	}
-	
+
+	/**
+	 * @see br.com.ap.jbpm.dao.TaskDao#obterVariables(br.com.ap.jbpm.decorator.TaskDecorator)
+	 */
 	public Map<String, Object> obterVariables(TaskDecorator task) {
 		Map<String, Object> resultado = null;
 		String id = task.getId();

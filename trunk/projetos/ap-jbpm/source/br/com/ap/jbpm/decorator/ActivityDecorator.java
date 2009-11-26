@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.jbpm.api.identity.User;
 import org.jbpm.pvm.internal.model.Activity;
 import org.jbpm.pvm.internal.model.ObservableElement;
 import org.jbpm.pvm.internal.model.OpenProcessDefinition;
@@ -18,12 +17,14 @@ import org.jbpm.pvm.internal.model.Transition;
 import br.com.ap.comum.objeto.UtilObjeto;
 
 /**
+ * Decorator da entidade Activity.
+ * 
  * @author adriano.pamplona
- *
  */
 public class ActivityDecorator extends JbpmDecoratorAbstrato {
-	private Activity activity;
-	private String name;
+	private Activity	activity;
+	private String		name;
+
 	/**
 	 * @param arg0
 	 * @return
@@ -102,7 +103,7 @@ public class ActivityDecorator extends JbpmDecoratorAbstrato {
 		}
 		return resultado;
 	}
-	
+
 	/**
 	 * @param name Atribui name.
 	 */
@@ -244,15 +245,12 @@ public class ActivityDecorator extends JbpmDecoratorAbstrato {
 		}
 		return activity;
 	}
-	
+
 	/**
 	 * @param activity Atribui activity.
 	 */
 	public void setActivity(Activity activity) {
 		this.activity = activity;
 	}
-
-
-
 
 }

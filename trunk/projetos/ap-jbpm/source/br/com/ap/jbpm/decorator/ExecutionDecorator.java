@@ -12,6 +12,8 @@ import java.util.Set;
 import org.jbpm.api.Execution;
 
 /**
+ * Decorator da entidade Execution.
+ * 
  * @author adriano.pamplona
  */
 public class ExecutionDecorator extends JbpmDecoratorAbstrato {
@@ -66,7 +68,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 */
 	public String getId() {
 		String resultado = getExecution().getId();
-		if (isVazio(resultado)) {
+		if (isVazio(resultado) || isZero(resultado)) {
 			resultado = id;
 		}
 		return resultado;
