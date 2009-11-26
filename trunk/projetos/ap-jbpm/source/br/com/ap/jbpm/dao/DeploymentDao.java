@@ -23,6 +23,7 @@ import br.com.ap.jbpm.decorator.TaskDecorator;
  * @author adriano.pamplona
  */
 public interface DeploymentDao extends CrudDao<DeploymentImpl> {
+
 	/**
 	 * Publica um processo no repositório.
 	 * 
@@ -30,27 +31,52 @@ public interface DeploymentDao extends CrudDao<DeploymentImpl> {
 	 * @return DeploymentDecorator
 	 */
 	public DeploymentDecorator publicar(DeploymentDecorator deployment);
+
 	/**
 	 * Consulta todas as definições de processo do repositório.
 	 * 
 	 * @return coleção de definições de processo.
 	 */
 	public Collection<ProcessDefinition> consultarDefinicaoDeProcesso();
+
 	/**
 	 * Retorna a definição de processo solicitada.
 	 * 
 	 * @param processDefinition Definição de processo com ID.
 	 * @return definição solicitada.
 	 */
-	public ProcessDefinition obterDefinicaoDeProcesso(ProcessDefinitionDecorator processDefinition);
-	
-	public TaskDecorator obterFormulario(DeploymentDecorator deployment, TaskDecorator task);
-	
+	public ProcessDefinition obterDefinicaoDeProcesso(
+			ProcessDefinitionDecorator processDefinition);
+
+	/**
+	 * Retorna o formulário da tarefa.
+	 * 
+	 * @param deployment Deployment com ID.
+	 * @param task Tarefa com ID.
+	 * @return formulário da tarefa
+	 */
+	public TaskDecorator obterFormulario(DeploymentDecorator deployment,
+			TaskDecorator task);
+
+	/**
+	 * Retorna a lista de nomes das atividades de start de uma definição de
+	 * processo.
+	 * 
+	 * @param processDefinition Definição de processo com ID
+	 * @return lista de nomes
+	 */
 	public List<String> obterNomesAtividadeStart(
 			ProcessDefinitionDecorator processDefinition);
 
-	public TaskDecorator obterFormularioInicial(
-			DeploymentDecorator deployment,
+	/**
+	 * Retorna o formulário inicial de uma definição de processo.
+	 * 
+	 * @param deployment Deployment com ID.
+	 * @param processDefinition Definição de processo com ID.
+	 * @param activity Atividade com nome.
+	 * @return formulário inicial
+	 */
+	public TaskDecorator obterFormularioInicial(DeploymentDecorator deployment,
 			ProcessDefinitionDecorator processDefinition,
 			ActivityDecorator activity);
 }
