@@ -16,6 +16,7 @@ import org.jbpm.api.identity.User;
 public class UserDecorator extends JbpmDecoratorAbstrato {
 	private User	user;
 	private String	givenName;
+	private String	senha;
 
 	/**
 	 * @return
@@ -75,6 +76,20 @@ public class UserDecorator extends JbpmDecoratorAbstrato {
 	 */
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	/**
+	 * @return senha
+	 */
+	public String getSenha() {
+		return senha;
+	}
+
+	/**
+	 * @param senha Atribui senha
+	 */
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }

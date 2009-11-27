@@ -1,5 +1,5 @@
 <@s.form action="CriarCaso" method="POST" enctype="multipart/form-data" theme="simple">
-	<@s.hidden name="form.deploymentDbid"/>
+	<@s.hidden name="processDefinitionDecorator.deploymentDbid"/>
 	<fieldset>
 		<label style="width:100%" for="dataSolicitacao">
 			Descri&ccedil;&atilde;o:

@@ -48,7 +48,13 @@ public class TaskDaoImpl extends JBPMDaoAbstrato<TaskImpl> implements TaskDao {
 	 * @see br.com.ap.jbpm.dao.TaskDao#completarTarefa(br.com.ap.jbpm.decorator.TaskDecorator)
 	 */
 	public void completarTarefa(TaskDecorator task) {
-		taskService.completeTask(task.getId(), task.getMapaVariables());
+		String transitionTO = task.getTransitionTO();
+		
+		if (UtilString.isVazio(transitionTO)) {
+			taskService.completeTask(task.getId(), task.getMapaVariables());
+		} else {
+			taskService.completeTask(task.getId(), transitionTO, task.getMapaVariables());
+		}
 	}
 
 	/**
