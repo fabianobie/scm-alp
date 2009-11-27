@@ -5,6 +5,10 @@
  */
 package br.com.ap.jbpm.dao.hibernate;
 
+import javax.annotation.Resource;
+
+import org.hibernate.SessionFactory;
+
 import br.com.ap.hibernate.dao.HibernateCrudDaoAbstrato;
 import br.com.ap.jbpm.factory.DecoratorFactory;
 
@@ -14,6 +18,16 @@ import br.com.ap.jbpm.factory.DecoratorFactory;
  * @author AdrianoP
  */
 public abstract class JBPMDaoAbstrato<T extends Object> extends HibernateCrudDaoAbstrato<T> {
+	
+	/**
+	 * @param sessionFactory
+	 *            Atribui o SessionFactory do hibernate
+	 */
+	@Override
+	@Resource(name = "jbpmSessionFactory")
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		super.setSessionFactory(sessionFactory);
+	}
 	
 	/**
 	 * @return DecoratorFactory

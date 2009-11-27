@@ -18,13 +18,26 @@ public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 	private ProcessDefinition	processDefinition;
 	private Map<String, Object>	mapaVariables;
 	private String				id;
+	private String				deploymentId;
 
 	/**
 	 * @return
 	 * @see org.jbpm.api.ProcessDefinition#getDeploymentId()
 	 */
 	public String getDeploymentId() {
-		return getProcessDefinition().getDeploymentId();
+		String resultado = getProcessDefinition().getDeploymentId();
+		
+		if (isVazio(resultado) || isZero(resultado)) {
+			resultado = deploymentId;
+		}
+		return resultado;
+	}
+	
+	/**
+	 * @param deploymentId Atribui deploymentId
+	 */
+	public void setDeploymentId(String deploymentId) {
+		this.deploymentId = deploymentId;
 	}
 
 	/**
@@ -127,5 +140,6 @@ public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 	public void setMapaVariables(Map<String, Object> mapaVariables) {
 		this.mapaVariables = mapaVariables;
 	}
+
 
 }

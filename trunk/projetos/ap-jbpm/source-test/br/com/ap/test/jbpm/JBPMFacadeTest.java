@@ -35,7 +35,7 @@ import br.com.ap.jbpm.decorator.UserDecorator;
  */
 public class JBPMFacadeTest extends TestCase {
 	private static ClassPathXmlApplicationContext contexto;
-	private boolean print = false;
+	private boolean print = true;
 	
 	
 	public void testPublicar() {
