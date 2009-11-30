@@ -17,7 +17,7 @@
 		</command-service>
 
 		<hibernate-configuration>
-			<cfg resource="ap-jbpm-hibernate-cfg.xml" />
+			<cfg resource="ap-jbpm-hibernate.properties" />
 		</hibernate-configuration>
 	
 		<deployer-manager>

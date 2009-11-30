@@ -5,6 +5,7 @@
  */
 package br.com.ap.test;
 
+import org.jbpm.api.Configuration;
 import org.jbpm.api.ExecutionService;
 import org.jbpm.api.HistoryService;
 import org.jbpm.api.IdentityService;
@@ -13,17 +14,38 @@ import org.jbpm.api.ProcessEngine;
 import org.jbpm.api.RepositoryService;
 import org.jbpm.api.TaskService;
 import org.jbpm.test.JbpmTestCase;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * @author AdrianoP
  * 
  */
 public class TesteAbstrato extends JbpmTestCase {
-	
+
+	/**
+	 * @see org.jbpm.test.JbpmTestCase#initialize()
+	 */
+	protected synchronized void initialize() {
+		if (processEngine == null) {
+			String xml = "ap-jbpm-application-context.xml";
+			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(xml);
+			
+			processEngine = (ProcessEngine) context.getBean("processEngine");
+
+			repositoryService = (RepositoryService) context.getBean("repositoryService");
+			executionService = (ExecutionService) context.getBean("executionService");
+			historyService = (HistoryService) context.getBean("historyService");
+			//managementService = (ManagementService) context.getBean("managementService");
+			taskService = (TaskService) context.getBean("taskService");
+			identityService = (IdentityService) context.getBean("identityService");
+		}
+	}
+
 	/**
 	 * @see org.jbpm.test.JbpmTestCase#tearDown()
 	 */
 	protected void tearDown() throws Exception {
+
 	}
 
 	/**

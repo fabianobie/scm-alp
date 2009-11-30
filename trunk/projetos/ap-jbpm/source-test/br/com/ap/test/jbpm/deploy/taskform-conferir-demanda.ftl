@@ -1,17 +1,17 @@
 <@s.form action="Atividade" method="POST" enctype="multipart/form-data" theme="simple">
-	<@s.hidden name="form.taskId"/>
+	<@s.hidden name="processDefinitionDecorator.deploymentDbid"/>
 	<fieldset>
 		<label style="width:100%" for="dataSolicitacao">
 			Data da Solicita&ccedil;&atilde;o:
-			<@s.textfield id="dataSolicitacao" name="form.parametros['dataSolicitacao']" readonly="true"/>
+			<@s.textfield id="dataSolicitacao" name="mapaVariable['dataSolicitacao']" readonly="true"/>
 		</label>	
 		<label style="width:100%" for="duracao">
 			Dura&ccedil;&atilde;o:
-			<@s.textfield id="duracao" name="form.parametros['duracao']" readonly="true"/> (dias)
+			<@s.textfield id="duracao" name="mapaVariable['duracao']" readonly="true"/> (dias)
 		</label>		
 		<label style="width:100%" for="informacao">
 			Informa&ccedil;&atilde;o:
-			<@s.textfield id="informacao" name="form.parametros['informacao']" readonly="true"/>
+			<@s.textfield id="informacao" name="mapaVariable['informacao']" readonly="true"/>
 		</label>		
 		<label style="width:100%" for="selectAceitar">
 			Aceitar? 

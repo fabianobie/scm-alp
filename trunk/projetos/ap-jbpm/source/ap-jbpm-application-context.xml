@@ -5,8 +5,19 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
+	<bean id="hibernateProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="location" value="ap-jbpm-hibernate.properties" />
+	</bean>
+
+	<bean id="carregarHibernateProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="propertiesArray">
+			<list>
+				<ref bean="hibernateProperties"/>
+			</list>
+		</property>
+	</bean>
+
 	<bean id="jbpmSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
-		<property name="configLocation" value="classpath:ap-jbpm-hibernate-cfg.xml" />
 		<property name="mappingResources">  
         	<list>  
 				<value>jbpm.repository.hbm.xml</value>
@@ -16,12 +27,23 @@
 				<value>jbpm.identity.hbm.xml</value>
             </list>  
 		</property> 
+		<property name="hibernateProperties">
+      		<ref local="hibernateProperties" />
+    	</property>
 	</bean>
 
+	<bean id="jbpmDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${hibernate.connection.driver_class}" />
+		<property name="url" value="${hibernate.connection.url}" />
+		<property name="username" value="${hibernate.connection.username}" />
+		<property name="password" value="${hibernate.connection.password}" />
+	</bean>
+	
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="jbpmSessionFactory" />
+		<property name="dataSource" ref="jbpmDataSource" />
 	</bean>
-
+	
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<context:annotation-config />
 
