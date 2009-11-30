@@ -1,13 +1,13 @@
 <@s.form action="Atividade" method="POST" enctype="multipart/form-data" theme="simple">
-	<@s.hidden name="form.taskId"/>
+	<@s.hidden name="processDefinitionDecorator.deploymentDbid"/>
 	<fieldset>
 		<label style="width:100%" for="dataSolicitacao">
 			Data da Solicita&ccedil;&atilde;o:
-			<@s.textfield id="dataSolicitacao" name="form.parametros['dataSolicitacao']" size="12"/>
+			<@s.textfield id="dataSolicitacao" name="mapaVariable['dataSolicitacao']" size="12"/>
 		</label>	
 		<label style="width:100%" for="duracao">
 			Dura&ccedil;&atilde;o:
-			<@s.textfield id="duracao" name="form.parametros['duracao']" size="6"/> (dias)
+			<@s.textfield id="duracao" name="mapaVariable['duracao']" size="6"/> (dias)
 		</label>	
 	</fieldset>
 	<p class="form-legenda">
