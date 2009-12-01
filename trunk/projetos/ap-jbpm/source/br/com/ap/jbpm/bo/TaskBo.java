@@ -131,6 +131,7 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 					.getDeploymentId());
 
 			resultado = deploymentBo.obterFormulario(deployment, tarefa);
+			resultado.setTask(tarefa);
 		}
 		return resultado;
 	}
