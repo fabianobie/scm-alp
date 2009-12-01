@@ -165,7 +165,7 @@ public class DeploymentBo extends CrudBoAbstrato<DeploymentImpl> {
 		String atividade = UtilColecao.getElementoDoIndice(atividades, 0);
 		return getDecoratorFactory().novaActivityDecorator(atividade);
 	}
-
+	
 	@Override
 	protected DeploymentDao getDao() {
 		return deploymentDao;
