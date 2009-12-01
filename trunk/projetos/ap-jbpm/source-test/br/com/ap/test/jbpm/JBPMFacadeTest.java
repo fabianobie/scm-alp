@@ -8,15 +8,12 @@ package br.com.ap.test.jbpm;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import junit.framework.TestCase;
 
 import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
-import org.jbpm.api.TaskQuery;
-import org.jbpm.api.TaskService;
 import org.jbpm.api.task.Task;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -187,10 +184,7 @@ public class JBPMFacadeTest extends TestCase {
 		UserDecorator user = new UserDecorator();
 		user.setGivenName("alex");
 		
-		//TODO: verificar a questão do compartilhamento de sessionfactory
-		TaskService taskService = (TaskService) getContexto().getBean("taskService");
-		TaskQuery query = taskService.createTaskQuery();
-		List<Task> tarefas = query.list();
+		Collection<Task> tarefas = getFacade().consultarTarefa(user);
 		Task tarefa = UtilColecao.getElementoDoIndice(tarefas, 0);
 		
 		TaskDecorator decorator = new TaskDecorator();

@@ -8,12 +8,12 @@
 		<execution-service />
 		<history-service />
 		<management-service />
-		<task-service />
 		<identity-service />
+		<task-service />
 		<command-service>
 			<retry-interceptor />
 			<environment-interceptor />
-			<spring-transaction-interceptor />
+			<spring-transaction-interceptor/>
 		</command-service>
 
 		<hibernate-configuration>

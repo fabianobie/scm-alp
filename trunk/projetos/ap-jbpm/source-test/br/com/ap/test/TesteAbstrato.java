@@ -5,7 +5,6 @@
  */
 package br.com.ap.test;
 
-import org.jbpm.api.Configuration;
 import org.jbpm.api.ExecutionService;
 import org.jbpm.api.HistoryService;
 import org.jbpm.api.IdentityService;
@@ -21,23 +20,21 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * 
  */
 public class TesteAbstrato extends JbpmTestCase {
-
+	private ClassPathXmlApplicationContext context;
+	
 	/**
 	 * @see org.jbpm.test.JbpmTestCase#initialize()
 	 */
 	protected synchronized void initialize() {
 		if (processEngine == null) {
-			String xml = "ap-jbpm-application-context.xml";
-			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(xml);
-			
-			processEngine = (ProcessEngine) context.getBean("processEngine");
+			processEngine = (ProcessEngine) getContext().getBean("processEngine");
 
-			repositoryService = (RepositoryService) context.getBean("repositoryService");
-			executionService = (ExecutionService) context.getBean("executionService");
-			historyService = (HistoryService) context.getBean("historyService");
-			//managementService = (ManagementService) context.getBean("managementService");
-			taskService = (TaskService) context.getBean("taskService");
-			identityService = (IdentityService) context.getBean("identityService");
+			repositoryService = (RepositoryService) getContext().getBean("repositoryService");
+			executionService = (ExecutionService) getContext().getBean("executionService");
+			historyService = (HistoryService) getContext().getBean("historyService");
+			//managementService = (ManagementService) getContext().getBean("managementService");
+			taskService = (TaskService) getContext().getBean("taskService");
+			identityService = (IdentityService) getContext().getBean("identityService");
 		}
 	}
 
@@ -46,6 +43,17 @@ public class TesteAbstrato extends JbpmTestCase {
 	 */
 	protected void tearDown() throws Exception {
 
+	}
+	
+	/**
+	 * @return context
+	 */
+	protected ClassPathXmlApplicationContext getContext() {
+		if (context == null) {
+			String xml = "ap-jbpm-application-context.xml";
+			context = new ClassPathXmlApplicationContext(xml);
+		}
+		return context;
 	}
 
 	/**
