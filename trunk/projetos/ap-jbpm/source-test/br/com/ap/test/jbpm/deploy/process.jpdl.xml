@@ -2,7 +2,7 @@
 
 <process name="SolicitarDemanda" xmlns="http://jbpm.org/4.0/jpdl">
 	<description>Solicitação de uma demanda para a área técnica.</description>
-	<start g="116,25,80,40" name="SolicitarDemandaStart" form="br/com/ap/test/jbpm/deploy/taskform-start.ftl">
+	<start g="116,25,80,40" name="Iniciar Solicitacao de Demanda" form="br/com/ap/test/jbpm/deploy/taskform-start.ftl">
 		<transition to="Solicitar Demanda"/>
 	</start>
 

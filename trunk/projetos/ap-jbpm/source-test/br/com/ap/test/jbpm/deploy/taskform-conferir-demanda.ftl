@@ -1,5 +1,5 @@
 <@s.form action="Atividade" method="POST" enctype="multipart/form-data" theme="simple">
-	<@s.hidden name="processDefinitionDecorator.deploymentDbid"/>
+	<@s.hidden name="taskDecorator.id"/>
 	<fieldset>
 		<label style="width:100%" for="dataSolicitacao">
 			Data da Solicita&ccedil;&atilde;o:
