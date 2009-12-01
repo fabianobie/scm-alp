@@ -36,7 +36,7 @@ public class TaskDaoImpl extends JBPMDaoAbstrato<TaskImpl> implements TaskDao {
 
 	@Resource
 	private TaskService	taskService;
-
+	
 	/**
 	 * @see br.com.ap.jbpm.dao.TaskDao#cancelarTarefa(br.com.ap.jbpm.decorator.TaskDecorator)
 	 */
@@ -62,7 +62,6 @@ public class TaskDaoImpl extends JBPMDaoAbstrato<TaskImpl> implements TaskDao {
 	 */
 	@SuppressWarnings("unchecked")
 	public Collection<Task> consultarTarefa(UserDecorator user) {
-		
 		String givenName = user.getGivenName();
 		
 		Criteria criteria = novoCriteria();
@@ -80,13 +79,14 @@ public class TaskDaoImpl extends JBPMDaoAbstrato<TaskImpl> implements TaskDao {
 			ProcessDefinitionDecorator processDefinition) {
 
 		String givenName = user.getGivenName();
+		String id = processDefinition.getId();
 		
 		Criteria criteria = novoCriteria();
 		criteria.add(Restrictions.or(
 				Restrictions.eq("assignee", givenName), 
 				Restrictions.isNull("assignee")));
 		Criteria execution = criteria.createCriteria("execution");
-		execution.add(Restrictions.eq("processDefinitionId", processDefinition.getId()));
+		execution.add(Restrictions.eq("processDefinitionId", id));
 		return criteria.list();
 	}
 
