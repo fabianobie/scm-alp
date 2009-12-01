@@ -91,7 +91,7 @@ public class HibernateDaoAbstrato<T extends Object> implements DAO<T> {
 	 */
 	protected Session getSession() {
 		if (!UtilObjeto.isReferencia(session)) {
-			session = getSessionFactory().openSession();
+			session = novaSession();
 		}
 		
 		return session;
