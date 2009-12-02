@@ -125,4 +125,9 @@ public class JBPMFacadeImpl implements JBPMFacade {
 		return taskBo.obterVariables(task);
 	}
 
+	@Override
+	public Map<String, String> obterVariablesFormatadas(TaskDecorator task) {
+		return taskBo.obterVariablesFormatadas(task);
+	}
+
 }

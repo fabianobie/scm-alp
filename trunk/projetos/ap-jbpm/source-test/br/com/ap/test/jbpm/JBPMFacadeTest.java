@@ -8,7 +8,9 @@ package br.com.ap.test.jbpm;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import junit.framework.TestCase;
 
@@ -171,6 +173,20 @@ public class JBPMFacadeTest extends TestCase {
 		Map<String, Object> mapaVariables = getFacade().obterVariables(task);
 		assertFalse(UtilMapa.isVazio(mapaVariables));
 		print("Variables: "+ mapaVariables);
+	}
+
+	public void testObterVariablesFormatadas() {
+		TaskDecorator task = new TaskDecorator();
+		task.setId("1");
+
+		Map<String, String> mapaVariables = getFacade().obterVariablesFormatadas(task);
+		assertFalse(UtilMapa.isVazio(mapaVariables));
+		Set<String> keys = mapaVariables.keySet();
+		Iterator<String> iterator = keys.iterator();
+		while (iterator.hasNext()) {
+			String key = iterator.next();
+			print(mapaVariables.get(key));
+		}
 	}
 	
 	public void testCompletarTarefa() {

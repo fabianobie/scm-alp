@@ -35,6 +35,11 @@ public abstract class JBPMDaoAbstrato<T extends Object> extends HibernateCrudDao
 	}
 	
 	@Override
+	protected Session getSession() {
+		return novaSession();
+	}
+	
+	@Override
 	protected Session novaSession() {
 		Environment environment = environmentFactory.openEnvironment();
 		Session session = environment.get(Session.class);

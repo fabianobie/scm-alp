@@ -6,7 +6,9 @@
 package br.com.ap.jbpm.bo;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -17,6 +19,8 @@ import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.task.TaskImpl;
 import org.springframework.stereotype.Component;
 
+import br.com.ap.comum.colecao.UtilColecao;
+import br.com.ap.comum.formatador.instancia.IFormatador;
 import br.com.ap.comum.objeto.UtilObjeto;
 import br.com.ap.comum.string.UtilString;
 import br.com.ap.jbpm.dao.TaskDao;
@@ -198,6 +202,50 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 
 		if (isReferencia(task)) {
 			resultado = getDao().obterVariables(task);
+		}
+		return resultado;
+	}
+
+	/**
+	 * Retorna as variáveis a partir de uma tarefa. Os valores retornados serão formatados.
+	 * 
+	 * @param task Tarefa com ID
+	 * @return variáveis da tarefa formatadas.
+	 */
+	public Map<String, String> obterVariablesFormatadas(TaskDecorator task) {
+		
+		Map<String, String> resultado = null;
+		
+		if (isReferencia(task)) {
+			Map<String, Object> mapa =  getDao().obterVariables(task);
+			Set<String> keys = mapa.keySet();
+			Iterator<String> iterator = getColecaoFactory().novoIterator(keys);
+			
+			if (!UtilColecao.isVazio(keys)) {
+				resultado = getColecaoFactory().novoHashMap();
+				while (iterator.hasNext()) {
+					String chave = iterator.next();
+					String valorFormatado = formatar(mapa.get(chave));
+					resultado.put(chave, valorFormatado);
+				}
+			}
+		}
+		return resultado;
+	}
+
+	/**
+	 * Formata o objeto passado por parâmetro.
+	 * @param objeto Objeto que será formatado.
+	 * @return objeto formatado
+	 */
+	@SuppressWarnings("unchecked")
+	private String formatar(Object objeto) {
+		String resultado = null;
+		
+		if (isReferencia(objeto)) {
+			Class classe = UtilObjeto.getClasse(objeto);
+			IFormatador formatador = getUtilEstrategiaDeFormatadores().recuperar(classe);
+			resultado = formatador.formatar(objeto);
 		}
 		return resultado;
 	}
