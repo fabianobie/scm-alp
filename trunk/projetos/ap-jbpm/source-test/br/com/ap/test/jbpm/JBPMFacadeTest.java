@@ -156,8 +156,9 @@ public class JBPMFacadeTest extends TestCase {
 	
 	public void testSalvarTarefa() {
 		Map<String, Object> variables = new HashMap<String, Object>();
-		variables.put("data", new Date());
-		variables.put("nome", "Adriano");
+		variables.put("descricao", "Processo de solicitação de demanda");
+		variables.put("dataSolicitacao", new Date());
+		variables.put("duracao", new Integer(5));
 		
 		TaskDecorator task = new TaskDecorator();
 		task.setId("1");
