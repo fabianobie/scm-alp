@@ -12,6 +12,8 @@ import org.jbpm.api.Deployment;
 import org.jbpm.api.task.Task;
 
 import br.com.ap.arquitetura.dao.CrudDao;
+import br.com.ap.comum.estrategia.UtilEstrategiaDeFormatadores;
+import br.com.ap.comum.fabrica.ColecaoFactory;
 import br.com.ap.comum.objeto.UtilObjeto;
 import br.com.ap.comum.string.UtilString;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
@@ -143,5 +145,19 @@ public abstract class CrudBoAbstrato<T extends Object> implements CrudDao<T> {
 	 */
 	protected boolean isVazio(String... strings) {
 		return UtilString.isVazioTodos(strings);
+	}
+	
+	/**
+	 * @return estratégia de formatadores
+	 */
+	protected UtilEstrategiaDeFormatadores getUtilEstrategiaDeFormatadores() {
+		return UtilEstrategiaDeFormatadores.getInstancia();
+	}
+
+	/**
+	 * @return fábrica de coleção.
+	 */
+	protected ColecaoFactory getColecaoFactory() {
+		return ColecaoFactory.getInstancia();
 	}
 }

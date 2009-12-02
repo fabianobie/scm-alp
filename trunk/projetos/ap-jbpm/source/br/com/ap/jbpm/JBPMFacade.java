@@ -153,4 +153,12 @@ public interface JBPMFacade {
 	 * @return variáveis da tarefa.
 	 */
 	public Map<String, Object> obterVariables(TaskDecorator task);
+	
+	/**
+	 * Retorna as variáveis a partir de uma tarefa. Os valores retornados serão formatados.
+	 * 
+	 * @param task Tarefa com ID
+	 * @return variáveis da tarefa formatadas.
+	 */
+	public Map<String, String> obterVariablesFormatadas(TaskDecorator task);
 }

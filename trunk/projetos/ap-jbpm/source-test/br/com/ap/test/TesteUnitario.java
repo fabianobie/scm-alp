@@ -28,12 +28,12 @@ public class TesteUnitario extends TesteAbstrato {
 	public void test() throws Exception {
 		String taskId = "2";
 		
-		getTaskService().assignTask(taskId, null);
+		//getTaskService().assignTask(taskId, null);
 		imprimirTarefasPeloServico();
 		
 		//String processDefinitionId = "SolicitarDemanda-1";
 		//ProcessInstance pi = getExecutionService().startProcessInstanceById(processDefinitionId);
-		getTaskService().takeTask(taskId, "alex");
+		//getTaskService().takeTask(taskId, "alex");
 		imprimirTarefasPeloHQL();
 		imprimirTarefasPeloSession();
 	}
