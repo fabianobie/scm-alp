@@ -3,7 +3,7 @@
 	<fieldset>
 		<label style="width:100%" for="dataSolicitacao">
 			Descri&ccedil;&atilde;o:
-			<@s.textfield id="descricao" name="mapaVariable['descricao']"/>
+			<@s.textfield id="descricao" name="model.mapaVariable['descricao']"/>
 		</label>	
 	</fieldset>
 	<p class="form-legenda">
