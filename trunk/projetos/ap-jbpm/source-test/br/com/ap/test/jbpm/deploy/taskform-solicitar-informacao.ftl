@@ -3,15 +3,15 @@
 	<fieldset>
 		<label style="width:100%" for="dataSolicitacao">
 			Data da Solicita&ccedil;&atilde;o:
-			<@s.textfield id="dataSolicitacao" name="mapaVariable['dataSolicitacao']" readonly="true"/>
+			<@s.textfield id="dataSolicitacao" name="model.mapaVariable['dataSolicitacao']" readonly="true"/>
 		</label>	
 		<label style="width:100%" for="duracao">
 			Dura&ccedil;&atilde;o:
-			<@s.textfield id="duracao" name="mapaVariable['duracao']" readonly="true"/> (dias)
+			<@s.textfield id="duracao" name="model.mapaVariable['duracao']" readonly="true"/> (dias)
 		</label>		
 		<label style="width:100%" for="informacao">
 			Informa&ccedil;&atilde;o:
-			<@s.textfield id="informacao" name="mapaVariable['informacao']"/>
+			<@s.textfield id="informacao" name="model.mapaVariable['informacao']"/>
 		</label>		
 	</fieldset>
 	<p class="form-legenda">

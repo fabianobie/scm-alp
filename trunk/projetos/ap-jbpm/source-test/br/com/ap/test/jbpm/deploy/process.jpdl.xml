@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<process name="SolicitarDemanda" xmlns="http://jbpm.org/4.0/jpdl">
-	<description>Solicitação de uma demanda para a área técnica.</description>
+<process name="ProcessoSolicitarDemanda" xmlns="http://jbpm.org/4.0/jpdl">
+	<description>Solicitar Demanda</description>
 	<start g="116,25,80,40" name="Iniciar Solicitacao de Demanda" form="br/com/ap/test/jbpm/deploy/taskform-start.ftl">
-		<transition to="Solicitar Demanda"/>
+		<transition to="SolicitarDemanda"/>
 	</start>
 
-	<task g="76,106,126,40" name="Solicitar Demanda" form="br/com/ap/test/jbpm/deploy/taskform-solicitar-demanda.ftl">
-		<transition to="Conferir Demanda"/>
+	<task g="76,106,126,40" name="SolicitarDemanda" form="br/com/ap/test/jbpm/deploy/taskform-solicitar-demanda.ftl">
+		<transition to="ConferirDemanda"/>
 	</task>
 	
-	<task g="75,182,126,40" name="Conferir Demanda" form="br/com/ap/test/jbpm/deploy/taskform-conferir-demanda.ftl">
-		<transition to="Solicitar Informação" g="243,232:-42,6" name="MaisInformacao"/>
-		<transition to="Finalizar Solicitação" name="FinalizarSolicitacao"/>
+	<task g="75,182,126,40" name="ConferirDemanda" form="br/com/ap/test/jbpm/deploy/taskform-conferir-demanda.ftl">
+		<transition to="SolicitarInformacao" g="243,232:-42,6" name="SolicitarInformacao"/>
+		<transition to="FinalizarSolicitacao" name="FinalizarSolicitacao"/>
 	</task>
 
-	<task g="289,179,135,40" name="Solicitar Informação" form="br/com/ap/test/jbpm/deploy/taskform-solicitar-informacao.ftl">
-		<transition g="242,168:" to="Conferir Demanda"/>
+	<task g="289,179,135,40" name="SolicitarInformacao" form="br/com/ap/test/jbpm/deploy/taskform-solicitar-informacao.ftl">
+		<transition g="242,168:" to="ConferirDemanda"/>
 	</task>
 	
-	<end g="114,259,80,40" name="Finalizar Solicitação"/>
+	<end g="114,259,80,40" name="FinalizarSolicitacao"/>
 </process>
