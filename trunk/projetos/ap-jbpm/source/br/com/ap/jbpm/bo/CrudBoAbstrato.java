@@ -19,6 +19,7 @@ import br.com.ap.comum.string.UtilString;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
+import br.com.ap.jbpm.factory.ConversorFactory;
 import br.com.ap.jbpm.factory.DecoratorFactory;
 import br.com.ap.jbpm.factory.EntidadeFactory;
 
@@ -125,6 +126,13 @@ public abstract class CrudBoAbstrato<T extends Object> implements CrudDao<T> {
 	 */
 	protected DecoratorFactory getDecoratorFactory() {
 		return DecoratorFactory.getInstancia();
+	}
+	
+	/**
+	 * @return ConversorFactory
+	 */
+	protected ConversorFactory getConversorFactory() {
+		return ConversorFactory.getInstancia();
 	}
 
 	/**

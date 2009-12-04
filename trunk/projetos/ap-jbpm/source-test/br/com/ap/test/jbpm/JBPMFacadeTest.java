@@ -67,7 +67,7 @@ public class JBPMFacadeTest extends TestCase {
 	
 	public void testObterDefinicaoDeProcesso() {
 		ProcessDefinitionDecorator decorator = new ProcessDefinitionDecorator();
-		decorator.setId("SolicitarDemanda-1");
+		decorator.setId("ProcessoSolicitarDemanda-1");
 		
 		ProcessDefinition processDefinition = getFacade().obterDefinicaoDeProcesso(decorator);
 		assertNotNull(processDefinition);
@@ -78,7 +78,7 @@ public class JBPMFacadeTest extends TestCase {
 	
 	public void testObterFormularioInicial() {
 		ProcessDefinitionDecorator decorator = new ProcessDefinitionDecorator();
-		decorator.setId("SolicitarDemanda-1");
+		decorator.setId("ProcessoSolicitarDemanda-1");
 		
 		TaskDecorator taskDecorator = getFacade().obterFormularioInicial(decorator);
 		assertNotNull(taskDecorator);
@@ -88,7 +88,7 @@ public class JBPMFacadeTest extends TestCase {
 
 	public void testIniciarProcesso() {
 		ProcessDefinitionDecorator decorator = new ProcessDefinitionDecorator();
-		decorator.setId("SolicitarDemanda-1");
+		decorator.setId("ProcessoSolicitarDemanda-1");
 		
 		ProcessInstance processInstance = getFacade().iniciarProcesso(decorator);
 		assertNotNull(processInstance);
@@ -116,10 +116,10 @@ public class JBPMFacadeTest extends TestCase {
 		UserDecorator user = new UserDecorator();
 		user.setGivenName("alex");
 		
-		Collection<Task> tarefas = getFacade().consultarTarefa(user);
+		Collection<TaskDecorator> tarefas = getFacade().consultarTarefa(user);
 		assertFalse(UtilColecao.isVazio(tarefas));
 		
-		for (Task tarefa : tarefas) {
+		for (TaskDecorator tarefa : tarefas) {
 			print("tarefa id..: "+ tarefa.getId());
 			print("assignee...: "+ tarefa.getAssignee());
 			print("name.......: "+ tarefa.getName());
@@ -131,7 +131,7 @@ public class JBPMFacadeTest extends TestCase {
 		user.setGivenName("alex");
 		
 		ProcessDefinitionDecorator processDefinition = new ProcessDefinitionDecorator();
-		processDefinition.setId("SolicitarDemanda-1");
+		processDefinition.setId("ProcessoSolicitarDemanda-1");
 		
 		Collection<Task> tarefas = getFacade().consultarTarefa(user, processDefinition);
 		assertFalse(UtilColecao.isVazio(tarefas));
@@ -201,12 +201,10 @@ public class JBPMFacadeTest extends TestCase {
 		UserDecorator user = new UserDecorator();
 		user.setGivenName("alex");
 		
-		Collection<Task> tarefas = getFacade().consultarTarefa(user);
-		Task tarefa = UtilColecao.getElementoDoIndice(tarefas, 0);
+		Collection<TaskDecorator> tarefas = getFacade().consultarTarefa(user);
+		TaskDecorator tarefa = UtilColecao.getElementoDoIndice(tarefas, 0);
 		
-		TaskDecorator decorator = new TaskDecorator();
-		decorator.setTask(tarefa);
-		TaskDecorator resultado = getFacade().obterFormulario(decorator);
+		TaskDecorator resultado = getFacade().obterFormulario(tarefa);
 		assertNotNull(resultado);
 		
 		print(resultado.getTextoFormulario());

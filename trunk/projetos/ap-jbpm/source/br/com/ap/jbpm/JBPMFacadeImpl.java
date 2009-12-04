@@ -65,7 +65,7 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public Collection<Task> consultarTarefa(UserDecorator user) {
+	public Collection<TaskDecorator> consultarTarefa(UserDecorator user) {
 		return taskBo.consultarTarefa(user);
 	}
 

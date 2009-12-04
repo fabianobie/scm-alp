@@ -8,6 +8,7 @@ package br.com.ap.jbpm.decorator;
 import java.util.Date;
 import java.util.Map;
 
+import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.task.Task;
 
 /**
@@ -17,6 +18,7 @@ import org.jbpm.api.task.Task;
  */
 public class TaskDecorator extends JbpmDecoratorAbstrato {
 	private Task				task;
+	private ProcessDefinition	processDefinition;
 	private String				id;
 	private String				textoFormulario;
 	private String				transitionTO;
@@ -213,6 +215,23 @@ public class TaskDecorator extends JbpmDecoratorAbstrato {
 	 */
 	public void setTransitionTO(String transitionTO) {
 		this.transitionTO = transitionTO;
+	}
+
+	/**
+	 * @return processDefinition
+	 */
+	public ProcessDefinition getProcessDefinition() {
+		if (!isReferencia(processDefinition)) {
+			processDefinition = getEntidadeFactory().novoProcessDefinition();
+		}
+		return processDefinition;
+	}
+
+	/**
+	 * @param processDefinition Atribui processDefinition
+	 */
+	public void setProcessDefinition(ProcessDefinition processDefinition) {
+		this.processDefinition = processDefinition;
 	}
 
 }
