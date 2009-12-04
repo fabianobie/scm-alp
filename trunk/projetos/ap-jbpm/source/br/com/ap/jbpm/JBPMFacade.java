@@ -10,7 +10,6 @@ import java.util.Map;
 
 import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
-import org.jbpm.api.task.Task;
 
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
@@ -64,7 +63,7 @@ public interface JBPMFacade {
 	 * @param processDefinition Definição de processo
 	 * @return tarefas
 	 */
-	public Collection<Task> consultarTarefa(UserDecorator user,
+	public Collection<TaskDecorator> consultarTarefa(UserDecorator user,
 			ProcessDefinitionDecorator processDefinition);
 
 	/**
