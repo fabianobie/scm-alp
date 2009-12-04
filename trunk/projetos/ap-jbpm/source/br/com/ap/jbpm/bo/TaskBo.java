@@ -19,6 +19,7 @@ import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.task.TaskImpl;
 import org.springframework.stereotype.Component;
 
+import br.com.ap.comum.colecao.Alterador;
 import br.com.ap.comum.colecao.UtilColecao;
 import br.com.ap.comum.formatador.instancia.IFormatador;
 import br.com.ap.comum.objeto.UtilObjeto;
@@ -27,6 +28,7 @@ import br.com.ap.jbpm.dao.TaskDao;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.decorator.UserDecorator;
+import br.com.ap.jbpm.util.ConversorDeTaskParaTaskDecorator;
 
 /**
  * BO responsável pelas regras de negócio de task.
@@ -52,11 +54,24 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 	 * @param user Usuário
 	 * @return tarefas
 	 */
-	public Collection<Task> consultarTarefa(UserDecorator user) {
+	public Collection<TaskDecorator> consultarTarefa(UserDecorator user) {
 
-		Collection<Task> resultado = null;
+		Collection<TaskDecorator> resultado = null;
 		if (isReferencia(user)) {
-			resultado = getDao().consultarTarefa(user);
+			Collection<Task> tasks = getDao().consultarTarefa(user);
+			ConversorDeTaskParaTaskDecorator conversor = getConversorFactory()
+					.novoConversorDeTaskParaTaskDecorator();
+			
+			resultado = UtilColecao.aplicarConversor(tasks, conversor);
+			UtilColecao.aplicarAlterador(resultado, new Alterador<TaskDecorator>() {
+				@Override
+				public TaskDecorator alterar(TaskDecorator taskDecorator) {
+					Task task = taskDecorator.getTask();
+					ProcessDefinition processDefinition = obterProcessDefinition(task);
+					taskDecorator.setProcessDefinition(processDefinition);
+					return taskDecorator;
+				}
+			});
 		}
 		return resultado;
 	}
@@ -128,11 +143,7 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 		TaskDecorator resultado = null;
 		if (UtilObjeto.isReferencia(task)) {
 			Task tarefa = getDao().obter(task.getId());
-			Execution execucao = executionBo.obter(tarefa.getExecutionId());
-			ProcessDefinition process = deploymentBo
-					.obterDefinicaoDeProcesso(execucao);
-			Deployment deployment = deploymentBo.obter(process
-					.getDeploymentId());
+			Deployment deployment = obterDeployment(tarefa);
 
 			resultado = deploymentBo.obterFormulario(deployment, tarefa);
 			resultado.setTask(tarefa);
@@ -168,8 +179,7 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 
 			String assignee = tarefa.getAssignee();
 			String givenName = user.getGivenName();
-			resultado = isReferencia(tarefa)
-					&& UtilString.isStringsIguais(assignee, givenName);
+			resultado = isReferencia(tarefa) && UtilString.isStringsIguais(assignee, givenName);
 		}
 		return resultado;
 	}
@@ -191,6 +201,27 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 	}
 
 	/**
+	 * Retorna a tarefa solicitada.
+	 * 
+	 * @param task Tarefa com ID.
+	 * @return tarefa
+	 */
+	public TaskDecorator obterTarefa(Task task) {
+		TaskDecorator resultado = null;
+
+		if (isReferencia(task)) {
+
+			if (isVazio(task.getExecutionId())) {
+				Task temp = obter(task.getId());
+				resultado = novoTaskDecorator(temp);
+			} else {
+				resultado = novoTaskDecorator(task);
+			}
+		}
+		return resultado;
+	}
+
+	/**
 	 * Retorna as variáveis a partir de uma tarefa.
 	 * 
 	 * @param task Tarefa com ID
@@ -207,20 +238,21 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 	}
 
 	/**
-	 * Retorna as variáveis a partir de uma tarefa. Os valores retornados serão formatados.
+	 * Retorna as variáveis a partir de uma tarefa. Os valores retornados serão
+	 * formatados.
 	 * 
 	 * @param task Tarefa com ID
 	 * @return variáveis da tarefa formatadas.
 	 */
 	public Map<String, String> obterVariablesFormatadas(TaskDecorator task) {
-		
+
 		Map<String, String> resultado = null;
-		
+
 		if (isReferencia(task)) {
-			Map<String, Object> mapa =  getDao().obterVariables(task);
+			Map<String, Object> mapa = getDao().obterVariables(task);
 			Set<String> keys = mapa.keySet();
 			Iterator<String> iterator = getColecaoFactory().novoIterator(keys);
-			
+
 			if (!UtilColecao.isVazio(keys)) {
 				resultado = getColecaoFactory().novoHashMap();
 				while (iterator.hasNext()) {
@@ -234,14 +266,65 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 	}
 
 	/**
+	 * Retorna o deployment da task.
+	 * 
+	 * @param task Task
+	 * @return deployment da task
+	 */
+	protected Deployment obterDeployment(Task task) {
+		Deployment resultado = null;
+
+		if (isReferencia(task)) {
+			ProcessDefinition definition = obterProcessDefinition(task);
+			String id = definition.getDeploymentId();
+			resultado = deploymentBo.obter(id);
+		}
+		return resultado;
+	}
+
+	/**
+	 * Retorna a definição do processo da task.
+	 * 
+	 * @param task Task
+	 * @return definição do processo da task
+	 */
+	protected ProcessDefinition obterProcessDefinition(Task task) {
+		ProcessDefinition resultado = null;
+
+		if (isReferencia(task)) {
+			Execution execution = obterExecution(task);
+			resultado = deploymentBo.obterDefinicaoDeProcesso(execution);
+		}
+		return resultado;
+	}
+
+	/**
+	 * Retorna a execution da task.
+	 * 
+	 * @param task Task
+	 * @return execution da task
+	 */
+	protected Execution obterExecution(Task task) {
+		Execution resultado = null;
+
+		if (isReferencia(task)) {
+			TaskDecorator taskDecorator = obterTarefa(task);
+			String id = taskDecorator.getExecutionId();
+			resultado = executionBo.obter(id);
+		}
+		return resultado;
+	}
+
+	/**
 	 * Formata o objeto passado por parâmetro.
+	 * 
 	 * @param objeto Objeto que será formatado.
 	 * @return objeto formatado
 	 */
 	@SuppressWarnings("unchecked")
 	private String formatar(Object objeto) {
 		String resultado = null;
-		
+
 		if (isReferencia(objeto)) {
 			Class classe = UtilObjeto.getClasse(objeto);
 			IFormatador formatador = getUtilEstrategiaDeFormatadores().recuperar(classe);

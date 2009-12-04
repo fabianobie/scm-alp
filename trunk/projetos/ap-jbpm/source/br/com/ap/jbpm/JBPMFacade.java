@@ -54,7 +54,7 @@ public interface JBPMFacade {
 	 * @param user Usuário
 	 * @return tarefas
 	 */
-	public Collection<Task> consultarTarefa(UserDecorator user);
+	public Collection<TaskDecorator> consultarTarefa(UserDecorator user);
 
 	/**
 	 * Consulta as tarefas atribuídas a um usuário ou a ninguém de uma definição
