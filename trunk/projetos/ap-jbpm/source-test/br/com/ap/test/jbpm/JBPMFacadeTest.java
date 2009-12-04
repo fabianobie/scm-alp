@@ -16,7 +16,6 @@ import junit.framework.TestCase;
 
 import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
-import org.jbpm.api.task.Task;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import br.com.ap.comum.colecao.UtilColecao;
@@ -133,10 +132,10 @@ public class JBPMFacadeTest extends TestCase {
 		ProcessDefinitionDecorator processDefinition = new ProcessDefinitionDecorator();
 		processDefinition.setId("ProcessoSolicitarDemanda-1");
 		
-		Collection<Task> tarefas = getFacade().consultarTarefa(user, processDefinition);
+		Collection<TaskDecorator> tarefas = getFacade().consultarTarefa(user, processDefinition);
 		assertFalse(UtilColecao.isVazio(tarefas));
 		
-		for (Task tarefa : tarefas) {
+		for (TaskDecorator tarefa : tarefas) {
 			print("tarefa id..: "+ tarefa.getId());
 			print("assignee...: "+ tarefa.getAssignee());
 			print("name.......: "+ tarefa.getName());

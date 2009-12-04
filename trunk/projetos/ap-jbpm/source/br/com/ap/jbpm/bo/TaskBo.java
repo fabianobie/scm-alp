@@ -28,7 +28,7 @@ import br.com.ap.jbpm.dao.TaskDao;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.decorator.UserDecorator;
-import br.com.ap.jbpm.util.ConversorDeTaskParaTaskDecorator;
+import br.com.ap.jbpm.util.UtilConversor;
 
 /**
  * BO responsável pelas regras de negócio de task.
@@ -59,22 +59,13 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 		Collection<TaskDecorator> resultado = null;
 		if (isReferencia(user)) {
 			Collection<Task> tasks = getDao().consultarTarefa(user);
-			ConversorDeTaskParaTaskDecorator conversor = getConversorFactory()
-					.novoConversorDeTaskParaTaskDecorator();
-			
-			resultado = UtilColecao.aplicarConversor(tasks, conversor);
-			UtilColecao.aplicarAlterador(resultado, new Alterador<TaskDecorator>() {
-				@Override
-				public TaskDecorator alterar(TaskDecorator taskDecorator) {
-					Task task = taskDecorator.getTask();
-					ProcessDefinition processDefinition = obterProcessDefinition(task);
-					taskDecorator.setProcessDefinition(processDefinition);
-					return taskDecorator;
-				}
-			});
+			resultado = UtilConversor.converter(tasks);
+			consultarProcessDefinition(resultado);
 		}
 		return resultado;
 	}
+
+	
 
 	/**
 	 * Consulta as tarefas atribuídas a um usuário ou a ninguém de uma definição
@@ -84,12 +75,14 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 	 * @param processDefinition Definição de processo
 	 * @return tarefas
 	 */
-	public Collection<Task> consultarTarefa(UserDecorator user,
+	public Collection<TaskDecorator> consultarTarefa(UserDecorator user,
 			ProcessDefinitionDecorator processDefinition) {
 
-		Collection<Task> resultado = null;
+		Collection<TaskDecorator> resultado = null;
 		if (isReferencia(user, processDefinition)) {
-			resultado = getDao().consultarTarefa(user, processDefinition);
+			Collection<Task> tasks = getDao().consultarTarefa(user, processDefinition);
+			resultado = UtilConversor.converter(tasks);
+			consultarProcessDefinition(resultado);
 		}
 		return resultado;
 	}
@@ -265,6 +258,23 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 		return resultado;
 	}
 
+	/**
+	 * Consulta ProcessDefinition para cada task da coleção.
+	 * 
+	 * @param resultado Coleção de taskDecorator
+	 */
+	protected void consultarProcessDefinition(Collection<TaskDecorator> resultado) {
+		UtilColecao.aplicarAlterador(resultado, new Alterador<TaskDecorator>() {
+			@Override
+			public TaskDecorator alterar(TaskDecorator taskDecorator) {
+				Task task = taskDecorator.getTask();
+				ProcessDefinition processDefinition = obterProcessDefinition(task);
+				taskDecorator.setProcessDefinition(processDefinition);
+				return taskDecorator;
+			}
+		});
+	}
+	
 	/**
 	 * Retorna o deployment da task.
 	 * 

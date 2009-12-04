@@ -12,7 +12,6 @@ import javax.annotation.Resource;
 
 import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
-import org.jbpm.api.task.Task;
 import org.springframework.stereotype.Service;
 
 import br.com.ap.jbpm.bo.DeploymentBo;
@@ -70,7 +69,7 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public Collection<Task> consultarTarefa(UserDecorator user,
+	public Collection<TaskDecorator> consultarTarefa(UserDecorator user,
 			ProcessDefinitionDecorator processDefinition) {
 		return taskBo.consultarTarefa(user, processDefinition);
 	}
