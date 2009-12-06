@@ -60,12 +60,10 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 		if (isReferencia(user)) {
 			Collection<Task> tasks = getDao().consultarTarefa(user);
 			resultado = UtilConversor.converter(tasks);
-			consultarProcessDefinition(resultado);
+			consultarProcessDefinitionEVariables(resultado);
 		}
 		return resultado;
 	}
-
-	
 
 	/**
 	 * Consulta as tarefas atribuídas a um usuário ou a ninguém de uma definição
@@ -82,7 +80,7 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 		if (isReferencia(user, processDefinition)) {
 			Collection<Task> tasks = getDao().consultarTarefa(user, processDefinition);
 			resultado = UtilConversor.converter(tasks);
-			consultarProcessDefinition(resultado);
+			consultarProcessDefinitionEVariables(resultado);
 		}
 		return resultado;
 	}
@@ -259,22 +257,26 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 	}
 
 	/**
-	 * Consulta ProcessDefinition para cada task da coleção.
+	 * Consulta ProcessDefinition e variables para cada task da coleção.
 	 * 
 	 * @param resultado Coleção de taskDecorator
 	 */
-	protected void consultarProcessDefinition(Collection<TaskDecorator> resultado) {
+	protected void consultarProcessDefinitionEVariables(Collection<TaskDecorator> resultado) {
 		UtilColecao.aplicarAlterador(resultado, new Alterador<TaskDecorator>() {
 			@Override
 			public TaskDecorator alterar(TaskDecorator taskDecorator) {
 				Task task = taskDecorator.getTask();
+
 				ProcessDefinition processDefinition = obterProcessDefinition(task);
 				taskDecorator.setProcessDefinition(processDefinition);
+
+				Map<String, Object> variables = obterVariables(taskDecorator);
+				taskDecorator.setMapaVariables(variables);
 				return taskDecorator;
 			}
 		});
 	}
-	
+
 	/**
 	 * Retorna o deployment da task.
 	 * 

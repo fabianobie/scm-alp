@@ -15,7 +15,7 @@
 		</label>		
 		<label style="width:100%" for="selectAceitar">
 			Aceitar? 
-			<@s.select list="%{#@java.util.HashMap@{'FinalizarSolicitacao':'SIM', 'SolicitarInformacao':'N&Atilde;O'}}" 
+			<@s.select list="%{#@java.util.HashMap@{'FinalizarSolicitacao':'SIM', 'SolicitarInformacao':'NAO'}}" 
 				name="model.taskDecorator.transitionTO" 
 				cssStyle="width:100%"
 				headerKey="0"
