@@ -34,7 +34,7 @@ public class UserBo extends CrudBoAbstrato<UserImpl> {
 
 		if (isReferencia(user)) {
 			UserDecorator userDecorator = obterUsuarioPeloNome(user);
-			resultado = isReferencia(userDecorator);
+			resultado = isReferencia(userDecorator) && isReferencia(userDecorator.getGivenName());
 		}
 		return resultado;
 	}
