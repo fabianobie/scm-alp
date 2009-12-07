@@ -49,7 +49,11 @@ public class UserBo extends CrudBoAbstrato<UserImpl> {
 		UserDecorator resultado = null;
 
 		if (isReferencia(user)) {
-			resultado = getDao().obterUsuarioPeloNome(user);
+			UserDecorator temp = getDao().obterUsuarioPeloNome(user);
+
+			if (isReferencia(temp) && isReferencia(temp.getGivenName())) {
+				resultado = temp;
+			}
 		}
 		return resultado;
 	}
