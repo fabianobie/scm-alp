@@ -14,6 +14,8 @@
 			<s:a action="JQuery" method="acaoCarregarMascara">JQuery Mascaras</s:a>
 			<br/>
 			<s:a action="JQuery" method="acaoCarregarValidacao">JQuery Validação</s:a>
+			<br/>
+			<s:a action="Validacao" method="acaoCarregarValidacao">Struts Validação - NOK</s:a>
 		</s:form>
 	</body>
 </html>

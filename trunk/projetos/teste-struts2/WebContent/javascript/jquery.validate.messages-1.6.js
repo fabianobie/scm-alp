@@ -3,11 +3,11 @@
  * Locale: PT_BR
  */
 jQuery.extend(jQuery.validator.messages, {
-	required: "Este campo &eacute; requerido.",
+	required: "Campo de preenchimento obrigat&oacute;rio.",
 	remote: "Por favor, corrija este campo.",
 	email: "Por favor, forne&ccedil;a um endere&ccedil;o eletr&ocirc;nico v&aacute;lido.",
 	url: "Por favor, forne&ccedil;a uma URL v&aacute;lida.",
-	date: "Por favor, forne&ccedil;a uma data v&aacute;lida.",
+	date: "Data inv&aacute;lida.",
 	dateISO: "Por favor, forne&ccedil;a uma data v&aacute;lida (ISO).",
 	number: "Por favor, forne&ccedil;a um n&uacute;mero v&aacute;lida.",
 	digits: "Por favor, forne&ccedil;a somente d&iacute;gitos.",
