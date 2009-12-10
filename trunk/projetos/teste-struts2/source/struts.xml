@@ -6,6 +6,7 @@
 <struts>
     <constant name="struts.enable.DynamicMethodInvocation" value="true" />
     <constant name="struts.devMode" value="false" />
+	<constant name="struts.custom.i18n.resources" value="mensagens" />
 	
     <package name="struts-teste" namespace="/" extends="struts-default">
     	<global-results>
@@ -28,6 +29,9 @@
         <action name="JQuery!*" class="teste.action.jquery.JQueryAction">
             <result name="mascara">/jsp/jquery/mascara.jsp</result>
             <result name="validacao">/jsp/jquery/validacao.jsp</result>
+        </action>
+        <action name="Validacao!*" class="teste.action.validacao.ValidacaoAction">
+            <result name="validacao">/jsp/validacao/validacao.jsp</result>
         </action>
     </package>
 </struts>

@@ -5,6 +5,8 @@
  */
 package teste.action;
 
+import org.apache.struts2.interceptor.validation.SkipValidation;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -16,6 +18,7 @@ public class PrincipalAction extends ActionSupport {
 	/**
 	 * @return principal
 	 */
+	@SkipValidation
 	public String acaoCarregarPrincipal() {
 		return "principal";
 	}
