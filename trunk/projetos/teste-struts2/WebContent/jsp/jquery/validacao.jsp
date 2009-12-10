@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
-<%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+<%@ taglib prefix="sj" uri="/struts2-jquery-tags"%>
 
 <html>
 <head>
@@ -22,16 +22,25 @@
 		});
 	
 		$(document).ready(function() {
-			$("#formulario").validate();
+			$("#formulario").validate({
+				rules: {
+					txtNome:{required:true},
+					txtData:{required:true, date:true}
+				}
+			});
 		});
 	</script>
 </head>
 <body>
-	<s:form id="formulario" action="JQuery">
-		<s:label value="Nome" for="txtNome"/>
-		<s:textfield id="txtNome" cssClass="required" minlength="2"/>
+	<s:form id="formulario" action="JQuery" theme="simple">
+		<s:label value="Nome (obrigatório)" for="txtNome"/>
+		<s:textfield name="txtNome"/>
+		<br/>
+		<s:label value="Nascimento (data)" for="txtData"/>
+		<s:textfield name="txtData"/>
 		<br/>
 		<s:submit value="Enviar"/>
 	</s:form>
+	<hr/>
 </body>
 </html>

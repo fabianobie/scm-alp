@@ -1,10 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
-<%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+<%@ taglib prefix="sj" uri="/struts2-jquery-tags"%>
 <html>
 	<head>
-		<sj:head jqueryui="true" jquerytheme="cupertino"/>
+		<sj:head compressed="true"/>
 		<title>Teste Struts2</title>
 	</head>
 	
