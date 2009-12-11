@@ -5,13 +5,19 @@
  */
 package br.com.ap.gerador;
 
+import org.hibernate.tool.hbm2x.Cfg2JavaTool;
 import org.hibernate.tool.hbm2x.POJOExporter;
 
 /**
- * Responsável pela disponibilização das informações usadas pelos templates freemarker. 
+ * Responsável pela disponibilização das informações usadas pelos templates
+ * freemarker.
  * 
  * @author adrianop
  */
 public class GeradorExporter extends POJOExporter {
-	// classe
+
+	@Override
+	public Cfg2JavaTool getCfg2JavaTool() {
+		return new GeradorCfg2JavaTool();
+	}
 }

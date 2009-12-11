@@ -26,5 +26,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/ap-comum"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ap-hibernate"/>
 	<classpathentry kind="lib" path="build/lib-externa/mysql-connector-java-3.0.15-ga-bin.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JBPM_LIB"/>
+	<classpathentry kind="lib" path="build/lib-externa/postgresql-8.3-603.jdbc4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
