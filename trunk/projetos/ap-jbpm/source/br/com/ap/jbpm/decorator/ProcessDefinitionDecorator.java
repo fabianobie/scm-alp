@@ -18,6 +18,9 @@ public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 	private ProcessDefinition	processDefinition;
 	private Map<String, Object>	mapaVariables;
 	private String				id;
+	private String				key;
+	private Integer				version;
+
 	private String				deploymentId;
 
 	/**
@@ -26,13 +29,13 @@ public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 	 */
 	public String getDeploymentId() {
 		String resultado = getProcessDefinition().getDeploymentId();
-		
+
 		if (isVazio(resultado) || isZero(resultado)) {
 			resultado = deploymentId;
 		}
 		return resultado;
 	}
-	
+
 	/**
 	 * @param deploymentId Atribui deploymentId
 	 */
@@ -80,7 +83,11 @@ public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.ProcessDefinition#getKey()
 	 */
 	public String getKey() {
-		return getProcessDefinition().getKey();
+		String resultado = getProcessDefinition().getKey();
+		if (isVazio(resultado) || isZero(resultado)) {
+			resultado = key;
+		}
+		return resultado;
 	}
 
 	/**
@@ -96,7 +103,11 @@ public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.ProcessDefinition#getVersion()
 	 */
 	public int getVersion() {
-		return getProcessDefinition().getVersion();
+		Integer resultado = getProcessDefinition().getVersion();
+		if (!isReferencia(resultado) || isZero(resultado)) {
+			resultado = version;
+		}
+		return resultado;
 	}
 
 	/**
@@ -141,5 +152,18 @@ public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 		this.mapaVariables = mapaVariables;
 	}
 
+	/**
+	 * @param key Atribui key
+	 */
+	public void setKey(String key) {
+		this.key = key;
+	}
+
+	/**
+	 * @param version Atribui version
+	 */
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 
 }
