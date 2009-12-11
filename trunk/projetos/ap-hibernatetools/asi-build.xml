@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="hibernate-tools" basedir="." default="inicializar">
-	<property file="build.properties"/>
+	<property file="asi-build.properties"/>
 	<property name="var.is.gerar.entidade.${is.gerar.entidade}" value="true"/>
 	<property name="var.is.gerar.dao.interface.${is.gerar.dao.interface}" value="true"/>
 	<property name="var.is.gerar.dao.impl.${is.gerar.dao.interface}" value="true"/>
@@ -46,8 +46,7 @@
 				packagename="${entidade.pacote}"
 				revengfile="${path.arquivo.revengfile}"
 				detectmanytomany="true"
-				reversestrategy="${classe.reversestrategy}"
-			/>
+				reversestrategy="${classe.reversestrategy}"/>
 			
 			<hbmtemplate 
 				templateprefix="${entidade.templateprefix}"
