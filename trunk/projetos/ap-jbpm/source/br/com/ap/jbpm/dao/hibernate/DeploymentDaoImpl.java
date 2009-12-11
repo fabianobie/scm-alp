@@ -101,6 +101,19 @@ public class DeploymentDaoImpl extends JBPMDaoAbstrato<DeploymentImpl> implement
 		String deploymentId = deployment.getId();
 		return obterFormulario(deploymentId, form);
 	}
+
+	/**
+	 * @see br.com.ap.jbpm.dao.DeploymentDao#obterNomeFormularioInicial(br.com.ap.jbpm.decorator.DeploymentDecorator, br.com.ap.jbpm.decorator.ProcessDefinitionDecorator, br.com.ap.jbpm.decorator.ActivityDecorator)
+	 */
+	public TaskDecorator obterNomeFormularioInicial(DeploymentDecorator deployment,
+			ProcessDefinitionDecorator processDefinition, ActivityDecorator activity) {
+		
+		String form = repositoryService.getStartFormResourceName(processDefinition.getId(),
+				activity.getName());
+		TaskDecorator taskDecorator = getDecoratorFactory().novoTaskDecorator();
+		taskDecorator.setFormResourceName(form);
+		return taskDecorator;
+	}
 	
 	/**
 	 * @see br.com.ap.hibernate.dao.HibernateCrudDaoAbstrato#obter(java.io.Serializable)

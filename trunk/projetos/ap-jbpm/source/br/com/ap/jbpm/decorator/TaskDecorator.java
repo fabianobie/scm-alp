@@ -22,6 +22,7 @@ public class TaskDecorator extends JbpmDecoratorAbstrato {
 	private String				id;
 	private String				textoFormulario;
 	private String				transitionTO;
+	private String				formResourceName;
 	private Map<String, Object>	mapaVariables;
 
 	/**
@@ -77,7 +78,11 @@ public class TaskDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.getTask().Task#getFormResourceName()
 	 */
 	public String getFormResourceName() {
-		return getTask().getFormResourceName();
+		String resultado = getTask().getFormResourceName();
+		if (isVazio(resultado) || isZero(resultado)) {
+			resultado = formResourceName;
+		}
+		return resultado;
 	}
 
 	/**
@@ -232,6 +237,13 @@ public class TaskDecorator extends JbpmDecoratorAbstrato {
 	 */
 	public void setProcessDefinition(ProcessDefinition processDefinition) {
 		this.processDefinition = processDefinition;
+	}
+
+	/**
+	 * @param formResourceName Atribui formResourceName
+	 */
+	public void setFormResourceName(String formResourceName) {
+		this.formResourceName = formResourceName;
 	}
 
 }

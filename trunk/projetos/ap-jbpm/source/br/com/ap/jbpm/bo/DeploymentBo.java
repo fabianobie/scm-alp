@@ -67,12 +67,10 @@ public class DeploymentBo extends CrudBoAbstrato<DeploymentImpl> {
 	 * @param processDefinition Definição de processo com ID.
 	 * @return definição solicitada.
 	 */
-	public ProcessDefinition obterDefinicaoDeProcesso(
-			ProcessDefinitionDecorator processDefinition) {
+	public ProcessDefinition obterDefinicaoDeProcesso(ProcessDefinitionDecorator processDefinition) {
 		ProcessDefinition resultado = null;
 
-		if (isReferencia(processDefinition)
-				&& !isVazio(processDefinition.getId())) {
+		if (isReferencia(processDefinition) && !isVazio(processDefinition.getId())) {
 
 			resultado = getDao().obterDefinicaoDeProcesso(processDefinition);
 		}
@@ -103,8 +101,7 @@ public class DeploymentBo extends CrudBoAbstrato<DeploymentImpl> {
 	 * @param task Tarefa com ID.
 	 * @return formulário da tarefa
 	 */
-	public TaskDecorator obterFormulario(DeploymentDecorator deployment,
-			TaskDecorator task) {
+	public TaskDecorator obterFormulario(DeploymentDecorator deployment, TaskDecorator task) {
 		TaskDecorator resultado = null;
 
 		if (isReferencia(deployment, task)) {
@@ -126,8 +123,7 @@ public class DeploymentBo extends CrudBoAbstrato<DeploymentImpl> {
 		if (isReferencia(deployment, task)) {
 			DeploymentDecorator deploymentDecorator = novoDeploymentDecorator(deployment);
 			TaskDecorator taskDecorator = novoTaskDecorator(task);
-			resultado = getDao().obterFormulario(deploymentDecorator,
-					taskDecorator);
+			resultado = getDao().obterFormulario(deploymentDecorator, taskDecorator);
 		}
 		return resultado;
 	}
@@ -138,16 +134,30 @@ public class DeploymentBo extends CrudBoAbstrato<DeploymentImpl> {
 	 * @param processDefinition Definição de processo com ID.
 	 * @return formulário inicial
 	 */
-	public TaskDecorator obterFormularioInicial(
-			ProcessDefinitionDecorator processDefinition) {
+	public TaskDecorator obterFormularioInicial(ProcessDefinitionDecorator processDefinition) {
 
 		ActivityDecorator activity = obterNomeAtividadeStart(processDefinition);
 		ProcessDefinition process = obterDefinicaoDeProcesso(processDefinition);
 		Deployment deployment = obter(process.getDeploymentId());
 
 		DeploymentDecorator deploymentDecorator = novoDeploymentDecorator(deployment);
-		return getDao().obterFormularioInicial(deploymentDecorator,
-				processDefinition, activity);
+		return getDao().obterFormularioInicial(deploymentDecorator, processDefinition, activity);
+	}
+
+	/**
+	 * Retorna o nome do formulário inicial de uma definição de processo.
+	 * 
+	 * @param processDefinition Definição de processo com ID.
+	 * @return nome do formulário inicial
+	 */
+	public TaskDecorator obterNomeFormularioInicial(ProcessDefinitionDecorator processDefinition) {
+		ActivityDecorator activity = obterNomeAtividadeStart(processDefinition);
+		ProcessDefinition process = obterDefinicaoDeProcesso(processDefinition);
+		Deployment deployment = obter(process.getDeploymentId());
+
+		DeploymentDecorator deploymentDecorator = novoDeploymentDecorator(deployment);
+		return getDao()
+				.obterNomeFormularioInicial(deploymentDecorator, processDefinition, activity);
 	}
 
 	/**
@@ -157,15 +167,13 @@ public class DeploymentBo extends CrudBoAbstrato<DeploymentImpl> {
 	 * @param processDefinition Definição de processo com ID
 	 * @return activity com nome
 	 */
-	public ActivityDecorator obterNomeAtividadeStart(
-			ProcessDefinitionDecorator processDefinition) {
+	public ActivityDecorator obterNomeAtividadeStart(ProcessDefinitionDecorator processDefinition) {
 
-		List<String> atividades = getDao().obterNomesAtividadeStart(
-				processDefinition);
+		List<String> atividades = getDao().obterNomesAtividadeStart(processDefinition);
 		String atividade = UtilColecao.getElementoDoIndice(atividades, 0);
 		return getDecoratorFactory().novaActivityDecorator(atividade);
 	}
-	
+
 	@Override
 	protected DeploymentDao getDao() {
 		return deploymentDao;
