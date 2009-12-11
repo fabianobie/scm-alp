@@ -79,4 +79,15 @@ public interface DeploymentDao extends CrudDao<DeploymentImpl> {
 	public TaskDecorator obterFormularioInicial(DeploymentDecorator deployment,
 			ProcessDefinitionDecorator processDefinition,
 			ActivityDecorator activity);
+	
+	/**
+	 * Retorna o nome do formulário inicial de uma definição de processo.
+	 * 
+	 * @param deployment Deployment com ID.
+	 * @param processDefinition Definição de processo com ID.
+	 * @param activity Atividade com nome.
+	 * @return nome do formulário inicial
+	 */
+	public TaskDecorator obterNomeFormularioInicial(DeploymentDecorator deployment,
+			ProcessDefinitionDecorator processDefinition, ActivityDecorator activity);
 }

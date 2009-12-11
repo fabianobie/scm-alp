@@ -129,4 +129,8 @@ public class JBPMFacadeImpl implements JBPMFacade {
 		return taskBo.obterVariablesFormatadas(task);
 	}
 
+	@Override
+	public TaskDecorator obterNomeFormularioInicial(ProcessDefinitionDecorator processDefinition) {
+		return deploymentBo.obterNomeFormularioInicial(processDefinition);
+	}
 }

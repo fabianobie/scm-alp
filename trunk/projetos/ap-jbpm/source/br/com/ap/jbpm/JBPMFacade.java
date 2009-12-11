@@ -146,6 +146,14 @@ public interface JBPMFacade {
 	public TaskDecorator obterTarefa(TaskDecorator task);
 
 	/**
+	 * Retorna o nome do formulário inicial de uma definição de processo.
+	 * 
+	 * @param processDefinition Definição de processo com ID.
+	 * @return nome do formulário inicial
+	 */
+	public TaskDecorator obterNomeFormularioInicial(ProcessDefinitionDecorator processDefinition);
+
+	/**
 	 * Retorna as variáveis a partir de uma tarefa.
 	 * 
 	 * @param task Tarefa com ID
