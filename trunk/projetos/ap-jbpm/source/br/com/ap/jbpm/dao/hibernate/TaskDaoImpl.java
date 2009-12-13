@@ -119,11 +119,10 @@ public class TaskDaoImpl extends JBPMDaoAbstrato<TaskImpl> implements TaskDao {
 	 * @see br.com.ap.jbpm.dao.TaskDao#obterVariables(br.com.ap.jbpm.decorator.TaskDecorator)
 	 */
 	public Map<String, Object> obterVariables(TaskDecorator task) {
-		Map<String, Object> resultado = null;
+		Map<String, Object> resultado = getColecaoFactory().novoHashMap();
 		String id = task.getId();
 		Set<String> nomes = taskService.getVariableNames(id);
 		if (!UtilColecao.isVazio(nomes)) {
-			resultado = getColecaoFactory().novoHashMap();
 			for (String nome : nomes) {
 				resultado.put(nome, taskService.getVariable(id, nome));
 			}
