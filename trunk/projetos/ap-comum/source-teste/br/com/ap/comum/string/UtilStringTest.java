@@ -1039,6 +1039,19 @@ public class UtilStringTest extends TesteAbstrato {
 
 	/**
 	 * Test method for
+	 * {@link br.com.ap.comum.string.UtilString#getPrimeiraMaiuscula(java.lang.String)}.
+	 */
+	@Test
+	public final void testGetPrimeiraMaiuscula() {
+		String s = new String("aBcD");
+		assertEquals(1, UtilString.getPrimeiraMaiuscula(s));
+		
+		s = null;
+		assertEquals(-1, UtilString.getPrimeiraMaiuscula(s));
+	}
+
+	/**
+	 * Test method for
 	 * {@link br.com.ap.comum.string.UtilString#isStringsIguais(java.lang.String, java.lang.String)}.
 	 */
 	@Test
