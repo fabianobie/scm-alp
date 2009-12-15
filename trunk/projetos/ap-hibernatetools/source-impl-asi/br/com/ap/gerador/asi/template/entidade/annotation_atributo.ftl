@@ -1,7 +1,8 @@
 <#if ejb3>
 <#if pojo.hasIdentifierProperty()>
 <#if property.equals(clazz.identifierProperty)>
-	${pojo.generateAnnIdGenerator()?replace("@", "\n\t@")?trim}
+	${pojo.generateAnnIdGenerator()?trim}
+<#--	${pojo.generateAnnIdGenerator()?replace("@", "\n\t@")?trim} -->
 <#--	@${pojo.importType("javax.persistence.Id")} -->
 <#--	@${pojo.importType("javax.persistence.GeneratedValue")} -->
 </#if>

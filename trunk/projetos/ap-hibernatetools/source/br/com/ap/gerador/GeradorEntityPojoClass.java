@@ -10,8 +10,9 @@ import org.hibernate.tool.hbm2x.Cfg2JavaTool;
 import org.hibernate.tool.hbm2x.pojo.EntityPOJOClass;
 
 /**
- * @author adriano.pamplona
+ * Classe responsável pela geração de código.
  * 
+ * @author adriano.pamplona
  */
 public class GeradorEntityPojoClass extends EntityPOJOClass {
 
@@ -24,5 +25,4 @@ public class GeradorEntityPojoClass extends EntityPOJOClass {
 	public GeradorEntityPojoClass(PersistentClass clazz, Cfg2JavaTool cfg) {
 		super(clazz, cfg);
 	}
-
 }

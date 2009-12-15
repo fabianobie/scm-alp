@@ -2,15 +2,6 @@
 <#if pojo.getMetaAttribAsBool(property, "gen-property", true)>
 <#if property.equals(clazz.identifierProperty)>
 	/**
-	 * @return O identificador desta entidade
-	 *
-	 * @see ${var_superinterface}#getIdentificador()
-	 */
-	public ${pojo.importType("java.io.Serializable")} getIdentificador() {
-		return getId();
-	}
-	
-	/**
 	 * @return O valor do atributo id
 	 */
     ${pojo.getPropertyGetModifiers(property)} ${pojo.getJavaTypeName(property, jdk5)} getId() {
