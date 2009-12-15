@@ -11,5 +11,13 @@
 		<sql-type jdbc-type="BIGINT" hibernate-type="java.lang.Long" />
 	</type-mapping>
 
-	<table-filter match-name="BIN$.*" exclude="true" />
+	<table-filter match-name="jbpm_.*" exclude="true" />
+	<table-filter match-name=".*">
+		<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	</table-filter>
+
+	<table name="abrangencia">
+		<meta attribute="extends">br.com.linkdata.domain.ElementoDeDominio</meta>
+	</table>
+
 </hibernate-reverse-engineering>

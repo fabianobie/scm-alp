@@ -10,6 +10,7 @@ import org.hibernate.cfg.reveng.ReverseEngineeringStrategy;
 import org.hibernate.cfg.reveng.TableIdentifier;
 
 import br.com.ap.gerador.GeradorReverseEngineeringStrategy;
+import br.com.ap.gerador.asi.util.UtilAtributoDominio;
 
 /**
  * Responsável pela parametrização da engenharia reversa das tabelas do banco de
@@ -40,5 +41,10 @@ public class AsiGeradorReverseEngineeringStrategy extends
 	public String getTableIdentifierStrategyName(TableIdentifier tableIdentifier) {
 		return "sequence";
 	}
-
+	
+	@Override
+	public String columnToPropertyName(TableIdentifier table, String column) {
+		String property = super.columnToPropertyName(table, column);
+		return UtilAtributoDominio.nomear(table, property);
+	}
 }
