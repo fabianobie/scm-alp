@@ -1,13 +1,14 @@
 /**
- * GeradorCfg2JavaTool.java
+ * AsiGeradorCfg2JavaTool.java
  *
  * Data: 11/12/2009
  */
-package br.com.ap.gerador;
+package br.com.ap.gerador.asi;
 
 import org.hibernate.mapping.PersistentClass;
-import org.hibernate.tool.hbm2x.Cfg2JavaTool;
 import org.hibernate.tool.hbm2x.pojo.POJOClass;
+
+import br.com.ap.gerador.GeradorCfg2JavaTool;
 
 /**
  * Classe responsável em prover os recursos de objeto para o contexto dos
@@ -15,13 +16,13 @@ import org.hibernate.tool.hbm2x.pojo.POJOClass;
  * 
  * @author adriano.pamplona
  */
-public class GeradorCfg2JavaTool extends Cfg2JavaTool {
+public class AsiGeradorCfg2JavaTool extends GeradorCfg2JavaTool {
 
 	/**
 	 * @see org.hibernate.tool.hbm2x.Cfg2JavaTool#getPOJOClass(org.hibernate.mapping.PersistentClass)
 	 */
-	public POJOClass getPOJOClass(PersistentClass comp) {
-		return new GeradorEntityPojoClass(comp, this);
+	public POJOClass getPOJOClass(PersistentClass comp) {		
+		return new AsiGeradorEntityPojoClass(comp, this);
 	}
 
 }

@@ -2,6 +2,8 @@
 <classpath>
 	<classpathentry kind="src" output="source" path="source"/>
 	<classpathentry kind="src" output="source-gerado" path="source-gerado"/>
+	<classpathentry kind="src" path="source-impl-asi"/>
+	<classpathentry kind="src" path="source-impl-template"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="build/lib/asm-attrs.jar"/>
 	<classpathentry kind="lib" path="build/lib/asm.jar"/>

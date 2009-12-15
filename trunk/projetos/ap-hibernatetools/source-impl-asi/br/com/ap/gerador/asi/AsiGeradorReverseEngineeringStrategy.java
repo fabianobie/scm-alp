@@ -1,13 +1,15 @@
 /*
- * GeradorReverseEngineeringStrategy.java
+ * AsiGeradorReverseEngineeringStrategy.java
  * 
  * Data de criação: 13/02/2009
  */
-package br.com.ap.gerador;
+package br.com.ap.gerador.asi;
 
-import org.hibernate.cfg.reveng.DelegatingReverseEngineeringStrategy;
 import org.hibernate.cfg.reveng.ReverseEngineeringSettings;
 import org.hibernate.cfg.reveng.ReverseEngineeringStrategy;
+import org.hibernate.cfg.reveng.TableIdentifier;
+
+import br.com.ap.gerador.GeradorReverseEngineeringStrategy;
 
 /**
  * Responsável pela parametrização da engenharia reversa das tabelas do banco de
@@ -15,13 +17,14 @@ import org.hibernate.cfg.reveng.ReverseEngineeringStrategy;
  * 
  * @author adrianop
  */
-public class GeradorReverseEngineeringStrategy extends
-		DelegatingReverseEngineeringStrategy {
+public class AsiGeradorReverseEngineeringStrategy extends
+		GeradorReverseEngineeringStrategy {
 
 	/**
 	 * @param delegate Strategy
 	 */
-	public GeradorReverseEngineeringStrategy(ReverseEngineeringStrategy delegate) {
+	public AsiGeradorReverseEngineeringStrategy(
+			ReverseEngineeringStrategy delegate) {
 		super(delegate);
 	}
 
@@ -32,4 +35,10 @@ public class GeradorReverseEngineeringStrategy extends
 	public void setSettings(ReverseEngineeringSettings settings) {
 		super.setSettings(settings);
 	}
+
+	@Override
+	public String getTableIdentifierStrategyName(TableIdentifier tableIdentifier) {
+		return "sequence";
+	}
+
 }

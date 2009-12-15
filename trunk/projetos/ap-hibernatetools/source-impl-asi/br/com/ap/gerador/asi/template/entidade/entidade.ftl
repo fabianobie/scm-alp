@@ -30,4 +30,3 @@ ${pojo.getClassModifiers()} ${pojo.getDeclarationType()} ${pojo.getDeclarationNa
 </#assign>
 ${pojo.generateImports()}
 ${classbody}
-${pojo.class}
