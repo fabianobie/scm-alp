@@ -12,8 +12,10 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import br.com.ap.comum.constante.EL;
 import br.com.ap.comum.constante.Metodo;
 import br.com.ap.comum.constante.pattern.PatternDeNumero;
 import br.com.ap.comum.constante.pattern.PatternDeString;
@@ -623,6 +625,25 @@ public final class UtilString {
 
 		if (!isVazio(string0, string1)) {
 			resultado = string0.equals(string1);
+		}
+		return resultado;
+	}
+	
+	/**
+	 * Retorna o índice da primeira letra maiúscula da string.
+	 * 
+	 * @param string String que será persquisada.
+	 * @return índice da primeira letra maiúscula.
+	 */
+	public static int getPrimeiraMaiuscula(String string) {
+		int resultado = -1;
+		
+		if (!isVazio(string)) {
+			Pattern pattern = Pattern.compile(EL.getLetraMaiuscula()); 	
+			Matcher matcher = pattern.matcher(string);
+			if (matcher.find()) {
+				resultado = matcher.start();
+			}
 		}
 		return resultado;
 	}
