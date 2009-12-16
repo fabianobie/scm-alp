@@ -2,9 +2,6 @@
 <#if pojo.hasIdentifierProperty()>
 <#if property.equals(clazz.identifierProperty)>
 	${pojo.generateAnnIdGenerator()?trim}
-<#--	${pojo.generateAnnIdGenerator()?replace("@", "\n\t@")?trim} -->
-<#--	@${pojo.importType("javax.persistence.Id")} -->
-<#--	@${pojo.importType("javax.persistence.GeneratedValue")} -->
 </#if>
 </#if>
 <#if c2h.isManyToOne(property)>

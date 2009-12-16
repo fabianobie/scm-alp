@@ -5,6 +5,7 @@
  */
 package br.com.ap.gerador;
 
+import org.hibernate.mapping.Component;
 import org.hibernate.mapping.PersistentClass;
 import org.hibernate.tool.hbm2x.Cfg2JavaTool;
 import org.hibernate.tool.hbm2x.pojo.POJOClass;
@@ -22,6 +23,13 @@ public class GeradorCfg2JavaTool extends Cfg2JavaTool {
 	 */
 	public POJOClass getPOJOClass(PersistentClass comp) {
 		return new GeradorEntityPojoClass(comp, this);
+	}
+
+	/**
+	 * @see org.hibernate.tool.hbm2x.Cfg2JavaTool#getPOJOClass(org.hibernate.mapping.Component)
+	 */
+	public POJOClass getPOJOClass(Component comp) {
+		return new GeradorComponentPojoClass(comp, this);
 	}
 
 }
