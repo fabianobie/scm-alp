@@ -7,10 +7,14 @@ package br.com.ap.gerador.asi.util;
 
 import java.util.Map;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.hibernate.cfg.reveng.ReverseEngineeringStrategyUtil;
 import org.hibernate.cfg.reveng.TableIdentifier;
 
 import br.com.ap.comum.arquivo.UtilCarregarMapaDeString;
+import br.com.ap.comum.constante.EL;
 import br.com.ap.comum.fabrica.ArquivoFactory;
 import br.com.ap.comum.fabrica.ColecaoFactory;
 import br.com.ap.comum.objeto.UtilObjeto;
@@ -27,20 +31,24 @@ public final class UtilAtributoDominio {
 	public static String nomear(TableIdentifier tabela, String propriedade) {
 		if (UtilObjeto.isReferenciaTodos(tabela, propriedade)) {
 			String nome = tabela.getName();
+			String classe = ReverseEngineeringStrategyUtil.toUpperCamelCase(nome);
 			String prefixo = getPrefixo(propriedade);
 			String sufixo = getSufixo(propriedade);
-			
-			if (UtilObjeto.isReferencia(prefixo) && nome.equalsIgnoreCase(sufixo)) {
+
+			if (UtilObjeto.isReferencia(prefixo) && classe.equalsIgnoreCase(sufixo)) {
 				if (getMapaPrefixoPropriedade().containsKey(prefixo)) {
 					propriedade = getMapaPrefixoPropriedade().get(prefixo);
 				}
 			}
 			
 			if (getMapaRenomearPrefixo().containsKey(prefixo)) {
-				String novoPrefixo = getMapaPrefixoPropriedade().get(prefixo);
+				String novoPrefixo = getMapaRenomearPrefixo().get(prefixo);
+				
 				if (UtilString.isVazio(novoPrefixo)) {
-					propriedade = propriedade.replace(prefixo, "");
-					
+					propriedade = propriedade.replace(prefixo, novoPrefixo);
+					propriedade = Character.toLowerCase(propriedade.charAt(0)) + propriedade.substring(1);
+				} else {
+					propriedade = propriedade.substring(0, 1).toLowerCase() + propriedade.substring(1);
 				}
 			}
 		}
@@ -53,7 +61,7 @@ public final class UtilAtributoDominio {
 		if (UtilObjeto.isReferencia(propriedade)) {
 			int indice = UtilString.getPrimeiraMaiuscula(propriedade);
 			if (indice > -1) {
-				sufixo = propriedade.substring(indice, propriedade.length());
+				sufixo = propriedade.substring(indice);
 			}
 		}
 		return sufixo;

@@ -19,5 +19,25 @@
 	<table name="abrangencia">
 		<meta attribute="extends">br.com.linkdata.domain.ElementoDeDominio</meta>
 	</table>
+	<table name="agregacao_indice">
+		<meta attribute="extends">br.com.linkdata.domain.ElementoDeDominio</meta>
+	</table>
+	<table name="alerta_email_frotas">
+		<meta attribute="extends">br.com.linkdata.entity.ExclusaoLogica</meta>
+		<column name="email_usuario" property="email" />
+		<column name="nm_usuario" property="nome" />
+	</table>
+	<table name="alerta_servico">
+		<column name="vl_porcentagem_alerta_servico" property="porcentagem" />
+		<column name="vl_km_referenciada" property="quilometragemReferenciada" />
+	</table>
+	<table name="amparo_legal">
+		<!--
+		<foreign-key foreign-table="amparo_legal">
+			<column-ref local-column="id_amparo" foreign-column="id_amparo" />
+			<many-to-one property="amparoLegalPai" />
+		</foreign-key>
+		-->
+	</table>
 
 </hibernate-reverse-engineering>

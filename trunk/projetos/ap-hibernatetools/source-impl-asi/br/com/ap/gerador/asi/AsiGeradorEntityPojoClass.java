@@ -5,7 +5,6 @@
  */
 package br.com.ap.gerador.asi;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -17,6 +16,7 @@ import org.hibernate.id.PersistentIdentifierGenerator;
 import org.hibernate.mapping.Component;
 import org.hibernate.mapping.KeyValue;
 import org.hibernate.mapping.PersistentClass;
+import org.hibernate.mapping.Property;
 import org.hibernate.mapping.SimpleValue;
 import org.hibernate.tool.hbm2x.Cfg2JavaTool;
 import org.hibernate.util.StringHelper;
@@ -239,4 +239,20 @@ public class AsiGeradorEntityPojoClass extends GeradorEntityPojoClass {
 		prefixo = prefixo.toLowerCase();
 		return prefixo + sufixo;
 	}
+	
+	/**
+	 * Method getGetterSignature.
+	 *
+	 * @return String
+	 */
+	public String getGetterSignature(Property p) {
+		String prefix = "get";
+		String tipo = c2j.getJavaTypeName( p, false);
+		
+		if (tipo.equalsIgnoreCase("boolean") || tipo.equals(Boolean.class.getName())) {
+			prefix = "is";
+		}
+		return prefix + beanCapitalize( p.getName() );
+	}
+
 }
