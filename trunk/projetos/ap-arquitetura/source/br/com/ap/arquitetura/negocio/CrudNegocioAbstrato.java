@@ -13,6 +13,7 @@ import br.com.ap.arquitetura.util.CRUD;
 /**
  * Classe CRUD de negócio.
  * 
+ * @param <T> Tipo do objeto tratado pelo crud
  * @author adriano.pamplona
  */
 public abstract class CrudNegocioAbstrato<T extends Object> extends
@@ -43,9 +44,10 @@ public abstract class CrudNegocioAbstrato<T extends Object> extends
 		getCrudDao().excluirTodos(entidades);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <R extends Serializable> R incluir(T entidade) {
-		return getCrudDao().incluir(entidade);
+		return (R)getCrudDao().incluir(entidade);
 	}
 
 	@Override
