@@ -1,5 +1,5 @@
 /**
- * GeradorCfg2JavaTool.java
+ * GeradorCfg2HbmTool.java
  *
  * Data: 11/12/2009
  */
