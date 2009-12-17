@@ -20,51 +20,51 @@ public abstract class CrudNegocioAbstrato<T extends Object> extends
 
 	@Override
 	public void alterar(T entidade) {
-		getCrud().alterar(entidade);
+		getCrudDao().alterar(entidade);
 	}
 
 	@Override
 	public Collection<T> consultar(T entidade) {
-		return getCrud().consultar(entidade);
+		return getCrudDao().consultar(entidade);
 	}
 
 	@Override
 	public Collection<T> consultar() {
-		return getCrud().consultar();
+		return getCrudDao().consultar();
 	}
 
 	@Override
 	public void excluir(T entidade) {
-		getCrud().excluir(entidade);
+		getCrudDao().excluir(entidade);
 	}
 
 	@Override
 	public void excluirTodos(Collection<T> entidades) {
-		getCrud().excluirTodos(entidades);
+		getCrudDao().excluirTodos(entidades);
 	}
 
 	@Override
 	public <R extends Serializable> R incluir(T entidade) {
-		return getCrud().incluir(entidade);
+		return getCrudDao().incluir(entidade);
 	}
 
 	@Override
 	public T obter(Serializable pk) {
-		return getCrud().obter(pk);
+		return getCrudDao().obter(pk);
 	}
 
 	@Override
 	public T obter(T entidade) {
-		return getCrud().obter(entidade);
+		return getCrudDao().obter(entidade);
 	}
 
 	@Override
 	public void salvar(T entidade) {
-		getCrud().salvar(entidade);
+		getCrudDao().salvar(entidade);
 	}
 
 	/**
 	 * @return retorna crud.
 	 */
-	protected abstract CRUD<T> getCrud();
+	protected abstract CRUD<T> getCrudDao();
 }
