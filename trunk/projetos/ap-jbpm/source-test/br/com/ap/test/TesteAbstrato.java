@@ -15,16 +15,21 @@ import org.jbpm.api.TaskService;
 import org.jbpm.test.JbpmTestCase;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import br.com.ap.comum.objeto.UtilObjeto;
+import br.com.ap.jbpm.JBPMFacade;
+
 /**
  * @author AdrianoP
  * 
  */
 public class TesteAbstrato extends JbpmTestCase {
-	private ClassPathXmlApplicationContext context;
-	
+	private ClassPathXmlApplicationContext	context;
+	private JBPMFacade						jbpmFacade;
+
 	/**
 	 * @see org.jbpm.test.JbpmTestCase#initialize()
 	 */
+	@Override
 	protected synchronized void initialize() {
 		if (processEngine == null) {
 			processEngine = (ProcessEngine) getContext().getBean("processEngine");
@@ -32,7 +37,6 @@ public class TesteAbstrato extends JbpmTestCase {
 			repositoryService = (RepositoryService) getContext().getBean("repositoryService");
 			executionService = (ExecutionService) getContext().getBean("executionService");
 			historyService = (HistoryService) getContext().getBean("historyService");
-			//managementService = (ManagementService) getContext().getBean("managementService");
 			taskService = (TaskService) getContext().getBean("taskService");
 			identityService = (IdentityService) getContext().getBean("identityService");
 		}
@@ -41,10 +45,11 @@ public class TesteAbstrato extends JbpmTestCase {
 	/**
 	 * @see org.jbpm.test.JbpmTestCase#tearDown()
 	 */
+	@Override
 	protected void tearDown() throws Exception {
 
 	}
-	
+
 	/**
 	 * @return context
 	 */
@@ -121,5 +126,15 @@ public class TesteAbstrato extends JbpmTestCase {
 	 */
 	protected void println(String texto) {
 		System.out.println(texto);
+	}
+
+	/**
+	 * @return jbpmFacade
+	 */
+	protected JBPMFacade getJbpmFacade() {
+		if (!UtilObjeto.isReferencia(jbpmFacade)) {
+			jbpmFacade = (JBPMFacade) getContext().getBean("JBPMFacadeImpl");
+		}
+		return jbpmFacade;
 	}
 }

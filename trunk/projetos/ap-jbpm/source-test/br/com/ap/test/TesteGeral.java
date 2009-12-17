@@ -5,7 +5,7 @@
  */
 package br.com.ap.test;
 
-import br.com.ap.test.jbpm.deploy.DeployTest;
+import br.com.ap.test.jbpm.deploy.solicitardemanda.SolicitarDemandaTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -20,7 +20,7 @@ public class TesteGeral extends TestSuite {
 	 */
 	public static Test suite() {
 		TestSuite testes = novoTestSuite();
-		testes.addTest(new DeployTest());
+		testes.addTest(new SolicitarDemandaTest());
 		
 		return testes;
 	}

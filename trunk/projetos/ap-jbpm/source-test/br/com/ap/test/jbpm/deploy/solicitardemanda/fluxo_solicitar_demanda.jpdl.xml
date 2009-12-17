@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<process name="ProcessoSolicitarDemanda" xmlns="http://jbpm.org/4.0/jpdl">
+<process name="ProcessoSolicitarDemanda">
 	<description>Solicitar Demanda</description>
 	<start g="116,25,80,40" name="Iniciar Solicitacao de Demanda" form="solicitardemanda/taskform-start">
 		<description>Iniciar Solicitação de Demanda</description>

@@ -38,13 +38,9 @@ public class JBPMFacadeTest extends TestCase {
 	
 	public void testPublicar() {
 		DeploymentDecorator decorator = new DeploymentDecorator();
-		decorator.setClasspathJpdl("br/com/ap/test/jbpm/deploy/process.jpdl.xml");
-		decorator.setClasspathImagem("br/com/ap/test/jbpm/deploy/process.png");
-		decorator.getColecaoClasspathFormulario().add("br/com/ap/test/jbpm/deploy/taskform-start.ftl");
-		decorator.getColecaoClasspathFormulario().add("br/com/ap/test/jbpm/deploy/taskform-conferir-demanda.ftl");
-		decorator.getColecaoClasspathFormulario().add("br/com/ap/test/jbpm/deploy/taskform-solicitar-demanda.ftl");
-		decorator.getColecaoClasspathFormulario().add("br/com/ap/test/jbpm/deploy/taskform-solicitar-informacao.ftl");
-		
+		decorator.setClasspathJpdl("br/com/ap/test/jbpm/deploy/solicitardemanda/" +
+				"fluxo_solicitar_demanda.jpdl.xml");
+
 		decorator = getFacade().publicar(decorator);
 		String id = decorator.getId();
 		assertNotNull(id);

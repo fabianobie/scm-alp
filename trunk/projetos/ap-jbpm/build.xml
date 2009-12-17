@@ -50,9 +50,7 @@
 	</target>
 
 	<target name="copiar-para-dependentes">
-		<!--
-		<copy file="${package.path}${package.bin.name}" todir="C:/java/projetos-pessoais/ap-arquitetura/build/lib/"/>
-		-->
+		<copy file="${package.path}${package.bin.name}" todir="C:/desenvolvimento/projetos/unb-ceam/projeto/WebContent/WEB-INF/lib/"/>
 	</target>
 
 </project>

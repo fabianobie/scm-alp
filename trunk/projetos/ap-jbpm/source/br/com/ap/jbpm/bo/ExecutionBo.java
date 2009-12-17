@@ -20,7 +20,8 @@ import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
  * @author adriano.pamplona
  */
 @Component
-public class ExecutionBo extends CrudBoAbstrato<ExecutionImpl> {
+public class ExecutionBo extends JBPMBoAbstrato<ExecutionImpl> {
+
 	@Resource(name = "executionDaoImpl")
 	private ExecutionDao	executionDao;
 
@@ -36,13 +37,13 @@ public class ExecutionBo extends CrudBoAbstrato<ExecutionImpl> {
 		ProcessInstance resultado = null;
 
 		if (isReferencia(processDefinition)) {
-			resultado = getDao().iniciarProcesso(processDefinition);
+			resultado = getCrudDao().iniciarProcesso(processDefinition);
 		}
 		return resultado;
 	}
 
 	@Override
-	protected ExecutionDao getDao() {
+	protected ExecutionDao getCrudDao() {
 		return executionDao;
 	}
 

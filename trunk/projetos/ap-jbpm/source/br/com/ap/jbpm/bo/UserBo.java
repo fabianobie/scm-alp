@@ -19,7 +19,7 @@ import br.com.ap.jbpm.decorator.UserDecorator;
  * @author adriano.pamplona
  */
 @Component
-public class UserBo extends CrudBoAbstrato<UserImpl> {
+public class UserBo extends JBPMBoAbstrato<UserImpl> {
 	@Resource(name = "userDaoImpl")
 	private UserDao	userDao;
 
@@ -49,7 +49,7 @@ public class UserBo extends CrudBoAbstrato<UserImpl> {
 		UserDecorator resultado = null;
 
 		if (isReferencia(user)) {
-			UserDecorator temp = getDao().obterUsuarioPeloNome(user);
+			UserDecorator temp = getCrudDao().obterUsuarioPeloNome(user);
 
 			if (isReferencia(temp) && isReferencia(temp.getGivenName())) {
 				resultado = temp;
@@ -59,7 +59,7 @@ public class UserBo extends CrudBoAbstrato<UserImpl> {
 	}
 
 	@Override
-	protected UserDao getDao() {
+	protected UserDao getCrudDao() {
 		return userDao;
 	}
 }
