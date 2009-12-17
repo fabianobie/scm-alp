@@ -1,6 +1,6 @@
 <#setting locale="pt_BR">
 /*
- * ${pojo.getDeclarationName()}Dao.java
+ * ${pojo.getDeclarationName()}DaoImpl.java
  * 
  * Data de criação: ${date?string("dd/MM/yyyy")}
  */

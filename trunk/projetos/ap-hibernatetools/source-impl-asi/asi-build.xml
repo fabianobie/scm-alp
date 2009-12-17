@@ -3,7 +3,7 @@
 	<property file="asi-build.properties"/>
 	<property name="var.is.gerar.entidade.${is.gerar.entidade}" value="true"/>
 	<property name="var.is.gerar.dao.interface.${is.gerar.dao.interface}" value="true"/>
-	<property name="var.is.gerar.dao.impl.${is.gerar.dao.interface}" value="true"/>
+	<property name="var.is.gerar.dao.impl.${is.gerar.dao.impl}" value="true"/>
 	<property name="var.is.gerar.bo.${is.gerar.bo}" value="true"/>
 	<property name="var.is.gerar.jpa.do.hbm.${is.gerar.jpa.do.hbm}" value="true"/>
 
@@ -40,12 +40,13 @@
 	<target name="gerar-entidade" if="var.is.gerar.entidade.true">
 		<hibernatetool destdir="${path.destino.root}">
 			<classpath refid="classpath"/>
+			<property key="hibernatetool.util.toolclass" value="${entidade.util}"/>
 			
 			<jdbcconfiguration 
 				configurationfile="${path.arquivo.hibernate}" 
 				packagename="${entidade.pacote}"
-				detectmanytomany="true"
 				revengfile="${path.arquivo.revengfile}"
+				detectmanytomany="true"
 				reversestrategy="${classe.reversestrategy}"
 			/>
 			
@@ -57,8 +58,6 @@
 				
 				<property key="jdk5" 				value="true" />
 				<property key="ejb3" 				value="true" />
-				<property key="var_superclasse" 	value="${entidade.var_superclasse}"/>
-				<property key="var_superinterface" 	value="${entidade.var_superinterface}"/>
 			</hbmtemplate>
 		</hibernatetool>
 	</target>
@@ -66,12 +65,13 @@
 	<target name="gerar-dao-interface" if="var.is.gerar.dao.interface.true">
 		<hibernatetool destdir="${path.destino.root}">
 			<classpath refid="classpath"/>
+			<property key="hibernatetool.util.toolclass" value="${dao.util}"/>
 			
 			<jdbcconfiguration 
 				configurationfile="${path.arquivo.hibernate}" 
 				packagename="${dao.pacote}"
-				detectmanytomany="true"
 				revengfile="${path.arquivo.revengfile}"
+				detectmanytomany="true"
 				reversestrategy="${classe.reversestrategy}"
 			/>
 			
@@ -93,12 +93,13 @@
 	<target name="gerar-dao-impl" if="var.is.gerar.dao.impl.true">
 		<hibernatetool destdir="${path.destino.root}">
 			<classpath refid="classpath"/>
+			<property key="hibernatetool.util.toolclass" value="${dao.impl.util}"/>
 			
 			<jdbcconfiguration 
 				configurationfile="${path.arquivo.hibernate}" 
 				packagename="${dao.impl.pacote}"
-				detectmanytomany="true"
 				revengfile="${path.arquivo.revengfile}"
+				detectmanytomany="true"
 				reversestrategy="${classe.reversestrategy}"
 			/>
 			
@@ -121,25 +122,26 @@
 	<target name="gerar-bo" if="var.is.gerar.bo.true">
 		<hibernatetool destdir="${path.destino.root}">
 			<classpath refid="classpath"/>
+			<property key="hibernatetool.util.toolclass" value="${bo.util}"/>
 			
 			<jdbcconfiguration 
 				configurationfile="${path.arquivo.hibernate}" 
 				packagename="${bo.pacote}"
-				detectmanytomany="true"
 				revengfile="${path.arquivo.revengfile}"
+				detectmanytomany="true"
 				reversestrategy="${classe.reversestrategy}"
 			/>
 			
 			<hbmtemplate 
 				templateprefix="${bo.templateprefix}"
 				template="${bo.template}"
-				filepattern="{package-name}/{class-name}.java"
+				filepattern="{package-name}/{class-name}${bo.var_sufixo_classe}.java"
 				exporterclass="${bo.exporterclass}">
 				
 				<property key="jdk5" 				value="true" />
 				<property key="ejb3" 				value="true" />
+				<property key="var_sufixo_classe" 	value="${bo.var_sufixo_classe}" />
 				<property key="var_superclasse" 	value="${bo.var_superclasse}"/>
-				<property key="var_superinterface" 	value="${bo.var_superinterface}"/>
 				<property key="var_pacote_dao" 		value="${bo.var_pacote_dao}"/>
 				<property key="var_pacote_entidade" value="${bo.var_pacote_entidade}"/>
 			</hbmtemplate>
@@ -149,6 +151,7 @@
 	<target name="gerar-jpa-do-hbm" if="var.is.gerar.jpa.do.hbm.true"> 
 		<hibernatetool destdir="${path.destino.root}"> 
 			<classpath refid="classpath"/>
+			<property key="hibernatetool.util.toolclass" value="${hbm2jpa.util}"/>
 			
 			<configuration> 
 				<fileset dir="${path.source.hbm}"> 

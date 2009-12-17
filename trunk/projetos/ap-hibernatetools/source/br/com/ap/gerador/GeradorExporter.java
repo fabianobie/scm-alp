@@ -5,6 +5,7 @@
  */
 package br.com.ap.gerador;
 
+import org.hibernate.tool.hbm2x.Cfg2HbmTool;
 import org.hibernate.tool.hbm2x.Cfg2JavaTool;
 import org.hibernate.tool.hbm2x.POJOExporter;
 
@@ -20,4 +21,12 @@ public class GeradorExporter extends POJOExporter {
 	public Cfg2JavaTool getCfg2JavaTool() {
 		return new GeradorCfg2JavaTool();
 	}
+
+	/**
+	 * @see org.hibernate.tool.hbm2x.AbstractExporter#getCfg2HbmTool()
+	 */
+	public Cfg2HbmTool getCfg2HbmTool() {
+		return new GeradorCfg2HbmTool();
+	}
+
 }

@@ -45,15 +45,15 @@ public class GeradorEntityPojoClass extends EntityPOJOClass {
 		}
 		return resultado;
 	}
-
+	
 	@Override
 	public String getImplementsDeclaration() {
 		String resultado = StringFactory.getInstancia().novaString();
 		String implementz = getImplements();
+		implementz = UtilString.remover(implementz, Serializable.class.getName());
+		implementz = UtilString.trim(implementz);
+		
 		if (!UtilString.isVazio(implementz)) {
-			if (UtilString.isTemString(implementz, ",")) {
-				implementz = UtilString.remover(implementz, Serializable.class.getName());
-			}
 			resultado = "implements " + importType(implementz);
 		}
 		return resultado;

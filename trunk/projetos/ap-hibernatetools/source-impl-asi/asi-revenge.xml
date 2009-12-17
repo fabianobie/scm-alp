@@ -38,5 +38,26 @@
 			<set property="amparosLegaisFilhos" />
 		</foreign-key>
 	</table>
+	<table name="anexo">
+		<meta attribute="meta-byteArray">
+			@org.hibernate.annotations.Type(type = "br.com.linkdata.entity.BlobUserType")
+		</meta>
+		<column name="nm_anexo" property="nmArquivo" />
+		<column name="byte_array" property="btArray" />
+		<column name="dt_anexo" property="dtUpload" />
+	</table>
+	<table name="apelido_material">
+		<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+		<meta attribute="implements"><![CDATA[java.lang.Comparable<ApelidoMaterial>]]></meta>
+		<meta attribute="class-code">
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(ApelidoMaterial o) {
+		return apelido.compareTo(o.apelido);
+	}
+		</meta>
+		<column name="ds_apelido" property="apelido" />
+	</table>
 <!-- FIM RELAÇÃO DE TABELAS ################################################################### -->
 </hibernate-reverse-engineering>

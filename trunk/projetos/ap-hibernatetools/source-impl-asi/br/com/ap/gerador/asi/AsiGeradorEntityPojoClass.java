@@ -15,12 +15,14 @@ import org.hibernate.id.MultipleHiLoPerTableGenerator;
 import org.hibernate.id.PersistentIdentifierGenerator;
 import org.hibernate.mapping.Component;
 import org.hibernate.mapping.KeyValue;
+import org.hibernate.mapping.MetaAttribute;
 import org.hibernate.mapping.PersistentClass;
 import org.hibernate.mapping.Property;
 import org.hibernate.mapping.SimpleValue;
 import org.hibernate.tool.hbm2x.Cfg2JavaTool;
 import org.hibernate.util.StringHelper;
 
+import br.com.ap.comum.fabrica.StringFactory;
 import br.com.ap.comum.string.UtilString;
 import br.com.ap.gerador.GeradorEntityPojoClass;
 
@@ -44,63 +46,18 @@ public class AsiGeradorEntityPojoClass extends GeradorEntityPojoClass {
 		super(clazz, cfg);
 		this.clazz = clazz;
 	}
-	
-	public String getExtendsDeclaration() {
-		String extendz = getExtends();
-		if ( extendz == null || extendz.trim().length() == 0 ) {
-			return "";
+
+	public String generateMetaColumn(Property property) {
+		StringBuffer resultado = StringFactory.getInstancia().novoStringBuffer();
+		String metaName = "meta-"+ property.getName();
+		
+		MetaAttribute meta = clazz.getMetaAttribute(metaName);
+		if (meta != null) {
+			String valor = meta.getValue();
+			resultado.append(UtilString.trim(valor));
 		}
-		else {
-			return "extends " + importType(extendz);
-		}
+		return resultado.toString();
 	}
-
-	public String getImplementsDeclaration() {
-		String implementz = getImplements();
-		if ( implementz == null || implementz.trim().length() == 0 ) {
-			return "";
-		}
-		else {
-			return "implements " + importType(implementz);
-		}
-	}
-	
-	public String getImplements() {
-		List interfaces = new ArrayList();
-
-		//			implement proxy, but NOT if the proxy is the class it self!
-		if ( clazz.getProxyInterfaceName() != null && ( !clazz.getProxyInterfaceName().equals( clazz.getClassName() ) ) ) {
-			interfaces.add( clazz.getProxyInterfaceName() );
-		}
-
-		if ( !isInterface() ) {
-			if ( clazz.getSuperclass() != null && c2j.getPOJOClass(clazz.getSuperclass()).isInterface() ) {
-				interfaces.add( clazz.getSuperclass().getClassName() );
-			}
-			if ( clazz.getMetaAttribute( IMPLEMENTS ) != null ) {
-				interfaces.addAll( clazz.getMetaAttribute( IMPLEMENTS ).getValues() );
-			}
-		}
-		else {
-			// interfaces can't implement suff
-		}
-
-
-		if ( interfaces.size() > 0 ) {
-			StringBuffer sbuf = new StringBuffer();
-			for ( Iterator iter = interfaces.iterator(); iter.hasNext() ; ) {
-				//sbuf.append(JavaTool.shortenType(iter.next().toString(), pc.getImports() ) );
-				sbuf.append( iter.next() );
-				if ( iter.hasNext() ) sbuf.append( "," );
-			}
-			return sbuf.toString();
-		}
-		else {
-			return null;
-		}
-	}
-
-
 	public String generateAnnIdGenerator() {
 		KeyValue identifier = clazz.getIdentifier();
 		String strategy = null;

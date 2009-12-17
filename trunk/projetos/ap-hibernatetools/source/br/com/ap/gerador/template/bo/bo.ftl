@@ -1,6 +1,6 @@
 <#setting locale="pt_BR">
 /*
- * ${pojo.getDeclarationName()}Bo.java
+ * ${pojo.getDeclarationName()}${var_sufixo_classe}.java
  * 
  * Data de criação: ${date?string("dd/MM/yyyy")}
  */
@@ -18,28 +18,24 @@ ${pojo.getPackageDeclaration()}
 <#if ejb3>
 @${pojo.importType("org.springframework.stereotype.Component")}
 </#if>
-public class ${pojo.getDeclarationName()}Bo extends ${pojo.importType("${var_superclasse}")}<${pojo.importType("${entidade}")}> {
+public class ${pojo.getDeclarationName()}${var_sufixo_classe} extends ${pojo.importType("${var_superclasse}")}<${pojo.importType("${entidade}")}> {
 	
 	@${pojo.importType("javax.annotation.Resource")}(name = "${var_atributo_entidade}DaoImpl")
-	private ${pojo.getDeclarationName()}Dao	dao;
+	private ${pojo.getDeclarationName()}Dao	crudDao;
 	
 	/**
 	 * Construtor default para rentringir a criação desta classe somente a este
 	 * pacote.
 	 */
-	${pojo.getDeclarationName()}Bo() {
-		// Construtor default
+	${pojo.getDeclarationName()}${var_sufixo_classe}() {
+		// Construtor padrão
 	}
 	
-	/**
-	 * @see br.jus.stj.alp01.arquitetura.negocio.bo.BO#getDao()
-	 */
 	@Override
-	protected ${pojo.importType("${var_pacote_dao}.${pojo.getDeclarationName()}Dao")} getDao() {
-		return dao;
+	protected ${pojo.importType("${var_pacote_dao}.${pojo.getDeclarationName()}Dao")} getCrudDao() {
+		return crudDao;
 	}
 }
 </#assign>
-import ${entidade};
 ${pojo.generateImports()}
 ${classbody}

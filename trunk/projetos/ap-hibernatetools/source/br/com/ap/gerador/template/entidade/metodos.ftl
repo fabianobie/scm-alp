@@ -3,8 +3,6 @@
 <#if property.equals(clazz.identifierProperty)>
 	/**
 	 * @return O identificador desta entidade
-	 *
-	 * @see ${var_superinterface}#getIdentificador()
 	 */
 	public ${pojo.importType("java.io.Serializable")} getIdentificador() {
 		return getId();
