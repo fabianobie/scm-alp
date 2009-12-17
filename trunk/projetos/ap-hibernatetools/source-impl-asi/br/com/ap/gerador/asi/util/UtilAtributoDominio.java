@@ -7,14 +7,11 @@ package br.com.ap.gerador.asi.util;
 
 import java.util.Map;
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.hibernate.cfg.reveng.ReverseEngineeringStrategyUtil;
 import org.hibernate.cfg.reveng.TableIdentifier;
 
 import br.com.ap.comum.arquivo.UtilCarregarMapaDeString;
-import br.com.ap.comum.constante.EL;
 import br.com.ap.comum.fabrica.ArquivoFactory;
 import br.com.ap.comum.fabrica.ColecaoFactory;
 import br.com.ap.comum.objeto.UtilObjeto;
