@@ -3,6 +3,7 @@
 	<classpathentry kind="src" output="source" path="source"/>
 	<classpathentry kind="src" output="source-gerado" path="source-gerado"/>
 	<classpathentry kind="src" output="source-impl-asi" path="source-impl-asi"/>
+	<classpathentry kind="src" output="source-impl-ceam" path="source-impl-ceam"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ANT_LIB"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/ap-arquitetura"/>
@@ -26,7 +27,6 @@
 	<classpathentry kind="lib" path="build/lib/hibernate-annotations.jar"/>
 	<classpathentry kind="lib" path="build/lib/hibernate-commons-annotations.jar"/>
 	<classpathentry kind="lib" path="build/lib/hibernate-entitymanager.jar"/>
-	<classpathentry kind="lib" path="build/lib/hibernate-tools.jar"/>
 	<classpathentry kind="lib" path="build/lib/hibernate-validator.jar"/>
 	<classpathentry kind="lib" path="build/lib/hibernate3.jar"/>
 	<classpathentry kind="lib" path="build/lib/jaas.jar"/>
@@ -46,5 +46,6 @@
 	<classpathentry kind="lib" path="build/lib-externa/mysql-connector-java-3.0.15-ga-bin.jar"/>
 	<classpathentry kind="lib" path="build/lib-externa/postgresql-8.3-603.jdbc4.jar"/>
 	<classpathentry kind="lib" path="build/lib-externa/spring-2.5.4.jar"/>
+	<classpathentry kind="lib" path="build/lib/hibernate-tools.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
