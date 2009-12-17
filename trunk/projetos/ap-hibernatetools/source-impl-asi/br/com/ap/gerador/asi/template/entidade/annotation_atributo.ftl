@@ -13,6 +13,8 @@ ${pojo.generateJoinColumnsAnnotation(property, cfg)}
 <#assign anotacoes_de_coluna>
 <#if !pojo.generateBasicAnnotation(property).trim().equals("")>${pojo.generateBasicAnnotation(property)}</#if>
 <#if !pojo.generateAnnColumnAnnotation(property).trim().equals("")>${pojo.generateAnnColumnAnnotation(property)}</#if>
+	${util.generateMetaColumn(clazz, property)}
+
 </#assign>
 	${anotacoes_de_coluna?trim}
 </#if>

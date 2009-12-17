@@ -7,6 +7,5 @@
 @${pojo.importType("org.jboss.seam.annotations.AutoCreate")}
 @${pojo.importType("org.jboss.seam.annotations.Name")}("${pojo.obterNomePadraoJava()?trim}")
 @${pojo.importType("org.jboss.seam.annotations.Scope.Scope")}(${pojo.importType("org.jboss.seam.ScopeType")}.CONVERSATION)
-<#assign uniqueConstraint=pojo.generateAnnTableUniqueConstraint()>
 </#if>
 </#if>
