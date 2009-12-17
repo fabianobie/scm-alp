@@ -21,6 +21,7 @@ public class AsiGeradorCfg2JavaTool extends GeradorCfg2JavaTool {
 	/**
 	 * @see org.hibernate.tool.hbm2x.Cfg2JavaTool#getPOJOClass(org.hibernate.mapping.PersistentClass)
 	 */
+	@Override
 	public POJOClass getPOJOClass(PersistentClass comp) {		
 		return new AsiGeradorEntityPojoClass(comp, this);
 	}
