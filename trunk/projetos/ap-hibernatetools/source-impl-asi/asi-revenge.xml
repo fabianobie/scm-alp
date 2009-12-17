@@ -16,6 +16,7 @@
 		<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
 	</table-filter>
 
+<!-- RELAÇÃO DE TABELAS ####################################################################### -->
 	<table name="abrangencia">
 		<meta attribute="extends">br.com.linkdata.domain.ElementoDeDominio</meta>
 	</table>
@@ -32,12 +33,10 @@
 		<column name="vl_km_referenciada" property="quilometragemReferenciada" />
 	</table>
 	<table name="amparo_legal">
-		<!--
-		<foreign-key foreign-table="amparo_legal">
-			<column-ref local-column="id_amparo" foreign-column="id_amparo" />
+		<foreign-key constraint-name="fk_amparolegalfilhos_al">
 			<many-to-one property="amparoLegalPai" />
+			<set property="amparosLegaisFilhos" />
 		</foreign-key>
-		-->
 	</table>
-
+<!-- FIM RELAÇÃO DE TABELAS ################################################################### -->
 </hibernate-reverse-engineering>
