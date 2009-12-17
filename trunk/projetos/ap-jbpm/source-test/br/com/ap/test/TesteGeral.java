@@ -5,7 +5,7 @@
  */
 package br.com.ap.test;
 
-import br.com.ap.test.jbpm.deploy.solicitardemanda.SolicitarDemandaTest;
+import br.com.ap.test.jbpm.processo.solicitardemanda.SolicitarDemandaTest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
