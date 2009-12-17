@@ -21,6 +21,7 @@ public class GeradorCfg2JavaTool extends Cfg2JavaTool {
 	/**
 	 * @see org.hibernate.tool.hbm2x.Cfg2JavaTool#getPOJOClass(org.hibernate.mapping.PersistentClass)
 	 */
+	@Override
 	public POJOClass getPOJOClass(PersistentClass comp) {
 		return new GeradorEntityPojoClass(comp, this);
 	}
@@ -28,6 +29,7 @@ public class GeradorCfg2JavaTool extends Cfg2JavaTool {
 	/**
 	 * @see org.hibernate.tool.hbm2x.Cfg2JavaTool#getPOJOClass(org.hibernate.mapping.Component)
 	 */
+	@Override
 	public POJOClass getPOJOClass(Component comp) {
 		return new GeradorComponentPojoClass(comp, this);
 	}
