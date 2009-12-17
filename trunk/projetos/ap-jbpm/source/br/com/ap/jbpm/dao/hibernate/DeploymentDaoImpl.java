@@ -46,7 +46,6 @@ public class DeploymentDaoImpl extends JBPMDaoAbstrato<DeploymentImpl> implement
 
 		NewDeployment novoDeploy = repositoryService.createDeployment();
 		novoDeploy.addResourceFromClasspath(deployment.getClasspathJpdl());
-		novoDeploy.addResourceFromClasspath(deployment.getClasspathImagem());
 		for (String formulario : deployment.getColecaoClasspathFormulario()) {
 			novoDeploy.addResourceFromClasspath(formulario);
 		}

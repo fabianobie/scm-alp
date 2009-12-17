@@ -18,7 +18,6 @@ public class DeploymentDecorator extends JbpmDecoratorAbstrato {
 	private Deployment			deployment;
 	private String				id;
 	private String				classpathJpdl;
-	private String				classpathImagem;
 	private Collection<String>	colecaoClasspathFormulario;
 
 	/**
@@ -93,20 +92,6 @@ public class DeploymentDecorator extends JbpmDecoratorAbstrato {
 	 */
 	public void setClasspathJpdl(String classpathJpdl) {
 		this.classpathJpdl = classpathJpdl;
-	}
-
-	/**
-	 * @return retorna classpathImagem.
-	 */
-	public String getClasspathImagem() {
-		return classpathImagem;
-	}
-
-	/**
-	 * @param classpathImagem Atribui classpathImagem.
-	 */
-	public void setClasspathImagem(String classpathImagem) {
-		this.classpathImagem = classpathImagem;
 	}
 
 	/**

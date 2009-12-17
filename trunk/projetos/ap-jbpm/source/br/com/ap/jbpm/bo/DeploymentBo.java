@@ -30,7 +30,7 @@ import br.com.ap.jbpm.decorator.TaskDecorator;
  * @author adriano.pamplona
  */
 @Component
-public class DeploymentBo extends CrudBoAbstrato<DeploymentImpl> {
+public class DeploymentBo extends JBPMBoAbstrato<DeploymentImpl> {
 
 	@Resource(name = "deploymentDaoImpl")
 	private DeploymentDao	deploymentDao;
@@ -46,7 +46,7 @@ public class DeploymentBo extends CrudBoAbstrato<DeploymentImpl> {
 
 		if (isReferencia(deployment) && !isVazio(deployment.getClasspathJpdl())) {
 
-			resultado = getDao().publicar(deployment);
+			resultado = getCrudDao().publicar(deployment);
 		}
 		return resultado;
 	}
@@ -58,7 +58,7 @@ public class DeploymentBo extends CrudBoAbstrato<DeploymentImpl> {
 	 */
 	public Collection<ProcessDefinition> consultarDefinicaoDeProcesso() {
 
-		return getDao().consultarDefinicaoDeProcesso();
+		return getCrudDao().consultarDefinicaoDeProcesso();
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class DeploymentBo extends CrudBoAbstrato<DeploymentImpl> {
 
 		if (isReferencia(processDefinition) && !isVazio(processDefinition.getId())) {
 
-			resultado = getDao().obterDefinicaoDeProcesso(processDefinition);
+			resultado = getCrudDao().obterDefinicaoDeProcesso(processDefinition);
 		}
 		return resultado;
 	}
@@ -105,7 +105,7 @@ public class DeploymentBo extends CrudBoAbstrato<DeploymentImpl> {
 		TaskDecorator resultado = null;
 
 		if (isReferencia(deployment, task)) {
-			resultado = getDao().obterFormulario(deployment, task);
+			resultado = getCrudDao().obterFormulario(deployment, task);
 		}
 		return resultado;
 	}
@@ -123,7 +123,7 @@ public class DeploymentBo extends CrudBoAbstrato<DeploymentImpl> {
 		if (isReferencia(deployment, task)) {
 			DeploymentDecorator deploymentDecorator = novoDeploymentDecorator(deployment);
 			TaskDecorator taskDecorator = novoTaskDecorator(task);
-			resultado = getDao().obterFormulario(deploymentDecorator, taskDecorator);
+			resultado = getCrudDao().obterFormulario(deploymentDecorator, taskDecorator);
 		}
 		return resultado;
 	}
@@ -141,7 +141,7 @@ public class DeploymentBo extends CrudBoAbstrato<DeploymentImpl> {
 		Deployment deployment = obter(process.getDeploymentId());
 
 		DeploymentDecorator deploymentDecorator = novoDeploymentDecorator(deployment);
-		return getDao().obterFormularioInicial(deploymentDecorator, processDefinition, activity);
+		return getCrudDao().obterFormularioInicial(deploymentDecorator, processDefinition, activity);
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class DeploymentBo extends CrudBoAbstrato<DeploymentImpl> {
 		Deployment deployment = obter(process.getDeploymentId());
 
 		DeploymentDecorator deploymentDecorator = novoDeploymentDecorator(deployment);
-		return getDao()
+		return getCrudDao()
 				.obterNomeFormularioInicial(deploymentDecorator, processDefinition, activity);
 	}
 
@@ -169,13 +169,13 @@ public class DeploymentBo extends CrudBoAbstrato<DeploymentImpl> {
 	 */
 	public ActivityDecorator obterNomeAtividadeStart(ProcessDefinitionDecorator processDefinition) {
 
-		List<String> atividades = getDao().obterNomesAtividadeStart(processDefinition);
+		List<String> atividades = getCrudDao().obterNomesAtividadeStart(processDefinition);
 		String atividade = UtilColecao.getElementoDoIndice(atividades, 0);
 		return getDecoratorFactory().novaActivityDecorator(atividade);
 	}
 
 	@Override
-	protected DeploymentDao getDao() {
+	protected DeploymentDao getCrudDao() {
 		return deploymentDao;
 	}
 

@@ -36,7 +36,7 @@ import br.com.ap.jbpm.util.UtilConversor;
  * @author adriano.pamplona
  */
 @Component
-public class TaskBo extends CrudBoAbstrato<TaskImpl> {
+public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 
 	@Resource(name = "taskDaoImpl")
 	private TaskDao			taskDao;
@@ -58,7 +58,7 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 
 		Collection<TaskDecorator> resultado = null;
 		if (isReferencia(user)) {
-			Collection<Task> tasks = getDao().consultarTarefa(user);
+			Collection<Task> tasks = getCrudDao().consultarTarefa(user);
 			resultado = UtilConversor.converter(tasks);
 			consultarProcessDefinitionEVariables(resultado);
 		}
@@ -78,7 +78,7 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 
 		Collection<TaskDecorator> resultado = null;
 		if (isReferencia(user, processDefinition)) {
-			Collection<Task> tasks = getDao().consultarTarefa(user, processDefinition);
+			Collection<Task> tasks = getCrudDao().consultarTarefa(user, processDefinition);
 			resultado = UtilConversor.converter(tasks);
 			consultarProcessDefinitionEVariables(resultado);
 		}
@@ -93,7 +93,7 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 	public void salvarTarefa(TaskDecorator task) {
 
 		if (isReferencia(task)) {
-			getDao().salvarTarefa(task);
+			getCrudDao().salvarTarefa(task);
 		}
 	}
 
@@ -106,7 +106,7 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 	public void cancelarTarefa(TaskDecorator task) {
 
 		if (isReferencia(task)) {
-			getDao().cancelarTarefa(task);
+			getCrudDao().cancelarTarefa(task);
 		}
 	}
 
@@ -119,7 +119,7 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 	public void completarTarefa(TaskDecorator task) {
 
 		if (isReferencia(task)) {
-			getDao().completarTarefa(task);
+			getCrudDao().completarTarefa(task);
 		}
 	}
 
@@ -133,7 +133,7 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 
 		TaskDecorator resultado = null;
 		if (UtilObjeto.isReferencia(task)) {
-			Task tarefa = getDao().obter(task.getId());
+			Task tarefa = getCrudDao().obter(task.getId());
 			Deployment deployment = obterDeployment(tarefa);
 
 			resultado = deploymentBo.obterFormulario(deployment, tarefa);
@@ -223,7 +223,7 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 		Map<String, Object> resultado = null;
 
 		if (isReferencia(task)) {
-			resultado = getDao().obterVariables(task);
+			resultado = getCrudDao().obterVariables(task);
 		}
 		return resultado;
 	}
@@ -240,7 +240,7 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 		Map<String, String> resultado = null;
 
 		if (isReferencia(task)) {
-			Map<String, Object> mapa = getDao().obterVariables(task);
+			Map<String, Object> mapa = getCrudDao().obterVariables(task);
 			Set<String> keys = mapa.keySet();
 			Iterator<String> iterator = getColecaoFactory().novoIterator(keys);
 
@@ -346,7 +346,7 @@ public class TaskBo extends CrudBoAbstrato<TaskImpl> {
 	}
 
 	@Override
-	protected TaskDao getDao() {
+	protected TaskDao getCrudDao() {
 		return taskDao;
 	}
 }
