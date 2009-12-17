@@ -5,9 +5,15 @@
  */
 package br.com.ap.gerador;
 
+import java.io.Serializable;
+import java.util.List;
+
 import org.hibernate.mapping.PersistentClass;
 import org.hibernate.tool.hbm2x.Cfg2JavaTool;
 import org.hibernate.tool.hbm2x.pojo.EntityPOJOClass;
+
+import br.com.ap.comum.fabrica.StringFactory;
+import br.com.ap.comum.string.UtilString;
 
 /**
  * Classe responsável pela geração de código.
@@ -15,7 +21,9 @@ import org.hibernate.tool.hbm2x.pojo.EntityPOJOClass;
  * @author adriano.pamplona
  */
 public class GeradorEntityPojoClass extends EntityPOJOClass {
-
+	@SuppressWarnings("unused")
+	private PersistentClass clazz;
+	
 	/**
 	 * Construtor.
 	 * 
@@ -24,5 +32,52 @@ public class GeradorEntityPojoClass extends EntityPOJOClass {
 	 */
 	public GeradorEntityPojoClass(PersistentClass clazz, Cfg2JavaTool cfg) {
 		super(clazz, cfg);
+		this.clazz = clazz;
 	}
+
+
+	@Override
+	public String getExtendsDeclaration() {
+		String resultado = StringFactory.getInstancia().novaString();
+		String extendz = getExtends();
+		if (!UtilString.isVazio(extendz)) {
+			resultado = "extends " + importType(extendz);
+		}
+		return resultado;
+	}
+
+	@Override
+	public String getImplementsDeclaration() {
+		String resultado = StringFactory.getInstancia().novaString();
+		String implementz = getImplements();
+		if (!UtilString.isVazio(implementz)) {
+			if (UtilString.isTemString(implementz, ",")) {
+				implementz = UtilString.remover(implementz, Serializable.class.getName());
+			}
+			resultado = "implements " + importType(implementz);
+		}
+		return resultado;
+	}
+	
+	@Override
+	public String importType(String classe) {
+		StringBuffer resultado = StringFactory.getInstancia().novoStringBuffer();
+		
+		if (UtilString.isTemString(classe, ",")) {
+			List<String> classes = UtilString.split(classe, ",");
+			for (String classeTemp : classes) {
+				classeTemp = UtilString.trim(classeTemp);
+				resultado.append(super.importType(classeTemp)).append(",");
+			}
+			
+			if (resultado.length() > 1) {
+				resultado.deleteCharAt(resultado.length()-1);
+			}
+		} else {
+			resultado.append(super.importType(classe));
+		}
+		return resultado.toString();
+	}
+
+	
 }
