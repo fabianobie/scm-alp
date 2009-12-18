@@ -4,34 +4,48 @@
 	"http://struts.apache.org/dtds/struts-2.1.dtd">
 
 <struts>
-    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
-    <constant name="struts.devMode" value="false" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<constant name="struts.devMode" value="false" />
 	<constant name="struts.custom.i18n.resources" value="mensagens" />
-	
-    <package name="struts-teste" namespace="/" extends="struts-default">
-    	<global-results>
-            <result name="erro">/jsp/excecao/erro.jsp</result>
-        </global-results>
-    	<global-exception-mappings>
-            <exception-mapping exception="teste.action.excecao.SystemException" result="erro"/>
-            <exception-mapping exception="teste.action.excecao.BusinessException" result="erro" />
-        </global-exception-mappings>
-    	
-        <action name="Principal" class="teste.action.PrincipalAction">
-            <result name="principal">/jsp/principal.jsp</result>
-        </action>
-        <action name="Excecao!*" class="teste.action.excecao.ExcecaoAction">
-            <result name="excecao">/jsp/excecao/excecao.jsp</result>
-        </action>
-        <action name="Mensagem!*" class="teste.action.mensagem.MensagemAction">
-            <result name="mensagem">/jsp/mensagem/mensagem.jsp</result>
-        </action>
-        <action name="JQuery!*" class="teste.action.jquery.JQueryAction">
-            <result name="mascara">/jsp/jquery/mascara.jsp</result>
-            <result name="validacao">/jsp/jquery/validacao.jsp</result>
-        </action>
-        <action name="Validacao!*" class="teste.action.validacao.ValidacaoAction">
-            <result name="validacao">/jsp/validacao/validacao.jsp</result>
-        </action>
-    </package>
+
+	<package name="struts-teste" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="mapa-interceptor" class="teste.action.formdinamico.MapaInterceptor"/>
+			<interceptor-stack name="interceptor-stack-padrao">
+				<interceptor-ref name="defaultStack" />
+				<interceptor-ref name="mapa-interceptor" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="interceptor-stack-padrao" />
+
+		<global-results>
+			<result name="erro">/jsp/excecao/erro.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="teste.action.excecao.SystemException" result="erro" />
+			<exception-mapping exception="teste.action.excecao.BusinessException" result="erro" />
+		</global-exception-mappings>
+
+		<action name="Principal" class="teste.action.PrincipalAction">
+			<result name="principal">/jsp/principal.jsp</result>
+		</action>
+		<action name="Excecao!*" class="teste.action.excecao.ExcecaoAction">
+			<result name="excecao">/jsp/excecao/excecao.jsp</result>
+		</action>
+		<action name="Mensagem!*" class="teste.action.mensagem.MensagemAction">
+			<result name="mensagem">/jsp/mensagem/mensagem.jsp</result>
+		</action>
+		<action name="JQuery!*" class="teste.action.jquery.JQueryAction">
+			<result name="mascara">/jsp/jquery/mascara.jsp</result>
+			<result name="validacao">/jsp/jquery/validacao.jsp</result>
+		</action>
+		<action name="Validacao!*" class="teste.action.validacao.ValidacaoAction">
+			<result name="validacao">/jsp/validacao/validacao.jsp</result>
+		</action>
+		<action name="FormDinamico!*" class="teste.action.formdinamico.FormDinamicoAction">
+			<result name="form-dinamico">/jsp/form-dinamico/form-dinamico.jsp</result>
+			<result name="form-dinamico-resultado">/jsp/form-dinamico/form-dinamico-resultado.jsp</result>
+		</action>
+	</package>
 </struts>
