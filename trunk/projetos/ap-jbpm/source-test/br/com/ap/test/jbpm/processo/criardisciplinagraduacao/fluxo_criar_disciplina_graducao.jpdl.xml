@@ -17,24 +17,12 @@
    <task candidate-groups="#{nucleo_solicitante}" g="344,7,181,52" name="task_encamiha_proposta" form="criardisciplinagraduacao/taskform-encaminhar_proposta_comissao_graduacao_">
       <transition to="task_analisar_proposta"/>
    </task>
-   <decision expr="#{pendencias}" g="801,15,48,48" name="possui_pendencia">
-      <transition g="10,-15" name="possui_pendencia_sim" to="task_providencia_pendencias"/>
-      <transition g="962,39;962,197:-90,-96" name="possui_pendencia_nao" to="task_direcao_ceam_procedimentos"/>
-   </decision>
    <task assignee="#{nucleo_solicitante}" g="736,104,180,52" name="task_providencia_pendencias">
       <transition g="649,130:" to="task_analisar_proposta"/>
    </task>
    <task candidate-groups="direcao_ceam" g="99,167,216,52" name="task_direcao_ceam_procedimentos">
       <transition to="task_cg_emitir_parecer"/>
    </task>
-   <decision expr="#{cg_favoravel}" g="408,288,48,48" name="decisao_cg_parecer_favoravel">
-      <transition g="3,1" name="decisao_cg_parecer_favoravel_sim" to="decisao_possui_pendencia"/>
-      <transition g="-97,-18" name="decisao_cg_parecer_favoravel_nao" to="task_informa_parecer_desfavoravel"/>
-   </decision>
-   <decision g="411,388,48,48" name="decisao_possui_pendencia">
-      <transition g="626,412:-175,5" name="decisao_possui_pendencia_nao" to="task_secretaria_ceam_executa_providencias"/>
-      <transition g="214,412:22,2" name="decisao_possui_pendencia_sim" to="task_solucionar_pendencias"/>
-   </decision>
    <task g="107,546,217,52" name="task_solucionar_pendencias" form="criardisciplinagraduacao/taskform-resolver_pendencia_proposta">
       <transition to="task_secretaria_ceam_executa_providencias"/>
    </task>
@@ -42,5 +30,17 @@
    <task g="672,288,229,52" name="task_informa_parecer_desfavoravel">
       <transition g="-15,-23" name="fim" to="end1"/>
    </task>
+   <decision expr="#{valorDecisao}" g="801,15,48,48" name="possui_pendencia">
+      <transition g="10,-15" name="sim" to="task_providencia_pendencias"/>
+      <transition g="962,39;962,197:-90,-96" name="nao" to="task_direcao_ceam_procedimentos"/>
+   </decision>
+   <decision expr="#{valorDecisao}" g="408,288,48,48" name="decisao_cg_parecer_favoravel">
+      <transition g="3,1" name="sim" to="decisao_possui_pendencia"/>
+      <transition g="-97,-18" name="nao" to="task_informa_parecer_desfavoravel"/>
+   </decision>
+   <decision expr="#{valorDecisao}" g="411,388,48,48" name="decisao_possui_pendencia">
+      <transition g="214,412:22,2" name="sim" to="task_solucionar_pendencias"/>
+      <transition g="626,412:-175,5" name="nao" to="task_secretaria_ceam_executa_providencias" />
+   </decision>
    <end g="972,288,48,48" name="end1"/>
 </process>
