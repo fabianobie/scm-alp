@@ -112,6 +112,7 @@
 				<property key="jdk5" 						value="true" />
 				<property key="ejb3" 						value="true" />
 				<property key="var_sufixo_dao_interface" 	value="${dao.var_sufixo_classe}"/>
+				<property key="var_sufixo_classe" 			value="${dao.impl.var_sufixo_classe}"/>
 				<property key="var_superclasse" 			value="${dao.impl.var_superclasse}"/>
 				<property key="var_pacote_entidade" 		value="${dao.impl.var_pacote_entidade}"/>
 				<property key="var_pacote_interface_dao"	value="${dao.impl.var_pacote_interface_dao}"/>
@@ -138,12 +139,13 @@
 				filepattern="{package-name}/{class-name}${bo.var_sufixo_classe}.java"
 				exporterclass="${bo.exporterclass}">
 				
-				<property key="jdk5" 				value="true" />
-				<property key="ejb3" 				value="true" />
-				<property key="var_sufixo_classe" 	value="${bo.var_sufixo_classe}" />
-				<property key="var_superclasse" 	value="${bo.var_superclasse}"/>
-				<property key="var_pacote_dao" 		value="${bo.var_pacote_dao}"/>
-				<property key="var_pacote_entidade" value="${bo.var_pacote_entidade}"/>
+				<property key="jdk5" 					value="true" />
+				<property key="ejb3" 					value="true" />
+				<property key="var_sufixo_classe" 		value="${bo.var_sufixo_classe}" />
+				<property key="var_sufixo_classe_dao" 	value="${bo.var_sufixo_classe_dao}" />
+				<property key="var_superclasse" 		value="${bo.var_superclasse}"/>
+				<property key="var_pacote_dao" 			value="${bo.var_pacote_dao}"/>
+				<property key="var_pacote_entidade" 	value="${bo.var_pacote_entidade}"/>
 			</hbmtemplate>
 		</hibernatetool>
 	</target>

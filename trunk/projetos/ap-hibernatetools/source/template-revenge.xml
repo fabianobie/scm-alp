@@ -13,7 +13,7 @@
 
 	<table-filter match-name="jbpm4_.*" exclude="true" />
 	<table-filter match-name=".*">
-		<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+		<meta attribute="implements">br.com.ap.comum.javabean.entidade.Entidade</meta>
 	</table-filter>
 
 </hibernate-reverse-engineering>
