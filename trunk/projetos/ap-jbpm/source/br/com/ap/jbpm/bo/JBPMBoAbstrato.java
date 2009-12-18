@@ -12,8 +12,10 @@ import br.com.ap.arquitetura.negocio.CrudNegocioAbstrato;
 import br.com.ap.arquitetura.seguranca.ControladorDeAcesso;
 import br.com.ap.comum.estrategia.UtilEstrategiaDeFormatadores;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
+import br.com.ap.jbpm.decorator.GroupDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
+import br.com.ap.jbpm.decorator.UserDecorator;
 import br.com.ap.jbpm.factory.DecoratorFactory;
 import br.com.ap.jbpm.factory.EntidadeFactory;
 
@@ -70,7 +72,7 @@ public abstract class JBPMBoAbstrato<T> extends CrudNegocioAbstrato<T> {
 	protected DecoratorFactory getDecoratorFactory() {
 		return DecoratorFactory.getInstancia();
 	}
-	
+
 	/**
 	 * @return estratégia de formatadores
 	 */
@@ -81,5 +83,26 @@ public abstract class JBPMBoAbstrato<T> extends CrudNegocioAbstrato<T> {
 	@Override
 	protected ControladorDeAcesso novoControladorDeAcesso() {
 		return null;
+	}
+
+	/**
+	 * Retorna true se o grupo agregado tiver referência.
+	 * 
+	 * @param decorator GroupDecorator
+	 * @return true se o grupo agregado tiver referência.
+	 */
+	protected boolean isGrupoTemReferencia(GroupDecorator decorator) {
+		return isReferencia(decorator)
+				&& isReferencia(decorator.getGroupImpl());
+	}
+
+	/**
+	 * Retorna true se o usuário agregado tiver referência.
+	 * 
+	 * @param decorator UserDecorator
+	 * @return true se o usuário agregado tiver referência.
+	 */
+	protected boolean isUsuarioTemReferencia(UserDecorator decorator) {
+		return isReferencia(decorator) && isReferencia(decorator.getUserImpl());
 	}
 }

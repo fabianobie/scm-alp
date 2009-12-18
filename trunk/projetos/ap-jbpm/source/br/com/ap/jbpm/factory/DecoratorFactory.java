@@ -7,13 +7,15 @@ package br.com.ap.jbpm.factory;
 
 import org.jbpm.api.Deployment;
 import org.jbpm.api.ProcessDefinition;
-import org.jbpm.api.identity.User;
 import org.jbpm.api.task.Task;
+import org.jbpm.pvm.internal.identity.impl.GroupImpl;
+import org.jbpm.pvm.internal.identity.impl.UserImpl;
 import org.jbpm.pvm.internal.task.TaskImpl;
 
 import br.com.ap.jbpm.decorator.ActivityDecorator;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.ExecutionDecorator;
+import br.com.ap.jbpm.decorator.GroupDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.decorator.UserDecorator;
@@ -24,7 +26,7 @@ import br.com.ap.jbpm.decorator.UserDecorator;
  * @author adriano.pamplona
  */
 public final class DecoratorFactory {
-	private static DecoratorFactory instancia = new DecoratorFactory();
+	private static DecoratorFactory	instancia	= new DecoratorFactory();
 
 	/**
 	 * Construtor.
@@ -95,7 +97,8 @@ public final class DecoratorFactory {
 	 * @param processDefinition ProcessDefinition
 	 * @return ProcessDefinitionDecorator
 	 */
-	public ProcessDefinitionDecorator novoProcessDefinitionDecorator(ProcessDefinition processDefinition) {
+	public ProcessDefinitionDecorator novoProcessDefinitionDecorator(
+			ProcessDefinition processDefinition) {
 		ProcessDefinitionDecorator decorator = novoProcessDefinitionDecorator();
 		decorator.setProcessDefinition(processDefinition);
 		return decorator;
@@ -129,9 +132,9 @@ public final class DecoratorFactory {
 	 * @param user Usuário
 	 * @return UserDecorator
 	 */
-	public UserDecorator novoUserDecorator(User user) {
+	public UserDecorator novoUserDecorator(UserImpl user) {
 		UserDecorator decorator = novoUserDecorator();
-		decorator.setUser(user);
+		decorator.setUserImpl(user);
 		return decorator;
 	}
 
@@ -151,7 +154,7 @@ public final class DecoratorFactory {
 		decorator.setId(id);
 		return decorator;
 	}
-	
+
 	/**
 	 * @return ActivityDecorator
 	 */
@@ -168,5 +171,22 @@ public final class DecoratorFactory {
 		decorator.setName(nome);
 
 		return decorator;
+	}
+
+	/**
+	 * @param group group
+	 * @return GroupDecorator
+	 */
+	public GroupDecorator novoGroupDecorator(GroupImpl group) {
+		GroupDecorator decorator = novoGroupDecorator();
+		decorator.setGroupImpl(group);
+		return decorator;
+	}
+
+	/**
+	 * @return GroupDecorator
+	 */
+	public GroupDecorator novoGroupDecorator() {
+		return new GroupDecorator();
 	}
 }

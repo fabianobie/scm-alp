@@ -38,7 +38,7 @@ public class JBPMFacadeTest extends TestCase {
 	
 	public void testPublicar() {
 		DeploymentDecorator decorator = new DeploymentDecorator();
-		decorator.setClasspathJpdl("br/com/ap/test/jbpm/deploy/solicitardemanda/" +
+		decorator.setClasspathJpdl("br/com/ap/test/jbpm/processo/solicitardemanda/" +
 				"fluxo_solicitar_demanda.jpdl.xml");
 
 		decorator = getFacade().publicar(decorator);
@@ -166,7 +166,7 @@ public class JBPMFacadeTest extends TestCase {
 		TaskDecorator task = new TaskDecorator();
 		task.setId("1");
 		
-		Map<String, Object> mapaVariables = getFacade().obterVariables(task);
+		Map<String, Object> mapaVariables = getFacade().obterVariaveis(task);
 		assertFalse(UtilMapa.isVazio(mapaVariables));
 		print("Variables: "+ mapaVariables);
 	}
@@ -175,7 +175,7 @@ public class JBPMFacadeTest extends TestCase {
 		TaskDecorator task = new TaskDecorator();
 		task.setId("1");
 
-		Map<String, String> mapaVariables = getFacade().obterVariablesFormatadas(task);
+		Map<String, String> mapaVariables = getFacade().obterVariaveisFormatadas(task);
 		assertFalse(UtilMapa.isVazio(mapaVariables));
 		Set<String> keys = mapaVariables.keySet();
 		Iterator<String> iterator = keys.iterator();
@@ -208,6 +208,8 @@ public class JBPMFacadeTest extends TestCase {
 	public void testObterUsuarioPeloNome() {
 		UserDecorator user = new UserDecorator();
 		user.setGivenName("alex");
+
+		getFacade().incluirUsuario(user);
 		
 		user = getFacade().obterUsuarioPeloNome(user);
 		
@@ -221,6 +223,10 @@ public class JBPMFacadeTest extends TestCase {
 		
 		boolean existe = getFacade().isUsuarioExiste(user);
 		assertTrue(existe);
+
+		user.setGivenName("xxxx");
+		existe = getFacade().isUsuarioExiste(user);
+		assertFalse(existe);
 	}
 	
 	

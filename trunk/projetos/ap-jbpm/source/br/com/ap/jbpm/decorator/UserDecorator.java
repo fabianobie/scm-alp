@@ -5,7 +5,7 @@
  */
 package br.com.ap.jbpm.decorator;
 
-import org.jbpm.api.identity.User;
+import org.jbpm.pvm.internal.identity.impl.UserImpl;
 
 /**
  * Decorator da entidade User.
@@ -14,82 +14,102 @@ import org.jbpm.api.identity.User;
  * 
  */
 public class UserDecorator extends JbpmDecoratorAbstrato {
-	private User	user;
-	private String	givenName;
-	private String	senha;
+	private UserImpl	userImpl;
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.identity.User#getBusinessEmail()
+	 * @see org.jbpm.pvm.internal.identity.impl.UserImpl#getBusinessEmail()
 	 */
 	public String getBusinessEmail() {
-		return getUser().getBusinessEmail();
+		return getUserImpl().getBusinessEmail();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.identity.User#getFamilyName()
+	 * @see org.jbpm.pvm.internal.identity.impl.UserImpl#getFamilyName()
 	 */
 	public String getFamilyName() {
-		return getUser().getFamilyName();
+		return getUserImpl().getFamilyName();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.identity.User#getGivenName()
+	 * @see org.jbpm.pvm.internal.identity.impl.UserImpl#getGivenName()
 	 */
 	public String getGivenName() {
-		String resultado = getUser().getGivenName();
-		if (isVazio(resultado)) {
-			resultado = givenName;
-		}
-		return resultado;
-	}
-
-	/**
-	 * @param givenName Atribui givenName.
-	 */
-	public void setGivenName(String givenName) {
-		this.givenName = givenName;
+		return getUserImpl().getGivenName();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.identity.User#getId()
+	 * @see org.jbpm.pvm.internal.identity.impl.UserImpl#getId()
 	 */
 	public String getId() {
-		return getUser().getId();
+		return getUserImpl().getId();
+	}
+
+	/**
+	 * @return
+	 * @see org.jbpm.pvm.internal.identity.impl.UserImpl#getPassword()
+	 */
+	public String getPassword() {
+		return getUserImpl().getPassword();
+	}
+
+	/**
+	 * @param emailAddress
+	 * @see org.jbpm.pvm.internal.identity.impl.UserImpl#setBusinessEmail(java.lang.String)
+	 */
+	public void setBusinessEmail(String emailAddress) {
+		getUserImpl().setBusinessEmail(emailAddress);
+	}
+
+	/**
+	 * @param familyName
+	 * @see org.jbpm.pvm.internal.identity.impl.UserImpl#setFamilyName(java.lang.String)
+	 */
+	public void setFamilyName(String familyName) {
+		getUserImpl().setFamilyName(familyName);
+	}
+
+	/**
+	 * @param givenName
+	 * @see org.jbpm.pvm.internal.identity.impl.UserImpl#setGivenName(java.lang.String)
+	 */
+	public void setGivenName(String givenName) {
+		getUserImpl().setGivenName(givenName);
+	}
+
+	/**
+	 * @param id
+	 * @see org.jbpm.pvm.internal.identity.impl.UserImpl#setId(java.lang.String)
+	 */
+	public void setId(String id) {
+		getUserImpl().setId(id);
+	}
+
+	/**
+	 * @param password
+	 * @see org.jbpm.pvm.internal.identity.impl.UserImpl#setPassword(java.lang.String)
+	 */
+	public void setPassword(String password) {
+		getUserImpl().setPassword(password);
 	}
 
 	/**
 	 * @return retorna user.
 	 */
-	public User getUser() {
-		if (!isReferencia(user)) {
-			user = getEntidadeFactory().novoUser();
+	public UserImpl getUserImpl() {
+		if (!isReferencia(userImpl)) {
+			userImpl = getEntidadeFactory().novoUser();
 		}
-		return user;
+		return userImpl;
 	}
 
 	/**
 	 * @param user Atribui user.
 	 */
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserImpl(UserImpl userImpl) {
+		this.userImpl = userImpl;
 	}
-
-	/**
-	 * @return senha
-	 */
-	public String getSenha() {
-		return senha;
-	}
-
-	/**
-	 * @param senha Atribui senha
-	 */
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
 }
