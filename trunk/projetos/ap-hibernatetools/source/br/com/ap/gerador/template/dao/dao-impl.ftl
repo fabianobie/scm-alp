@@ -1,6 +1,6 @@
 <#setting locale="pt_BR">
 /*
- * ${pojo.getDeclarationName()}DaoImpl.java
+ * ${pojo.getDeclarationName()}${var_sufixo_classe}.java
  * 
  * Data de criação: ${date?string("dd/MM/yyyy")}
  */
@@ -17,7 +17,7 @@ ${pojo.getPackageDeclaration()}
 <#if ejb3>
 @${pojo.importType("org.springframework.stereotype.Repository")}
 </#if>
-public class ${pojo.getDeclarationName()}DaoImpl extends ${pojo.importType("${var_superclasse}")}<${pojo.importType("${entidade}")}>
+public class ${pojo.getDeclarationName()}${var_sufixo_classe} extends ${pojo.importType("${var_superclasse}")}<${pojo.importType("${entidade}")}>
 		implements ${pojo.importType("${dao}")} {
 	// classe
 }

@@ -1,6 +1,6 @@
 <#setting locale="pt_BR">
 /*
- * ${pojo.getDeclarationName()}Dao.java
+ * ${pojo.getDeclarationName()}${var_sufixo_classe}.java
  * 
  * Data de criação: ${date?string("dd/MM/yyyy")}
  */
