@@ -21,7 +21,7 @@ ${pojo.getPackageDeclaration()}
 public class ${pojo.getDeclarationName()}${var_sufixo_classe} extends ${pojo.importType("${var_superclasse}")}<${pojo.importType("${entidade}")}> {
 	
 	@${pojo.importType("javax.annotation.Resource")}(name = "${var_atributo_entidade}DaoImpl")
-	private ${pojo.getDeclarationName()}Dao	crudDao;
+	private ${pojo.getDeclarationName()}${var_sufixo_classe_dao} crudDao;
 	
 	/**
 	 * Construtor default para rentringir a criação desta classe somente a este
@@ -32,7 +32,7 @@ public class ${pojo.getDeclarationName()}${var_sufixo_classe} extends ${pojo.imp
 	}
 	
 	@Override
-	protected ${pojo.importType("${var_pacote_dao}.${pojo.getDeclarationName()}Dao")} getCrudDao() {
+	protected ${pojo.importType("${var_pacote_dao}.${pojo.getDeclarationName()}${var_sufixo_classe_dao}")} getCrudDao() {
 		return crudDao;
 	}
 }
