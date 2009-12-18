@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
-<process key="fluxo_criar_disciplina" name="fluxo_criar_disciplina_graduacao" version="1.0">
+<process key="fluxo_criar_disciplina" name="fluxo_criar_disciplina_graduacao" version="1">
    <description>Processo de cria&#141;&#139;o de disciplinas/ementa de gradua&#141;&#139;o</description>
    <start g="13,8,48,48" name="task_solicita_requisitos" form="criardisciplinagraduacao/taskform-solicita_requisitos">
       <transition to="task_fornecer_requisitos"/>
