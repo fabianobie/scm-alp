@@ -19,7 +19,8 @@ public class CriarDisciplinaGraduacaoTest extends TesteAbstrato {
 	 */
 	public void testDeploy() {
 		DeploymentDecorator decorator = new DeploymentDecorator();
-		decorator.setClasspathJpdl("br/com/ap/test/jbpm/processo/solicitardemanda/fluxo_criar_disciplina_graducao.jpdl.xml");
+		decorator.setClasspathJpdl("br/com/ap/test/jbpm/processo/criardisciplinagraduacao/" +
+				"fluxo_criar_disciplina_graducao.jpdl.xml");
 		
 		DeploymentDecorator publicado = getJbpmFacade().publicar(decorator);
 		assertNotNull(publicado.getId());
