@@ -5,13 +5,18 @@
  */
 package br.com.ap.jbpm;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 
 import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
+import org.jbpm.pvm.internal.identity.impl.GroupImpl;
+import org.jbpm.pvm.internal.identity.impl.UserImpl;
 
+import br.com.ap.arquitetura.util.CRUD;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
+import br.com.ap.jbpm.decorator.GroupDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.decorator.UserDecorator;
@@ -44,7 +49,8 @@ public interface JBPMFacade {
 	 * @param processDefinition Definição de processo com ID.
 	 * @return definição solicitada.
 	 */
-	public ProcessDefinition obterDefinicaoDeProcesso(ProcessDefinitionDecorator processDefinition);
+	public ProcessDefinition obterDefinicaoDeProcesso(
+			ProcessDefinitionDecorator processDefinition);
 
 	/**
 	 * Consulta as tarefas do usuário solicitado, incluindo as tarefas
@@ -111,23 +117,10 @@ public interface JBPMFacade {
 	 * @param processDefinition Definição de processo com ID.
 	 * @return formulário inicial
 	 */
-	public TaskDecorator obterFormularioInicial(ProcessDefinitionDecorator processDefinition);
+	public TaskDecorator obterFormularioInicial(
+			ProcessDefinitionDecorator processDefinition);
 
-	/**
-	 * Consulta o usuário pelo givenName.
-	 * 
-	 * @param user Usuário com givenName informado
-	 * @return Usuário recuperado
-	 */
-	public UserDecorator obterUsuarioPeloNome(UserDecorator user);
 
-	/**
-	 * Retorna true se o usuário existir.
-	 * 
-	 * @param user Usuário com givenName informado
-	 * @return true se o usuário existir.
-	 */
-	public boolean isUsuarioExiste(UserDecorator user);
 
 	/**
 	 * Inicia a execução de uma definição de processo.
@@ -135,7 +128,8 @@ public interface JBPMFacade {
 	 * @param processDefinition Definição de processo com ID
 	 * @return instância do processo iniciado
 	 */
-	public ProcessInstance iniciarProcesso(ProcessDefinitionDecorator processDefinition);
+	public ProcessInstance iniciarProcesso(
+			ProcessDefinitionDecorator processDefinition);
 
 	/**
 	 * Retorna a tarefa solicitada.
@@ -151,7 +145,8 @@ public interface JBPMFacade {
 	 * @param processDefinition Definição de processo com ID.
 	 * @return nome do formulário inicial
 	 */
-	public TaskDecorator obterNomeFormularioInicial(ProcessDefinitionDecorator processDefinition);
+	public TaskDecorator obterNomeFormularioInicial(
+			ProcessDefinitionDecorator processDefinition);
 
 	/**
 	 * Retorna as variáveis a partir de uma tarefa.
@@ -159,13 +154,108 @@ public interface JBPMFacade {
 	 * @param task Tarefa com ID
 	 * @return variáveis da tarefa.
 	 */
-	public Map<String, Object> obterVariables(TaskDecorator task);
-	
+	public Map<String, Object> obterVariaveis(TaskDecorator task);
+
 	/**
-	 * Retorna as variáveis a partir de uma tarefa. Os valores retornados serão formatados.
+	 * Retorna as variáveis a partir de uma tarefa. Os valores retornados serão
+	 * formatados.
 	 * 
 	 * @param task Tarefa com ID
 	 * @return variáveis da tarefa formatadas.
 	 */
-	public Map<String, String> obterVariablesFormatadas(TaskDecorator task);
+	public Map<String, String> obterVariaveisFormatadas(TaskDecorator task);
+
+	/**
+	 * @param <R> Serializable
+	 * @param decorator UserDecorator
+	 * @return Serializable
+	 * @see CRUD#incluir(Object)
+	 */
+	public <R extends Serializable> R incluirUsuario(UserDecorator decorator);
+
+	/**
+	 * @param decorator UserDecorator
+	 * @see CRUD#alterar(Object)
+	 */
+	public void alterarUsuario(UserDecorator decorator);
+
+	/**
+	 * @param decorator UserDecorator
+	 * @see CRUD#excluir(Object)
+	 */
+	public void excluirUsuario(UserDecorator decorator);
+
+	/**
+	 * Retorna o usuário pelo ID.
+	 * 
+	 * @param decorator UserDecorator com ID informado.
+	 * @return usuário
+	 */
+	public UserDecorator obterUsuarioPorId(UserDecorator decorator);
+
+	/**
+	 * Consulta o usuário pelo givenName.
+	 * 
+	 * @param decorator Usuário com givenName informado
+	 * @return Usuário recuperado
+	 */
+	public UserDecorator obterUsuarioPeloNome(UserDecorator decorator);
+	
+	/**
+	 * Retorna true se o usuário existir.
+	 * 
+	 * @param decorator Usuário com givenName informado
+	 * @return true se o usuário existir.
+	 */
+	public boolean isUsuarioExiste(UserDecorator decorator);
+	
+	/**
+	 * Consulta todos os usuários.
+	 * 
+	 * @return usuário
+	 */
+	public Collection<UserImpl> consultarUsuario();
+	
+	/**
+	 * @param <R> Serializable
+	 * @param decorator GroupDecorator
+	 * @return Serializable
+	 * @see CRUD#incluir(Object)
+	 */
+	public <R extends Serializable> R incluirGrupo(GroupDecorator decorator);
+
+	/**
+	 * @param decorator GroupDecorator
+	 * @see CRUD#alterar(Object)
+	 */
+	public void alterarGrupo(GroupDecorator decorator);
+
+	/**
+	 * @param decorator GroupDecorator
+	 * @see CRUD#excluir(Object)
+	 */
+	public void excluirGrupo(GroupDecorator decorator);
+
+	/**
+	 * Retorna o grupo pelo ID.
+	 * 
+	 * @param decorator GroupDecorator com ID informado.
+	 * @return grupo
+	 */
+	public GroupDecorator obterGrupoPorId(GroupDecorator decorator);
+
+	/**
+	 * Retorna true se o grupo existir.
+	 * 
+	 * @param decorator Grupo com name informado
+	 * @return true se o grupo existir.
+	 */
+	public boolean isGrupoExiste(GroupDecorator decorator);
+	
+	/**
+	 * Consulta todos os grupos.
+	 * 
+	 * @return usuário
+	 */
+	public Collection<GroupImpl> consultarGrupo();
 }

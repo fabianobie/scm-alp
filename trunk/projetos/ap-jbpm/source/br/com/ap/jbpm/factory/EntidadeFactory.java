@@ -8,8 +8,9 @@ package br.com.ap.jbpm.factory;
 import org.jbpm.api.Deployment;
 import org.jbpm.api.Execution;
 import org.jbpm.api.ProcessDefinition;
-import org.jbpm.api.identity.User;
 import org.jbpm.api.task.Task;
+import org.jbpm.pvm.internal.identity.impl.GroupImpl;
+import org.jbpm.pvm.internal.identity.impl.MembershipImpl;
 import org.jbpm.pvm.internal.identity.impl.UserImpl;
 import org.jbpm.pvm.internal.model.Activity;
 import org.jbpm.pvm.internal.model.ActivityImpl;
@@ -64,7 +65,7 @@ public final class EntidadeFactory {
 	/**
 	 * @return User
 	 */
-	public User novoUser() {
+	public UserImpl novoUser() {
 		return new UserImpl();
 	}
 
@@ -80,5 +81,19 @@ public final class EntidadeFactory {
 	 */
 	public Activity novaActivity() {
 		return new ActivityImpl();
+	}
+
+	/**
+	 * @return Group
+	 */
+	public GroupImpl novoGroup() {
+		return new GroupImpl();
+	}
+
+	/**
+	 * @return MembershipImpl
+	 */
+	public MembershipImpl novoMembership() {
+		return new MembershipImpl();
 	}
 }

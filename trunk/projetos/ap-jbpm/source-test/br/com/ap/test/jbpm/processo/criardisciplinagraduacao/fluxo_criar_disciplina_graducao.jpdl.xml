@@ -2,18 +2,22 @@
 
 <process key="fluxo_criar_disciplina" name="fluxo_criar_disciplina_graduacao" version="1">
    <description>Processo de criação de disciplinas/ementa de graduação</description>
+   
    <start g="13,8,48,48" name="task_solicita_requisitos" form="criardisciplinagraduacao/taskform-solicita_requisitos">
       <transition to="task_fornecer_requisitos"/>
    </start>
+   
+   <task candidate-groups="secretaria_ceam" g="106,6,184,52" name="task_fornecer_requisitos" form="criardisciplinagraduacao/taskform-fornecer_requisitos">
+      <transition to="task_encamiha_proposta"/>
+   </task>
+   
    <task candidate-groups="secretaria_ceam" g="560,12,179,52" name="task_analisar_proposta" form="criardisciplinagraduacao/taskform-analisar_proposta">
       <transition to="possui_pendencia"/>
    </task>
    <task candidate-groups="comissao_graduacao" g="96,288,217,52" name="task_cg_emitir_parecer" form="criardisciplinagraduacao/taskform-emite_parecer_proposta">
       <transition to="decisao_cg_parecer_favoravel"/>
    </task>
-   <task candidate-groups="secretaria_ceam" g="106,6,184,52" name="task_fornecer_requisitos" form="criardisciplinagraduacao/taskform-fornecer_requisitos">
-      <transition to="task_encamiha_proposta"/>
-   </task>
+   
    <task candidate-groups="#{nucleo_solicitante}" g="344,7,181,52" name="task_encamiha_proposta" form="criardisciplinagraduacao/taskform-encaminhar_proposta_comissao_graduacao_">
       <transition to="task_analisar_proposta"/>
    </task>

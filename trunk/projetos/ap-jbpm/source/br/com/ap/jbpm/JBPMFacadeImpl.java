@@ -5,6 +5,7 @@
  */
 package br.com.ap.jbpm;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 
@@ -12,13 +13,17 @@ import javax.annotation.Resource;
 
 import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
+import org.jbpm.pvm.internal.identity.impl.GroupImpl;
+import org.jbpm.pvm.internal.identity.impl.UserImpl;
 import org.springframework.stereotype.Service;
 
 import br.com.ap.jbpm.bo.DeploymentBo;
 import br.com.ap.jbpm.bo.ExecutionBo;
+import br.com.ap.jbpm.bo.GroupBo;
 import br.com.ap.jbpm.bo.TaskBo;
 import br.com.ap.jbpm.bo.UserBo;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
+import br.com.ap.jbpm.decorator.GroupDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.decorator.UserDecorator;
@@ -41,6 +46,9 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	private UserBo			userBo;
 
 	@Resource
+	private GroupBo			groupBo;
+
+	@Resource
 	private ExecutionBo		executionBo;
 
 	@Override
@@ -59,7 +67,8 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public ProcessDefinition obterDefinicaoDeProcesso(ProcessDefinitionDecorator processDefinition) {
+	public ProcessDefinition obterDefinicaoDeProcesso(
+			ProcessDefinitionDecorator processDefinition) {
 		return deploymentBo.obterDefinicaoDeProcesso(processDefinition);
 	}
 
@@ -75,23 +84,14 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public boolean isUsuarioExiste(UserDecorator user) {
-		return userBo.isUsuarioExiste(user);
-	}
-
-	@Override
 	public TaskDecorator obterFormulario(TaskDecorator task) {
 		return taskBo.obterFormulario(task);
 	}
 
 	@Override
-	public TaskDecorator obterFormularioInicial(ProcessDefinitionDecorator processDefinition) {
+	public TaskDecorator obterFormularioInicial(
+			ProcessDefinitionDecorator processDefinition) {
 		return deploymentBo.obterFormularioInicial(processDefinition);
-	}
-
-	@Override
-	public UserDecorator obterUsuarioPeloNome(UserDecorator user) {
-		return userBo.obterUsuarioPeloNome(user);
 	}
 
 	@Override
@@ -110,7 +110,8 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public ProcessInstance iniciarProcesso(ProcessDefinitionDecorator processDefinition) {
+	public ProcessInstance iniciarProcesso(
+			ProcessDefinitionDecorator processDefinition) {
 		return executionBo.iniciarProcesso(processDefinition);
 	}
 
@@ -120,17 +121,84 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public Map<String, Object> obterVariables(TaskDecorator task) {
+	public Map<String, Object> obterVariaveis(TaskDecorator task) {
 		return taskBo.obterVariables(task);
 	}
 
 	@Override
-	public Map<String, String> obterVariablesFormatadas(TaskDecorator task) {
+	public Map<String, String> obterVariaveisFormatadas(TaskDecorator task) {
 		return taskBo.obterVariablesFormatadas(task);
 	}
 
 	@Override
-	public TaskDecorator obterNomeFormularioInicial(ProcessDefinitionDecorator processDefinition) {
+	public TaskDecorator obterNomeFormularioInicial(
+			ProcessDefinitionDecorator processDefinition) {
 		return deploymentBo.obterNomeFormularioInicial(processDefinition);
 	}
+
+	@Override
+	public <R extends Serializable> R incluirUsuario(UserDecorator decorator) {
+		return userBo.incluir(decorator);
+	}
+
+	@Override
+	public void alterarUsuario(UserDecorator decorator) {
+		userBo.alterar(decorator);
+	}
+
+	@Override
+	public void excluirUsuario(UserDecorator decorator) {
+		userBo.excluir(decorator);
+	}
+
+	@Override
+	public UserDecorator obterUsuarioPorId(UserDecorator decorator) {
+		return userBo.obterPorId(decorator);
+	}
+
+	@Override
+	public UserDecorator obterUsuarioPeloNome(UserDecorator user) {
+		return userBo.obterPeloNome(user);
+	}
+
+	@Override
+	public boolean isUsuarioExiste(UserDecorator user) {
+		return userBo.isUsuarioExiste(user);
+	}
+
+	@Override
+	public Collection<UserImpl> consultarUsuario() {
+		return userBo.consultar();
+	}
+
+	@Override
+	public void alterarGrupo(GroupDecorator decorator) {
+		groupBo.alterar(decorator);
+	}
+
+	@Override
+	public Collection<GroupImpl> consultarGrupo() {
+		return groupBo.consultar();
+	}
+
+	@Override
+	public void excluirGrupo(GroupDecorator decorator) {
+		groupBo.excluir(decorator);
+	}
+
+	@Override
+	public <R extends Serializable> R incluirGrupo(GroupDecorator decorator) {
+		return groupBo.incluir(decorator);
+	}
+
+	@Override
+	public boolean isGrupoExiste(GroupDecorator decorator) {
+		return groupBo.isGrupoExiste(decorator);
+	}
+
+	@Override
+	public GroupDecorator obterGrupoPorId(GroupDecorator decorator) {
+		return groupBo.obterPorId(decorator);
+	}
+
 }
