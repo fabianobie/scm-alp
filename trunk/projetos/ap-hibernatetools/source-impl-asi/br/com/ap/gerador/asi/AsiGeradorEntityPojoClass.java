@@ -15,11 +15,14 @@ import org.hibernate.mapping.KeyValue;
 import org.hibernate.mapping.MetaAttribute;
 import org.hibernate.mapping.PersistentClass;
 import org.hibernate.mapping.Property;
+import org.hibernate.mapping.RootClass;
 import org.hibernate.mapping.SimpleValue;
+import org.hibernate.mapping.Table;
 import org.hibernate.tool.hbm2x.Cfg2JavaTool;
 import org.hibernate.util.StringHelper;
 
 import br.com.ap.comum.fabrica.StringFactory;
+import br.com.ap.comum.objeto.UtilObjeto;
 import br.com.ap.comum.string.UtilString;
 import br.com.ap.gerador.GeradorEntityPojoClass;
 
@@ -129,8 +132,14 @@ public class AsiGeradorEntityPojoClass extends GeradorEntityPojoClass {
 	}
 	
 	private void buildAnnSequenceGenerator(StringBuffer wholeString, PersistentClass clazz) {
+		String nomeTabela = getNomeTabela();
+		if (UtilString.isVazio(nomeTabela)) {
+			nomeTabela = getNomeEntidade(clazz);
+		} else {
+			nomeTabela = UtilString.maiuscula(nomeTabela);
+		}
 		wholeString.append("\n\t@" + importType("javax.persistence.SequenceGenerator") + "(name=\"generator\", sequenceName=\"" )
-				.append("SQ_").append( getNomeEntidade(clazz))
+				.append("SQ_").append(nomeTabela)
 				.append( "\")" );
 		//TODO HA does not support initialValue and allocationSize
 		wholeString.append( "\n    " );
@@ -183,6 +192,17 @@ public class AsiGeradorEntityPojoClass extends GeradorEntityPojoClass {
 		String nome = clazz.getEntityName();
 		nome = UtilString.substring(nome, nome.lastIndexOf(".")+1);
 		return UtilString.maiuscula(nome);
+	}
+	
+	protected String getNomeTabela() {
+		String resultado = null;
+		
+		if (!UtilObjeto.isReferencia(meta) || !(meta instanceof RootClass)) {
+			RootClass rootClass = (RootClass) meta;
+			Table tabela = rootClass.getTable();
+			resultado = tabela.getName();
+		}
+		return resultado;
 	}
 	
 	public String obterNomePadraoJava() {
