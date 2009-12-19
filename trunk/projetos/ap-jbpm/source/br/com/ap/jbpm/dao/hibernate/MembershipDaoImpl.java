@@ -40,7 +40,7 @@ public class MembershipDaoImpl extends JBPMDaoAbstrato<MembershipImpl>
 		if (!isVazio(role)) {
 			identityService.createMembership(userId, groupId, role);
 		} else {
-			identityService.createMembership(userId, groupId, role);
+			identityService.createMembership(userId, groupId);
 		}
 		return (R) resultado;
 	}

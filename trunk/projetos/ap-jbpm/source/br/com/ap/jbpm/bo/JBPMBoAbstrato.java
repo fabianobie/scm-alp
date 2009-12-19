@@ -13,6 +13,7 @@ import br.com.ap.arquitetura.seguranca.ControladorDeAcesso;
 import br.com.ap.comum.estrategia.UtilEstrategiaDeFormatadores;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.GroupDecorator;
+import br.com.ap.jbpm.decorator.MembershipDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.decorator.UserDecorator;
@@ -104,5 +105,18 @@ public abstract class JBPMBoAbstrato<T> extends CrudNegocioAbstrato<T> {
 	 */
 	protected boolean isUsuarioTemReferencia(UserDecorator decorator) {
 		return isReferencia(decorator) && isReferencia(decorator.getUserImpl());
+	}
+	
+	/**
+	 * Retorna true se o usuário e o grupo agregado tiverem referência.
+	 * 
+	 * @param decorator MembershipDecorator
+	 * @return true se o usuário e o grupo agregado tiverem referência.
+	 */
+	protected boolean isMembershipTemReferencia(MembershipDecorator decorator) {
+		return isReferencia(decorator) && 
+			isReferencia(decorator.getMembershipImpl()) &&
+			isReferencia(decorator.getMembershipImpl().getUser()) && 
+			isReferencia(decorator.getMembershipImpl().getGroup());
 	}
 }
