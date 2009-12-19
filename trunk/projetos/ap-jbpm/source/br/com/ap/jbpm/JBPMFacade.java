@@ -17,6 +17,7 @@ import org.jbpm.pvm.internal.identity.impl.UserImpl;
 import br.com.ap.arquitetura.util.CRUD;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.GroupDecorator;
+import br.com.ap.jbpm.decorator.MembershipDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.decorator.UserDecorator;
@@ -258,4 +259,18 @@ public interface JBPMFacade {
 	 * @return usuário
 	 */
 	public Collection<GroupImpl> consultarGrupo();
+	
+	/**
+	 * @param <R> Serializable
+	 * @param decorator MembershipDecorator
+	 * @return Serializable
+	 * @see CRUD#incluir(Object)
+	 */
+	public <R extends Serializable> R incluirUsuarioAoGrupo(MembershipDecorator decorator);
+
+	/**
+	 * @param decorator MembershipDecorator
+	 * @see CRUD#excluir(Object)
+	 */
+	public void excluirGrupoDoUsuario(MembershipDecorator decorator);
 }

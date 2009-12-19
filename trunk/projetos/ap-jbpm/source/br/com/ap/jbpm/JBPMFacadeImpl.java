@@ -20,10 +20,12 @@ import org.springframework.stereotype.Service;
 import br.com.ap.jbpm.bo.DeploymentBo;
 import br.com.ap.jbpm.bo.ExecutionBo;
 import br.com.ap.jbpm.bo.GroupBo;
+import br.com.ap.jbpm.bo.MembershipBo;
 import br.com.ap.jbpm.bo.TaskBo;
 import br.com.ap.jbpm.bo.UserBo;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.GroupDecorator;
+import br.com.ap.jbpm.decorator.MembershipDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.decorator.UserDecorator;
@@ -49,6 +51,9 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	private GroupBo			groupBo;
 
 	@Resource
+	private MembershipBo	membershipBo;
+
+	@Resource
 	private ExecutionBo		executionBo;
 
 	@Override
@@ -67,8 +72,7 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public ProcessDefinition obterDefinicaoDeProcesso(
-			ProcessDefinitionDecorator processDefinition) {
+	public ProcessDefinition obterDefinicaoDeProcesso(ProcessDefinitionDecorator processDefinition) {
 		return deploymentBo.obterDefinicaoDeProcesso(processDefinition);
 	}
 
@@ -89,8 +93,7 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public TaskDecorator obterFormularioInicial(
-			ProcessDefinitionDecorator processDefinition) {
+	public TaskDecorator obterFormularioInicial(ProcessDefinitionDecorator processDefinition) {
 		return deploymentBo.obterFormularioInicial(processDefinition);
 	}
 
@@ -110,8 +113,7 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public ProcessInstance iniciarProcesso(
-			ProcessDefinitionDecorator processDefinition) {
+	public ProcessInstance iniciarProcesso(ProcessDefinitionDecorator processDefinition) {
 		return executionBo.iniciarProcesso(processDefinition);
 	}
 
@@ -131,8 +133,7 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public TaskDecorator obterNomeFormularioInicial(
-			ProcessDefinitionDecorator processDefinition) {
+	public TaskDecorator obterNomeFormularioInicial(ProcessDefinitionDecorator processDefinition) {
 		return deploymentBo.obterNomeFormularioInicial(processDefinition);
 	}
 
@@ -199,6 +200,16 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	@Override
 	public GroupDecorator obterGrupoPorId(GroupDecorator decorator) {
 		return groupBo.obterPorId(decorator);
+	}
+
+	@Override
+	public void excluirGrupoDoUsuario(MembershipDecorator decorator) {
+		membershipBo.excluir(decorator);
+	}
+
+	@Override
+	public <R extends Serializable> R incluirUsuarioAoGrupo(MembershipDecorator decorator) {
+		return membershipBo.incluir(decorator);
 	}
 
 }

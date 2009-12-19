@@ -15,6 +15,7 @@ import br.com.ap.jbpm.JBPMFacade;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
 import br.com.ap.jbpm.decorator.GroupDecorator;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
+import br.com.ap.jbpm.decorator.UserDecorator;
 import br.com.ap.test.TesteAbstrato;
 
 /**
@@ -34,6 +35,14 @@ public class CriarDisciplinaGraduacaoTest extends TesteAbstrato {
 			g.setName(grupos[indice]);
 			facade.incluirGrupo(g);
 		}
+		String[] usuarios = new String[]{"usuario_secretaria_ceam","usuario_comissao_graduacao","usuario_direcao_ceam"};
+		for (int indice = 0; indice < usuarios.length; indice++) {
+			UserDecorator g = new UserDecorator();
+			g.setGivenName(grupos[indice]);
+			facade.incluirUsuario(g);
+		}
+		
+		
 		
 		// DEPLOY
 		DeploymentDecorator decorator = new DeploymentDecorator();
