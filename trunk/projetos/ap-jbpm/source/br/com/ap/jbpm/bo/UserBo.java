@@ -88,12 +88,12 @@ public class UserBo extends JBPMBoAbstrato<UserImpl> {
 	 * @param decorator Usuário com givenName informado
 	 * @return Usuário recuperado
 	 */
-	public UserDecorator obterPeloNome(UserDecorator decorator) {
+	public UserDecorator obterPorGivenName(UserDecorator decorator) {
 		UserDecorator resultado = null;
 
 		if (isReferencia(decorator)) {
 			UserImpl user = decorator.getUserImpl();
-			UserImpl localizado = getCrudDao().obterPeloNome(user);
+			UserImpl localizado = getCrudDao().obterPorGivenName(user);
 
 			if (isReferencia(localizado)
 					&& isReferencia(localizado.getGivenName())) {
@@ -101,6 +101,17 @@ public class UserBo extends JBPMBoAbstrato<UserImpl> {
 			}
 		}
 		return resultado;
+	}
+	
+	/**
+	 * Consulta o usuário pelo givenName.
+	 * 
+	 * @param user Usuário com givenName informado
+	 * @return Usuário recuperado
+	 */
+	public UserDecorator obterPorGivenName(UserImpl user) {
+		UserDecorator decorator = getDecoratorFactory().novoUserDecorator(user);
+		return obterPorGivenName(decorator);
 	}
 
 	/**
@@ -110,7 +121,7 @@ public class UserBo extends JBPMBoAbstrato<UserImpl> {
 	 * @return true se o usuário existir.
 	 */
 	public boolean isUsuarioExiste(UserDecorator decorator) {
-		UserDecorator resultado = obterPeloNome(decorator);
+		UserDecorator resultado = obterPorGivenName(decorator);
 		return isReferencia(resultado)
 				&& isReferencia(resultado.getGivenName());
 	}

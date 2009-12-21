@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.Map;
 
 import org.jbpm.api.ProcessDefinition;
-import org.jbpm.api.task.Task;
+import org.jbpm.pvm.internal.task.TaskImpl;
 
 /**
  * Decoratora da entidade Task.
@@ -17,7 +17,7 @@ import org.jbpm.api.task.Task;
  * @author adriano.pamplona
  */
 public class TaskDecorator extends JbpmDecoratorAbstrato {
-	private Task				task;
+	private TaskImpl			taskImpl;
 	private ProcessDefinition	processDefinition;
 	private String				id;
 	private String				textoFormulario;
@@ -27,58 +27,58 @@ public class TaskDecorator extends JbpmDecoratorAbstrato {
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.getTask().Task#getActivityName()
+	 * @see org.jbpm.api.getTaskImpl().Task#getActivityName()
 	 */
 	public String getActivityName() {
-		return getTask().getActivityName();
+		return getTaskImpl().getActivityName();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.getTask().Task#getAssignee()
+	 * @see org.jbpm.api.getTaskImpl().Task#getAssignee()
 	 */
 	public String getAssignee() {
-		return getTask().getAssignee();
+		return getTaskImpl().getAssignee();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.getTask().Task#getCreateTime()
+	 * @see org.jbpm.api.getTaskImpl().Task#getCreateTime()
 	 */
 	public Date getCreateTime() {
-		return getTask().getCreateTime();
+		return getTaskImpl().getCreateTime();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.getTask().Task#getDescription()
+	 * @see org.jbpm.api.getTaskImpl().Task#getDescription()
 	 */
 	public String getDescription() {
-		return getTask().getDescription();
+		return getTaskImpl().getDescription();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.getTask().Task#getDuedate()
+	 * @see org.jbpm.api.getTaskImpl().Task#getDuedate()
 	 */
 	public Date getDuedate() {
-		return getTask().getDuedate();
+		return getTaskImpl().getDuedate();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.getTask().Task#getExecutionId()
+	 * @see org.jbpm.api.getTaskImpl().Task#getExecutionId()
 	 */
 	public String getExecutionId() {
-		return getTask().getExecutionId();
+		return getTaskImpl().getExecutionId();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.getTask().Task#getFormResourceName()
+	 * @see org.jbpm.api.getTaskImpl().Task#getFormResourceName()
 	 */
 	public String getFormResourceName() {
-		String resultado = getTask().getFormResourceName();
+		String resultado = getTaskImpl().getFormResourceName();
 		if (isVazio(resultado) || isZero(resultado)) {
 			resultado = formResourceName;
 		}
@@ -87,10 +87,10 @@ public class TaskDecorator extends JbpmDecoratorAbstrato {
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.getTask().Task#getId()
+	 * @see org.jbpm.api.getTaskImpl().Task#getId()
 	 */
 	public String getId() {
-		String resultado = getTask().getId();
+		String resultado = getTaskImpl().getId();
 		if (isVazio(resultado) || isZero(resultado)) {
 			resultado = id;
 		}
@@ -106,75 +106,75 @@ public class TaskDecorator extends JbpmDecoratorAbstrato {
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.getTask().Task#getName()
+	 * @see org.jbpm.api.getTaskImpl().Task#getName()
 	 */
 	public String getName() {
-		return getTask().getName();
+		return getTaskImpl().getName();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.getTask().Task#getPriority()
+	 * @see org.jbpm.api.getTaskImpl().Task#getPriority()
 	 */
 	public int getPriority() {
-		return getTask().getPriority();
+		return getTaskImpl().getPriority();
 	}
 
 	/**
 	 * @param arg0
-	 * @see org.jbpm.api.getTask().Task#setAssignee(java.lang.String)
+	 * @see org.jbpm.api.getTaskImpl().Task#setAssignee(java.lang.String)
 	 */
 	public void setAssignee(String arg0) {
-		getTask().setAssignee(arg0);
+		getTaskImpl().setAssignee(arg0);
 	}
 
 	/**
 	 * @param arg0
-	 * @see org.jbpm.api.getTask().Task#setDescription(java.lang.String)
+	 * @see org.jbpm.api.getTaskImpl().Task#setDescription(java.lang.String)
 	 */
 	public void setDescription(String arg0) {
-		getTask().setDescription(arg0);
+		getTaskImpl().setDescription(arg0);
 	}
 
 	/**
 	 * @param arg0
-	 * @see org.jbpm.api.getTask().Task#setDuedate(java.util.Date)
+	 * @see org.jbpm.api.getTaskImpl().Task#setDuedate(java.util.Date)
 	 */
 	public void setDuedate(Date arg0) {
-		getTask().setDuedate(arg0);
+		getTaskImpl().setDuedate(arg0);
 	}
 
 	/**
 	 * @param arg0
-	 * @see org.jbpm.api.getTask().Task#setName(java.lang.String)
+	 * @see org.jbpm.api.getTaskImpl().Task#setName(java.lang.String)
 	 */
 	public void setName(String arg0) {
-		getTask().setName(arg0);
+		getTaskImpl().setName(arg0);
 	}
 
 	/**
 	 * @param arg0
-	 * @see org.jbpm.api.getTask().Task#setPriority(int)
+	 * @see org.jbpm.api.getTaskImpl().Task#setPriority(int)
 	 */
 	public void setPriority(int arg0) {
-		getTask().setPriority(arg0);
+		getTaskImpl().setPriority(arg0);
 	}
 
 	/**
-	 * @return retorna getTask().
+	 * @return retorna getTaskImpl().
 	 */
-	public Task getTask() {
-		if (!isReferencia(task)) {
-			task = getEntidadeFactory().novaTask();
+	public TaskImpl getTaskImpl() {
+		if (!isReferencia(taskImpl)) {
+			taskImpl = getEntidadeFactory().novaTask();
 		}
-		return task;
+		return taskImpl;
 	}
 
 	/**
-	 * @param task Atribui getTask().
+	 * @param task Atribui getTaskImpl().
 	 */
-	public void setTask(Task task) {
-		this.task = task;
+	public void setTaskImpl(TaskImpl taskImpl) {
+		this.taskImpl = taskImpl;
 	}
 
 	/**

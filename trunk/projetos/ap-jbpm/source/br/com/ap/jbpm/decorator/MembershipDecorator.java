@@ -5,9 +5,9 @@
  */
 package br.com.ap.jbpm.decorator;
 
-import org.jbpm.api.identity.Group;
-import org.jbpm.api.identity.User;
+import org.jbpm.pvm.internal.identity.impl.GroupImpl;
 import org.jbpm.pvm.internal.identity.impl.MembershipImpl;
+import org.jbpm.pvm.internal.identity.impl.UserImpl;
 
 /**
  * Decorator da entidade Group.
@@ -16,13 +16,16 @@ import org.jbpm.pvm.internal.identity.impl.MembershipImpl;
  */
 public class MembershipDecorator extends JbpmDecoratorAbstrato {
 	private MembershipImpl	membershipImpl;
-
 	/**
 	 * @return
 	 * @see org.jbpm.pvm.internal.identity.impl.MembershipImpl#getGroup()
 	 */
-	public Group getGroup() {
-		return getMembershipImpl().getGroup();
+	public GroupImpl getGroup() {
+		if (!isReferencia(getMembershipImpl().getGroup())) {
+			GroupImpl group = getEntidadeFactory().novoGroup();
+			getMembershipImpl().setGroup(group);
+		}
+		return (GroupImpl) getMembershipImpl().getGroup();
 	}
 
 	/**
@@ -37,15 +40,19 @@ public class MembershipDecorator extends JbpmDecoratorAbstrato {
 	 * @return
 	 * @see org.jbpm.pvm.internal.identity.impl.MembershipImpl#getUser()
 	 */
-	public User getUser() {
-		return getMembershipImpl().getUser();
+	public UserImpl getUser() {
+		if (!isReferencia(getMembershipImpl().getUser())) {
+			UserImpl user = getEntidadeFactory().novoUser();
+			getMembershipImpl().setUser(user);
+		}
+		return (UserImpl) getMembershipImpl().getUser();
 	}
 
 	/**
 	 * @param group
 	 * @see org.jbpm.pvm.internal.identity.impl.MembershipImpl#setGroup(org.jbpm.api.identity.Group)
 	 */
-	public void setGroup(Group group) {
+	public void setGroup(GroupImpl group) {
 		getMembershipImpl().setGroup(group);
 	}
 
@@ -61,7 +68,7 @@ public class MembershipDecorator extends JbpmDecoratorAbstrato {
 	 * @param user
 	 * @see org.jbpm.pvm.internal.identity.impl.MembershipImpl#setUser(org.jbpm.api.identity.User)
 	 */
-	public void setUser(User user) {
+	public void setUser(UserImpl user) {
 		getMembershipImpl().setUser(user);
 	}
 
@@ -80,5 +87,33 @@ public class MembershipDecorator extends JbpmDecoratorAbstrato {
 	 */
 	public void setMembershipImpl(MembershipImpl membershipImpl) {
 		this.membershipImpl = membershipImpl;
+	}
+
+	/**
+	 * @return groupName
+	 */
+	public String getGroupName() {
+		return getGroup().getName();
+	}
+
+	/**
+	 * @param groupName Atribui groupName
+	 */
+	public void setGroupName(String groupName) {
+		getGroup().setName(groupName);
+	}
+
+	/**
+	 * @return userGivenName
+	 */
+	public String getUserGivenName() {
+		return getUser().getGivenName();
+	}
+
+	/**
+	 * @param userGivenName Atribui userGivenName
+	 */
+	public void setUserGivenName(String userGivenName) {
+		getUser().setGivenName(userGivenName);
 	}
 }

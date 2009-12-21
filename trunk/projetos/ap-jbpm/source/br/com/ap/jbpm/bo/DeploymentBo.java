@@ -13,8 +13,8 @@ import javax.annotation.Resource;
 import org.jbpm.api.Deployment;
 import org.jbpm.api.Execution;
 import org.jbpm.api.ProcessDefinition;
-import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.repository.DeploymentImpl;
+import org.jbpm.pvm.internal.task.TaskImpl;
 import org.springframework.stereotype.Component;
 
 import br.com.ap.comum.colecao.UtilColecao;
@@ -117,7 +117,7 @@ public class DeploymentBo extends JBPMBoAbstrato<DeploymentImpl> {
 	 * @param task Tarefa com ID.
 	 * @return formulário da tarefa
 	 */
-	public TaskDecorator obterFormulario(Deployment deployment, Task task) {
+	public TaskDecorator obterFormulario(Deployment deployment, TaskImpl task) {
 		TaskDecorator resultado = null;
 
 		if (isReferencia(deployment, task)) {

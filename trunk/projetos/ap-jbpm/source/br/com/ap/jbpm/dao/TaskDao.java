@@ -8,7 +8,6 @@ package br.com.ap.jbpm.dao;
 import java.util.Collection;
 import java.util.Map;
 
-import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.task.TaskImpl;
 
 import br.com.ap.arquitetura.dao.CrudDao;
@@ -29,7 +28,7 @@ public interface TaskDao extends CrudDao<TaskImpl> {
 	 * @param user Usuário
 	 * @return tarefas
 	 */
-	public Collection<Task> consultarTarefa(UserDecorator user);
+	public Collection<TaskImpl> consultarTarefa(UserDecorator user);
 
 	/**
 	 * Consulta as tarefas atribuídas a um usuário ou a ninguém de uma definição
@@ -39,7 +38,7 @@ public interface TaskDao extends CrudDao<TaskImpl> {
 	 * @param processDefinition Definição de processo
 	 * @return tarefas
 	 */
-	public Collection<Task> consultarTarefa(UserDecorator user,
+	public Collection<TaskImpl> consultarTarefa(UserDecorator user,
 			ProcessDefinitionDecorator processDefinition);
 
 	/**

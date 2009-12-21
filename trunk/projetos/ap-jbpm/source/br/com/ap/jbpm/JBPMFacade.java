@@ -13,6 +13,7 @@ import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
 import org.jbpm.pvm.internal.identity.impl.GroupImpl;
 import org.jbpm.pvm.internal.identity.impl.UserImpl;
+import org.jbpm.pvm.internal.task.TaskImpl;
 
 import br.com.ap.arquitetura.util.CRUD;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
@@ -50,8 +51,14 @@ public interface JBPMFacade {
 	 * @param processDefinition Definição de processo com ID.
 	 * @return definição solicitada.
 	 */
-	public ProcessDefinition obterDefinicaoDeProcesso(
-			ProcessDefinitionDecorator processDefinition);
+	public ProcessDefinition obterDefinicaoDeProcesso(ProcessDefinitionDecorator processDefinition);
+
+	/**
+	 * Consultar todas as tarefas.
+	 * 
+	 * @return tarefas
+	 */
+	public Collection<TaskImpl> consultarTarefa();
 
 	/**
 	 * Consulta as tarefas do usuário solicitado, incluindo as tarefas
@@ -118,10 +125,7 @@ public interface JBPMFacade {
 	 * @param processDefinition Definição de processo com ID.
 	 * @return formulário inicial
 	 */
-	public TaskDecorator obterFormularioInicial(
-			ProcessDefinitionDecorator processDefinition);
-
-
+	public TaskDecorator obterFormularioInicial(ProcessDefinitionDecorator processDefinition);
 
 	/**
 	 * Inicia a execução de uma definição de processo.
@@ -129,8 +133,7 @@ public interface JBPMFacade {
 	 * @param processDefinition Definição de processo com ID
 	 * @return instância do processo iniciado
 	 */
-	public ProcessInstance iniciarProcesso(
-			ProcessDefinitionDecorator processDefinition);
+	public ProcessInstance iniciarProcesso(ProcessDefinitionDecorator processDefinition);
 
 	/**
 	 * Retorna a tarefa solicitada.
@@ -146,8 +149,7 @@ public interface JBPMFacade {
 	 * @param processDefinition Definição de processo com ID.
 	 * @return nome do formulário inicial
 	 */
-	public TaskDecorator obterNomeFormularioInicial(
-			ProcessDefinitionDecorator processDefinition);
+	public TaskDecorator obterNomeFormularioInicial(ProcessDefinitionDecorator processDefinition);
 
 	/**
 	 * Retorna as variáveis a partir de uma tarefa.
@@ -201,7 +203,7 @@ public interface JBPMFacade {
 	 * @return Usuário recuperado
 	 */
 	public UserDecorator obterUsuarioPeloNome(UserDecorator decorator);
-	
+
 	/**
 	 * Retorna true se o usuário existir.
 	 * 
@@ -209,14 +211,14 @@ public interface JBPMFacade {
 	 * @return true se o usuário existir.
 	 */
 	public boolean isUsuarioExiste(UserDecorator decorator);
-	
+
 	/**
 	 * Consulta todos os usuários.
 	 * 
 	 * @return usuário
 	 */
 	public Collection<UserImpl> consultarUsuario();
-	
+
 	/**
 	 * @param <R> Serializable
 	 * @param decorator GroupDecorator
@@ -252,25 +254,32 @@ public interface JBPMFacade {
 	 * @return true se o grupo existir.
 	 */
 	public boolean isGrupoExiste(GroupDecorator decorator);
-	
+
 	/**
 	 * Consulta todos os grupos.
 	 * 
 	 * @return usuário
 	 */
 	public Collection<GroupImpl> consultarGrupo();
-	
-	/**
-	 * @param <R> Serializable
-	 * @param decorator MembershipDecorator
-	 * @return Serializable
-	 * @see CRUD#incluir(Object)
-	 */
-	public <R extends Serializable> R incluirUsuarioAoGrupo(MembershipDecorator decorator);
 
 	/**
-	 * @param decorator MembershipDecorator
-	 * @see CRUD#excluir(Object)
+	 * Consulta todos os grupos do usuário informado.
+	 * 
+	 * @return usuário
 	 */
-	public void excluirGrupoDoUsuario(MembershipDecorator decorator);
+	public Collection<GroupImpl> consultarGrupo(UserDecorator decorator);
+
+	/**
+	 * Inclui usuário a um grupo.
+	 * 
+	 * @param decorator Membership com group.id e user.id.
+	 */
+	public void incluirUsuarioAoGrupo(MembershipDecorator decorator);
+
+	/**
+	 * Remove o usuário de um determinado grupo.
+	 * 
+	 * @param decorator Membership com group.id e user.id.
+	 */
+	public void excluirUsuarioDoGrupo(MembershipDecorator decorator);
 }

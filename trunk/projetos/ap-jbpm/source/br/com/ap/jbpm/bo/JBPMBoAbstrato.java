@@ -6,7 +6,7 @@
 package br.com.ap.jbpm.bo;
 
 import org.jbpm.api.Deployment;
-import org.jbpm.api.task.Task;
+import org.jbpm.pvm.internal.task.TaskImpl;
 
 import br.com.ap.arquitetura.negocio.CrudNegocioAbstrato;
 import br.com.ap.arquitetura.seguranca.ControladorDeAcesso;
@@ -34,7 +34,7 @@ public abstract class JBPMBoAbstrato<T> extends CrudNegocioAbstrato<T> {
 	 * @param tarefa Tarefa
 	 * @return TaskDecorator
 	 */
-	protected TaskDecorator novoTaskDecorator(Task tarefa) {
+	protected TaskDecorator novoTaskDecorator(TaskImpl tarefa) {
 		return getDecoratorFactory().novoTaskDecorator(tarefa);
 	}
 
@@ -115,8 +115,7 @@ public abstract class JBPMBoAbstrato<T> extends CrudNegocioAbstrato<T> {
 	 */
 	protected boolean isMembershipTemReferencia(MembershipDecorator decorator) {
 		return isReferencia(decorator) && 
-			isReferencia(decorator.getMembershipImpl()) &&
-			isReferencia(decorator.getMembershipImpl().getUser()) && 
-			isReferencia(decorator.getMembershipImpl().getGroup());
+			isReferencia(decorator.getMembershipImpl().getUser().getGivenName()) && 
+			isReferencia(decorator.getMembershipImpl().getGroup().getName());
 	}
 }

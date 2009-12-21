@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Criteria;
 import org.jbpm.api.IdentityService;
 import org.jbpm.api.identity.Group;
 import org.jbpm.pvm.internal.identity.impl.GroupImpl;
@@ -26,8 +27,7 @@ import br.com.ap.jbpm.dao.GroupDao;
  * @author adriano.pamplona
  */
 @Repository
-public class GroupDaoImpl extends JBPMDaoAbstrato<GroupImpl> implements
-		GroupDao {
+public class GroupDaoImpl extends JBPMDaoAbstrato<GroupImpl> implements GroupDao {
 
 	@Resource
 	private IdentityService	identityService;
@@ -43,8 +43,7 @@ public class GroupDaoImpl extends JBPMDaoAbstrato<GroupImpl> implements
 
 		if (isReferencia(parent)) {
 			String parentId = parent.getId();
-			resultado = identityService.createGroup(groupName, groupType,
-					parentId);
+			resultado = identityService.createGroup(groupName, groupType, parentId);
 		} else {
 			resultado = identityService.createGroup(groupName, groupType);
 		}
@@ -71,14 +70,20 @@ public class GroupDaoImpl extends JBPMDaoAbstrato<GroupImpl> implements
 	}
 
 	@Override
-	public Collection<GroupImpl> consultarPorUsuarioTipoGrupo(UserImpl user,
-			GroupImpl group) {
+	public Collection<GroupImpl> consultarPorUsuarioTipoGrupo(UserImpl user, GroupImpl group) {
 
 		String userId = user.getId();
 		String groupType = group.getType();
-		List<Group> grupos = identityService.findGroupsByUserAndGroupType(
-				userId, groupType);
+		List<Group> grupos = identityService.findGroupsByUserAndGroupType(userId, groupType);
 		return converter(grupos);
+	}
+
+	@Override
+	public GroupImpl obterPorName(GroupImpl group) {
+
+		Criteria criteria = novoCriteria();
+		criteria.add(novoCriterioEQ("name", group.getName()));
+		return (GroupImpl) criteria.uniqueResult();
 	}
 
 	/**
@@ -95,4 +100,5 @@ public class GroupDaoImpl extends JBPMDaoAbstrato<GroupImpl> implements
 		}
 		return resultado;
 	}
+
 }

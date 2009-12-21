@@ -73,7 +73,7 @@ public class GroupBo extends JBPMBoAbstrato<GroupImpl> {
 	 * Retorna o grupo pelo ID.
 	 * 
 	 * @param decorator GroupDecorator com ID informado.
-	 * @return usuário
+	 * @return grupo
 	 */
 	public GroupDecorator obterPorId(GroupDecorator decorator) {
 		GroupDecorator resultado = null;
@@ -83,6 +83,35 @@ public class GroupBo extends JBPMBoAbstrato<GroupImpl> {
 			resultado = getDecoratorFactory().novoGroupDecorator(group);
 		}
 		return resultado;
+	}
+
+	/**
+	 * Retorna o grupo pelo name.
+	 * 
+	 * @param decorator GroupDecorator com 'name' informado.
+	 * @return grupo
+	 */
+	public GroupDecorator obterPorName(GroupDecorator decorator) {
+		GroupDecorator resultado = null;
+
+		if (isReferencia(decorator) && !isVazio(decorator.getName())) {
+			GroupImpl group = decorator.getGroupImpl();
+			GroupImpl groupResultado = getCrudDao().obterPorName(group);
+
+			resultado = getDecoratorFactory().novoGroupDecorator(groupResultado);
+		}
+		return resultado;
+	}
+
+	/**
+	 * Retorna o grupo pelo name.
+	 * 
+	 * @param group Group com 'name' informado.
+	 * @return grupo
+	 */
+	public GroupDecorator obterPorName(GroupImpl group) {
+		GroupDecorator decorator = getDecoratorFactory().novoGroupDecorator(group);
+		return obterPorName(decorator);
 	}
 
 	/**
@@ -119,12 +148,11 @@ public class GroupBo extends JBPMBoAbstrato<GroupImpl> {
 	 * @param group Grupo com tipo.
 	 * @return grupos
 	 */
-	public Collection<GroupImpl> consultarPorUsuarioTipoGrupo(
-			UserDecorator userDecorator, GroupDecorator groupDecorator) {
+	public Collection<GroupImpl> consultarPorUsuarioTipoGrupo(UserDecorator userDecorator,
+			GroupDecorator groupDecorator) {
 		Collection<GroupImpl> resultado = null;
 
-		if (isUsuarioTemReferencia(userDecorator)
-				&& isGrupoTemReferencia(groupDecorator)) {
+		if (isUsuarioTemReferencia(userDecorator) && isGrupoTemReferencia(groupDecorator)) {
 			UserImpl user = userDecorator.getUserImpl();
 			GroupImpl group = groupDecorator.getGroupImpl();
 			resultado = getCrudDao().consultarPorUsuarioTipoGrupo(user, group);

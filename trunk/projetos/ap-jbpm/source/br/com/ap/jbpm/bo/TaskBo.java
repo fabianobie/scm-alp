@@ -15,7 +15,6 @@ import javax.annotation.Resource;
 import org.jbpm.api.Deployment;
 import org.jbpm.api.Execution;
 import org.jbpm.api.ProcessDefinition;
-import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.task.TaskImpl;
 import org.springframework.stereotype.Component;
 
@@ -48,6 +47,15 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	private DeploymentBo	deploymentBo;
 
 	/**
+	 * Consultar todas as tarefas.
+	 * 
+	 * @return tarefas
+	 */
+	public Collection<TaskImpl> consultarTarefa() {
+		return getCrudDao().consultar();
+	}
+	
+	/**
 	 * Consulta as tarefas do usuário solicitado, incluindo as tarefas
 	 * atribuídas a ninguém.
 	 * 
@@ -58,7 +66,7 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 
 		Collection<TaskDecorator> resultado = null;
 		if (isReferencia(user)) {
-			Collection<Task> tasks = getCrudDao().consultarTarefa(user);
+			Collection<TaskImpl> tasks = getCrudDao().consultarTarefa(user);
 			resultado = UtilConversor.converter(tasks);
 			consultarProcessDefinitionEVariables(resultado);
 		}
@@ -78,7 +86,7 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 
 		Collection<TaskDecorator> resultado = null;
 		if (isReferencia(user, processDefinition)) {
-			Collection<Task> tasks = getCrudDao().consultarTarefa(user, processDefinition);
+			Collection<TaskImpl> tasks = getCrudDao().consultarTarefa(user, processDefinition);
 			resultado = UtilConversor.converter(tasks);
 			consultarProcessDefinitionEVariables(resultado);
 		}
@@ -133,11 +141,11 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 
 		TaskDecorator resultado = null;
 		if (UtilObjeto.isReferencia(task)) {
-			Task tarefa = getCrudDao().obter(task.getId());
+			TaskImpl tarefa = getCrudDao().obter(task.getId());
 			Deployment deployment = obterDeployment(tarefa);
 
 			resultado = deploymentBo.obterFormulario(deployment, tarefa);
-			resultado.setTask(tarefa);
+			resultado.setTaskImpl(tarefa);
 		}
 		return resultado;
 	}
@@ -166,7 +174,7 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 
 		boolean resultado = false;
 		if (isReferencia(task, user)) {
-			Task tarefa = taskDao.obter(task.getId());
+			TaskImpl tarefa = taskDao.obter(task.getId());
 
 			String assignee = tarefa.getAssignee();
 			String givenName = user.getGivenName();
@@ -185,7 +193,7 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 		TaskDecorator resultado = null;
 
 		if (isReferencia(task)) {
-			Task temp = obter(task.getId());
+			TaskImpl temp = obter(task.getId());
 			resultado = novoTaskDecorator(temp);
 		}
 		return resultado;
@@ -197,13 +205,13 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 * @param task Tarefa com ID.
 	 * @return tarefa
 	 */
-	public TaskDecorator obterTarefa(Task task) {
+	public TaskDecorator obterTarefa(TaskImpl task) {
 		TaskDecorator resultado = null;
 
 		if (isReferencia(task)) {
 
 			if (isVazio(task.getExecutionId())) {
-				Task temp = obter(task.getId());
+				TaskImpl temp = obter(task.getId());
 				resultado = novoTaskDecorator(temp);
 			} else {
 				resultado = novoTaskDecorator(task);
@@ -265,7 +273,7 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 		UtilColecao.aplicarAlterador(resultado, new Alterador<TaskDecorator>() {
 			@Override
 			public TaskDecorator alterar(TaskDecorator taskDecorator) {
-				Task task = taskDecorator.getTask();
+				TaskImpl task = taskDecorator.getTaskImpl();
 
 				ProcessDefinition processDefinition = obterProcessDefinition(task);
 				taskDecorator.setProcessDefinition(processDefinition);
@@ -283,7 +291,7 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 * @param task Task
 	 * @return deployment da task
 	 */
-	protected Deployment obterDeployment(Task task) {
+	protected Deployment obterDeployment(TaskImpl task) {
 		Deployment resultado = null;
 
 		if (isReferencia(task)) {
@@ -300,7 +308,7 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 * @param task Task
 	 * @return definição do processo da task
 	 */
-	protected ProcessDefinition obterProcessDefinition(Task task) {
+	protected ProcessDefinition obterProcessDefinition(TaskImpl task) {
 		ProcessDefinition resultado = null;
 
 		if (isReferencia(task)) {
@@ -316,7 +324,7 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 * @param task Task
 	 * @return execution da task
 	 */
-	protected Execution obterExecution(Task task) {
+	protected Execution obterExecution(TaskImpl task) {
 		Execution resultado = null;
 
 		if (isReferencia(task)) {
@@ -349,4 +357,5 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	protected TaskDao getCrudDao() {
 		return taskDao;
 	}
+	
 }
