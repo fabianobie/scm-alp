@@ -143,9 +143,10 @@ public class JBPMFacadeImpl implements JBPMFacade {
 		return deploymentBo.obterNomeFormularioInicial(processDefinition);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <R extends Serializable> R incluirUsuario(UserDecorator decorator) {
-		return userBo.incluir(decorator);
+		return (R) userBo.incluir(decorator);
 	}
 
 	@Override
@@ -198,9 +199,10 @@ public class JBPMFacadeImpl implements JBPMFacade {
 		groupBo.excluir(decorator);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public <R extends Serializable> R incluirGrupo(GroupDecorator decorator) {
-		return groupBo.incluir(decorator);
+		return (R) groupBo.incluir(decorator);
 	}
 
 	@Override
