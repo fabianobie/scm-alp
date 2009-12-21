@@ -66,8 +66,7 @@ public final class UtilString {
 	 * @param string3 String
 	 * @return true se alguma string tiver vazia.
 	 */
-	public static boolean isVazio(String string1, String string2,
-			String string3) {
+	public static boolean isVazio(String string1, String string2, String string3) {
 		return (isVazio(string1, string2) || isVazio(string3));
 	}
 
@@ -164,9 +163,8 @@ public final class UtilString {
 	 * @param seFalso String substituta caso a condição seja false.
 	 * @return nova string com as devidas alterações.
 	 */
-	public static String substituirStringSe(boolean condicao,
-			String srcString, String localizar, String seVerdadeiro,
-			String seFalso) {
+	public static String substituirStringSe(boolean condicao, String srcString,
+			String localizar, String seVerdadeiro, String seFalso) {
 		if (condicao) {
 			srcString = UtilString.substituirString(srcString, localizar,
 					seVerdadeiro);
@@ -318,8 +316,8 @@ public final class UtilString {
 	 * @param tamanho Quantidade de repetições.
 	 * @return string alterada.
 	 */
-	public static String completarADireita(String srcString,
-			String novaString, int tamanho) {
+	public static String completarADireita(String srcString, String novaString,
+			int tamanho) {
 		StringBuilder result = getStringFactory().novoStringBuilder();
 		result.append(converterParaVazio(srcString));
 
@@ -519,7 +517,7 @@ public final class UtilString {
 	 * Retorna a quantidade de caracteres solicitados.
 	 * 
 	 * @param string String que será percorrida e verificada a quantidade de
-	 *            caracteres.
+	 *        caracteres.
 	 * @param caracter Caracter que será contado.
 	 * @return quantidade de caracteres.
 	 */
@@ -628,7 +626,7 @@ public final class UtilString {
 		}
 		return resultado;
 	}
-	
+
 	/**
 	 * Retorna o índice da primeira letra maiúscula da string.
 	 * 
@@ -637,9 +635,9 @@ public final class UtilString {
 	 */
 	public static int getPrimeiraMaiuscula(String string) {
 		int resultado = -1;
-		
+
 		if (!isVazio(string)) {
-			Pattern pattern = Pattern.compile(EL.getLetraMaiuscula()); 	
+			Pattern pattern = Pattern.compile(EL.getLetraMaiuscula());
 			Matcher matcher = pattern.matcher(string);
 			if (matcher.find()) {
 				resultado = matcher.start();
@@ -664,6 +662,67 @@ public final class UtilString {
 			resultado = string0.equalsIgnoreCase(string1);
 		}
 		return resultado;
+	}
+
+	/**
+	 * Retorna a string pluralizada, ex: casa retorna casas.
+	 * 
+	 * @param singular String que será pluralizada.
+	 * @return string pluralizada.
+	 */
+	public static String pluralizar(String singular) {
+
+		if (!isVazio(singular)) {
+			char letra = singular.charAt(singular.length() - 1);
+			switch (letra) {
+			case 'x':
+			case 's':
+				singular += "es";
+				break;
+			case 'y':
+				singular = singular.substring(0, singular.length() - 1) + "ies";
+				break;
+			default:
+				singular += "s";
+			}
+		}
+		return singular;
+	}
+
+	/**
+	 * Retorna uma string no padrão java, as strings com separadores do tipo
+	 * "_", " " ou "-" serão transformadas para o padrão java.<br/>
+	 * Ex: produto_final = ProdutoFinal
+	 * 
+	 * @param string String que será transformada.
+	 * 
+	 * @return String no padrão Java.
+	 */
+	public static String padraoJava(String string) {
+		if (!isVazio(string)) {
+			List<String> capitalizaveis = split("_ -", 1);
+			StringBuffer resultado = getStringFactory().novoStringBuffer();
+
+			boolean capitalizar = true;
+			for (int indice = 0; indice < string.length(); indice++) {
+				String letra = String.valueOf(string.charAt(indice));
+				if (capitalizaveis.contains(letra)) {
+					capitalizar = true;
+					continue;
+				}
+
+				if (capitalizar) {
+					resultado.append(maiuscula(letra));
+				} else {
+					resultado.append(minuscula(letra));
+				}
+				capitalizar = false;
+
+			}
+			string = resultado.toString();
+		}
+		return string;
+
 	}
 
 	/**
