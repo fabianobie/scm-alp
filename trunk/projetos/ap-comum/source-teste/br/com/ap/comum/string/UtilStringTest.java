@@ -1089,5 +1089,61 @@ public class UtilStringTest extends TesteAbstrato {
 		r = UtilString.isStringsIguaisIgnoreCase(null, null);
 		assertFalse(r);
 	}
+	
+	/**
+	 * Test
+	 * {@link UtilString#pluralizar(String)}
+	 */
+	@Test
+	public final void testPluralizar() {
+		
+		String singular = "casa";
+		String plural = UtilString.pluralizar(singular);
+		assertEquals("casas", plural);
+
+		singular = "";
+		plural = UtilString.pluralizar(singular);
+		assertEquals("", plural);
+
+		singular = null;
+		plural = UtilString.pluralizar(singular);
+		assertNull(plural);
+
+		singular = "vas";
+		plural = UtilString.pluralizar(singular);
+		assertEquals("vases", plural);
+	}
+
+	/**
+	 * Test
+	 * {@link UtilString#padraoJava(String)}
+	 */
+	@Test
+	public final void testPadraoJava() {
+		
+		String singular = "tabela_unidade_organizacional";
+		String plural = UtilString.padraoJava(singular);
+		assertEquals("TabelaUnidadeOrganizacional", plural);
+
+		singular = "tabela unidade organizacional";
+		plural = UtilString.padraoJava(singular);
+		assertEquals("TabelaUnidadeOrganizacional", plural);
+
+		singular = "TABELA_UNIDADE_ORGANIZACIONAL";
+		plural = UtilString.padraoJava(singular);
+		assertEquals("TabelaUnidadeOrganizacional", plural);
+		
+		singular = "";
+		plural = UtilString.padraoJava(singular);
+		assertEquals("", plural);
+		
+		singular = null;
+		plural = UtilString.padraoJava(singular);
+		assertNull(plural);
+		
+		singular = "vas";
+		plural = UtilString.padraoJava(singular);
+		assertEquals("Vas", plural);
+	}
 
 }
