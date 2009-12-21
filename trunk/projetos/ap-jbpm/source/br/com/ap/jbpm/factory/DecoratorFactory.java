@@ -115,9 +115,9 @@ public final class DecoratorFactory {
 	 * @param task Tarefa
 	 * @return TaskDecorator
 	 */
-	public TaskDecorator novoTaskDecorator(Task task) {
+	public TaskDecorator novoTaskDecorator(TaskImpl task) {
 		TaskDecorator decorator = novoTaskDecorator();
-		decorator.setTask(task);
+		decorator.setTaskImpl(task);
 		return decorator;
 	}
 

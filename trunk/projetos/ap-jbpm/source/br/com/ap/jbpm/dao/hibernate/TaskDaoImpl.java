@@ -15,7 +15,6 @@ import javax.annotation.Resource;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.jbpm.api.TaskService;
-import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.task.TaskImpl;
 import org.springframework.stereotype.Repository;
 
@@ -61,7 +60,7 @@ public class TaskDaoImpl extends JBPMDaoAbstrato<TaskImpl> implements TaskDao {
 	 * @see br.com.ap.jbpm.dao.TaskDao#consultarTarefa(br.com.ap.jbpm.decorator.UserDecorator)
 	 */
 	@SuppressWarnings("unchecked")
-	public Collection<Task> consultarTarefa(UserDecorator user) {
+	public Collection<TaskImpl> consultarTarefa(UserDecorator user) {
 		String givenName = user.getGivenName();
 		
 		Criteria criteria = novoCriteria();
@@ -75,7 +74,7 @@ public class TaskDaoImpl extends JBPMDaoAbstrato<TaskImpl> implements TaskDao {
 	 * @see br.com.ap.jbpm.dao.TaskDao#consultarTarefa(br.com.ap.jbpm.decorator.UserDecorator, br.com.ap.jbpm.decorator.ProcessDefinitionDecorator)
 	 */
 	@SuppressWarnings("unchecked")
-	public Collection<Task> consultarTarefa(UserDecorator user,
+	public Collection<TaskImpl> consultarTarefa(UserDecorator user,
 			ProcessDefinitionDecorator processDefinition) {
 
 		String givenName = user.getGivenName();

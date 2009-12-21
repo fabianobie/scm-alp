@@ -115,7 +115,7 @@ public class TesteAbstrato extends JbpmTestCase {
 	 * 
 	 * @param texto
 	 */
-	protected void print(String texto) {
+	protected void print(Object texto) {
 		System.out.print(texto);
 	}
 
@@ -124,7 +124,7 @@ public class TesteAbstrato extends JbpmTestCase {
 	 * 
 	 * @param texto
 	 */
-	protected void println(String texto) {
+	protected void println(Object texto) {
 		System.out.println(texto);
 	}
 

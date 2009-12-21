@@ -8,7 +8,6 @@ package br.com.ap.jbpm.factory;
 import org.jbpm.api.Deployment;
 import org.jbpm.api.Execution;
 import org.jbpm.api.ProcessDefinition;
-import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.identity.impl.GroupImpl;
 import org.jbpm.pvm.internal.identity.impl.MembershipImpl;
 import org.jbpm.pvm.internal.identity.impl.UserImpl;
@@ -44,7 +43,7 @@ public final class EntidadeFactory {
 	/**
 	 * @return Task
 	 */
-	public Task novaTask() {
+	public TaskImpl novaTask() {
 		return new TaskImpl();
 	}
 

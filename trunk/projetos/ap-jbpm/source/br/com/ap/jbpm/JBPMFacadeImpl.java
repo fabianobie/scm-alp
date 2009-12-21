@@ -15,6 +15,7 @@ import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
 import org.jbpm.pvm.internal.identity.impl.GroupImpl;
 import org.jbpm.pvm.internal.identity.impl.UserImpl;
+import org.jbpm.pvm.internal.task.TaskImpl;
 import org.springframework.stereotype.Service;
 
 import br.com.ap.jbpm.bo.DeploymentBo;
@@ -76,6 +77,11 @@ public class JBPMFacadeImpl implements JBPMFacade {
 		return deploymentBo.obterDefinicaoDeProcesso(processDefinition);
 	}
 
+	@Override
+	public Collection<TaskImpl> consultarTarefa() {
+		return taskBo.consultarTarefa();
+	}
+	
 	@Override
 	public Collection<TaskDecorator> consultarTarefa(UserDecorator user) {
 		return taskBo.consultarTarefa(user);
@@ -159,7 +165,7 @@ public class JBPMFacadeImpl implements JBPMFacade {
 
 	@Override
 	public UserDecorator obterUsuarioPeloNome(UserDecorator user) {
-		return userBo.obterPeloNome(user);
+		return userBo.obterPorGivenName(user);
 	}
 
 	@Override
@@ -183,6 +189,11 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
+	public Collection<GroupImpl> consultarGrupo(UserDecorator decorator) {
+		return groupBo.consultar(decorator);
+	}
+
+	@Override
 	public void excluirGrupo(GroupDecorator decorator) {
 		groupBo.excluir(decorator);
 	}
@@ -203,13 +214,12 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public void excluirGrupoDoUsuario(MembershipDecorator decorator) {
+	public void excluirUsuarioDoGrupo(MembershipDecorator decorator) {
 		membershipBo.excluir(decorator);
 	}
 
 	@Override
-	public <R extends Serializable> R incluirUsuarioAoGrupo(MembershipDecorator decorator) {
-		return membershipBo.incluir(decorator);
+	public void incluirUsuarioAoGrupo(MembershipDecorator decorator) {
+		membershipBo.incluir(decorator);
 	}
-
 }

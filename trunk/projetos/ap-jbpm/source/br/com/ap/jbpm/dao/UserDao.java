@@ -22,5 +22,5 @@ public interface UserDao extends CrudDao<UserImpl> {
 	 * @param user Usuário com givenName informado
 	 * @return Usuário recuperado
 	 */
-	public UserImpl obterPeloNome(UserImpl user);
+	public UserImpl obterPorGivenName(UserImpl user);
 }

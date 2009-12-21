@@ -53,9 +53,9 @@ public class UserDaoImpl extends JBPMDaoAbstrato<UserImpl> implements UserDao {
 	}
 
 	/**
-	 * @see br.com.ap.jbpm.dao.UserDao#obterPeloNome(br.com.ap.jbpm.decorator.UserDecorator)
+	 * @see br.com.ap.jbpm.dao.UserDao#obterPorGivenName(br.com.ap.jbpm.decorator.UserDecorator)
 	 */
-	public UserImpl obterPeloNome(UserImpl user) {
+	public UserImpl obterPorGivenName(UserImpl user) {
 
 		Criteria criteria = novoCriteria();
 		criteria.add(novoCriterioEQ("givenName", user.getGivenName()));

@@ -7,7 +7,7 @@ package br.com.ap.jbpm.util;
 
 import java.util.Collection;
 
-import org.jbpm.api.task.Task;
+import org.jbpm.pvm.internal.task.TaskImpl;
 
 import br.com.ap.comum.colecao.UtilColecao;
 import br.com.ap.jbpm.decorator.TaskDecorator;
@@ -33,7 +33,7 @@ public final class UtilConversor {
 	 * @param tasks coleção de task
 	 * @return coleção de taskdecorator
 	 */
-	public static Collection<TaskDecorator> converter(Collection<Task> tasks) {
+	public static Collection<TaskDecorator> converter(Collection<TaskImpl> tasks) {
 		ConversorDeTaskParaTaskDecorator conversor = getConversorFactory()
 				.novoConversorDeTaskParaTaskDecorator();
 

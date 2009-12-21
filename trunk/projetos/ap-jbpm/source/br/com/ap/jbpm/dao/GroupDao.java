@@ -36,4 +36,12 @@ public interface GroupDao extends CrudDao<GroupImpl> {
 	 */
 	public Collection<GroupImpl> consultarPorUsuarioTipoGrupo(UserImpl user,
 			GroupImpl group);
+
+	/**
+	 * Obtem o grupo pelo nome.
+	 * 
+	 * @param group Group com o name informado.
+	 * @return group localizado
+	 */
+	public GroupImpl obterPorName(GroupImpl group);
 }
