@@ -61,6 +61,40 @@ public class GeradorUtil {
 	}
 
 	/**
+	 * Gera anotações extras para um atributo.
+	 * 
+	 * @param clazz PersistentClass
+	 * @return anotações extras para um atributo.
+	 */
+	public String generateMetaExtraClasse(PersistentClass clazz) {
+		StringBuffer resultado = getStringFactory().novoStringBuffer();
+
+		MetaAttribute meta = clazz.getMetaAttribute("extra-classe");
+		if (UtilObjeto.isReferencia(meta)) {
+			String valor = meta.getValue();
+			resultado.append(UtilString.trim(valor));
+		}
+		return resultado.toString();
+	}
+	
+	/**
+	 * Gera anotações extras para um atributo.
+	 * 
+	 * @param component Component
+	 * @return anotações extras para um atributo.
+	 */
+	public String generateMetaExtraClasse(Component component) {
+		StringBuffer resultado = getStringFactory().novoStringBuffer();
+		
+		MetaAttribute meta = component.getMetaAttribute("extra-classe");
+		if (UtilObjeto.isReferencia(meta)) {
+			String valor = meta.getValue();
+			resultado.append(UtilString.trim(valor));
+		}
+		return resultado.toString();
+	}
+
+	/**
 	 * @return StringFactory
 	 */
 	protected StringFactory getStringFactory() {
