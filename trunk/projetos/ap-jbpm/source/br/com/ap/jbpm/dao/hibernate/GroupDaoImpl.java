@@ -92,11 +92,12 @@ public class GroupDaoImpl extends JBPMDaoAbstrato<GroupImpl> implements GroupDao
 	 * @param groups Lista de group
 	 * @return coleção de groupimpl
 	 */
-	@SuppressWarnings("unchecked")
 	protected Collection<GroupImpl> converter(List<Group> groups) {
 		Collection<GroupImpl> resultado = getColecaoFactory().novoArrayList();
 		if (isReferencia(groups)) {
-			resultado.addAll((Collection<? extends GroupImpl>) groups);
+			for (Group group : groups) {
+				resultado.add((GroupImpl) group);
+			}
 		}
 		return resultado;
 	}
