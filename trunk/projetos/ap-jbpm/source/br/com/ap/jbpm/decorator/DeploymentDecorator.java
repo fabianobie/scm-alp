@@ -7,7 +7,7 @@ package br.com.ap.jbpm.decorator;
 
 import java.util.Collection;
 
-import org.jbpm.api.Deployment;
+import org.jbpm.pvm.internal.repository.DeploymentImpl;
 
 /**
  * Decorator da entidade Deployment.
@@ -15,7 +15,7 @@ import org.jbpm.api.Deployment;
  * @author adriano.pamplona
  */
 public class DeploymentDecorator extends JbpmDecoratorAbstrato {
-	private Deployment			deployment;
+	private DeploymentImpl		deploymentImpl;
 	private String				id;
 	private String				classpathJpdl;
 	private Collection<String>	colecaoClasspathFormulario;
@@ -25,7 +25,7 @@ public class DeploymentDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Deployment#getId()
 	 */
 	public String getId() {
-		String resultado = getDeployment().getId();
+		String resultado = getDeploymentImpl().getId();
 		if (isVazio(resultado) || isZero(resultado)) {
 			resultado = id;
 		}
@@ -44,7 +44,16 @@ public class DeploymentDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Deployment#getName()
 	 */
 	public String getName() {
-		return getDeployment().getName();
+		return getDeploymentImpl().getName();
+	}
+
+	/**
+	 * @param name
+	 * @return
+	 * @see org.jbpm.pvm.internal.repository.DeploymentImpl#setName(java.lang.String)
+	 */
+	public DeploymentImpl setName(String name) {
+		return getDeploymentImpl().setName(name);
 	}
 
 	/**
@@ -52,7 +61,7 @@ public class DeploymentDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Deployment#getState()
 	 */
 	public String getState() {
-		return getDeployment().getState();
+		return getDeploymentImpl().getState();
 	}
 
 	/**
@@ -60,24 +69,33 @@ public class DeploymentDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Deployment#getTimestamp()
 	 */
 	public long getTimestamp() {
-		return getDeployment().getTimestamp();
+		return getDeploymentImpl().getTimestamp();
+	}
+
+	/**
+	 * @param timestamp
+	 * @return
+	 * @see org.jbpm.pvm.internal.repository.DeploymentImpl#setTimestamp(long)
+	 */
+	public DeploymentImpl setTimestamp(long timestamp) {
+		return getDeploymentImpl().setTimestamp(timestamp);
 	}
 
 	/**
 	 * @return retorna deployment.
 	 */
-	public Deployment getDeployment() {
-		if (!isReferencia(deployment)) {
-			deployment = getEntidadeFactory().novoDeployment();
+	public DeploymentImpl getDeploymentImpl() {
+		if (!isReferencia(deploymentImpl)) {
+			deploymentImpl = getEntidadeFactory().novoDeployment();
 		}
-		return deployment;
+		return deploymentImpl;
 	}
 
 	/**
 	 * @param deployment Atribui deployment.
 	 */
-	public void setDeployment(Deployment deployment) {
-		this.deployment = deployment;
+	public void setDeploymentImpl(DeploymentImpl deploymentImpl) {
+		this.deploymentImpl = deploymentImpl;
 	}
 
 	/**
@@ -107,7 +125,8 @@ public class DeploymentDecorator extends JbpmDecoratorAbstrato {
 	/**
 	 * @param colecaoClasspathFormulario Atribui colecaoClasspathFormulario.
 	 */
-	public void setColecaoClasspathFormulario(Collection<String> colecaoClasspathFormulario) {
+	public void setColecaoClasspathFormulario(
+			Collection<String> colecaoClasspathFormulario) {
 		this.colecaoClasspathFormulario = colecaoClasspathFormulario;
 	}
 

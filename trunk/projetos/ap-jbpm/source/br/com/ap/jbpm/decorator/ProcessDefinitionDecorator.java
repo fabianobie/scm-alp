@@ -5,9 +5,10 @@
  */
 package br.com.ap.jbpm.decorator;
 
+import java.util.Date;
 import java.util.Map;
 
-import org.jbpm.api.ProcessDefinition;
+import org.jbpm.pvm.internal.model.ProcessDefinitionImpl;
 
 /**
  * Decorator da entidade ProcessDefinition.
@@ -15,124 +16,161 @@ import org.jbpm.api.ProcessDefinition;
  * @author adriano.pamplona
  */
 public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
-	private ProcessDefinition	processDefinition;
-	private Map<String, Object>	mapaVariables;
-	private String				id;
-	private String				key;
-	private Integer				version;
-
-	private String				deploymentId;
+	private ProcessDefinitionImpl	processDefinitionImpl;
+	private Map<String, Object>		mapaVariables;
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.ProcessDefinition#getDeploymentId()
+	 * @see org.jbpm.pvm.internal.model.ProcessDefinitionImpl#getDeploymentId()
 	 */
 	public String getDeploymentId() {
-		String resultado = getProcessDefinition().getDeploymentId();
-
-		if (isVazio(resultado) || isZero(resultado)) {
-			resultado = deploymentId;
-		}
-		return resultado;
-	}
-
-	/**
-	 * @param deploymentId Atribui deploymentId
-	 */
-	public void setDeploymentId(String deploymentId) {
-		this.deploymentId = deploymentId;
+		return getProcessDefinitionImpl().getDeploymentId();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.ProcessDefinition#getDescription()
+	 * @see org.jbpm.pvm.internal.model.ProcessDefinitionImpl#getDeploymentTime()
+	 */
+	public Date getDeploymentTime() {
+		return getProcessDefinitionImpl().getDeploymentTime();
+	}
+
+	/**
+	 * @return
+	 * @see org.jbpm.pvm.internal.model.ObservableElementImpl#getDescription()
 	 */
 	public String getDescription() {
-		return getProcessDefinition().getDescription();
+		return getProcessDefinitionImpl().getDescription();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.ProcessDefinition#getId()
+	 * @see org.jbpm.pvm.internal.model.ProcessDefinitionImpl#getId()
 	 */
 	public String getId() {
-		String resultado = getProcessDefinition().getId();
-		if (isVazio(resultado) || isZero(resultado)) {
-			resultado = id;
-		}
-		return resultado;
-	}
-
-	/**
-	 * @param id Atribui id
-	 */
-	public void setId(String id) {
-		this.id = id;
+		return getProcessDefinitionImpl().getId();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.ProcessDefinition#getImageResourceName()
+	 * @see org.jbpm.pvm.internal.model.ProcessDefinitionImpl#getImageResourceName()
 	 */
 	public String getImageResourceName() {
-		return getProcessDefinition().getImageResourceName();
+		return getProcessDefinitionImpl().getImageResourceName();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.ProcessDefinition#getKey()
+	 * @see org.jbpm.pvm.internal.model.ProcessDefinitionImpl#getKey()
 	 */
 	public String getKey() {
-		String resultado = getProcessDefinition().getKey();
-		if (isVazio(resultado) || isZero(resultado)) {
-			resultado = key;
-		}
-		return resultado;
+		return getProcessDefinitionImpl().getKey();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.ProcessDefinition#getName()
+	 * @see org.jbpm.pvm.internal.model.ObservableElementImpl#getName()
 	 */
 	public String getName() {
-		return getProcessDefinition().getName();
+		return getProcessDefinitionImpl().getName();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.ProcessDefinition#getVersion()
+	 * @see org.jbpm.pvm.internal.model.ProcessDefinitionImpl#getVersion()
 	 */
 	public int getVersion() {
-		Integer resultado = getProcessDefinition().getVersion();
-		if (!isReferencia(resultado) || isZero(resultado)) {
-			resultado = version;
-		}
-		return resultado;
+		return getProcessDefinitionImpl().getVersion();
 	}
 
 	/**
 	 * @return
-	 * @see org.jbpm.api.ProcessDefinition#isSuspended()
+	 * @see org.jbpm.pvm.internal.model.ProcessDefinitionImpl#isSuspended()
 	 */
 	public boolean isSuspended() {
-		return getProcessDefinition().isSuspended();
+		return getProcessDefinitionImpl().isSuspended();
+	}
+
+	/**
+	 * @param deploymentTime
+	 * @see org.jbpm.pvm.internal.model.ProcessDefinitionImpl#setDeploymentTime(java.util.Date)
+	 */
+	public void setDeploymentTime(Date deploymentTime) {
+		getProcessDefinitionImpl().setDeploymentTime(deploymentTime);
+	}
+
+	/**
+	 * @param description
+	 * @see org.jbpm.pvm.internal.model.ObservableElementImpl#setDescription(java.lang.String)
+	 */
+	public void setDescription(String description) {
+		getProcessDefinitionImpl().setDescription(description);
+	}
+
+	/**
+	 * @param id
+	 * @see org.jbpm.pvm.internal.model.ProcessDefinitionImpl#setId(java.lang.String)
+	 */
+	public void setId(String id) {
+		getProcessDefinitionImpl().setId(id);
+	}
+
+	/**
+	 * @param imageResourceName
+	 * @see org.jbpm.pvm.internal.model.ProcessDefinitionImpl#setImageResourceName(java.lang.String)
+	 */
+	public void setImageResourceName(String imageResourceName) {
+		getProcessDefinitionImpl().setImageResourceName(imageResourceName);
+	}
+
+	/**
+	 * @param key
+	 * @see org.jbpm.pvm.internal.model.ProcessDefinitionImpl#setKey(java.lang.String)
+	 */
+	public void setKey(String key) {
+		getProcessDefinitionImpl().setKey(key);
+	}
+
+	/**
+	 * @param name
+	 * @see org.jbpm.pvm.internal.model.ObservableElementImpl#setName(java.lang.String)
+	 */
+	public void setName(String name) {
+		getProcessDefinitionImpl().setName(name);
+	}
+
+	/**
+	 * @param isSuspended
+	 * @see org.jbpm.pvm.internal.model.ProcessDefinitionImpl#setSuspended(boolean)
+	 */
+	public void setSuspended(boolean isSuspended) {
+		getProcessDefinitionImpl().setSuspended(isSuspended);
+	}
+
+	/**
+	 * @param version
+	 * @see org.jbpm.pvm.internal.model.ProcessDefinitionImpl#setVersion(int)
+	 */
+	public void setVersion(int version) {
+		getProcessDefinitionImpl().setVersion(version);
 	}
 
 	/**
 	 * @return retorna processDefinition.
 	 */
-	public ProcessDefinition getProcessDefinition() {
-		if (!isReferencia(processDefinition)) {
-			processDefinition = getEntidadeFactory().novoProcessDefinition();
+	public ProcessDefinitionImpl getProcessDefinitionImpl() {
+		if (!isReferencia(processDefinitionImpl)) {
+			processDefinitionImpl = getEntidadeFactory()
+					.novoProcessDefinition();
 		}
-		return processDefinition;
+		return processDefinitionImpl;
 	}
 
 	/**
 	 * @param processDefinition Atribui processDefinition.
 	 */
-	public void setProcessDefinition(ProcessDefinition processDefinition) {
-		this.processDefinition = processDefinition;
+	public void setProcessDefinitionImpl(ProcessDefinitionImpl processDefinition) {
+		this.processDefinitionImpl = processDefinition;
 	}
 
 	/**
@@ -150,20 +188,6 @@ public class ProcessDefinitionDecorator extends JbpmDecoratorAbstrato {
 	 */
 	public void setMapaVariables(Map<String, Object> mapaVariables) {
 		this.mapaVariables = mapaVariables;
-	}
-
-	/**
-	 * @param key Atribui key
-	 */
-	public void setKey(String key) {
-		this.key = key;
-	}
-
-	/**
-	 * @param version Atribui version
-	 */
-	public void setVersion(Integer version) {
-		this.version = version;
 	}
 
 }

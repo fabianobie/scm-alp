@@ -5,13 +5,9 @@
  */
 package br.com.ap.jbpm.factory;
 
-import org.jbpm.api.Deployment;
-import org.jbpm.api.Execution;
-import org.jbpm.api.ProcessDefinition;
 import org.jbpm.pvm.internal.identity.impl.GroupImpl;
 import org.jbpm.pvm.internal.identity.impl.MembershipImpl;
 import org.jbpm.pvm.internal.identity.impl.UserImpl;
-import org.jbpm.pvm.internal.model.Activity;
 import org.jbpm.pvm.internal.model.ActivityImpl;
 import org.jbpm.pvm.internal.model.ExecutionImpl;
 import org.jbpm.pvm.internal.model.ProcessDefinitionImpl;
@@ -50,14 +46,14 @@ public final class EntidadeFactory {
 	/**
 	 * @return Deployment
 	 */
-	public Deployment novoDeployment() {
+	public DeploymentImpl novoDeployment() {
 		return new DeploymentImpl();
 	}
 
 	/**
 	 * @return ProcessDefinition
 	 */
-	public ProcessDefinition novoProcessDefinition() {
+	public ProcessDefinitionImpl novoProcessDefinition() {
 		return new ProcessDefinitionImpl();
 	}
 
@@ -71,14 +67,14 @@ public final class EntidadeFactory {
 	/**
 	 * @return Execution
 	 */
-	public Execution novoExecution() {
+	public ExecutionImpl novoExecution() {
 		return new ExecutionImpl();
 	}
 
 	/**
 	 * @return Activity
 	 */
-	public Activity novaActivity() {
+	public ActivityImpl novaActivity() {
 		return new ActivityImpl();
 	}
 

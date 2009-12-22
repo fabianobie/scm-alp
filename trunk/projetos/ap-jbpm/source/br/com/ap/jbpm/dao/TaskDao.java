@@ -8,12 +8,12 @@ package br.com.ap.jbpm.dao;
 import java.util.Collection;
 import java.util.Map;
 
+import org.jbpm.pvm.internal.identity.impl.UserImpl;
+import org.jbpm.pvm.internal.model.ProcessDefinitionImpl;
 import org.jbpm.pvm.internal.task.TaskImpl;
 
 import br.com.ap.arquitetura.dao.CrudDao;
-import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
-import br.com.ap.jbpm.decorator.UserDecorator;
 
 /**
  * DAO de acesso às informação da task.
@@ -28,7 +28,7 @@ public interface TaskDao extends CrudDao<TaskImpl> {
 	 * @param user Usuário
 	 * @return tarefas
 	 */
-	public Collection<TaskImpl> consultarTarefa(UserDecorator user);
+	public Collection<TaskImpl> consultarTarefa(UserImpl user);
 
 	/**
 	 * Consulta as tarefas atribuídas a um usuário ou a ninguém de uma definição
@@ -38,8 +38,8 @@ public interface TaskDao extends CrudDao<TaskImpl> {
 	 * @param processDefinition Definição de processo
 	 * @return tarefas
 	 */
-	public Collection<TaskImpl> consultarTarefa(UserDecorator user,
-			ProcessDefinitionDecorator processDefinition);
+	public Collection<TaskImpl> consultarTarefa(UserImpl user,
+			ProcessDefinitionImpl processDefinition);
 
 	/**
 	 * Salva a tarefa.
@@ -70,7 +70,7 @@ public interface TaskDao extends CrudDao<TaskImpl> {
 	 * @param task Tarefa
 	 * @param user Usuário
 	 */
-	public void locarTarefa(TaskDecorator task, UserDecorator user);
+	public void locarTarefa(TaskDecorator task, UserImpl user);
 
 	/**
 	 * Retorna as variáveis a partir de uma tarefa.

@@ -5,11 +5,10 @@
  */
 package br.com.ap.jbpm.factory;
 
-import org.jbpm.api.Deployment;
-import org.jbpm.api.ProcessDefinition;
-import org.jbpm.api.task.Task;
 import org.jbpm.pvm.internal.identity.impl.GroupImpl;
 import org.jbpm.pvm.internal.identity.impl.UserImpl;
+import org.jbpm.pvm.internal.model.ProcessDefinitionImpl;
+import org.jbpm.pvm.internal.repository.DeploymentImpl;
 import org.jbpm.pvm.internal.task.TaskImpl;
 
 import br.com.ap.jbpm.decorator.ActivityDecorator;
@@ -45,7 +44,7 @@ public final class DecoratorFactory {
 	/**
 	 * @return Task
 	 */
-	public Task novaTask() {
+	public TaskImpl novaTask() {
 		return new TaskImpl();
 	}
 
@@ -60,9 +59,9 @@ public final class DecoratorFactory {
 	 * @param deployment Deployment
 	 * @return DeploymentDecorator
 	 */
-	public DeploymentDecorator novoDeploymentDecorator(Deployment deployment) {
+	public DeploymentDecorator novoDeploymentDecorator(DeploymentImpl deployment) {
 		DeploymentDecorator decorator = novoDeploymentDecorator();
-		decorator.setDeployment(deployment);
+		decorator.setDeploymentImpl(deployment);
 		return decorator;
 	}
 
@@ -98,9 +97,9 @@ public final class DecoratorFactory {
 	 * @return ProcessDefinitionDecorator
 	 */
 	public ProcessDefinitionDecorator novoProcessDefinitionDecorator(
-			ProcessDefinition processDefinition) {
+			ProcessDefinitionImpl processDefinition) {
 		ProcessDefinitionDecorator decorator = novoProcessDefinitionDecorator();
-		decorator.setProcessDefinition(processDefinition);
+		decorator.setProcessDefinitionImpl(processDefinition);
 		return decorator;
 	}
 

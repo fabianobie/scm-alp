@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.jbpm.api.Execution;
+import org.jbpm.pvm.internal.model.ExecutionImpl;
 
 /**
  * Decorator da entidade Execution.
@@ -17,15 +18,15 @@ import org.jbpm.api.Execution;
  * @author adriano.pamplona
  */
 public class ExecutionDecorator extends JbpmDecoratorAbstrato {
-	private Execution	execution;
-	private String		id;
+	private ExecutionImpl		executionImpl;
+	private Map<String, Object>	mapaVariables;
 
 	/**
 	 * @return
 	 * @see org.jbpm.api.Execution#findActiveActivityNames()
 	 */
 	public Set<String> findActiveActivityNames() {
-		return getExecution().findActiveActivityNames();
+		return getExecutionImpl().findActiveActivityNames();
 	}
 
 	/**
@@ -34,7 +35,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#findActiveExecutionIn(java.lang.String)
 	 */
 	public Execution findActiveExecutionIn(String activityName) {
-		return getExecution().findActiveExecutionIn(activityName);
+		return getExecutionImpl().findActiveExecutionIn(activityName);
 	}
 
 	/**
@@ -43,7 +44,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#getExecution(java.lang.String)
 	 */
 	public Execution getExecution(String name) {
-		return getExecution().getExecution(name);
+		return getExecutionImpl().getExecution(name);
 	}
 
 	/**
@@ -51,7 +52,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#getExecutions()
 	 */
 	public Collection<? extends Execution> getExecutions() {
-		return getExecution().getExecutions();
+		return getExecutionImpl().getExecutions();
 	}
 
 	/**
@@ -59,7 +60,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#getExecutionsMap()
 	 */
 	public Map<String, Execution> getExecutionsMap() {
-		return getExecution().getExecutionsMap();
+		return getExecutionImpl().getExecutionsMap();
 	}
 
 	/**
@@ -67,18 +68,14 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#getId()
 	 */
 	public String getId() {
-		String resultado = getExecution().getId();
-		if (isVazio(resultado) || isZero(resultado)) {
-			resultado = id;
-		}
-		return resultado;
+		return getExecutionImpl().getId();
 	}
 
 	/**
 	 * @param id Atribui id
 	 */
 	public void setId(String id) {
-		this.id = id;
+		getExecutionImpl().setId(id);
 	}
 
 	/**
@@ -86,7 +83,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#getKey()
 	 */
 	public String getKey() {
-		return getExecution().getKey();
+		return getExecutionImpl().getKey();
 	}
 
 	/**
@@ -94,7 +91,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#getName()
 	 */
 	public String getName() {
-		return getExecution().getName();
+		return getExecutionImpl().getName();
 	}
 
 	/**
@@ -102,7 +99,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#getParent()
 	 */
 	public Execution getParent() {
-		return getExecution().getParent();
+		return getExecutionImpl().getParent();
 	}
 
 	/**
@@ -110,7 +107,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#getPriority()
 	 */
 	public int getPriority() {
-		return getExecution().getPriority();
+		return getExecutionImpl().getPriority();
 	}
 
 	/**
@@ -118,7 +115,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#getProcessDefinitionId()
 	 */
 	public String getProcessDefinitionId() {
-		return getExecution().getProcessDefinitionId();
+		return getExecutionImpl().getProcessDefinitionId();
 	}
 
 	/**
@@ -126,7 +123,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#getProcessInstance()
 	 */
 	public Execution getProcessInstance() {
-		return getExecution().getProcessInstance();
+		return getExecutionImpl().getProcessInstance();
 	}
 
 	/**
@@ -134,7 +131,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#getState()
 	 */
 	public String getState() {
-		return getExecution().getState();
+		return getExecutionImpl().getState();
 	}
 
 	/**
@@ -143,7 +140,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#hasExecution(java.lang.String)
 	 */
 	public boolean hasExecution(String executionName) {
-		return getExecution().hasExecution(executionName);
+		return getExecutionImpl().hasExecution(executionName);
 	}
 
 	/**
@@ -152,7 +149,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#isActive(java.lang.String)
 	 */
 	public boolean isActive(String activityName) {
-		return getExecution().isActive(activityName);
+		return getExecutionImpl().isActive(activityName);
 	}
 
 	/**
@@ -160,7 +157,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#isEnded()
 	 */
 	public boolean isEnded() {
-		return getExecution().isEnded();
+		return getExecutionImpl().isEnded();
 	}
 
 	/**
@@ -168,7 +165,7 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#isProcessInstance()
 	 */
 	public boolean isProcessInstance() {
-		return getExecution().isProcessInstance();
+		return getExecutionImpl().isProcessInstance();
 	}
 
 	/**
@@ -176,24 +173,41 @@ public class ExecutionDecorator extends JbpmDecoratorAbstrato {
 	 * @see org.jbpm.api.Execution#isSuspended()
 	 */
 	public boolean isSuspended() {
-		return getExecution().isSuspended();
+		return getExecutionImpl().isSuspended();
 	}
 
 	/**
 	 * @return execution
 	 */
-	public Execution getExecution() {
-		if (!isReferencia(execution)) {
-			execution = getEntidadeFactory().novoExecution();
+	public ExecutionImpl getExecutionImpl() {
+		if (!isReferencia(executionImpl)) {
+			executionImpl = getEntidadeFactory().novoExecution();
 		}
-		return execution;
+		return executionImpl;
 	}
 
 	/**
 	 * @param execution Atribui execution
 	 */
-	public void setExecution(Execution execution) {
-		this.execution = execution;
+	public void setExecutionImpl(ExecutionImpl execution) {
+		this.executionImpl = execution;
+	}
+
+	/**
+	 * @return retorna mapaVariables.
+	 */
+	public Map<String, Object> getMapaVariables() {
+		if (!isReferencia(mapaVariables)) {
+			mapaVariables = getColecaoFactory().novoHashMap();
+		}
+		return mapaVariables;
+	}
+
+	/**
+	 * @param mapaVariables Atribui mapaVariables.
+	 */
+	public void setMapaVariables(Map<String, Object> mapaVariables) {
+		this.mapaVariables = mapaVariables;
 	}
 
 }
