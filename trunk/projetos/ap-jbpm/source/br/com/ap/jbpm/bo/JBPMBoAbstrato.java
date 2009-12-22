@@ -5,7 +5,7 @@
  */
 package br.com.ap.jbpm.bo;
 
-import org.jbpm.api.Deployment;
+import org.jbpm.pvm.internal.repository.DeploymentImpl;
 import org.jbpm.pvm.internal.task.TaskImpl;
 
 import br.com.ap.arquitetura.negocio.CrudNegocioAbstrato;
@@ -44,7 +44,8 @@ public abstract class JBPMBoAbstrato<T> extends CrudNegocioAbstrato<T> {
 	 * @param deployment Deployment
 	 * @return deployment decorator
 	 */
-	protected DeploymentDecorator novoDeploymentDecorator(Deployment deployment) {
+	protected DeploymentDecorator novoDeploymentDecorator(
+			DeploymentImpl deployment) {
 		return getDecoratorFactory().novoDeploymentDecorator(deployment);
 	}
 
@@ -106,7 +107,7 @@ public abstract class JBPMBoAbstrato<T> extends CrudNegocioAbstrato<T> {
 	protected boolean isUsuarioTemReferencia(UserDecorator decorator) {
 		return isReferencia(decorator) && isReferencia(decorator.getUserImpl());
 	}
-	
+
 	/**
 	 * Retorna true se o usuário e o grupo agregado tiverem referência.
 	 * 
@@ -114,8 +115,10 @@ public abstract class JBPMBoAbstrato<T> extends CrudNegocioAbstrato<T> {
 	 * @return true se o usuário e o grupo agregado tiverem referência.
 	 */
 	protected boolean isMembershipTemReferencia(MembershipDecorator decorator) {
-		return isReferencia(decorator) && 
-			isReferencia(decorator.getMembershipImpl().getUser().getGivenName()) && 
-			isReferencia(decorator.getMembershipImpl().getGroup().getName());
+		return isReferencia(decorator)
+				&& isReferencia(decorator.getMembershipImpl().getUser()
+						.getGivenName())
+				&& isReferencia(decorator.getMembershipImpl().getGroup()
+						.getName());
 	}
 }

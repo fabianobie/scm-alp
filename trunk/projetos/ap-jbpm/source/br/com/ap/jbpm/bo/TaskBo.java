@@ -12,9 +12,11 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
-import org.jbpm.api.Deployment;
 import org.jbpm.api.Execution;
 import org.jbpm.api.ProcessDefinition;
+import org.jbpm.pvm.internal.identity.impl.UserImpl;
+import org.jbpm.pvm.internal.model.ProcessDefinitionImpl;
+import org.jbpm.pvm.internal.repository.DeploymentImpl;
 import org.jbpm.pvm.internal.task.TaskImpl;
 import org.springframework.stereotype.Component;
 
@@ -54,7 +56,7 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	public Collection<TaskImpl> consultarTarefa() {
 		return getCrudDao().consultar();
 	}
-	
+
 	/**
 	 * Consulta as tarefas do usuário solicitado, incluindo as tarefas
 	 * atribuídas a ninguém.
@@ -66,7 +68,8 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 
 		Collection<TaskDecorator> resultado = null;
 		if (isReferencia(user)) {
-			Collection<TaskImpl> tasks = getCrudDao().consultarTarefa(user);
+			UserImpl userImpl = user.getUserImpl();
+			Collection<TaskImpl> tasks = getCrudDao().consultarTarefa(userImpl);
 			resultado = UtilConversor.converter(tasks);
 			consultarProcessDefinitionEVariables(resultado);
 		}
@@ -86,7 +89,12 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 
 		Collection<TaskDecorator> resultado = null;
 		if (isReferencia(user, processDefinition)) {
-			Collection<TaskImpl> tasks = getCrudDao().consultarTarefa(user, processDefinition);
+			UserImpl userImpl = user.getUserImpl();
+
+			ProcessDefinitionImpl processDefinitionImpl = processDefinition
+					.getProcessDefinitionImpl();
+			Collection<TaskImpl> tasks = getCrudDao().consultarTarefa(userImpl,
+					processDefinitionImpl);
 			resultado = UtilConversor.converter(tasks);
 			consultarProcessDefinitionEVariables(resultado);
 		}
@@ -98,10 +106,10 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 * 
 	 * @param task Tarefa
 	 */
-	public void salvarTarefa(TaskDecorator task) {
+	public void salvarTarefa(TaskDecorator decorator) {
 
-		if (isReferencia(task)) {
-			getCrudDao().salvarTarefa(task);
+		if (isReferencia(decorator)) {
+			getCrudDao().salvarTarefa(decorator);
 		}
 	}
 
@@ -111,10 +119,10 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 * 
 	 * @param task Tarefa
 	 */
-	public void cancelarTarefa(TaskDecorator task) {
+	public void cancelarTarefa(TaskDecorator decorator) {
 
-		if (isReferencia(task)) {
-			getCrudDao().cancelarTarefa(task);
+		if (isReferencia(decorator)) {
+			getCrudDao().cancelarTarefa(decorator);
 		}
 	}
 
@@ -124,10 +132,10 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 * 
 	 * @param task Tarefa
 	 */
-	public void completarTarefa(TaskDecorator task) {
+	public void completarTarefa(TaskDecorator decorator) {
 
-		if (isReferencia(task)) {
-			getCrudDao().completarTarefa(task);
+		if (isReferencia(decorator)) {
+			getCrudDao().completarTarefa(decorator);
 		}
 	}
 
@@ -137,12 +145,12 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 * @param task Tarefa com ID.
 	 * @return formulário da tarefa
 	 */
-	public TaskDecorator obterFormulario(TaskDecorator task) {
+	public TaskDecorator obterFormulario(TaskDecorator decorator) {
 
 		TaskDecorator resultado = null;
-		if (UtilObjeto.isReferencia(task)) {
-			TaskImpl tarefa = getCrudDao().obter(task.getId());
-			Deployment deployment = obterDeployment(tarefa);
+		if (isReferencia(decorator)) {
+			TaskImpl tarefa = getCrudDao().obter(decorator.getId());
+			DeploymentImpl deployment = obterDeployment(tarefa);
 
 			resultado = deploymentBo.obterFormulario(deployment, tarefa);
 			resultado.setTaskImpl(tarefa);
@@ -159,7 +167,8 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	public void locarTarefa(TaskDecorator task, UserDecorator user) {
 
 		if (!isTarefaLocada(task, user)) {
-			taskDao.locarTarefa(task, user);
+			UserImpl userImpl = user.getUserImpl();
+			taskDao.locarTarefa(task, userImpl);
 		}
 	}
 
@@ -178,7 +187,8 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 
 			String assignee = tarefa.getAssignee();
 			String givenName = user.getGivenName();
-			resultado = isReferencia(tarefa) && UtilString.isStringsIguais(assignee, givenName);
+			resultado = isReferencia(tarefa)
+					&& UtilString.isStringsIguais(assignee, givenName);
 		}
 		return resultado;
 	}
@@ -189,11 +199,11 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 * @param task Tarefa com ID.
 	 * @return tarefa
 	 */
-	public TaskDecorator obterTarefa(TaskDecorator task) {
+	public TaskDecorator obterTarefa(TaskDecorator decorator) {
 		TaskDecorator resultado = null;
 
-		if (isReferencia(task)) {
-			TaskImpl temp = obter(task.getId());
+		if (isReferencia(decorator)) {
+			TaskImpl temp = obter(decorator.getId());
 			resultado = novoTaskDecorator(temp);
 		}
 		return resultado;
@@ -223,15 +233,15 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	/**
 	 * Retorna as variáveis a partir de uma tarefa.
 	 * 
-	 * @param task Tarefa com ID
+	 * @param decorator Tarefa com ID
 	 * @return variáveis da tarefa.
 	 */
-	public Map<String, Object> obterVariables(TaskDecorator task) {
+	public Map<String, Object> obterVariables(TaskDecorator decorator) {
 
 		Map<String, Object> resultado = null;
 
-		if (isReferencia(task)) {
-			resultado = getCrudDao().obterVariables(task);
+		if (isReferencia(decorator)) {
+			resultado = getCrudDao().obterVariables(decorator);
 		}
 		return resultado;
 	}
@@ -243,12 +253,12 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 * @param task Tarefa com ID
 	 * @return variáveis da tarefa formatadas.
 	 */
-	public Map<String, String> obterVariablesFormatadas(TaskDecorator task) {
+	public Map<String, String> obterVariablesFormatadas(TaskDecorator decorator) {
 
 		Map<String, String> resultado = null;
 
-		if (isReferencia(task)) {
-			Map<String, Object> mapa = getCrudDao().obterVariables(task);
+		if (isReferencia(decorator)) {
+			Map<String, Object> mapa = getCrudDao().obterVariables(decorator);
 			Set<String> keys = mapa.keySet();
 			Iterator<String> iterator = getColecaoFactory().novoIterator(keys);
 
@@ -269,7 +279,8 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 * 
 	 * @param resultado Coleção de taskDecorator
 	 */
-	protected void consultarProcessDefinitionEVariables(Collection<TaskDecorator> resultado) {
+	protected void consultarProcessDefinitionEVariables(
+			Collection<TaskDecorator> resultado) {
 		UtilColecao.aplicarAlterador(resultado, new Alterador<TaskDecorator>() {
 			@Override
 			public TaskDecorator alterar(TaskDecorator taskDecorator) {
@@ -291,8 +302,8 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 * @param task Task
 	 * @return deployment da task
 	 */
-	protected Deployment obterDeployment(TaskImpl task) {
-		Deployment resultado = null;
+	protected DeploymentImpl obterDeployment(TaskImpl task) {
+		DeploymentImpl resultado = null;
 
 		if (isReferencia(task)) {
 			ProcessDefinition definition = obterProcessDefinition(task);
@@ -347,7 +358,8 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 
 		if (isReferencia(objeto)) {
 			Class classe = UtilObjeto.getClasse(objeto);
-			IFormatador formatador = getUtilEstrategiaDeFormatadores().recuperar(classe);
+			IFormatador formatador = getUtilEstrategiaDeFormatadores()
+					.recuperar(classe);
 			resultado = formatador.formatar(objeto);
 		}
 		return resultado;
@@ -357,5 +369,5 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	protected TaskDao getCrudDao() {
 		return taskDao;
 	}
-	
+
 }

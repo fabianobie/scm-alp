@@ -15,15 +15,15 @@ import javax.annotation.Resource;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.jbpm.api.TaskService;
+import org.jbpm.pvm.internal.identity.impl.UserImpl;
+import org.jbpm.pvm.internal.model.ProcessDefinitionImpl;
 import org.jbpm.pvm.internal.task.TaskImpl;
 import org.springframework.stereotype.Repository;
 
 import br.com.ap.comum.colecao.UtilColecao;
 import br.com.ap.comum.string.UtilString;
 import br.com.ap.jbpm.dao.TaskDao;
-import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
-import br.com.ap.jbpm.decorator.UserDecorator;
 
 /**
  * DAO de acesso às informação de tarefa.
@@ -35,7 +35,7 @@ public class TaskDaoImpl extends JBPMDaoAbstrato<TaskImpl> implements TaskDao {
 
 	@Resource
 	private TaskService	taskService;
-	
+
 	/**
 	 * @see br.com.ap.jbpm.dao.TaskDao#cancelarTarefa(br.com.ap.jbpm.decorator.TaskDecorator)
 	 */
@@ -48,41 +48,41 @@ public class TaskDaoImpl extends JBPMDaoAbstrato<TaskImpl> implements TaskDao {
 	 */
 	public void completarTarefa(TaskDecorator task) {
 		String transitionTO = task.getTransitionTO();
-		
+
 		if (UtilString.isVazio(transitionTO)) {
 			taskService.completeTask(task.getId(), task.getMapaVariables());
 		} else {
-			taskService.completeTask(task.getId(), transitionTO, task.getMapaVariables());
+			taskService.completeTask(task.getId(), transitionTO, task
+					.getMapaVariables());
 		}
 	}
 
 	/**
-	 * @see br.com.ap.jbpm.dao.TaskDao#consultarTarefa(br.com.ap.jbpm.decorator.UserDecorator)
+	 * @see br.com.ap.jbpm.dao.TaskDao#consultarTarefa(org.jbpm.pvm.internal.identity.impl.UserImpl)
 	 */
 	@SuppressWarnings("unchecked")
-	public Collection<TaskImpl> consultarTarefa(UserDecorator user) {
+	public Collection<TaskImpl> consultarTarefa(UserImpl user) {
 		String givenName = user.getGivenName();
-		
+
 		Criteria criteria = novoCriteria();
-		criteria.add(Restrictions.or(
-				Restrictions.eq("assignee", givenName), 
+		criteria.add(Restrictions.or(Restrictions.eq("assignee", givenName),
 				Restrictions.isNull("assignee")));
 		return criteria.list();
 	}
 
 	/**
-	 * @see br.com.ap.jbpm.dao.TaskDao#consultarTarefa(br.com.ap.jbpm.decorator.UserDecorator, br.com.ap.jbpm.decorator.ProcessDefinitionDecorator)
+	 * @see br.com.ap.jbpm.dao.TaskDao#consultarTarefa(org.jbpm.pvm.internal.identity.impl.UserImpl,
+	 *      org.jbpm.pvm.internal.model.ProcessDefinitionImpl)
 	 */
 	@SuppressWarnings("unchecked")
-	public Collection<TaskImpl> consultarTarefa(UserDecorator user,
-			ProcessDefinitionDecorator processDefinition) {
+	public Collection<TaskImpl> consultarTarefa(UserImpl user,
+			ProcessDefinitionImpl processDefinition) {
 
 		String givenName = user.getGivenName();
 		String id = processDefinition.getId();
-		
+
 		Criteria criteria = novoCriteria();
-		criteria.add(Restrictions.or(
-				Restrictions.eq("assignee", givenName), 
+		criteria.add(Restrictions.or(Restrictions.eq("assignee", givenName),
 				Restrictions.isNull("assignee")));
 		Criteria execution = criteria.createCriteria("execution");
 		execution.add(Restrictions.eq("processDefinitionId", id));
@@ -98,10 +98,11 @@ public class TaskDaoImpl extends JBPMDaoAbstrato<TaskImpl> implements TaskDao {
 	}
 
 	/**
-	 * @see br.com.ap.jbpm.dao.TaskDao#locarTarefa(br.com.ap.jbpm.decorator.TaskDecorator, br.com.ap.jbpm.decorator.UserDecorator)
+	 * @see br.com.ap.jbpm.dao.TaskDao#locarTarefa(br.com.ap.jbpm.decorator.TaskDecorator,
+	 *      org.jbpm.pvm.internal.identity.impl.UserImpl)
 	 */
-	public void locarTarefa(TaskDecorator task, UserDecorator user) {
-		
+	public void locarTarefa(TaskDecorator task, UserImpl user) {
+
 		taskService.takeTask(task.getId(), user.getGivenName());
 	}
 

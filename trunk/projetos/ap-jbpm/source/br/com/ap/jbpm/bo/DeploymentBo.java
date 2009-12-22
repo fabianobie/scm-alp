@@ -10,7 +10,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.jbpm.api.Deployment;
 import org.jbpm.api.Execution;
 import org.jbpm.api.ProcessDefinition;
 import org.jbpm.pvm.internal.repository.DeploymentImpl;
@@ -117,7 +116,7 @@ public class DeploymentBo extends JBPMBoAbstrato<DeploymentImpl> {
 	 * @param task Tarefa com ID.
 	 * @return formulário da tarefa
 	 */
-	public TaskDecorator obterFormulario(Deployment deployment, TaskImpl task) {
+	public TaskDecorator obterFormulario(DeploymentImpl deployment, TaskImpl task) {
 		TaskDecorator resultado = null;
 
 		if (isReferencia(deployment, task)) {
@@ -138,7 +137,7 @@ public class DeploymentBo extends JBPMBoAbstrato<DeploymentImpl> {
 
 		ActivityDecorator activity = obterNomeAtividadeStart(processDefinition);
 		ProcessDefinition process = obterDefinicaoDeProcesso(processDefinition);
-		Deployment deployment = obter(process.getDeploymentId());
+		DeploymentImpl deployment = obter(process.getDeploymentId());
 
 		DeploymentDecorator deploymentDecorator = novoDeploymentDecorator(deployment);
 		return getCrudDao().obterFormularioInicial(deploymentDecorator, processDefinition, activity);
@@ -153,7 +152,7 @@ public class DeploymentBo extends JBPMBoAbstrato<DeploymentImpl> {
 	public TaskDecorator obterNomeFormularioInicial(ProcessDefinitionDecorator processDefinition) {
 		ActivityDecorator activity = obterNomeAtividadeStart(processDefinition);
 		ProcessDefinition process = obterDefinicaoDeProcesso(processDefinition);
-		Deployment deployment = obter(process.getDeploymentId());
+		DeploymentImpl deployment = obter(process.getDeploymentId());
 
 		DeploymentDecorator deploymentDecorator = novoDeploymentDecorator(deployment);
 		return getCrudDao()
