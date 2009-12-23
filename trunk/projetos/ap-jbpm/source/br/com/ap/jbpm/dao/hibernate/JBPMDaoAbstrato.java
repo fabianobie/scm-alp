@@ -21,24 +21,23 @@ import br.com.ap.jbpm.factory.DecoratorFactory;
  * @author AdrianoP
  */
 public abstract class JBPMDaoAbstrato<T extends Object> extends HibernateCrudDaoAbstrato<T> {
-	@Resource (name="processEngine")
-	private EnvironmentFactory environmentFactory;
-	
+	@Resource(name = "processEngine")
+	private EnvironmentFactory	environmentFactory;
+
 	/**
-	 * @param sessionFactory
-	 *            Atribui o SessionFactory do hibernate
+	 * @param sessionFactory Atribui o SessionFactory do hibernate
 	 */
 	@Override
 	@Resource(name = "jbpmSessionFactory")
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		super.setSessionFactory(sessionFactory);
 	}
-	
+
 	@Override
 	protected Session getSession() {
 		return novaSession();
 	}
-	
+
 	@Override
 	protected Session novaSession() {
 		Environment environment = environmentFactory.openEnvironment();
@@ -48,7 +47,7 @@ public abstract class JBPMDaoAbstrato<T extends Object> extends HibernateCrudDao
 		}
 		return session;
 	}
-	
+
 	/**
 	 * @return DecoratorFactory
 	 */
