@@ -17,6 +17,13 @@
 		</property>
 	</bean>
 
+	<bean id="jbpmDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${hibernate.connection.driver_class}" />
+		<property name="url" value="${hibernate.connection.url}" />
+		<property name="username" value="${hibernate.connection.username}" />
+		<property name="password" value="${hibernate.connection.password}" />
+	</bean>
+	
 	<bean id="jbpmSessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="dataSource" ref="jbpmDataSource"/>
 		<property name="hibernateProperties">
@@ -31,13 +38,6 @@
 				<value>jbpm.identity.hbm.xml</value>
 			</list>
 		</property>
-	</bean>
-
-	<bean id="jbpmDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${hibernate.connection.driver_class}" />
-		<property name="url" value="${hibernate.connection.url}" />
-		<property name="username" value="${hibernate.connection.username}" />
-		<property name="password" value="${hibernate.connection.password}" />
 	</bean>
 
 	<bean id="jbpmTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
