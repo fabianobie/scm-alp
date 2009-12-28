@@ -5,6 +5,7 @@
  */
 package teste.action.formdinamico;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +16,10 @@ import com.opensymphony.xwork2.ActionSupport;
  * 
  */
 public class FormDinamicoAction extends ActionSupport {
-	private Map	mapa;
+	private Map<String, Object>	mapa;
+	private File				doc;
+	private String				docFileName;
+	private String				docContentType;
 
 	/**
 	 * @return form-dinamico
@@ -32,14 +36,6 @@ public class FormDinamicoAction extends ActionSupport {
 		System.out.println(getMapa());
 		return "form-dinamico-resultado";
 	}
-	
-	public void setMapaInteger(String chave, Object valor) {
-		getMapa().put(chave, valor);
-	}
-	
-	public Integer getMapaInteger(String chave) {
-		return (Integer) getMapa().get(chave);
-	}
 
 	@Override
 	public String getText(String aTextName) {
@@ -48,13 +44,13 @@ public class FormDinamicoAction extends ActionSupport {
 		}
 		return super.getText(aTextName);
 	}
-	
+
 	/**
 	 * @return retorna mapa.
 	 */
-	public Map getMapa() {
+	public Map<String, Object> getMapa() {
 		if (mapa == null) {
-			mapa = new HashMap();
+			mapa = new HashMap<String, Object>();
 		}
 		return mapa;
 	}
@@ -62,16 +58,50 @@ public class FormDinamicoAction extends ActionSupport {
 	/**
 	 * @param mapa Atribui mapa.
 	 */
-	public void setMapa(Map mapa) {
+	public void setMapa(Map<String, Object> mapa) {
 		this.mapa = mapa;
 	}
 
 	/**
-	 * @param mapa Atribui mapa.
+	 * @return retorna doc.
 	 */
-	public void setMapa(String key, Object value) {
-		System.out.println("XXXXXXXXXXXXXXXXXXX");
-		getMapa().put(key, value);
+	public File getDoc() {
+		return doc;
 	}
-	
+
+	/**
+	 * @param doc Atribui doc.
+	 */
+	public void setDoc(File doc) {
+		this.doc = doc;
+	}
+
+	/**
+	 * @return retorna docFileName.
+	 */
+	public String getDocFileName() {
+		return docFileName;
+	}
+
+	/**
+	 * @param docFileName Atribui docFileName.
+	 */
+	public void setDocFileName(String docFileName) {
+		this.docFileName = docFileName;
+	}
+
+	/**
+	 * @return retorna docContentType.
+	 */
+	public String getDocContentType() {
+		return docContentType;
+	}
+
+	/**
+	 * @param docContentType Atribui docContentType.
+	 */
+	public void setDocContentType(String docContentType) {
+		this.docContentType = docContentType;
+	}
+
 }

@@ -11,6 +11,8 @@
 	<body>
 		<s:form action="FormDinamico" theme="simple">
 			String: <s:property value="mapa['string']"/>
+			<br/>
+			Arquivo: <s:property value="docFileName"/>
 			<hr/>
 			<s:submit method="acaoCarregarFormDinamico" value="Voltar" />
 		</s:form>
