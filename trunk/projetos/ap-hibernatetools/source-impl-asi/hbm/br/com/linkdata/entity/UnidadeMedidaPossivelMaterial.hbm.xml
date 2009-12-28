@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.UnidadeMedidaPossivelMaterial" table="UNIDADE_POSSIVEL_MATERIAL">
+        <composite-id name="id" class="br.com.linkdata.entity.UnidadeMedidaPossivelMaterial$Id" access="field">
+            <key-property name="idMaterial" type="java.lang.Long">
+                <column name="ID_MATERIAL" />
+            </key-property>
+            <key-property name="idUnidadeMedida" type="java.lang.Long">
+                <column name="ID_UNIDADE_MEDIDA" />
+            </key-property>
+            <key-property name="isUnidadeEntrada" type="java.lang.Boolean">
+                <column name="IND_ENTRADA" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="material" class="br.com.linkdata.entity.Material" update="false" insert="false" access="field" fetch="join">
+            <column name="ID_MATERIAL" />
+        </many-to-one>
+        <property name="padrao" type="java.lang.Boolean" access="field">
+            <column name="IN_PADRAO" />
+        </property>
+        <many-to-one name="unidadeMedida" class="br.com.linkdata.entity.UnidadeMedida" update="false" insert="false" access="field" fetch="join">
+            <column name="ID_UNIDADE_MEDIDA" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	
+    <class name="br.com.linkdata.entity.DiariaMissao" table="DIARIA_MISSAO">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_DIARIA_MISSAO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_DIARIA_MISSAO</param>
+            </generator>
+        </id>
+        <one-to-one name="missao" class="br.com.linkdata.entity.Missao" access="field" constrained="true">
+        </one-to-one>
+        <property name="quantidade" type="java.lang.Long" access="field">
+            <column name="QT_DIARIA" />
+        </property>
+        <many-to-one name="tipoDiariaMissao" class="br.com.linkdata.entity.TipoDiariaMissao" access="field" fetch="join">
+            <column name="ID_TIPO_DIARIA_MISSAO" />
+        </many-to-one>
+        <property name="valorDiaria" type="java.math.BigDecimal" access="field">
+            <column name="VL_DIARIA" precision="15" />
+        </property>
+        <property name="valorTotal" type="java.math.BigDecimal" access="field">
+            <column name="VL_TOTAL" />
+        </property>
+    </class>
+</hibernate-mapping>

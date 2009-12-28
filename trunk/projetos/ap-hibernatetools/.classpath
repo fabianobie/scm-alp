@@ -6,9 +6,6 @@
 	<classpathentry kind="src" output="source-impl-ceam" path="source-impl-ceam"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ANT_LIB"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ap-arquitetura"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ap-comum"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ap-hibernate"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JBPM_LIB"/>
 	<classpathentry kind="lib" path="build/lib/antlr-2.7.6.jar"/>
 	<classpathentry kind="lib" path="build/lib/asm-attrs.jar"/>
@@ -46,6 +43,9 @@
 	<classpathentry kind="lib" path="build/lib-externa/mysql-connector-java-3.0.15-ga-bin.jar"/>
 	<classpathentry kind="lib" path="build/lib-externa/postgresql-8.3-603.jdbc4.jar"/>
 	<classpathentry kind="lib" path="build/lib-externa/spring-2.5.4.jar"/>
-	<classpathentry kind="lib" path="build/lib/hibernate-tools.jar"/>
+	<classpathentry kind="lib" path="build/lib/hibernate-tools.jar" sourcepath="/fonte-hibernatetools"/>
+	<classpathentry kind="lib" path="C:/java/projetos/entities/bin"/>
+	<classpathentry kind="lib" path="C:/java/projetos/entities/src/main/java"/>
+	<classpathentry kind="lib" path="build/lib/ap-comum.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

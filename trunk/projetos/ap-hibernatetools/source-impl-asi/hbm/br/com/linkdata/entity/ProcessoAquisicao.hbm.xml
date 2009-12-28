@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.ProcessoAquisicao" table="PROCESSO_AQUISICAO">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_PROCESSO_AQUISICAO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_PROCESSO_AQUISICAO</param>
+            </generator>
+        </id>
+        <set name="aquisicoes" inverse="false" lazy="true" table="AQUISICAO" cascade="persist,merge,delete" fetch="select">
+            <key>
+                <column name="ID_PROCESSO_AQUISICAO" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.Aquisicao" />
+        </set>
+        <set name="autorizacoes" inverse="false" lazy="true" table="AUTORIZACAO_PROCESSO" cascade="persist,merge,delete" fetch="select">
+            <key>
+                <column name="ID_PROCESSO_AQUISICAO" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.AutorizacaoProcessoAquisicao" />
+        </set>
+        <many-to-one name="baseLegal" class="br.com.linkdata.entity.BaseLegal" access="field" fetch="select">
+            <column name="ID_BASE_LEGAL" />
+        </many-to-one>
+        <property name="dataFormalizacaoAquisicao" type="date" access="field">
+            <column name="DT_FORMALIZACAO_AQUISICAO" />
+        </property>
+        <property name="dataProcessoAdministrativo" type="date" access="field">
+            <column name="DT_PROCESSO_ADM" />
+        </property>
+        <many-to-one name="formaAquisicao" class="br.com.linkdata.entity.FormaAquisicao" access="field" fetch="select">
+            <column name="ID_FORMA_AQUISICAO" />
+        </many-to-one>
+        <many-to-one name="formaAvaliacao" class="br.com.linkdata.entity.FormaAvaliacao" access="field" fetch="select">
+            <column name="ID_FORMA_AVALIACAO" />
+        </many-to-one>
+        <property name="justificativaAquisicao" type="java.lang.String" access="field">
+            <column name="JUSTIFICATIVA_AQUISICAO" />
+        </property>
+        <set name="loteAquisicoes" inverse="false" lazy="true" table="LOTE_AQUISICAO" cascade="persist,merge,delete" fetch="select">
+            <key>
+                <column name="ID_PROCESSO_AQUISICAO" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.LoteAquisicao" />
+        </set>
+        <property name="numeroModalidade" type="java.lang.String" access="field">
+            <column name="NU_MODALIDADE" />
+        </property>
+        <property name="numeroProcessoAdministrativo" type="java.lang.Long" access="field">
+            <column name="NU_PROCESSO_ADM" />
+        </property>
+        <property name="objetoAquisicao" type="java.lang.String" access="field">
+            <column name="OBJETO_AQUISICAO" />
+        </property>
+        <property name="obrasServicoEngenharia" type="java.lang.Boolean" access="field">
+            <column name="OBRA_SERVICO_ENG" />
+        </property>
+        <property name="responsavelFormalizacaoAquisicao" type="java.lang.String" access="field">
+            <column name="RESP_FORMALIZACAO_AQUISICAO" />
+        </property>
+        <property name="responsavelProcessoAdministrativo" type="java.lang.String" access="field">
+            <column name="RESP_PROCESSO_ADM" />
+        </property>
+        <many-to-one name="ultimaAutorizacao" class="br.com.linkdata.entity.AutorizacaoProcessoAquisicao" access="field" fetch="select">
+            <column name="ID_AUTZ_PROCESSO" />
+        </many-to-one>
+        <many-to-one name="unidadeOrganizacionalAdquirente" class="br.com.linkdata.entity.UnidadeOrganizacional" access="field" fetch="select">
+            <column name="ID_UO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <union-subclass name="br.com.linkdata.entity.VigenciaPrazoExecucao" extends="br.com.linkdata.entity.Vigencia" table="VIGENCIA_PRAZO_EXECUCAO">
+        <property name="prazo" type="java.lang.Integer" access="field">
+            <column name="NR_PRAZO" />
+        </property>
+        <many-to-one name="tipoInicioVigencia" class="br.com.linkdata.entity.TipoLimiteVigencia" access="field" fetch="select">
+            <column name="ID_TIPO_LIMITE_VIGENCIA" />
+        </many-to-one>
+        <many-to-one name="tipoPrazoVigenciaExecucao" class="br.com.linkdata.entity.TipoPrazo" access="field" fetch="select">
+            <column name="ID_TIPO_PRAZO_EXECUCAO" />
+        </many-to-one>
+    </union-subclass>
+</hibernate-mapping>

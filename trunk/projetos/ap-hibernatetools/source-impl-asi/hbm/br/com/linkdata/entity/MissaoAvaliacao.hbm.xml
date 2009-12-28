@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	
+    <class name="br.com.linkdata.entity.MissaoAvaliacao" table="MISSAO_AVALIACAO">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_MISSAO_AVALIACAO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_MISSAO_AVALIACAO</param>
+            </generator>
+        </id>
+        <property name="observacao" type="java.lang.String" access="field">
+            <column name="OBSERVACAO" />
+        </property>
+        <property name="satisfacaoAtendimento" type="java.lang.Integer" access="field">
+            <column name="SATISFACAO_ATENDIMENTO" length="2" not-null="true" />
+        </property>
+        <property name="satisfacaoTempoAtendimento" type="java.lang.Integer" access="field">
+            <column name="SATISFACAO_TEMPO_ATENDIMENTO" length="2" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -12,6 +12,7 @@ ${pojo.getPackageDeclaration()}
  *
  * @author Hibernatetools
  */
+${util.generateMetaExtraClasse(clazz)}
 <#include "annotation_entidade.ftl"/>
 ${pojo.getClassModifiers()} ${pojo.getDeclarationType()} ${pojo.getDeclarationName()} ${pojo.getExtendsDeclaration()} ${pojo.getImplementsDeclaration()} {
 

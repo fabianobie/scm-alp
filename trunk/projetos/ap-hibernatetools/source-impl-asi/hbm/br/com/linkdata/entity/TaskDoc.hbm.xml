@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.TaskDoc" table="JBPM_TASKDOC">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_TASKDOC</param>
+            </generator>
+        </id>
+        <property name="btArray" access="field">
+            <column name="BYTE_ARRAY" />
+            <type name="br.com.linkdata.entity.BlobUserType"></type>
+        </property>
+        <property name="dsComentario" type="java.lang.String" access="field">
+            <column name="DS_COMENTARIO" length="2000" />
+        </property>
+        <property name="dsMimeType" type="java.lang.String" access="field">
+            <column name="DS_MIME_TYPE" length="100" not-null="true" />
+        </property>
+        <property name="dtUpload" type="java.util.Date" access="field">
+            <column name="DT_ANEXO" not-null="true" />
+        </property>
+        <property name="nmApresentacao" type="java.lang.String" access="field">
+            <column name="NM_APRESENTACAO" />
+        </property>
+        <property name="nmArquivo" type="java.lang.String" access="field">
+            <column name="NM_ANEXO" not-null="true" />
+        </property>
+        <property name="processId" type="java.lang.Long" access="field">
+            <column name="ID_PROCESS" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="taskId" type="java.lang.Long" access="field">
+            <column name="ID_TASK" precision="12" scale="0" />
+        </property>
+        <property name="taskName" type="java.lang.String" access="field">
+            <column name="NM_TASK" />
+        </property>
+        <many-to-one name="tipoTaskDoc" class="br.com.linkdata.entity.TipoTaskDoc" access="field" fetch="join">
+            <column name="ID_TIPO_TASK_DOC" />
+        </many-to-one>
+        <many-to-one name="usuario" class="br.com.linkdata.entity.Usuario" access="field" fetch="select">
+            <column name="ID_USUARIO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

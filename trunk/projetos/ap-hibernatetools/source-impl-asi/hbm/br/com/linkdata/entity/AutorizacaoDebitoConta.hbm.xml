@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	
+    <class name="br.com.linkdata.entity.AutorizacaoDebitoConta" table="AUTORIZACAO_DEBITO_CONTA">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_AUTORIZACAO_DEBITO_CONTA" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_AUTORIZACAO_DEBITO_CONTA</param>
+            </generator>
+        </id>
+        <property name="dataAutorizacao" type="date" access="field">
+            <column name="DT_AUTORIZACAO" />
+        </property>
+        <property name="justificativa" type="java.lang.String" access="field">
+            <column name="JUSTIFICATIVA" length="1000" />
+        </property>
+        <property name="nomeResponsavel" type="java.lang.String" access="field">
+            <column name="NM_RESPONSAVEL" length="80" />
+        </property>
+        <property name="numeroParcelas" type="java.lang.Integer" access="field">
+            <column name="NR_PARCELAS" length="3" />
+        </property>
+        <many-to-one name="simNao" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
+            <column name="ID_MULTA" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

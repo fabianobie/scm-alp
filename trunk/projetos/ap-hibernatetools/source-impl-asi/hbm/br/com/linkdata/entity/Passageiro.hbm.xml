@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.Passageiro" table="PASSAGEIRO">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_PASSAGEIRO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_PASSAGEIRO</param>
+            </generator>
+        </id>
+        <property name="nome" type="java.lang.String" access="field">
+            <column name="NM_PASSAGEIRO" length="80" not-null="true" />
+        </property>
+        <many-to-one name="telefoneContato" class="br.com.linkdata.entity.Telefone" access="field" cascade="persist,merge,delete" fetch="join">
+            <column name="ID_TELEFONE" />
+        </many-to-one>
+        <many-to-one name="tipoPassageiro" class="br.com.linkdata.entity.TipoPassageiro" access="field" fetch="join">
+            <column name="ID_TIPO_PASSAGEIRO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

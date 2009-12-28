@@ -12,55 +12,14 @@
 	</type-mapping>
 
 	<table-filter match-name="jbpm_.*" exclude="true" />
+	<table-filter match-name="autz_.*" exclude="true" />
+	<table-filter match-name="cidade_aud" exclude="true" />
+	<table-filter match-name="continente_aud" exclude="true" />
 	<table-filter match-name=".*">
 		<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
 	</table-filter>
 
 <!-- RELAÇÃO DE TABELAS ####################################################################### -->
-	<table name="abrangencia">
-		<meta attribute="extends">br.com.linkdata.domain.ElementoDeDominio</meta>
-	</table>
-	<table name="agregacao_indice">
-		<meta attribute="extends">br.com.linkdata.domain.ElementoDeDominio</meta>
-	</table>
-	<table name="alerta_email_frotas">
-		<meta attribute="extends">br.com.linkdata.entity.ExclusaoLogica</meta>
-		<column name="email_usuario" property="email" />
-		<column name="nm_usuario" property="nome" />
-	</table>
-	<table name="alerta_servico">
-		<column name="vl_porcentagem_alerta_servico" property="porcentagem" />
-		<column name="vl_km_referenciada" property="quilometragemReferenciada" />
-	</table>
-	<table name="amparo_legal">
-		<foreign-key constraint-name="fk_amparolegalfilhos_al">
-			<many-to-one property="amparoLegalPai" />
-			<set property="amparosLegaisFilhos" />
-		</foreign-key>
-	</table>
-	<table name="anexo">
-		<meta attribute="meta-byteArray">
-			@org.hibernate.annotations.Type(type = "br.com.linkdata.entity.BlobUserType")
-		</meta>
-		<column name="nm_anexo" property="nmArquivo" />
-		<column name="byte_array" property="btArray" />
-		<column name="dt_anexo" property="dtUpload" />
-	</table>
-	<table name="apelido_material">
-		<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
-		<meta attribute="implements"><![CDATA[java.lang.Comparable<ApelidoMaterial>]]></meta>
-		<meta attribute="class-code">
-	/**
-	 * @see java.lang.Comparable#compareTo(java.lang.Object)
-	 */
-	public int compareTo(ApelidoMaterial o) {
-		return apelido.compareTo(o.apelido);
-	}
-		</meta>
-		<column name="ds_apelido" property="apelido" />
-	</table>
-	<table name="aquisicao">
-		<column name="nu_aquisicao" property="numeroAquisicao" />
-	</table>
+
 <!-- FIM RELAÇÃO DE TABELAS ################################################################### -->
 </hibernate-reverse-engineering>

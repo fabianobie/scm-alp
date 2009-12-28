@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.UserDefinedValue" table="USER_DEFINED_VALUE">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_UDV" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_UDV</param>
+            </generator>
+        </id>
+        <property name="entityId" type="java.lang.Long" access="field">
+            <column name="ID_ENTITY" precision="12" scale="0" />
+        </property>
+        <property name="objeto" access="field">
+            <column name="OBJETO" />
+            <type name="br.com.linkdata.entity.BlobUserType"></type>
+        </property>
+        <property name="properties" type="java.lang.String" access="field">
+            <column name="PROPS" length="100" />
+        </property>
+        <many-to-one name="userDefinedField" class="br.com.linkdata.entity.UserDefinedField" access="field" fetch="select">
+            <column name="ID_UDF" />
+        </many-to-one>
+        <property name="value" type="java.lang.String" access="field">
+            <column name="VALUE" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

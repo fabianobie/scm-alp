@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <subclass name="br.com.linkdata.entity.DetalheOrdemServicoMaterial" extends="br.com.linkdata.entity.DetalheOrdemServico" discriminator-value="M">
+        <many-to-one name="material" class="br.com.linkdata.entity.Material" access="field" fetch="join">
+            <column name="ID_MATERIAL" />
+        </many-to-one>
+    </subclass>
+</hibernate-mapping>

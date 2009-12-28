@@ -9,3 +9,13 @@ ALTER TABLE frotasweb.funcionario ADD CONSTRAINT fk_fornecedor_situacao_cidade F
 --org.hibernate.cfg.JDBCBinderException: Foreign key name (fk_situacao_cidade) mapped to different tables! previous: org.hibernate.mapping.Table(cidade) current:org.hibernate.mapping.Table(localidade)
 ALTER TABLE frotasweb.localidade drop CONSTRAINT fk_situacao_cidade;
 ALTER TABLE frotasweb.localidade ADD CONSTRAINT fk_localidade_situacao_cidade FOREIGN KEY(ind_ativo) REFERENCES frotasweb.sim_nao(id_sim_nao);
+
+HBM'S >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Onde o estado do component Identidade foi comentado:
+FornecedorPF.hbm.xml
+Responsavel.hbm.xml
+Motorista.hbm.xml
+
+Mudei o sequence class de native para sequence em todos os hbm's.
+
+O CustomAuditoria tem mais um monte de atributos que não foram gerados, as vezes o hbm não está atualizado com a Entidade atual.

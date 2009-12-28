@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <joined-subclass name="br.com.linkdata.entity.UsuarioFornecedor" extends="br.com.linkdata.entity.Usuario" table="USUARIO_FORNECEDOR">
+        <key>
+            <column name="USUARIO_ID" not-null="true" />
+        </key>
+        <many-to-one name="fornecedor" class="br.com.linkdata.entity.Fornecedor" access="field" fetch="join">
+            <column name="ID_FORNECEDOR" />
+        </many-to-one>
+    </joined-subclass>
+</hibernate-mapping>

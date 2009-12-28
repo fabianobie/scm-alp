@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	
+    <class name="br.com.linkdata.entity.ConfiguracaoAlertaFrotas" table="CONFIGURACAO_ALERTA_FROTAS">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_CONFIGURACAO_ALERTA_FROTAS" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_CONFIGURACAO_ALERTA_FROTAS</param>
+            </generator>
+        </id>
+        <property name="ordem" type="java.lang.Integer" access="field">
+            <column name="NR_ORDEM" />
+        </property>
+        <property name="quantidade" type="java.lang.Long" access="field">
+            <column name="QTD_" length="80" />
+        </property>
+        <many-to-one name="tipoAlertaFrotas" class="br.com.linkdata.entity.TipoAlertaFrotas" access="field" fetch="select">
+            <column name="ID_TIPO_ALERTA_FROTAS" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

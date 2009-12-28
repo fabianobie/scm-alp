@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extra-import">java.io.Serializable</meta>
+	<meta attribute="class-code">
+	public FiscalNomeado() {
+	}
+
+	public FiscalNomeado(Usuario usuario,
+			DocumentoNomeacaoFiscal documentoNomeacaoFiscal) {
+		this.id.idUsuario = usuario.getId();
+		this.id.idDocumentoNomeacaoFiscal = documentoNomeacaoFiscal.getId();
+		this.usuario = usuario;
+		this.documentoNomeacaoFiscal = documentoNomeacaoFiscal;
+		documentoNomeacaoFiscal.getFiscaisNomeados().add(this);
+	}
+	
+	public static class Id implements Serializable {
+
+		@Column(name = "ID_USUARIO")
+		private Long idUsuario;
+
+		@Column(name = "ID_DOC_NOMEACAO_FISCAL")
+		private Long idDocumentoNomeacaoFiscal;
+		
+		public Id() {
+		}
+
+		public Id(Long idUsuario, Long idDocumentoNomeacaoFiscal) {
+			this.idUsuario = idUsuario;
+			this.idDocumentoNomeacaoFiscal = idDocumentoNomeacaoFiscal;
+		}
+
+		public boolean equals(Object o) {
+			if (o != null &amp;&amp; o instanceof Id) {
+				Id objeto = (Id) o;
+				return this.idUsuario.equals(objeto.idUsuario)
+						&amp;&amp; this.idDocumentoNomeacaoFiscal.equals(idDocumentoNomeacaoFiscal);
+			} else {
+				return false;
+			}
+		}
+
+		public int hashCode() {
+			return idUsuario.hashCode() + idDocumentoNomeacaoFiscal.hashCode();
+		}
+		
+		/**
+		 * Este método insere o ID do documento nomeação fiscal persistido na FiscalNomeado, foi criado
+		 * pois o hibernate não contrala a inclusão deste objeto via CASCADE, o ID do documento nomeação fiscal deve ser
+		 * setado manualmente após a inclusão do documento nomeação fiscal.
+		 * @param idDocumentoNomeacaoFiscal
+		 */
+		public void setIdDocumentoNomeacaoFiscal(Long idDocumentoNomeacaoFiscal){
+			this.idDocumentoNomeacaoFiscal = idDocumentoNomeacaoFiscal;
+		}
+	}
+	</meta>
+    <class name="br.com.linkdata.entity.FiscalNomeado" table="FISCAL_NOMEADO">
+        <composite-id name="id" class="br.com.linkdata.entity.FiscalNomeado$Id" access="field">
+            <key-property name="idDocumentoNomeacaoFiscal" type="java.lang.Long">
+                <column name="ID_DOC_NOMEACAO_FISCAL" />
+            </key-property>
+            <key-property name="idUsuario" type="java.lang.Long">
+                <column name="ID_USUARIO" />
+            </key-property>
+        </composite-id>
+        <property name="dataCiencia" type="date" access="field">
+            <column name="DT_CIENCIA" />
+        </property>
+        <property name="dataDestituicao" type="date" access="field">
+            <column name="DT_DESTITUICAO" />
+        </property>
+        <many-to-one name="documentoNomeacaoFiscal" class="br.com.linkdata.entity.DocumentoNomeacaoFiscal" update="false" insert="false" access="field" fetch="join">
+            <column name="ID_DOC_NOMEACAO_FISCAL" />
+        </many-to-one>
+        <property name="isCiente" type="java.lang.Boolean" access="field">
+            <column name="IND_CIENCIA" not-null="true" />
+        </property>
+        <many-to-one name="tipoFiscal" class="br.com.linkdata.entity.TipoFiscal" access="field" fetch="join">
+            <column name="ID_TIPO_FISCAL" />
+        </many-to-one>
+        <many-to-one name="usuario" class="br.com.linkdata.entity.Usuario" update="false" insert="false" access="field" fetch="join">
+            <column name="ID_USUARIO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

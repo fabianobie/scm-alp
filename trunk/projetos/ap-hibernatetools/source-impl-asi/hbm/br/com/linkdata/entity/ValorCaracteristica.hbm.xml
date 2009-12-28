@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.ValorCaracteristica" table="VALOR_CARACTERISTICA">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_VALOR_CARACT" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_VALOR_CARACT</param>
+            </generator>
+        </id>
+        <property name="apelido" type="java.lang.String" access="field">
+            <column name="APELIDO" length="80" />
+        </property>
+        <many-to-one name="caracteristicaServico" class="br.com.linkdata.entity.CaracteristicaServico" access="field" fetch="select">
+            <column name="ID_CARACT_SERVICO" />
+        </many-to-one>
+        <property name="nome" type="java.lang.String" access="field">
+            <column name="NM_VALOR_CARACT" length="80" not-null="true" />
+        </property>
+        <property name="valor" type="java.lang.String" access="field">
+            <column name="VALOR_CARACT" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

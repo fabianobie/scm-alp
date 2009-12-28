@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extra-import">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+	<meta attribute="extra-import">org.hibernate.annotations.Type</meta>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	<meta attribute="extra-classe">
+@DynaColumnsDomain(description = "Modelo de Documento", column = "nmDocumento")
+	</meta>
+    <class name="br.com.linkdata.entity.ModeloDocumento" table="MODELO_DOC">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_MODELO_DOC" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_MODELO_DOC</param>
+            </generator>
+        </id>
+        <property name="arquivo" access="field">
+        	<meta attribute="meta-arquivo">
+	@Type(type = "br.com.linkdata.entity.BlobUserType")
+        	</meta>
+            <column name="ARQUIVO" />
+            <type name="br.com.linkdata.entity.BlobUserType"></type>
+        </property>
+        <component name="customFields" class="br.com.linkdata.entity.EntityEmbedded">
+            <property name="dataExclusao" type="java.util.Date" access="field">
+                <column name="DT_EXCLUSAO" />
+            </property>
+        </component>
+        <property name="dtInicioVigencia" type="date" access="field">
+            <column name="DT_INICIO_VIGENCIA" />
+        </property>
+        <property name="idTipoDocumento" type="java.lang.Long" access="field">
+            <column name="ID_TP_DOC" length="10" not-null="true" />
+        </property>
+        <property name="nmDocumento" type="java.lang.String" access="field">
+            <column name="NM_DOCUMENTO" length="100" />
+        </property>
+        <many-to-one name="situacao" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
+            <column name="IND_ATIVO" />
+        </many-to-one>
+        <property name="versao" type="java.lang.Integer" access="field">
+            <column name="VERSAO" length="2" />
+        </property>
+    </class>
+</hibernate-mapping>

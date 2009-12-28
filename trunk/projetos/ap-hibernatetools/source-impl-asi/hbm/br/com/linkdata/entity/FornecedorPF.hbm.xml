@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="implements">br.com.linkdata.interfaces.IPessoaFisica</meta>
+	<meta attribute="class-code">
+	@Override
+	public EstadoCivil getEstadoCivil() {
+		return null;
+	}
+	</meta>
+    <union-subclass name="br.com.linkdata.entity.FornecedorPF" extends="br.com.linkdata.entity.Fornecedor" table="FORNECEDOR_PF">
+        <property name="cpf" type="java.lang.String" access="field">
+            <column name="NR_CPF" length="11" />
+        </property>
+        <property name="entidadeRegistroProfissional" type="java.lang.String" access="field">
+            <column name="NM_ENT_REG_PROFISSIONAL" length="20" />
+        </property>
+        <component name="identidade" class="br.com.linkdata.entity.Identidade" >
+            <property name="dataExpedicao" type="date" access="field">
+                <column name="DT_EXPEDICAO" />
+            </property>
+            <!--
+            <many-to-one name="estado" class="br.com.linkdata.entity.Estado" access="field" fetch="select">
+                <column name="ID_ESTADO" />
+            </many-to-one>
+            -->
+            <property name="numero" type="java.lang.String" access="field">
+                <column name="NR_INDENTIDADE" length="20" />
+            </property>
+            <property name="orgaoExpeditor" type="java.lang.String" access="field">
+                <column name="DS_ORGAO_EXP" length="5" />
+            </property>
+        </component>
+        <property name="nacionalidade" type="java.lang.String" access="field">
+            <column name="DS_NACIONALIDADE" length="30" />
+        </property>
+        <property name="numeroRegistroProfissional" type="java.lang.String" access="field">
+            <column name="NR_ENT_REG_PROFISSIONAL" length="20" />
+        </property>
+    </union-subclass>
+</hibernate-mapping>

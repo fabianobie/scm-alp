@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extra-import">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+	<meta attribute="extra-import">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	<meta attribute="extra-classe">
+@UniqueCompositeConstraint(
+	fields={
+		@UniqueCompositeField(fieldLabel="Modelo", fieldName="modeloVeiculo"),
+		@UniqueCompositeField(fieldLabel="Grupo de serviço de manutenção", fieldName="grupoServicoManutencao")
+	}
+)
+	</meta>
+    <class name="br.com.linkdata.entity.GrupoManutencaoModeloVeiculo" table="GRUPO_MANUT_MODELO_VEICULO">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_GRUPO_MANUT_MODELO_VEICULO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_GRUPO_MANUT_MODELO_VEICULO</param>
+            </generator>
+        </id>
+        <set name="alertas" inverse="false" lazy="true" table="ALERTA_SERVICO" cascade="persist,merge,delete" fetch="select">
+            <key>
+                <column name="ID_GRUPO_MANUT_MODELO_VEICULO" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.AlertaServico" />
+        </set>
+        <set name="emails" inverse="false" lazy="true" table="GRUPO_MAN_SERVICO_EMAIL" fetch="select">
+            <key>
+                <column name="ID_GRUPO_MANUT_MODELO_VEICULO" not-null="true" />
+            </key>
+            <many-to-many entity-name="br.com.linkdata.entity.AlertaEmailFrotas">
+                <column name="ID_ALERTA_EMAIL_FROTAS" not-null="true" />
+            </many-to-many>
+        </set>
+        <many-to-one name="grupoServicoManutencao" class="br.com.linkdata.entity.GrupoServicoManutencao" access="field" fetch="join">
+            <column name="ID_GRUPO_SERVICO_MANUTENCAO" />
+        </many-to-one>
+        <many-to-one name="modeloVeiculo" class="br.com.linkdata.entity.ModeloVeiculo" access="field" fetch="select">
+            <column name="ID_MODELO_VEICULO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

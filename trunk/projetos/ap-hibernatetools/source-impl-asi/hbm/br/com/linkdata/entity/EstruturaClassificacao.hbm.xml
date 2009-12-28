@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extra-import">org.hibernate.search.annotations.Indexed</meta> 
+	<meta attribute="extra-import">org.hibernate.search.annotations.FullTextFilterDefs</meta> 
+	<meta attribute="extra-import">org.hibernate.search.annotations.FullTextFilterDef</meta> 
+	<meta attribute="extra-import">br.com.linkdata.filter.FiltroEstruturaTipoClassificacaoFactory</meta> 
+	<meta attribute="extra-import">br.com.linkdata.filter.FiltroEstruturaTipoModeloFactory</meta>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	<meta attribute="implements">br.com.linkdata.entity.Duplicate&lt;EstruturaClassificacao&gt;</meta>
+	<meta attribute="extra-classe">
+@Indexed(index="EstruturaClassificacao")
+@FullTextFilterDefs({
+	@FullTextFilterDef(name= "estruturaTipoClassificacaoFiltro", impl = FiltroEstruturaTipoClassificacaoFactory.class),
+	@FullTextFilterDef(name= "estruturaTipoModeloFiltro", impl = FiltroEstruturaTipoModeloFactory.class)
+})
+	</meta>
+	<meta attribute="class-code">
+	private transient List&lt;EstruturaClassificacao&gt; nodes;
+	
+	public List&lt;EstruturaClassificacao&gt; getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List&lt;EstruturaClassificacao&gt; nodes) {
+		this.nodes = nodes;
+	}
+
+	public void addNodes(EstruturaClassificacao node){
+		if(this.nodes == null){
+			nodes = new ArrayList&lt;EstruturaClassificacao&gt;();
+		}
+	    this.nodes.add(node);	
+	}
+	
+	public boolean isLastNode() {
+		return nodes == null || nodes.size() == 0;
+	}
+	
+	public String toString() {
+		return getTipoEstrutura().getNome() + ": " + this.codigo + " - "
+				+ this.nome;
+	}
+	
+	public int compareTo(EstruturaClassificacao o) {
+		return nome.compareTo(o.getNome());
+	}
+	
+	@Override
+	public EstruturaClassificacao duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			EstruturaClassificacao ec = new EstruturaClassificacao();
+			bag.store(this,ec);
+			ec.setCodigo(this.getCodigo());
+			ec.setDescricao(this.getDescricao());
+			ec.setEstruturaClassificacaoSuperior(ec.getEstruturaClassificacaoSuperior() == null ? null : ec.getEstruturaClassificacaoSuperior().duplicate(bag));
+			ec.setHierarquia(this.getHierarquia());
+			ec.setId(this.getId());
+			if(this.getNodes() != null &amp;&amp; this.getNodes().size() != 0){
+				for(EstruturaClassificacao ec2: this.getNodes()){
+					ec.addNodes(ec2.duplicate(bag));
+				}
+			}
+			ec.setNome(this.getNome());
+			ec.setTipoEstrutura(this.getTipoEstrutura() == null ? null : this.getTipoEstrutura().duplicate(bag));
+			ec.setTipoModelo(this.getTipoModelo() == null ? null : this.getTipoModelo().duplicate(bag));
+		}
+		return (EstruturaClassificacao) bag.retrieve(this);
+	}
+	</meta>
+    <class name="br.com.linkdata.entity.EstruturaClassificacao" table="ESTRUTURA_CLASSIFICACAO">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_ESTR_CLASSIFICACAO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_ESTR_CLASSIFICACAO</param>
+            </generator>
+        </id>
+        <property name="codigo" type="java.lang.String" access="field">
+            <column name="CD_ESTR_CLASSIFICACAO" length="20" not-null="true" />
+        </property>
+        <property name="descricao" type="java.lang.String" access="field">
+            <column name="DS_ESTR_CLASSIFICACAO" length="2000" />
+        </property>
+        <many-to-one name="estruturaClassificacaoSuperior" class="br.com.linkdata.entity.EstruturaClassificacao" access="field" fetch="select">
+        	<meta attribute="scope-field">protected</meta>
+            <column name="ID_ESTR_CLASS_SUP" />
+        </many-to-one>
+        <property name="hierarquia" type="java.lang.String" access="field">
+            <column name="DS_HIERQ_CLASSIFICACAO" length="2000" not-null="true" />
+        </property>
+        <property name="nome" type="java.lang.String" access="field">
+            <column name="NM_ESTR_CLASSIFICACAO" not-null="true" />
+        </property>
+        <many-to-one name="tipoEstrutura" class="br.com.linkdata.entity.TipoEstrutura" access="field" fetch="select">
+            <column name="ID_TP_ESTRUTURA" />
+        </many-to-one>
+        <many-to-one name="tipoModelo" class="br.com.linkdata.entity.TipoModelo" access="field" fetch="select">
+            <column name="ID_TP_MODELO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

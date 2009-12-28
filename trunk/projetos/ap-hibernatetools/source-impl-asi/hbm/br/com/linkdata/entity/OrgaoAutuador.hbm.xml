@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.OrgaoAutuador" table="ORGAO_AUTUADOR">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_ORGAO_AUTUADOR" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_ORGAO_AUTUADOR</param>
+            </generator>
+        </id>
+        <component name="controleExclusao" class="br.com.linkdata.entity.EntityEmbedded">
+            <property name="dataExclusao" type="java.util.Date" access="field">
+                <column name="DT_EXCLUSAO" />
+            </property>
+        </component>
+        <property name="descricao" type="java.lang.String" access="field">
+            <column name="DS_ORGAO_AUTUADOR" length="1000" not-null="true" />
+        </property>
+        <property name="sigla" type="java.lang.String" access="field">
+            <column name="SG_ORGAO_AUTUADOR" length="10" not-null="true" unique="true" />
+        </property>
+    </class>
+</hibernate-mapping>

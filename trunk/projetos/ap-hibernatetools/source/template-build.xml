@@ -6,7 +6,8 @@
 	<property name="var.is.gerar.dao.impl.${is.gerar.dao.impl}" value="true"/>
 	<property name="var.is.gerar.bo.${is.gerar.bo}" value="true"/>
 	<property name="var.is.gerar.jpa.do.hbm.${is.gerar.jpa.do.hbm}" value="true"/>
-
+	<property name="var.is.gerar.hbm.do.jpa.${is.gerar.hbm.do.jpa}" value="true"/>
+	
 	<path id="classpath">
 		<fileset dir="${classpath.lib}">
 			<include name="**/*jar"/>
@@ -172,6 +173,16 @@
 				<property key="var_superclasse" 	value="${hbm2jpa.var_superclasse}"/>
 				<property key="var_superinterface" 	value="${hbm2jpa.var_superinterface}"/>
 			</hbmtemplate>
+		</hibernatetool> 
+	</target>
+	
+	<target name="gerar-hbm-do-jpa" if="var.is.gerar.hbm.do.jpa.true"> 
+		<hibernatetool destdir="${path.destino.root}"> 
+			<classpath refid="classpath"/>
+			<property key="hibernatetool.util.toolclass" value="${jpa2hbm.util}"/>
+			
+			<jpaconfiguration persistenceunit="${jpa2hbm.nome.pu}" />
+			<hbm2hbmxml/>
 		</hibernatetool> 
 	</target> 
 </project>

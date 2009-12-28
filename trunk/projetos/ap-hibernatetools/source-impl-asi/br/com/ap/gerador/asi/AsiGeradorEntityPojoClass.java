@@ -7,6 +7,7 @@ package br.com.ap.gerador.asi;
 
 import java.util.Enumeration;
 import java.util.Properties;
+import java.util.StringTokenizer;
 
 import org.hibernate.id.MultipleHiLoPerTableGenerator;
 import org.hibernate.id.PersistentIdentifierGenerator;
@@ -17,6 +18,7 @@ import org.hibernate.mapping.PersistentClass;
 import org.hibernate.mapping.Property;
 import org.hibernate.mapping.RootClass;
 import org.hibernate.mapping.SimpleValue;
+import org.hibernate.mapping.SingleTableSubclass;
 import org.hibernate.mapping.Table;
 import org.hibernate.tool.hbm2x.Cfg2JavaTool;
 import org.hibernate.util.StringHelper;
@@ -197,7 +199,7 @@ public class AsiGeradorEntityPojoClass extends GeradorEntityPojoClass {
 	protected String getNomeTabela() {
 		String resultado = null;
 		
-		if (!UtilObjeto.isReferencia(meta) || !(meta instanceof RootClass)) {
+		if (UtilObjeto.isReferencia(meta) && (meta instanceof RootClass)) {
 			RootClass rootClass = (RootClass) meta;
 			Table tabela = rootClass.getTable();
 			resultado = tabela.getName();
@@ -229,4 +231,49 @@ public class AsiGeradorEntityPojoClass extends GeradorEntityPojoClass {
 		return prefix + beanCapitalize( p.getName() );
 	}
 
+	@Override
+	public String[] getCascadeTypes(Property property) {
+		StringTokenizer st =  new StringTokenizer( property.getCascade(), ", ", false );
+		String cascadeType = null;
+		StringBuffer cascade = new StringBuffer();
+		while ( st.hasMoreElements() ) {
+			String element = ( (String) st.nextElement() ).toLowerCase();
+			if ( "persist".equals( element ) ) {
+				if (cascadeType == null) cascadeType = importType( "javax.persistence.CascadeType");
+				cascade.append( cascadeType ).append(".PERSIST").append(", ");
+			}
+			else if ( "merge".equals( element ) ) {
+				if (cascadeType == null) cascadeType = importType( "javax.persistence.CascadeType");
+				cascade.append( cascadeType ).append(".MERGE").append(", ");
+			}
+			else if ( "delete".equals( element ) ) {
+				if (cascadeType == null) cascadeType = importType( "javax.persistence.CascadeType");
+				cascade.append( cascadeType ).append(".REMOVE").append(", ");
+			}
+			else if ( "refresh".equals( element ) ) {
+				if (cascadeType == null) cascadeType = importType( "javax.persistence.CascadeType");
+				cascade.append( cascadeType ).append(".REFRESH").append(", ");
+			}
+			else if ( "all".equals( element ) || "none".equals( element )) {
+				if (cascadeType == null) cascadeType = importType( "javax.persistence.CascadeType");
+				cascade.append( cascadeType ).append(".ALL").append(", ");
+			}
+		}
+		if ( cascade.length() >= 2 ) {
+			cascade.setLength( cascade.length() - 2 );
+		}
+		return cascade.toString().split(", ");
+	}
+	
+	public String generateDiscriminatorValue() {
+		StringBuilder resultado = new StringBuilder();
+		if (clazz instanceof SingleTableSubclass) {
+			resultado.append("@");
+			resultado.append(importType("javax.persistence.DiscriminatorValue"));
+			resultado.append("(value=\"");
+			resultado.append(clazz.getDiscriminatorValue());
+			resultado.append("\")");
+		}
+		return resultado.toString();
+	}
 }
