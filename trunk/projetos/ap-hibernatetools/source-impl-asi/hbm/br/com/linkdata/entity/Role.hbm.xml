@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.Role" table="AUTZ_ROLE">
+        <id name="id" type="long" access="field">
+            <column name="ID_ROLE" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_ROLE</param>
+            </generator>
+        </id>
+        <set name="memberships" inverse="true" lazy="true" table="AUTZ_MEMBERSHIP" fetch="select">
+            <key>
+                <column name="ID_ROLE" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.Membership" />
+        </set>
+        <property name="name" type="java.lang.String" access="field">
+            <column name="NM_ROLE" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

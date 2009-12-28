@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="implements"><![CDATA[java.lang.Comparable<CaracteristicaModelo>]]></meta>
+	<meta attribute="class-code">
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(CaracteristicaModelo o) {
+		return ordem.compareTo(o.getOrdem());
+	}
+	</meta>
+	
+    <class name="br.com.linkdata.entity.CaracteristicaModelo" table="CARACTERISTICA_MODELO">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_CARACT_MODELO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_CARACT_MODELO</param>
+            </generator>
+        </id>
+        <many-to-one name="modeloMaterial" class="br.com.linkdata.entity.ModeloMaterial" access="field" fetch="select">
+            <column name="ID_MODELO" />
+        </many-to-one>
+        <property name="nome" type="java.lang.String" access="field">
+            <column name="NM_CARACT_MODELO" length="200" not-null="true" />
+        </property>
+        <property name="obrigatorio" type="boolean" access="field">
+            <column name="IN_OBRIGATORIO" not-null="true" />
+        </property>
+        <property name="ordem" type="java.lang.Integer" access="field">
+            <column name="NR_ORDEM" length="2" not-null="true" />
+        </property>
+        <many-to-one name="tipoCaracteristica" class="br.com.linkdata.entity.TipoCaracteristica" access="field" fetch="select">
+        	<meta attribute="scope-field">protected</meta>
+            <column name="ID_TIPO_CARACT" />
+        </many-to-one>
+        <many-to-one name="tipoDado" class="br.com.linkdata.entity.TipoDado" access="field" fetch="select">
+            <column name="ID_TIPO_DADO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

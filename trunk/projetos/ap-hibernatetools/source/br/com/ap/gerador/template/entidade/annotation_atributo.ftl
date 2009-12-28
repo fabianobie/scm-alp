@@ -2,13 +2,13 @@
 <#if pojo.hasIdentifierProperty()>
 <#if property.equals(clazz.identifierProperty)>
 	${pojo.generateAnnIdGenerator()?replace("@", "\n\t@")?trim}
-<#--	@${pojo.importType("javax.persistence.Id")} -->
-<#--	@${pojo.importType("javax.persistence.GeneratedValue")} -->
 </#if>
 </#if>
 <#if c2h.isManyToOne(property)>
 	${pojo.generateManyToOneAnnotation(property).trim()}
-${pojo.generateJoinColumnsAnnotation(property, cfg)}
+	${pojo.generateJoinColumnsAnnotation(property, cfg).trim()}
+<#elseif c2h.isOneToOne(property)>
+	${pojo.generateOneToOneAnnotation(property, cfg).trim()}
 <#elseif c2h.isCollection(property)>
 	${pojo.generateCollectionAnnotation(property, cfg).trim()}
 <#else>

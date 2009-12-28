@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	
+    <class name="br.com.linkdata.entity.DocumentoNomeacaoFiscal" table="DOCUMENTO_NOMEACAO_FISCAL">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_DOC_NOMEACAO_FISCAL" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_DOC_NOMEACAO_FISCAL</param>
+            </generator>
+        </id>
+        <many-to-one name="anexo" class="br.com.linkdata.entity.TaskDoc" access="field" cascade="persist,merge" fetch="select">
+            <column name="ID_ANEXO" />
+        </many-to-one>
+        <many-to-one name="contrato" class="br.com.linkdata.entity.Contrato" access="field" fetch="select">
+            <column name="ID_CONTRATO" />
+        </many-to-one>
+        <property name="dataEmissao" type="date" access="field">
+            <column name="DT_EMISSAO" not-null="true" />
+        </property>
+        <set name="fiscaisNomeados" inverse="true" lazy="true" table="FISCAL_NOMEADO" fetch="select">
+            <key>
+                <column name="ID_DOC_NOMEACAO_FISCAL" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.FiscalNomeado" />
+        </set>
+        <many-to-one name="modeloDocumento" class="br.com.linkdata.entity.ModeloDocumento" access="field" fetch="select">
+            <column name="ID_MODELO_DOC" />
+        </many-to-one>
+        <set name="notificacaoFiscal" inverse="false" lazy="true" table="NOTIFICACAO_FISCAL" fetch="select">
+            <key>
+                <column name="ID_DOC_NOMEACAO_FISCAL" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.NotificacaoFiscal" />
+        </set>
+        <property name="numeroDocumento" type="java.lang.Long" access="field">
+            <column name="NR_DOCUMENTO" not-null="true" />
+        </property>
+        <many-to-one name="vigencia" class="br.com.linkdata.entity.Vigencia" access="field" cascade="persist,merge,delete" fetch="join">
+            <column name="ID_VIGENCIA" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

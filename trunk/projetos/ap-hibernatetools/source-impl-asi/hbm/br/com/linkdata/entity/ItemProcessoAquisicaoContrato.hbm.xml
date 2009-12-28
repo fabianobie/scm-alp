@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extra-import">org.hibernate.annotations.Type</meta>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	
+    <class name="br.com.linkdata.entity.ItemProcessoAquisicaoContrato" table="ITEM_PROCESSO_AQUISICAO_CT">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_ITEM_PROCESSO_AQUI_CT" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_ITEM_PROCESSO_AQUI_CT</param>
+            </generator>
+        </id>
+        <property name="contratado" type="boolean" access="field">
+            <column name="IN_CONTRATADO" />
+        </property>
+        <property name="descricaoDetalhada" access="field">
+        	<meta attribute="meta-descricaoDetalhada">
+	@Type(type = "br.com.linkdata.entity.ClobUserType")
+            </meta>
+            <column name="DS_DETALHADA" />
+            <type name="br.com.linkdata.entity.ClobUserType"></type>
+        </property>
+        <many-to-one name="fornecedor" class="br.com.linkdata.entity.Fornecedor" access="field" fetch="select">
+            <column name="ID_FORNECEDOR" />
+        </many-to-one>
+        <property name="marca" type="java.lang.String" access="field">
+            <column name="DS_MARCA" />
+        </property>
+        <property name="modelo" type="java.lang.String" access="field">
+            <column name="DS_MODELO" />
+        </property>
+        <property name="numeroItemLicitacao" type="java.lang.String" access="field">
+            <column name="NU_ITEM_LICITACAO" not-null="true" />
+        </property>
+        <many-to-one name="processoAquisicaoContrato" class="br.com.linkdata.entity.ProcessoAquisicaoContrato" access="field" fetch="select">
+            <column name="ID_PROCESSO_AQUISICAO_CT_IPAC" />
+        </many-to-one>
+        <property name="quantidade" type="java.math.BigDecimal" access="field">
+            <column name="QTD_ITEM" precision="15" not-null="true" />
+        </property>
+        <any name="servicoMaterial" id-type="long" meta-type="string">
+            <meta-value value="S" class="br.com.linkdata.entity.Servico" />
+            <meta-value value="M" class="br.com.linkdata.entity.Material" />
+            <column name="TYPE_SERVICO_MATERIAL" />
+            <column name="ID_SERVICO_MATERIAL" />
+        </any>
+        <many-to-one name="unidadeMedida" class="br.com.linkdata.entity.UnidadeMedida" access="field" fetch="select">
+            <column name="ID_UNIDADE_MEDIDA" />
+        </many-to-one>
+        <property name="valorTotal" type="java.math.BigDecimal" access="field">
+            <column name="VR_TOTAL" />
+        </property>
+    </class>
+</hibernate-mapping>

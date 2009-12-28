@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.VersaoMinuta" table="VERSAO_MINUTA">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_VERSAO_MINUTA" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_VERSAO_MINUTA</param>
+            </generator>
+        </id>
+        <many-to-one name="anexo" class="br.com.linkdata.entity.TaskDoc" access="field" fetch="select">
+            <column name="ID_" />
+        </many-to-one>
+        <property name="dtVersao" type="java.util.Date" access="field">
+            <column name="DT_VERSAO" />
+        </property>
+        <property name="isAprovada" type="java.lang.Integer" access="field">
+            <column name="IND_APROVADA" />
+        </property>
+        <many-to-one name="minuta" class="br.com.linkdata.entity.Minuta" access="field" fetch="select">
+            <column name="ID_MINUTA" />
+        </many-to-one>
+        <property name="nrVersao" type="java.lang.Integer" access="field">
+            <column name="NR_VERSAO" not-null="true" />
+        </property>
+        <many-to-one name="parecerJuridico" class="br.com.linkdata.entity.ParecerJuridico" access="field" fetch="select">
+            <column name="ID_PARECER_JURIDICO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

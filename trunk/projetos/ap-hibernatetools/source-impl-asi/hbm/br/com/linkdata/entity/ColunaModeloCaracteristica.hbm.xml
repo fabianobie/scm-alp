@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	<meta attribute="implements"><![CDATA[br.com.linkdata.entity.Duplicate<ColunaModeloCaracteristica>]]></meta>
+
+    <class name="br.com.linkdata.entity.ColunaModeloCaracteristica" table="COLUNA_MODELO_CARACTERISTICA">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_COLUNA" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_COLUNA</param>
+            </generator>
+        </id>
+        <property name="mascara" type="java.lang.String" access="field">
+            <column name="DS_MASCARA" precision="20" scale="0" />
+        </property>
+        <set name="modeloValores" inverse="false" lazy="false" table="MODELO_VALOR_CARACT" cascade="persist,merge,delete" fetch="join">
+            <key>
+                <column name="ID_COLUNA" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.ModeloValorCaracteristica" />
+        </set>
+        <property name="nome" type="java.lang.String" access="field">
+            <column name="NM_COLUNA" precision="80" scale="0" not-null="true" />
+        </property>
+        <property name="ordem" type="java.lang.Integer" access="field">
+            <column name="NR_ORDEM" length="2" not-null="true" />
+        </property>
+        <many-to-one name="tipoDado" class="br.com.linkdata.entity.TipoDado" access="field" fetch="select">
+        	<meta attribute="scope-field">protected</meta>
+            <column name="ID_TIPO_DADO" />
+        </many-to-one>
+        <property name="totalizavel" type="java.lang.Boolean" access="field">
+            <column name="IN_TOTALIZAVEL" />
+        </property>
+    </class>
+</hibernate-mapping>

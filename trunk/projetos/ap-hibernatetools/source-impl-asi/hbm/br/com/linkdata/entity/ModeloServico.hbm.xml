@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	<meta attribute="implements">br.com.linkdata.entity.Duplicate&lt;ModeloServico&gt;</meta>
+	<meta attribute="extra-import">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+	<meta attribute="extra-classe">
+@DynaColumnsDomain(description = "Modelo de Serviço", column = "nome")
+	</meta>
+	<meta attribute="class-code">
+	public void addEstrutura(EstruturaClassificacao estrutura) {
+		getEstruturas().add(estrutura);
+	}
+
+	public void removeEstrutura(EstruturaClassificacao estrutura) {
+		getEstruturas().remove(estrutura);
+	}
+
+	public void addCaracteristica(ModeloCaracteristicaServico caracteristica) {
+		if (modeloCaracteristicas == null) {
+			modeloCaracteristicas = new LinkedHashSet&lt;ModeloCaracteristicaServico&gt;();
+		}
+		modeloCaracteristicas.add(caracteristica);
+	}
+
+	@Override
+	public Object clone() {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream oos;
+		Object deepCopy = null;
+		try {
+			oos = new ObjectOutputStream(baos);
+			oos.writeUnshared(this);
+			ByteArrayInputStream bais = new ByteArrayInputStream(baos
+					.toByteArray());
+			ObjectInputStream ois = new ObjectInputStream(bais);
+			deepCopy = ois.readObject();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deepCopy;
+	}
+
+	@Override
+	public ModeloServico duplicate(DuplicateBag bag) {
+		if (bag.fits(this)) {
+			ModeloServico ms = new ModeloServico();
+			bag.store(this, ms);
+			ms.setSituacaoModelo(this.getSituacaoModelo().duplicate(bag));
+			ms.setDescricao(this.getDescricao());
+			ms.setId(this.getId());
+			ms.setNome(this.getNome());
+			Iterator&lt;EstruturaClassificacao&gt; it = this.getEstruturas()
+					.iterator();
+			while (it.hasNext()) {
+				ms.addEstrutura(it.next().duplicate(bag));
+			}
+			Iterator&lt;ModeloCaracteristicaServico&gt; it2 = this
+					.getModeloCaracteristicas().iterator();
+			while (it2.hasNext()) {
+				ms.addCaracteristica(it2.next().duplicate(bag));
+			}
+		}
+		return (ModeloServico) bag.retrieve(this);
+
+	}
+	</meta>
+    <class name="br.com.linkdata.entity.ModeloServico" table="MODELO_SERVICO">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_MODELO_SERVICO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_MODELO_SERVICO</param>
+            </generator>
+        </id>
+        <property name="dataDesativacao" type="java.util.Date" access="field">
+            <column name="DT_DESATIVACAO" />
+        </property>
+        <property name="descricao" type="java.lang.String" access="field">
+            <column name="DS_MODELO" />
+        </property>
+        <set name="estruturas" inverse="false" lazy="false" table="MODELO_ESTRUTURA" fetch="join">
+            <key>
+                <column name="ID_MODELO_SERVICO" not-null="true" />
+            </key>
+            <many-to-many entity-name="br.com.linkdata.entity.EstruturaClassificacao">
+                <column name="ID_ESTR_CLASSIFICACAO" not-null="true" />
+            </many-to-many>
+        </set>
+        <property name="idIntegracao" type="java.lang.String" access="field">
+            <column name="ID_INTEGRACAO" length="10" />
+        </property>
+        <set name="modeloCaracteristicas" inverse="false" lazy="false" table="MODELO_CARACTERISTICA_SERV" cascade="persist,merge,delete" fetch="join">
+            <key>
+                <column name="ID_MODELO_SERVICO" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.ModeloCaracteristicaServico" />
+        </set>
+        <property name="nome" type="java.lang.String" access="field">
+            <column name="NM_MODELO" length="100" not-null="true" />
+        </property>
+        <many-to-one name="situacao" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
+            <column name="IND_ATIVO" />
+        </many-to-one>
+        <many-to-one name="situacaoModelo" class="br.com.linkdata.entity.SituacaoModelo" access="field" fetch="join">
+            <column name="ID_SIT_MODELO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

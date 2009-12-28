@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.Mensagem" table="MENSAGEM">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_MENSAGEM</param>
+            </generator>
+        </id>
+        <many-to-one name="autor" class="br.com.linkdata.entity.Usuario" access="field" fetch="join">
+            <column name="ID_USUARIO" />
+        </many-to-one>
+        <many-to-one name="conversa" class="br.com.linkdata.entity.Conversa" access="field" fetch="select">
+            <column name="ID_CONVERSA" />
+        </many-to-one>
+        <property name="data" type="timestamp" access="field">
+            <column name="DT_MENSAGEM" not-null="true" />
+        </property>
+        <property name="ordem" type="java.lang.Integer" access="field">
+            <column name="NR_ORDEM" length="3" not-null="true" />
+        </property>
+        <property name="texto" type="java.lang.String" access="field">
+            <column name="TXT_MENSAGEM" length="2000" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

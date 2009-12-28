@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	
+    <class name="br.com.linkdata.entity.ItemEstruturaCusto" table="ITEM_ESTRUTURA_CUSTO">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_ITEM_ESTRUTURA_CUSTO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_ITEM_ESTRUTURA_CUSTO</param>
+            </generator>
+        </id>
+        <property name="descricaoItem" type="java.lang.String" access="field">
+            <column name="DS_ITEM" />
+        </property>
+        <many-to-one name="estruturaCusto" class="br.com.linkdata.entity.EstruturaCusto" access="field" fetch="select">
+            <column name="ID_ESTRUTURA_CUSTO" />
+        </many-to-one>
+        <property name="formula" type="java.lang.String" access="field">
+            <column name="DS_FORMULA" />
+        </property>
+        <property name="itemSuperior" type="java.lang.String" access="field">
+            <column name="DS_ITEM_SUPERIOR" />
+        </property>
+        <property name="ordem" type="java.lang.Integer" access="field">
+            <column name="NR_ORDEM" />
+        </property>
+    </class>
+</hibernate-mapping>

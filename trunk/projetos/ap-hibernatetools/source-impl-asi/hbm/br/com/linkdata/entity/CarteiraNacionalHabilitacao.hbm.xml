@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	
+    <class name="br.com.linkdata.entity.CarteiraNacionalHabilitacao" table="CARTEIRA_NAC_HABILITACAO">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_CARTEIRA_NAC_HABILITACAO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_CARTEIRA_NAC_HABILITACAO</param>
+            </generator>
+        </id>
+        <property name="dataExpedicao" type="date" access="field">
+            <column name="DT_EXPEDICAO" not-null="true" />
+        </property>
+        <property name="numero" type="java.lang.String" access="field">
+            <column name="NM_CARTEIRA_NAC_HABILITACAO" length="10" not-null="true" />
+        </property>
+        <many-to-one name="tipoCNH" class="br.com.linkdata.entity.TipoCNH" access="field" fetch="select">
+            <column name="ID_TIPO_CNH" />
+        </many-to-one>
+        <property name="vencimento" type="date" access="field">
+            <column name="DT_VENCIMENTO" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

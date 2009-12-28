@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.Servico" table="SERVICO">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_SERVICO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_SERVICO</param>
+            </generator>
+        </id>
+        <component name="controleExclusao" class="br.com.linkdata.entity.EntityEmbedded">
+            <property name="dataExclusao" type="java.util.Date" access="field">
+                <column name="DT_EXCLUSAO" />
+            </property>
+        </component>
+        <property name="descricao" type="java.lang.String" access="field">
+            <column name="DS_MODELO" not-null="true" />
+        </property>
+        <many-to-one name="modeloServico" class="br.com.linkdata.entity.ModeloServico" access="field" fetch="select">
+            <column name="ID_MODELO_SERVICO" />
+        </many-to-one>
+        <property name="nome" type="java.lang.String" access="field">
+            <column name="NM_MODELO" length="80" not-null="true" unique="true" />
+        </property>
+        <many-to-one name="situacao" class="br.com.linkdata.entity.SituacaoModelo" access="field" fetch="select">
+            <column name="ID_SIT_SERVICO" />
+        </many-to-one>
+        <property name="ultimaAlteracao" type="date" access="field">
+            <column name="DT_ULT_ALTERACAO" />
+        </property>
+    </class>
+</hibernate-mapping>

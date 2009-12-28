@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extra-import">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+	<meta attribute="extra-import">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+	<meta attribute="implements">br.com.linkdata.interfaces.IPessoaFisica</meta>
+	<meta attribute="extra-classe">
+@UniqueCompositeConstraint(
+	fields={
+		@UniqueCompositeField(fieldLabel="CPF", fieldName="cpf"),
+		@UniqueCompositeField(fieldLabel="Matrícula", fieldName="matricula")
+	}
+)
+	</meta>
+    <class name="br.com.linkdata.entity.Motorista" table="MOTORISTA">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_MOTORISTA" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_MOTORISTA</param>
+            </generator>
+        </id>
+        <component name="controleExclusao" class="br.com.linkdata.entity.EntityEmbedded">
+            <property name="dataExclusao" type="java.util.Date" access="field">
+                <column name="DT_EXCLUSAO" />
+            </property>
+        </component>
+        <many-to-one name="ativo" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
+            <column name="IND_DISPONIBILIDADE" />
+        </many-to-one>
+        <many-to-one name="carteiraNacionalHabilitacao" class="br.com.linkdata.entity.CarteiraNacionalHabilitacao" access="field" cascade="persist,merge"
+        fetch="select">
+            <column name="ID_CNH" />
+        </many-to-one>
+        <set name="contatoMotorista" inverse="false" lazy="true" table="CONTATO_MOTORISTA" cascade="persist,merge,delete" fetch="select">
+            <key>
+                <column name="ID_MOTORISTA" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.ContatoMotorista" />
+        </set>
+        <property name="cpf" type="java.lang.String" access="field">
+            <column name="NR_CPF" length="11" not-null="true" />
+        </property>
+        <property name="dataAdmissao" type="date" access="field">
+            <column name="DT_ADMISSAO" not-null="true" />
+        </property>
+        <property name="dataDemissao" type="date" access="field">
+            <column name="DT_DEMISSAO" />
+        </property>
+        <property name="dataNascimento" type="date" access="field">
+            <column name="DT_NASCIMENTO" not-null="true" />
+        </property>
+        <many-to-one name="domicilioBancario" class="br.com.linkdata.entity.DomicilioBancario" access="field" cascade="persist,merge" fetch="select">
+            <column name="ID_DOMICILIO_BANCARIO" />
+        </many-to-one>
+        <property name="email" type="java.lang.String" access="field">
+            <column name="DS_EMAIL" length="80" />
+        </property>
+        <many-to-one name="endereco" class="br.com.linkdata.entity.Endereco" access="field" cascade="persist,merge" fetch="select">
+            <column name="ID_ENDERECO" />
+        </many-to-one>
+        <many-to-one name="estadoCivil" class="br.com.linkdata.entity.EstadoCivil" access="field" fetch="join">
+            <column name="ID_ESTADO_CIVIL" />
+        </many-to-one>
+        <component name="identidade" class="br.com.linkdata.entity.Identidade">
+            <property name="dataExpedicao" type="date" access="field">
+                <column name="DT_EXPEDICAO" />
+            </property>
+	        <!-- 
+            <many-to-one name="estado" class="br.com.linkdata.entity.Estado" access="field" fetch="select">
+                <column name="ID_ESTADO" />
+            </many-to-one>
+            -->
+            <property name="numero" type="java.lang.String" access="field">
+                <column name="NR_INDENTIDADE" length="20" />
+            </property>
+            <property name="orgaoExpeditor" type="java.lang.String" access="field">
+                <column name="DS_ORGAO_EXP" length="5" />
+            </property>
+        </component>
+        <property name="matricula" type="java.lang.String" access="field">
+            <column name="NR_MATRICULA" length="12" not-null="true" />
+        </property>
+        <many-to-one name="motivoIndisponibilidadeMotorista" class="br.com.linkdata.entity.MotivoIndisponibilidadeMotorista" access="field" fetch="join">
+            <column name="ID_MOTIVO_INDISPONIBILIDADE" />
+        </many-to-one>
+        <set name="multas" inverse="false" lazy="true" table="MULTA" cascade="persist,merge,delete" fetch="select">
+            <key>
+                <column name="ID_MOTORISTA" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.Multa" />
+        </set>
+        <property name="nacionalidade" type="java.lang.String" access="field">
+            <column name="DS_NACIONALIDADE" length="30" not-null="true" />
+        </property>
+        <property name="nome" type="java.lang.String" access="field">
+            <column name="NM_MOTORISTA" length="80" not-null="true" />
+        </property>
+        <property name="numeroTicketCar" type="java.lang.String" access="field">
+            <column name="NR_TICKET_CAR" length="15" not-null="true" />
+        </property>
+        <property name="observacao" type="java.lang.String" access="field">
+            <column name="DS_OBSERVACAO" length="1000" />
+        </property>
+        <many-to-one name="sexo" class="br.com.linkdata.entity.Sexo" access="field" fetch="join">
+            <column name="ID_SEXO" />
+        </many-to-one>
+        <many-to-one name="situacaoMotorista" class="br.com.linkdata.entity.SituacaoMotorista" access="field" fetch="join">
+            <column name="ID_SITUACAO_MOTORISTA" />
+        </many-to-one>
+        <many-to-one name="telefoneCelular" class="br.com.linkdata.entity.Telefone" access="field" cascade="persist,merge" fetch="select">
+            <column name="ID_TELEFONE_CELULAR" />
+        </many-to-one>
+        <many-to-one name="telefoneRedidencial" class="br.com.linkdata.entity.Telefone" access="field" cascade="persist,merge" fetch="select">
+            <column name="ID_TELEFONE_RESIDENCIAL" />
+        </many-to-one>
+        <many-to-one name="tipoSanguineo" class="br.com.linkdata.entity.TipoSanguineo" access="field" fetch="join">
+            <column name="ID_TIPO_SANGUINEO" />
+        </many-to-one>
+        <many-to-one name="unidadeOrganizacional" class="br.com.linkdata.entity.UnidadeOrganizacional" access="field" fetch="select">
+            <column name="ID_UNIDADE_ORGANIZACIONAL" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

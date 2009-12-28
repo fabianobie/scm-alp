@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.ProcessoAquisicaoContrato" table="PROCESSO_AQUISICAO_CT">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_PROCESSO_AQUISICAO_CT" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_PROCESSO_AQUISICAO_CT</param>
+            </generator>
+        </id>
+        <set name="convocacao" inverse="true" lazy="true" table="Convocacao" cascade="persist,merge" fetch="select">
+            <key>
+                <column name="ID_PROCESSO_AQUISICAO" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.Convocacao" />
+        </set>
+        <many-to-one name="formaAquisicao" class="br.com.linkdata.entity.FormaAquisicao" access="field" fetch="select">
+            <column name="ID_FORMA_AQUISICAO" />
+        </many-to-one>
+        <set name="itensProcessoAquisicaoContrato" inverse="true" lazy="true" table="ITEM_PROCESSO_AQUISICAO_CT" cascade="persist,merge" fetch="select">
+            <key>
+                <column name="ID_PROCESSO_AQUISICAO_CT_IPAC" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.ItemProcessoAquisicaoContrato" />
+        </set>
+        <property name="numero" type="java.lang.String" access="field">
+            <column name="NU_PROCESSO_AQUISICAO_CT" />
+        </property>
+        <property name="numeroAquisicao" type="java.lang.String" access="field">
+            <column name="NU_AQUISICAO_CT" />
+        </property>
+        <property name="numeroModalidade" type="java.lang.String" access="field">
+            <column name="NU_MODALIDADE" />
+        </property>
+        <many-to-one name="unidadeOrganizacional" class="br.com.linkdata.entity.UnidadeOrganizacional" access="field" fetch="select">
+            <column name="ID_UO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

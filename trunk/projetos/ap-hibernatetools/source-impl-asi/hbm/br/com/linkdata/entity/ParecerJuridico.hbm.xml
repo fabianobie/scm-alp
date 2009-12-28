@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.ParecerJuridico" table="PARECER_JURIDICO">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_PARECER_JURIDICO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_PARECER_JURIDICO</param>
+            </generator>
+        </id>
+        <property name="acatado" type="java.lang.Boolean" access="field">
+            <column name="IND_ACATADO" />
+        </property>
+        <many-to-one name="anexo" class="br.com.linkdata.entity.TaskDoc" access="field" fetch="select">
+            <column name="ID_TASKDOC" />
+        </many-to-one>
+        <property name="assuntosTipoDocumento" type="br.com.linkdata.entity.AssuntosTipoDocumento" access="field">
+            <column name="assuntosTipoDocumento" />
+        </property>
+        <many-to-one name="justificativaParecer" class="br.com.linkdata.entity.JustificativaParecer" access="field" fetch="select">
+            <column name="ID_JUSTIFICATIVA_PARECER" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

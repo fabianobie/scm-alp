@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.OrdemServico" table="OrdemServico" abstract="true" persister="org.hibernate.persister.entity.UnionSubclassEntityPersister">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_ORDEM_SERVICO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_ORDEM_SERVICO</param>
+            </generator>
+        </id>
+        <set name="anexos" inverse="false" lazy="true" table="ANEXO" cascade="persist,merge,delete" fetch="select">
+            <key>
+                <column name="ID_ORDEM_SERVICO" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.Anexo" />
+        </set>
+        <property name="dataNotaFiscal" type="timestamp" access="field">
+            <column name="DT_NOTA_FISCAL" />
+        </property>
+        <property name="dataRealizacao" type="timestamp" access="field">
+            <column name="DT_REALIZACAO" />
+        </property>
+        <many-to-one name="fornecedor" class="br.com.linkdata.entity.Fornecedor" access="field" fetch="select">
+            <column name="ID_FORNECEDOR" />
+        </many-to-one>
+        <property name="hodometro" type="java.lang.Long" access="field">
+            <column name="KM_HODOMETRO" not-null="true" />
+        </property>
+        <property name="justificativaCancelamento" type="java.lang.String" access="field">
+            <column name="DS_JUSTIFICATIVA_CANCELAMENTO" length="1000" />
+        </property>
+        <many-to-one name="missao" class="br.com.linkdata.entity.Missao" access="field" fetch="select">
+            <column name="ID_MISSAO" />
+        </many-to-one>
+        <property name="numero" type="java.lang.String" access="field">
+            <column name="NR_ORDEM_SERVICO" length="15" unique="true" />
+        </property>
+        <property name="numeroNotaFiscal" type="java.lang.String" access="field">
+            <column name="NR_NOTA_FISCAL" length="15" />
+        </property>
+        <property name="numeroTicketCar" type="java.lang.String" access="field">
+            <column name="NR_TICKET_CAR" length="15" />
+        </property>
+        <many-to-one name="situacaoOrdemServico" class="br.com.linkdata.entity.SituacaoOrdemServico" access="field" fetch="select">
+            <column name="ID_SITUACAO_ORDEM_SERVICO" />
+        </many-to-one>
+        <many-to-one name="veiculo" class="br.com.linkdata.entity.Veiculo" access="field" fetch="select">
+            <column name="ID_VEICULO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

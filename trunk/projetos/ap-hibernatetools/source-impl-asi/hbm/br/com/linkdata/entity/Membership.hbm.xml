@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.Membership" table="AUTZ_MEMBERSHIP">
+        <id name="id" type="long" access="field">
+            <column name="ID_MEMBERSHIP" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_MEMBERSHIP</param>
+            </generator>
+        </id>
+        <many-to-one name="authorization" class="br.com.linkdata.entity.UserAuthorization" access="field" fetch="join">
+            <column name="ID_USER_AUTHORIZATION" />
+        </many-to-one>
+        <set name="permissions" inverse="true" lazy="false" table="AUTZ_PERMISSION" cascade="persist,delete" fetch="join">
+            <key>
+                <column name="ID_MEMBERSHIP" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.Permission" />
+        </set>
+        <many-to-one name="role" class="br.com.linkdata.entity.Role" access="field" fetch="join">
+            <column name="ID_ROLE" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

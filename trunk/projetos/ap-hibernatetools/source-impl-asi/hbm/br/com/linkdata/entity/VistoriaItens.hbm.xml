@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.VistoriaItens" table="VISTORIA_ITENS">
+        <composite-id name="id" class="br.com.linkdata.entity.VistoriaItens$Id" access="field">
+            <key-property name="idItemVistoriaVeiculo" type="java.lang.Long">
+                <column name="ID_ITEM_VISTORIA_VEICULO" />
+            </key-property>
+            <key-property name="idVistoriaVeiculo" type="java.lang.Long">
+                <column name="ID_VISTORIA_VEICULO" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="estadoItensAvaliacao" class="br.com.linkdata.entity.EstadoItensAvaliacao" access="field" fetch="join">
+            <column name="ID_ESTADO_ITENS_AVALIACAO" />
+        </many-to-one>
+        <many-to-one name="itemVistoriaVeiculo" class="br.com.linkdata.entity.ItemVistoriaVeiculo" update="false" insert="false" access="field" fetch="join">
+            <column name="ID_ITEM_VISTORIA_VEICULO" />
+        </many-to-one>
+        <many-to-one name="vistoriaVeiculo" class="br.com.linkdata.entity.VistoriaVeiculo" update="false" insert="false" access="field" fetch="join">
+            <column name="ID_VISTORIA_VEICULO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

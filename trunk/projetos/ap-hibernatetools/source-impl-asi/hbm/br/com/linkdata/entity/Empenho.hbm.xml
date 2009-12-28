@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	
+    <class name="br.com.linkdata.entity.Empenho" table="EMPENHO">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_EMPENHO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_EMPENHO</param>
+            </generator>
+        </id>
+        <property name="data" type="date" access="field">
+            <column name="DT_INICIO" />
+        </property>
+        <many-to-one name="modalidadeEmpenho" class="br.com.linkdata.entity.ModalidadeEmpenho" access="field" fetch="select">
+            <column name="ID_MODALIDADE_EMPENHO" />
+        </many-to-one>
+        <property name="numero" type="java.lang.String" access="field">
+            <column name="NU_EMPENHO" />
+        </property>
+        <property name="valor" type="java.math.BigDecimal" access="field">
+            <column name="VL_EMPENHO" precision="15" />
+        </property>
+    </class>
+</hibernate-mapping>

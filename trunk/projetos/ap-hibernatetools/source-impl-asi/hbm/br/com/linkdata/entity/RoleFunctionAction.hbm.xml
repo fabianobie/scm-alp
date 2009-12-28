@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.RoleFunctionAction" table="AUTZ_ROLE_FUNC_ACT">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_ROLE_FUNC_ACT" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_ROLE_FUNC_ACT</param>
+            </generator>
+        </id>
+        <property name="actionId" type="java.lang.String" access="field">
+            <column name="ID_ACTION" />
+        </property>
+        <many-to-one name="roleFunction" class="br.com.linkdata.entity.RoleFunction" access="field" fetch="join">
+            <column name="ID_ROLE_FUNCTION" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
