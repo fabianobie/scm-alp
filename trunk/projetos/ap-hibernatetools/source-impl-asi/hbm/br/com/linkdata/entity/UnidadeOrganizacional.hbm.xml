@@ -3,6 +3,13 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.ExclusaoLogica</meta>
+	<meta attribute="extra-import">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+	<meta attribute="extra-import">br.com.linkdata.dynacolumns.DynaColumns</meta>
+	<meta attribute="extra-classe">
+@DynaColumns(description="Unidade Organizacional")
+@DynaColumnsDomain(description="Unidade Organizacional", column="nome")
+	</meta>
     <class name="br.com.linkdata.entity.UnidadeOrganizacional" table="UNIDADE_ORGANIZACIONAL">
         <id name="id" type="java.lang.Long" access="field">
             <column name="ID_UO" precision="12" scale="0" />
@@ -26,15 +33,18 @@
             <column name="DT_DESATIVACAO" />
         </property>
         <many-to-one name="endereco" class="br.com.linkdata.entity.Endereco" access="field" cascade="persist,merge,delete" fetch="select">
+        	<meta attribute="scope-field">protected</meta>
             <column name="ID_ENDERECO" />
         </many-to-one>
         <many-to-one name="fax" class="br.com.linkdata.entity.Telefone" access="field" cascade="persist,merge,delete" fetch="select">
+        	<meta attribute="scope-field">protected</meta>
             <column name="ID_FAX" />
         </many-to-one>
         <property name="idIntegracao" type="java.lang.String" access="field">
             <column name="ID_INTEGRACAO" length="15" />
         </property>
         <many-to-one name="naturezaJuridica" class="br.com.linkdata.entity.NaturezaJuridica" access="field" fetch="select">
+        	<meta attribute="scope-field">protected</meta>
             <column name="ID_NATJUR" />
         </many-to-one>
         <property name="nome" type="java.lang.String" access="field">
@@ -47,15 +57,19 @@
             <column name="IND_ATIVO" />
         </many-to-one>
         <many-to-one name="telefonePrimario" class="br.com.linkdata.entity.Telefone" access="field" cascade="persist,merge,delete" fetch="select">
+        	<meta attribute="scope-field">protected</meta>
             <column name="ID_TELEFONE_PRI" />
         </many-to-one>
         <many-to-one name="tipoUnidadeOrganizacional" class="br.com.linkdata.entity.TipoUnidadeOrganizacional" access="field" fetch="select">
+        	<meta attribute="scope-field">protected</meta>
             <column name="ID_TIPOUO" />
         </many-to-one>
         <many-to-one name="unidadeOrganizacionalSuperior" class="br.com.linkdata.entity.UnidadeOrganizacional" access="field" fetch="select">
+        	<meta attribute="scope-field">protected</meta>
             <column name="ID_UO_SUP" />
         </many-to-one>
         <set name="unidadesFilhas" inverse="false" lazy="true" table="UNIDADE_ORGANIZACIONAL" fetch="select">
+        	<meta attribute="scope-field">protected</meta>
             <key>
                 <column name="ID_UO_SUP" />
             </key>

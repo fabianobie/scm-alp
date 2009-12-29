@@ -3,14 +3,28 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="class-code">
+	@Override
+	public boolean equals(Object obj) {
+
+		if (obj instanceof ResponsavelLegal) {
+			Responsavel resp = (Responsavel) obj;
+			if (resp.getId() == this.getId())
+				return true;
+		}
+		return false;
+	}
+	</meta>
     <union-subclass name="br.com.linkdata.entity.ResponsavelLegal" extends="br.com.linkdata.entity.Responsavel" table="RESPONSAVEL_LEGAL">
         <property name="cargo" type="java.lang.String" access="field">
             <column name="NM_CARGO_CONTATO_FOR" length="20" not-null="true" />
         </property>
         <many-to-one name="endereco" class="br.com.linkdata.entity.Endereco" access="field" cascade="persist,merge" fetch="select">
+        	<meta attribute="scope-field">protected</meta>
             <column name="ID_ENDERECO" />
         </many-to-one>
         <many-to-one name="estadoCivil" class="br.com.linkdata.entity.EstadoCivil" access="field" fetch="select">
+        	<meta attribute="scope-field">protected</meta>
             <column name="ID_ESTADO_CIVIL" />
         </many-to-one>
         <many-to-one name="fornecedor" class="br.com.linkdata.entity.Fornecedor" access="field" fetch="select">

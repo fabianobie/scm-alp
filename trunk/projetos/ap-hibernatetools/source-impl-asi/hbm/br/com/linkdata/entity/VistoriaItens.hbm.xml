@@ -3,6 +3,28 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="implements"><![CDATA[java.util.Comparable<VistoriaItens>]]></meta>
+	<meta attribute="class-code">
+	public VistoriaItens() {
+		//Construtor.
+	}
+
+	public VistoriaItens(VistoriaVeiculo vistoriaVeiculo,
+			ItemVistoriaVeiculo itemVistoriaVeiculo) {
+		
+		this.id.idItemVistoriaVeiculo = itemVistoriaVeiculo.getId();
+		
+		this.vistoriaVeiculo = vistoriaVeiculo;
+		this.itemVistoriaVeiculo = itemVistoriaVeiculo;
+
+		vistoriaVeiculo.getVistoriasItens().add(this);
+	}
+	
+	@Override
+	public int compareTo(VistoriaItens vi) {
+		return this.getItemVistoriaVeiculo().getDescricao().compareTo(vi.getItemVistoriaVeiculo().getDescricao());
+	}
+	</meta>
     <class name="br.com.linkdata.entity.VistoriaItens" table="VISTORIA_ITENS">
         <composite-id name="id" class="br.com.linkdata.entity.VistoriaItens$Id" access="field">
             <key-property name="idItemVistoriaVeiculo" type="java.lang.Long">

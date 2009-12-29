@@ -3,6 +3,17 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	<meta attribute="class-code">
+	public boolean equals(Object obj){
+		Role r = (Role) obj;
+		boolean result = false;
+		if(r != null){
+			if(r.getId() == this.id) result = true;
+		}
+        return result;
+	}
+	</meta>
     <class name="br.com.linkdata.entity.Role" table="AUTZ_ROLE">
         <id name="id" type="long" access="field">
             <column name="ID_ROLE" precision="12" scale="0" />

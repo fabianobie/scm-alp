@@ -3,6 +3,21 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	<meta attribute="implements"><![CDATA[br.com.linkdata.entity.Duplicate<TipoEstrutura>]]></meta>
+	<meta attribute="class-code">
+	public TipoEstrutura duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			TipoEstrutura te = new TipoEstrutura();
+			bag.store(this,te);
+			te.setCodigo(this.getCodigo());
+			te.setId(this.getId());
+			te.setNome(this.getNome());
+			te.setTipoClassificacaoModelo(this.getTipoClassificacaoModelo() == null ? null : this.getTipoClassificacaoModelo().duplicate(bag));
+		}
+		return (TipoEstrutura) bag.retrieve(this);
+	}
+	</meta>
     <class name="br.com.linkdata.entity.TipoEstrutura" table="TIPO_ESTRUTURA">
         <id name="id" type="java.lang.Long" access="field">
             <column name="ID_TP_ESTRUTURA" precision="12" scale="0" />
