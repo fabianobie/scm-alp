@@ -32,11 +32,11 @@
         <property name="dataDesativacao" type="java.util.Date" access="field">
             <column name="DT_DESATIVACAO" />
         </property>
-        <many-to-one name="endereco" class="br.com.linkdata.entity.Endereco" access="field" cascade="persist,merge,delete" fetch="select">
+        <many-to-one name="endereco" class="br.com.linkdata.entity.Endereco" access="field" cascade="all" fetch="select">
         	<meta attribute="scope-field">protected</meta>
             <column name="ID_ENDERECO" />
         </many-to-one>
-        <many-to-one name="fax" class="br.com.linkdata.entity.Telefone" access="field" cascade="persist,merge,delete" fetch="select">
+        <many-to-one name="fax" class="br.com.linkdata.entity.Telefone" access="field" cascade="all" fetch="select">
         	<meta attribute="scope-field">protected</meta>
             <column name="ID_FAX" />
         </many-to-one>
@@ -56,7 +56,7 @@
         <many-to-one name="situacao" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
             <column name="IND_ATIVO" />
         </many-to-one>
-        <many-to-one name="telefonePrimario" class="br.com.linkdata.entity.Telefone" access="field" cascade="persist,merge,delete" fetch="select">
+        <many-to-one name="telefonePrimario" class="br.com.linkdata.entity.Telefone" access="field" cascade="all" fetch="select">
         	<meta attribute="scope-field">protected</meta>
             <column name="ID_TELEFONE_PRI" />
         </many-to-one>

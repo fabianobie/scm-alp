@@ -24,7 +24,7 @@
         </property>
         <set name="locaisEntrega" inverse="false" lazy="true" table="AQUISICAO_LOCAL_ENTREGA" fetch="select">
             <key>
-                <column name="ID_AQUISICAO" not-null="true" />
+                <column name="ID_AQUISICAO" precision="12" scale="0" not-null="true" />
             </key>
             <many-to-many entity-name="br.com.linkdata.entity.LocalEntrega">
                 <column name="ID_LOCAL_ENTREGA" not-null="true" />

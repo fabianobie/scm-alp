@@ -55,13 +55,13 @@
                 <param name="sequence">SQ_MATERIAL</param>
             </generator>
         </id>
-        <set name="apelidos" inverse="true" lazy="true" table="APELIDO_MATERIAL" cascade="persist,merge,delete" fetch="select">
+        <set name="apelidos" inverse="true" lazy="true" table="APELIDO_MATERIAL" cascade="all" fetch="select">
             <key>
                 <column name="ID_MATERIAL" />
             </key>
             <one-to-many class="br.com.linkdata.entity.ApelidoMaterial" />
         </set>
-        <set name="caracteristicas" inverse="true" lazy="true" table="CARACTERISTICA_MATERIAL" cascade="persist,merge,delete" fetch="select">
+        <set name="caracteristicas" inverse="true" lazy="true" table="CARACTERISTICA_MATERIAL" cascade="all" fetch="select">
             <key>
                 <column name="ID_MATERIAL" />
             </key>
@@ -74,7 +74,7 @@
         <property name="descricao" type="java.lang.String" access="field">
             <column name="DS_MODELO" />
         </property>
-        <list name="imagens" inverse="true" table="IMAGEM_MATERIAL" lazy="true" cascade="persist,merge,delete" fetch="select">
+        <list name="imagens" inverse="true" table="IMAGEM_MATERIAL" lazy="true" cascade="all" fetch="select">
             <key>
                 <column name="ID_MATERIAL" />
             </key>
@@ -85,7 +85,7 @@
             <column name="ID_MODELO" />
         </many-to-one>
         <property name="nome" type="java.lang.String" access="field">
-            <column name="NM_MODELO" length="100" not-null="true" unique="true" />
+            <column name="NM_MODELO" length="100" not-null="true" />
         </property>
         <many-to-one name="situacaoModelo" class="br.com.linkdata.entity.SituacaoModelo" access="field" fetch="select">
             <column name="ID_SIT_MODELO" />

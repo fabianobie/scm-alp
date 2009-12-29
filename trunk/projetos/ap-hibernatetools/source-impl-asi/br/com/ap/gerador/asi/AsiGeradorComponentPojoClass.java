@@ -23,5 +23,4 @@ public class AsiGeradorComponentPojoClass extends GeradorComponentPojoClass {
 		super(component, cfg);
 		this.component = component;
 	}
-
 }

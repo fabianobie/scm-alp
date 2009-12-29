@@ -174,12 +174,19 @@
 	</target> 
 
 	<target name="gerar-hbm-do-jpa" if="var.is.gerar.hbm.do.jpa.true"> 
-		<hibernatetool destdir="${path.destino.root}"> 
+		<hibernatetool destdir="${path.destino.root}" templatepath="br/com/ap/gerador/asi/template/"> 
 			<classpath refid="classpath"/>
 			<property key="hibernatetool.util.toolclass" value="${jpa2hbm.util}"/>
 			
 			<jpaconfiguration persistenceunit="${jpa2hbm.nome.pu}" />
-			<hbm2hbmxml/>
+			<hbm2hbmxml />
+			<!--
+			<hbmtemplate 
+				templateprefix="br/com/ap/gerador/asi/template/hbm/"
+				template="br/com/ap/gerador/asi/template/hbm/hibernate-mapping.hbm.ftl"
+				filepattern="{package-name}/{class-name}.hbm.xml">
+			</hbmtemplate>
+			-->
 		</hibernatetool> 
 	</target> 
 </project>

@@ -19,7 +19,7 @@
             <column name="VL_KM_REFERENCIADA" length="14" not-null="true" />
         </property>
         <many-to-one name="servico" class="br.com.linkdata.entity.Servico" access="field" fetch="select">
-            <column name="ID_SERVICO" />
+            <column name="ID_SERVICO" precision="12" scale="0" />
         </many-to-one>
     </class>
 </hibernate-mapping>

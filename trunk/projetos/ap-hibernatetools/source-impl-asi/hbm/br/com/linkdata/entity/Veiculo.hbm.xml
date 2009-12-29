@@ -22,17 +22,17 @@
                 <param name="sequence">SQ_VEICULO</param>
             </generator>
         </id>
-        <set name="anexos" inverse="false" lazy="true" table="ANEXO" cascade="persist,merge,delete" fetch="select">
+        <set name="anexos" inverse="false" lazy="true" table="ANEXO" cascade="all" fetch="select">
             <key>
                 <column name="ID_VEICULO" />
             </key>
             <one-to-many class="br.com.linkdata.entity.Anexo" />
         </set>
         <property name="anoFabricacao" type="java.lang.Integer" access="field">
-            <column name="ANO_FABRICACAO" length="4" not-null="true" />
+            <column name="ANO_FABRICACAO" length="4" />
         </property>
         <property name="anoModelo" type="java.lang.Integer" access="field">
-            <column name="ANO_MODELO" length="4" not-null="true" />
+            <column name="ANO_MODELO" length="4" />
         </property>
         <property name="chassi" type="java.lang.String" access="field">
             <column name="NR_CHASSI" length="20" />
@@ -85,7 +85,7 @@
         <many-to-one name="situacaoVeiculo" class="br.com.linkdata.entity.SituacaoVeiculo" access="field" fetch="join">
             <column name="ID_SITUACAO_VEICULO" />
         </many-to-one>
-        <many-to-one name="tipoCNH" class="br.com.linkdata.entity.TipoCNH" access="field" cascade="persist,merge" fetch="select">
+        <many-to-one name="tipoCNH" class="br.com.linkdata.entity.TipoCNH" access="field" cascade="all" fetch="select">
             <column name="ID_TIPO_CNH" />
         </many-to-one>
         <many-to-one name="tipoVeiculo" class="br.com.linkdata.entity.TipoVeiculo" access="field" fetch="join">
@@ -94,13 +94,9 @@
         <many-to-one name="ufPlaca" class="br.com.linkdata.entity.Estado" access="field" fetch="join">
             <column name="ID_UF_PLACA" />
         </many-to-one>
-        <one-to-one name="aquisicaoVeiculo" class="br.com.linkdata.entity.AquisicaoVeiculo" property-ref="veiculo" access="field" cascade="persist,merge,delete">
-        </one-to-one>
-        <one-to-one name="caracteristicaVeiculo" class="br.com.linkdata.entity.CaracteristicaVeiculo" property-ref="veiculo" access="field"
-        cascade="persist,merge,delete"></one-to-one>
-        <one-to-one name="fidelizacaoVeiculo" class="br.com.linkdata.entity.FidelizacaoVeiculo" property-ref="veiculo" access="field" cascade="persist,merge,delete">
-        </one-to-one>
-        <one-to-one name="garantiaVeiculo" class="br.com.linkdata.entity.GarantiaVeiculo" property-ref="veiculo" access="field" cascade="persist,merge,delete">
-        </one-to-one>
+        <one-to-one name="aquisicaoVeiculo" class="br.com.linkdata.entity.AquisicaoVeiculo" property-ref="veiculo" access="field" cascade="all"></one-to-one>
+        <one-to-one name="caracteristicaVeiculo" class="br.com.linkdata.entity.CaracteristicaVeiculo" property-ref="veiculo" access="field" cascade="all"></one-to-one>
+        <one-to-one name="fidelizacaoVeiculo" class="br.com.linkdata.entity.FidelizacaoVeiculo" property-ref="veiculo" access="field" cascade="all"></one-to-one>
+        <one-to-one name="garantiaVeiculo" class="br.com.linkdata.entity.GarantiaVeiculo" property-ref="veiculo" access="field" cascade="all"></one-to-one>
     </class>
 </hibernate-mapping>
