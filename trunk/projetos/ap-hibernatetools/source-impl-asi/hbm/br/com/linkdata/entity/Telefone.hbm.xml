@@ -3,6 +3,15 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	<meta attribute="extra-import">org.jboss.seam.annotations.Roles</meta>
+	<meta attribute="extra-import">org.jboss.seam.annotations.Role</meta>
+	<meta attribute="extra-classe">
+@Roles( { @Role(name = "celular", scope = ScopeType.CONVERSATION),
+		@Role(name = "fax", scope = ScopeType.CONVERSATION),
+		@Role(name = "telefonePrimario", scope = ScopeType.CONVERSATION),
+		@Role(name = "telefoneSecundario", scope = ScopeType.CONVERSATION) })
+	</meta>
     <class name="br.com.linkdata.entity.Telefone" table="TELEFONE">
         <id name="id" type="java.lang.Long" access="field">
             <column name="ID_TELEFONE" precision="12" scale="0" />

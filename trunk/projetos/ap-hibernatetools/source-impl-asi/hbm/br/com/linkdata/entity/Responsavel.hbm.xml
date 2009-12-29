@@ -3,8 +3,28 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="extra-import">javax.persistence.Inheritance</meta>
+	<meta attribute="extra-import">javax.persistence.InheritanceType</meta>
+	
+	<meta attribute="implements">br.com.linkdata.interfaces.IPessoaFisica</meta>
+	<meta attribute="extra-classe">
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+	</meta>
+	<meta attribute="class-code">
+	@Override
+	public boolean equals(Object obj) {
+
+		if (obj instanceof Responsavel) {
+			Responsavel resp = (Responsavel) obj;
+			if (resp.getId() == this.getId())
+				return true;
+		}
+		return false;
+	}
+	</meta>
     <class name="br.com.linkdata.entity.Responsavel" table="Responsavel" abstract="true" persister="org.hibernate.persister.entity.UnionSubclassEntityPersister">
         <id name="id" type="java.lang.Long" access="field">
+        	<meta attribute="scope-field">protected</meta>
             <column name="ID_RESPONSAVEL" precision="12" scale="0" />
             <generator class="sequence">
                 <param name="max_lo">49</param>
@@ -12,9 +32,11 @@
             </generator>
         </id>
         <property name="cpf" type="java.lang.String" access="field">
+        	<meta attribute="scope-field">protected</meta>
             <column name="NR_CPF" length="11" not-null="true" />
         </property>
         <component name="identidade" class="br.com.linkdata.entity.Identidade">
+        	<meta attribute="scope-field">protected</meta>
             <property name="dataExpedicao" type="date" access="field">
                 <column name="DT_EXPEDICAO" />
             </property>
@@ -31,9 +53,11 @@
             </property>
         </component>
         <property name="nacionalidade" type="java.lang.String" access="field">
+        	<meta attribute="scope-field">protected</meta>
             <column name="DS_NACIONALIDADE" length="20" not-null="true" />
         </property>
         <property name="nome" type="java.lang.String" access="field">
+        	<meta attribute="scope-field">protected</meta>
             <column name="NM_RESPONSAVEL" length="80" />
         </property>
     </class>

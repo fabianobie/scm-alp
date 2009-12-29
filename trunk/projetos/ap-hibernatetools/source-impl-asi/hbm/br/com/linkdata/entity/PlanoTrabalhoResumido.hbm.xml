@@ -3,6 +3,8 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	
     <class name="br.com.linkdata.entity.PlanoTrabalhoResumido" table="PLANO_TRABALHO_RESUMIDO">
         <id name="id" type="java.lang.Long" access="field">
             <column name="ID_PLANO_TRABALHO_RESUMIDOL" precision="12" scale="0" />
@@ -14,11 +16,6 @@
         <property name="codigo" type="java.lang.String" access="field">
             <column name="CD_PLANO_TRABALHO_RESUMIDO" length="10" not-null="true" />
         </property>
-        <component name="controleExclusao" class="br.com.linkdata.entity.EntityEmbedded">
-            <property name="dataExclusao" type="java.util.Date" access="field">
-                <column name="DT_EXCLUSAO" />
-            </property>
-        </component>
         <many-to-one name="situacao" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
             <column name="IND_ATIVO" />
         </many-to-one>

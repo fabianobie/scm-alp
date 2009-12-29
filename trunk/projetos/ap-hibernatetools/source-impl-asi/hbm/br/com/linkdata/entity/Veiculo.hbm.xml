@@ -3,6 +3,17 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.ExclusaoLogica</meta>
+	<meta attribute="extra-import">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+	<meta attribute="extra-import">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+	<meta attribute="extra-classe">
+@UniqueCompositeConstraint(
+	fields={
+		@UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+		@UniqueCompositeField(fieldLabel="Número da ticketcar", fieldName="numeroTicketCar")
+	}
+)
+	</meta>
     <class name="br.com.linkdata.entity.Veiculo" table="VEICULO">
         <id name="id" type="java.lang.Long" access="field">
             <column name="ID_VEICULO" precision="12" scale="0" />
@@ -11,11 +22,6 @@
                 <param name="sequence">SQ_VEICULO</param>
             </generator>
         </id>
-        <component name="controleExclusao" class="br.com.linkdata.entity.EntityEmbedded">
-            <property name="dataExclusao" type="java.util.Date" access="field">
-                <column name="DT_EXCLUSAO" />
-            </property>
-        </component>
         <set name="anexos" inverse="false" lazy="true" table="ANEXO" cascade="persist,merge,delete" fetch="select">
             <key>
                 <column name="ID_VEICULO" />

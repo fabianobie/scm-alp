@@ -3,6 +3,33 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.domain.ElementoDeDominio</meta>
+	<meta attribute="implements"><![CDATA[br.com.linkdata.entity.Duplicate<TipoModelo>]]></meta>
+	<meta attribute="class-code">
+	@Override
+	public Object getChave() {
+		return getCodigo();
+	}
+	
+	@Override
+	public String getDescricao() {
+		return nome;
+	}
+	
+	public TipoModelo duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			TipoModelo tm = new TipoModelo();
+			bag.store(this,tm);
+			try {
+				PropertyUtils.copyProperties(tm,this);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+		}
+		return (TipoModelo) bag.retrieve(this);
+	}
+	</meta>
     <class name="br.com.linkdata.entity.TipoModelo" table="TIPO_MODELO">
         <id name="id" type="java.lang.Long" access="field">
             <column name="ID_TP_MODELO" precision="12" scale="0" />

@@ -3,6 +3,35 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="extra-import">org.jboss.seam.annotations.Roles</meta>
+	<meta attribute="extra-import">org.jboss.seam.annotations.Role</meta>
+	<meta attribute="extra-classe">
+@Roles( { 
+	@Role(name = "responsavelTecnicoSelecionado", scope = ScopeType.CONVERSATION),
+    @Role(name = "novoResponsavelTecnico", scope = ScopeType.CONVERSATION) 
+})
+	</meta>
+	<meta attribute="class-code">
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof ResponsavelTecnico) {
+			Responsavel resp = (Responsavel) obj;
+			if (resp.getId() == this.getId())
+				return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Endereco getEndereco() {
+		return null;
+	}
+	
+	@Override
+	public EstadoCivil getEstadoCivil() {
+		return null;
+	}
+	</meta>
     <union-subclass name="br.com.linkdata.entity.ResponsavelTecnico" extends="br.com.linkdata.entity.Responsavel" table="RESPONSAVEL_TECNICO">
         <many-to-one name="celular" class="br.com.linkdata.entity.Telefone" access="field" cascade="persist,merge" fetch="select">
             <column name="ID_CELULAR" />

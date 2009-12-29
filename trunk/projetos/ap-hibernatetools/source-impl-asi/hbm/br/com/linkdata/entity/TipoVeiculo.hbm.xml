@@ -3,6 +3,8 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	
     <class name="br.com.linkdata.entity.TipoVeiculo" table="TIPO_VEICULO">
         <id name="id" type="java.lang.Long" access="field">
             <column name="ID_TIPO_VEICULO" precision="12" scale="0" />
@@ -11,11 +13,6 @@
                 <param name="sequence">SQ_TIPO_VEICULO</param>
             </generator>
         </id>
-        <component name="controleExclusao" class="br.com.linkdata.entity.EntityEmbedded">
-            <property name="dataExclusao" type="java.util.Date" access="field">
-                <column name="DT_EXCLUSAO" />
-            </property>
-        </component>
         <property name="descricao" type="java.lang.String" access="field">
             <column name="DS_TIPO_VEICULO" length="80" not-null="true" unique="true" />
         </property>

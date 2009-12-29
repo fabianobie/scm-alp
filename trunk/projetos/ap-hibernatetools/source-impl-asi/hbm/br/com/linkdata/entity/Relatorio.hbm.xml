@@ -3,6 +3,21 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	<meta attribute="class-code">
+	@Override
+	public int hashCode(){
+		return cdRelatorio.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object other){
+		Relatorio r = (Relatorio) other;
+		if(r != null &amp;&amp; r.getCdRelatorio().equals(this.cdRelatorio))
+			return true;
+		return false;
+	}
+	</meta>
     <class name="br.com.linkdata.entity.Relatorio" table="RELATORIO">
         <id name="id" type="java.lang.Long" access="field">
             <column name="ID_RELATORIO" precision="12" scale="0" />

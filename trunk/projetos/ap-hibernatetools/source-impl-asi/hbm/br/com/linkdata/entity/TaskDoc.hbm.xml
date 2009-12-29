@@ -3,6 +3,17 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="extra-import">javax.persistence.Transient</meta>
+	<meta attribute="extra-import">org.hibernate.annotations.Type</meta>
+	<meta attribute="implements">br.com.linkdata.entity.IAttachment</meta>
+	<meta attribute="class-code">
+	@Transient
+	public boolean isPrincipal() {
+		if (DominioTipoTaskDoc.getInstancia().getCodPrincipal().equals(this.getTipoTaskDoc().getCodigo()))
+			return true;
+		return false;
+	}
+	</meta>
     <class name="br.com.linkdata.entity.TaskDoc" table="JBPM_TASKDOC">
         <id name="id" type="java.lang.Long" access="field">
             <column name="ID_" precision="12" scale="0" />
@@ -12,6 +23,9 @@
             </generator>
         </id>
         <property name="btArray" access="field">
+        	<meta attribute="meta-btArray">
+				@Type(type = "br.com.linkdata.entity.BlobUserType")
+            </meta>
             <column name="BYTE_ARRAY" />
             <type name="br.com.linkdata.entity.BlobUserType"></type>
         </property>

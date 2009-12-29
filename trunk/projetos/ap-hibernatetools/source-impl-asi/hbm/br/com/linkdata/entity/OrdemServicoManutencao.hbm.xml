@@ -26,6 +26,7 @@
             <column name="ID_TIPO_REALIZACAO_ORD_SRV_MAN" />
         </many-to-one>
         <property name="valorTotalOrdemServico" type="java.math.BigDecimal" access="field">
+        	<meta attribute="scope-field">protected</meta>
             <column name="VALOR_ORDEM_SERVICO" precision="16" />
         </property>
     </union-subclass>

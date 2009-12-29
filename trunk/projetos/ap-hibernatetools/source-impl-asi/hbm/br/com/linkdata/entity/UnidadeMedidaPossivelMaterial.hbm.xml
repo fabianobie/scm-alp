@@ -3,6 +3,69 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="implements"><![CDATA[Comparable<UnidadeMedidaPossivelMaterial>]]></meta>
+	<meta attribute="class-code">
+	public static class Id implements Serializable {
+
+		@Column(name = "ID_MATERIAL")
+		private Long idMaterial;
+
+		@Column(name = "ID_UNIDADE_MEDIDA")
+		private Long idUnidadeMedida;
+		
+		@Column(name = "IND_ENTRADA")
+		private Boolean isUnidadeEntrada;
+
+		public Id() {
+		}
+
+		public Id(Long idMaterial, Long idUnidadeMedida, Boolean isUnidadeEntrada) {
+			this.idMaterial = idMaterial;
+			this.idUnidadeMedida = idUnidadeMedida;
+			this.isUnidadeEntrada = isUnidadeEntrada;
+		}
+
+		public boolean equals(Object o) {
+			if (o != null &amp;&amp; o instanceof Id) {
+				Id objeto = (Id) o;
+				return this.idMaterial.equals(objeto.idMaterial)
+						&amp;&amp; this.idUnidadeMedida.equals(objeto.idUnidadeMedida)
+						&amp;&amp; this.isUnidadeEntrada.equals(objeto.isUnidadeEntrada);
+			} else {
+				return false;
+			}
+		}
+
+		public int hashCode() {
+			return idMaterial.hashCode() + idUnidadeMedida.hashCode() + isUnidadeEntrada.hashCode();
+		}
+		
+		/**
+		 * Este método insere o ID do material persistido na UnidadeMedidaPossivelMaterial, foi criado
+		 * pois o hibernate não contrala a inclusão deste objeto via CASCADE, o ID do material deve ser
+		 * setado manualmente após a inclusão do material.
+		 * @param idMaterial
+		 */
+		public void setIdMaterial(Long idMaterial){
+			this.idMaterial = idMaterial;
+		}
+	}
+	
+	@Override
+	public int compareTo(UnidadeMedidaPossivelMaterial o) {
+		 String desc1 = unidadeMedida.getDescricao() + (getIsUnidadeEntrada() ==
+		 true ? "1" : "2");
+		 String desc2 = o.getUnidadeMedida().getDescricao() +
+		 (o.getIsUnidadeEntrada() == true ? "1" : "2");
+		 return desc1.compareTo(desc2);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+	</meta>
+	
     <class name="br.com.linkdata.entity.UnidadeMedidaPossivelMaterial" table="UNIDADE_POSSIVEL_MATERIAL">
         <composite-id name="id" class="br.com.linkdata.entity.UnidadeMedidaPossivelMaterial$Id" access="field">
             <key-property name="idMaterial" type="java.lang.Long">
