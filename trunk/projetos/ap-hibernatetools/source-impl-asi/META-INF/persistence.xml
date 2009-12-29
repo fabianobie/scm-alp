@@ -6,7 +6,7 @@
 	version="1.0">
 
 	<persistence-unit name="PU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    	<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>br.com.linkdata.entity.Abrangencia</class>
 		<class>br.com.linkdata.entity.Agencia</class>
 		<class>br.com.linkdata.entity.AgregacaoIndice</class>
@@ -17,14 +17,12 @@
 		<class>br.com.linkdata.entity.ApelidoMaterial</class>
 		<class>br.com.linkdata.entity.Aquisicao</class>
 		<class>br.com.linkdata.entity.AquisicaoVeiculo</class>
-		<class>br.com.linkdata.entity.AssuntosTipoDocumento</class>
 		<class>br.com.linkdata.entity.Atributo</class>
 		<class>br.com.linkdata.entity.Auditoria</class>
 		<class>br.com.linkdata.entity.AutorizacaoDebitoConta</class>
 		<class>br.com.linkdata.entity.AutorizacaoProcessoAquisicao</class>
 		<class>br.com.linkdata.entity.Banco</class>
 		<class>br.com.linkdata.entity.BaseLegal</class>
-		<class>br.com.linkdata.entity.BlobUserType</class>
 		<class>br.com.linkdata.entity.CaracteristicaMaterial</class>
 		<class>br.com.linkdata.entity.CaracteristicaModelo</class>
 		<class>br.com.linkdata.entity.CaracteristicaServico</class>
@@ -32,7 +30,6 @@
 		<class>br.com.linkdata.entity.CarteiraNacionalHabilitacao</class>
 		<class>br.com.linkdata.entity.CBO</class>
 		<class>br.com.linkdata.entity.Cidade</class>
-		<class>br.com.linkdata.entity.ClobUserType</class>
 		<class>br.com.linkdata.entity.CodigoPostal</class>
 		<class>br.com.linkdata.entity.ColunaModeloCaracteristica</class>
 		<class>br.com.linkdata.entity.Comprador</class>
@@ -64,14 +61,9 @@
 		<class>br.com.linkdata.entity.DocumentosAdicionais</class>
 		<class>br.com.linkdata.entity.DomicilioBancario</class>
 		<class>br.com.linkdata.entity.DotacaoOrcamentaria</class>
-		<class>br.com.linkdata.entity.Duplicate</class>
-		<class>br.com.linkdata.entity.DuplicateBag</class>
 		<class>br.com.linkdata.entity.Empenho</class>
 		<class>br.com.linkdata.entity.Endereco</class>
 		<class>br.com.linkdata.entity.Entidade</class>
-		<class>br.com.linkdata.entity.Entity</class>
-		<class>br.com.linkdata.entity.EntityDiscover</class>
-		<class>br.com.linkdata.entity.EntityEmbedded</class>
 		<class>br.com.linkdata.entity.Envolvido</class>
 		<class>br.com.linkdata.entity.Estado</class>
 		<class>br.com.linkdata.entity.EstadoCivil</class>
@@ -79,10 +71,8 @@
 		<class>br.com.linkdata.entity.EstadoItensAvaliacao</class>
 		<class>br.com.linkdata.entity.EstruturaClassificacao</class>
 		<class>br.com.linkdata.entity.EstruturaCusto</class>
-		<class>br.com.linkdata.entity.ExclusaoLogica</class>
 		<class>br.com.linkdata.entity.FaturamentoRejeitados</class>
 		<class>br.com.linkdata.entity.FidelizacaoVeiculo</class>
-		<class>br.com.linkdata.entity.FiltroModeloDocumento</class>
 		<class>br.com.linkdata.entity.FiscalNomeado</class>
 		<class>br.com.linkdata.entity.FonteRecurso</class>
 		<class>br.com.linkdata.entity.FormaAquisicao</class>
@@ -100,20 +90,15 @@
 		<class>br.com.linkdata.entity.Group</class>
 		<class>br.com.linkdata.entity.GroupValue</class>
 		<class>br.com.linkdata.entity.GrupoConfiguracaoAlertaFrotas</class>
-		<class>br.com.linkdata.entity.GrupoDescritivo</class>
 		<class>br.com.linkdata.entity.GrupoFonteRecurso</class>
 		<class>br.com.linkdata.entity.GrupoManutencaoModeloVeiculo</class>
 		<class>br.com.linkdata.entity.GrupoModeloServico</class>
 		<class>br.com.linkdata.entity.GrupoNaturezaJuridica</class>
 		<class>br.com.linkdata.entity.GrupoPostoServico</class>
 		<class>br.com.linkdata.entity.GrupoServicoManutencao</class>
-		<class>br.com.linkdata.entity.HibernateProxyCleaner</class>
 		<class>br.com.linkdata.entity.HierarquiaAmparoLegal</class>
 		<class>br.com.linkdata.entity.HistoricoCaracteristica</class>
 		<class>br.com.linkdata.entity.HistoricoSituacaoMotorista</class>
-		<class>br.com.linkdata.entity.IAttachment</class>
-		<class>br.com.linkdata.entity.Identidade</class>
-		<class>br.com.linkdata.entity.IEntity</class>
 		<class>br.com.linkdata.entity.ImagemMaterial</class>
 		<class>br.com.linkdata.entity.Indexador</class>
 		<class>br.com.linkdata.entity.Indice</class>
@@ -128,7 +113,6 @@
 		<class>br.com.linkdata.entity.ItinerarioTransporte</class>
 		<class>br.com.linkdata.entity.JustificativaParecer</class>
 		<class>br.com.linkdata.entity.JustificativaParecerNew</class>
-		<class>br.com.linkdata.entity.Label</class>
 		<class>br.com.linkdata.entity.LocalEntrega</class>
 		<class>br.com.linkdata.entity.Localidade</class>
 		<class>br.com.linkdata.entity.LogOperation</class>
@@ -172,7 +156,6 @@
 		<class>br.com.linkdata.entity.OrdemServicoManutencao</class>
 		<class>br.com.linkdata.entity.OrgaoAutuador</class>
 		<class>br.com.linkdata.entity.Pais</class>
-		<class>br.com.linkdata.entity.Parcela</class>
 		<class>br.com.linkdata.entity.ParcelaImposto</class>
 		<class>br.com.linkdata.entity.ParecerJuridico</class>
 		<class>br.com.linkdata.entity.ParecerJuridicoNew</class>
@@ -238,7 +221,6 @@
 		<class>br.com.linkdata.entity.TipoDado</class>
 		<class>br.com.linkdata.entity.TipoDia</class>
 		<class>br.com.linkdata.entity.TipoDiariaMissao</class>
-		<class>br.com.linkdata.entity.TipoDocumento</class>
 		<class>br.com.linkdata.entity.TipoDocumentoHabilitacao</class>
 		<class>br.com.linkdata.entity.TipoDotacao</class>
 		<class>br.com.linkdata.entity.TipoEstrutura</class>
@@ -268,8 +250,6 @@
 		<class>br.com.linkdata.entity.TipoViagemMissao</class>
 		<class>br.com.linkdata.entity.TipoVigencia</class>
 		<class>br.com.linkdata.entity.TrechoItinerario</class>
-		<class>br.com.linkdata.entity.UDFType</class>
-		<class>br.com.linkdata.entity.UDFUserType</class>
 		<class>br.com.linkdata.entity.UnidadeMedida</class>
 		<class>br.com.linkdata.entity.UnidadeMedidaPossivelMaterial</class>
 		<class>br.com.linkdata.entity.UnidadeOrganizacional</class>
@@ -293,6 +273,5 @@
 		<class>br.com.linkdata.entity.VigenciaPrazoExecucao</class>
 		<class>br.com.linkdata.entity.VistoriaItens</class>
 		<class>br.com.linkdata.entity.VistoriaVeiculo</class>
-	</persistence-unit>
-
+    </persistence-unit>
 </persistence>

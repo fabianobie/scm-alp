@@ -40,7 +40,7 @@
         <property name="potencia" type="java.lang.Integer" access="field">
             <column name="POTENCIA" length="3" />
         </property>
-        <many-to-one name="tipoCombustivel" class="br.com.linkdata.entity.TipoCombustivel" access="field" fetch="select">
+        <many-to-one name="tipoCombustivel" class="br.com.linkdata.entity.TipoCombustivel" access="field" cascade="all" fetch="select">
             <column name="ID_TIPO_COMBUSTIVEL" />
         </many-to-one>
         <many-to-one name="veiculo" class="br.com.linkdata.entity.Veiculo" access="field" fetch="join">

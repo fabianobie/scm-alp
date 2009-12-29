@@ -5,8 +5,8 @@
 </#if>
 </#if>
 <#if c2h.isManyToOne(property)>
-	${pojo.generateManyToOneAnnotation(property).trim()}
-${pojo.generateJoinColumnsAnnotation(property, cfg)}
+	${util.generateManyToOneAnnotation(pojo, property).trim()}
+${util.generateJoinColumnsAnnotation(pojo, property, cfg)}
 <#elseif c2h.isOneToOne(property)>
 	${pojo.generateOneToOneAnnotation(property, cfg).trim()}
 <#elseif c2h.isCollection(property)>

@@ -25,7 +25,7 @@
             <column name="DS_APELIDO" length="100" not-null="true" />
         </property>
         <many-to-one name="material" class="br.com.linkdata.entity.Material" access="field" fetch="select">
-            <column name="ID_MATERIAL" />
+            <column name="ID_MATERIAL" precision="12" scale="0" />
         </many-to-one>
     </class>
 </hibernate-mapping>

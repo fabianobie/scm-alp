@@ -16,7 +16,7 @@
         <property name="descricao" type="java.lang.String" access="field">
             <column name="DS_MARCA_VEICULO" length="80" not-null="true" unique="true" />
         </property>
-        <set name="modelos" inverse="true" lazy="true" table="MODELO_VEICULO" cascade="persist,merge,delete" fetch="select">
+        <set name="modelos" inverse="true" lazy="true" table="MODELO_VEICULO" cascade="all" fetch="select">
             <key>
                 <column name="ID_MARCA_VEICULO" />
             </key>

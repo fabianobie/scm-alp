@@ -19,3 +19,12 @@ Motorista.hbm.xml
 Mudei o sequence class de native para sequence em todos os hbm's.
 
 O CustomAuditoria tem mais um monte de atributos que não foram gerados, as vezes o hbm não está atualizado com a Entidade atual.
+
+alteradas depois de finalizado
+    U  C:/java/projetos/entities/src/main/java/br/com/linkdata/entity/CaracteristicaVeiculo.java
+    U  C:/java/projetos/entities/src/main/java/br/com/linkdata/entity/Material.java
+    U  C:/java/projetos/entities/src/main/java/br/com/linkdata/entity/MarcaVeiculo.java
+    U  C:/java/projetos/entities/src/main/java/br/com/linkdata/entity/Veiculo.java
+    U  C:/java/projetos/entities/src/main/java/br/com/linkdata/entity/Parcela.java
+    U  C:/java/projetos/entities/src/main/java/br/com/linkdata/entity/UnidadeMedida.java
+    U  C:/java/projetos/entities/src/main/java/br/com/linkdata/entity/UnidadeOrganizacional.java

@@ -18,14 +18,16 @@
             <column name="NM_ENT_REG_PROFISSIONAL" length="20" />
         </property>
         <component name="identidade" class="br.com.linkdata.entity.Identidade" >
+        	<meta attribute="implements"></meta>
+			<meta attribute="class-code"></meta>
+			<meta attribute="extra-classe"></meta>
+			<meta attribute="extra-import"></meta>
             <property name="dataExpedicao" type="date" access="field">
                 <column name="DT_EXPEDICAO" />
             </property>
-            <!--
             <many-to-one name="estado" class="br.com.linkdata.entity.Estado" access="field" fetch="select">
                 <column name="ID_ESTADO" />
             </many-to-one>
-            -->
             <property name="numero" type="java.lang.String" access="field">
                 <column name="NR_INDENTIDADE" length="20" />
             </property>
