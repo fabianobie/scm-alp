@@ -24,11 +24,6 @@
             <column name="ARQUIVO" />
             <type name="br.com.linkdata.entity.BlobUserType"></type>
         </property>
-        <component name="customFields" class="br.com.linkdata.entity.EntityEmbedded">
-            <property name="dataExclusao" type="java.util.Date" access="field">
-                <column name="DT_EXCLUSAO" />
-            </property>
-        </component>
         <property name="dtInicioVigencia" type="date" access="field">
             <column name="DT_INICIO_VIGENCIA" />
         </property>

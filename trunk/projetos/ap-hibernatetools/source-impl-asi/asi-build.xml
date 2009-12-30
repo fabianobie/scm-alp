@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="hibernate-tools" basedir="." default="inicializar">
 	<property file="asi-build.properties"/>
-	<property name="var.is.gerar.entidade.${is.gerar.entidade}" value="true"/>
-	<property name="var.is.gerar.dao.interface.${is.gerar.dao.interface}" value="true"/>
-	<property name="var.is.gerar.dao.impl.${is.gerar.dao.impl}" value="true"/>
-	<property name="var.is.gerar.bo.${is.gerar.bo}" value="true"/>
-	<property name="var.is.gerar.jpa.do.hbm.${is.gerar.jpa.do.hbm}" value="true"/>
-	<property name="var.is.gerar.hbm.do.jpa.${is.gerar.hbm.do.jpa}" value="true"/>
+	<property name="var.is.gerar.entidade.do.hbm.${is.gerar.entidade.do.hbm}" value="true"/>
+	<property name="var.is.gerar.entidade.do.banco.${is.gerar.entidade.do.banco}" value="true"/>
+	<property name="var.is.gerar.dao.do.hbm.${is.gerar.dao.do.hbm}" value="true"/>
+	<property name="var.is.gerar.dao.do.banco.${is.gerar.dao.do.banco}" value="true"/>
+	<property name="var.is.gerar.hbm.da.entidade.${is.gerar.hbm.da.entidade}" value="true"/>
 
 	<path id="classpath">
 		<fileset dir="${classpath.lib}">
@@ -25,12 +24,11 @@
 
 	<target name="inicializar">
 		<antcall target="delete-pasta-destino"/>
-		<antcall target="gerar-entidade"/>
-		<antcall target="gerar-dao-interface"/>
-		<antcall target="gerar-dao-impl"/>
-		<antcall target="gerar-bo"/>
-		<antcall target="gerar-jpa-do-hbm"/>
-		<antcall target="gerar-hbm-do-jpa"/>
+		<antcall target="gerar-hbm-da-entidade"/>
+		<antcall target="gerar-entidade-do-hbm"/>
+		<antcall target="gerar-entidade-do-banco"/>
+		<antcall target="gerar-dao-do-hbm"/>
+		<antcall target="gerar-dao-do-banco"/>
 	</target>
 	
 	<target name="delete-pasta-destino">
@@ -39,7 +37,40 @@
 		</delete>
 	</target>
 	
-	<target name="gerar-entidade" if="var.is.gerar.entidade.true">
+	<target name="gerar-hbm-da-entidade" if="var.is.gerar.hbm.da.entidade.true"> 
+		<hibernatetool destdir="${path.destino.root}" templatepath="${jpa2hbm.templateprefix}"> 
+			<classpath refid="classpath"/>
+			<property key="hibernatetool.util.toolclass" value="${jpa2hbm.util}"/>
+			
+			<jpaconfiguration persistenceunit="${jpa2hbm.nome.pu}" />
+			<hbm2hbmxml />
+		</hibernatetool> 
+	</target> 
+		
+	<target name="gerar-entidade-do-hbm" if="var.is.gerar.entidade.do.hbm.true"> 
+		<hibernatetool destdir="${path.destino.root}"> 
+			<classpath refid="classpath"/>
+			<property key="hibernatetool.util.toolclass" value="${hbm2jpa.util}"/>
+			
+			<configuration> 
+				<fileset dir="${hbm2jpa.path.source.hbm}"> 
+					<include name="**/*.hbm.xml"/> 
+				</fileset> 
+			</configuration>
+
+			<hbmtemplate 
+				templateprefix="${hbm2jpa.templateprefix}"
+				template="${hbm2jpa.template}"
+				filepattern="{package-name}/{class-name}.java"
+				exporterclass="${hbm2jpa.exporterclass}">
+				
+				<property key="jdk5" 				value="true" />
+				<property key="ejb3" 				value="true" />
+			</hbmtemplate>
+		</hibernatetool> 
+	</target> 
+	
+	<target name="gerar-entidade-do-banco" if="var.is.gerar.entidade.do.banco.true">
 		<hibernatetool destdir="${path.destino.root}">
 			<classpath refid="classpath"/>
 			<property key="hibernatetool.util.toolclass" value="${entidade.util}"/>
@@ -64,7 +95,34 @@
 		</hibernatetool>
 	</target>
 	
-	<target name="gerar-dao-interface" if="var.is.gerar.dao.interface.true">
+	<target name="gerar-dao-do-hbm" if="var.is.gerar.dao.do.hbm.true">
+		<hibernatetool destdir="${path.destino.root}">
+			<classpath refid="classpath"/>
+			<property key="hibernatetool.util.toolclass" value="${dao.util}"/>
+			
+			<configuration> 
+				<fileset dir="${dao.path.source.hbm}"> 
+					<include name="**/*.hbm.xml"/> 
+				</fileset> 
+			</configuration>
+			
+			<hbmtemplate 
+				templateprefix="${dao.templateprefix}"
+				template="${dao.template}"
+				filepattern="${dao.pacote}/{class-name}${dao.var_sufixo_classe}.java"
+				exporterclass="${dao.exporterclass}">
+				
+				<property key="jdk5" 						value="true" />
+				<property key="ejb3" 						value="true" />
+				<property key="var_superclasse" 			value="${dao.var_superclasse}"/>
+				<property key="var_sufixo_classe" 			value="${dao.var_sufixo_classe}"/>
+				<property key="var_pacote_entidade" 		value="${dao.var_pacote_entidade}"/>
+				<property key="var_pacote_dao"				value="${dao.pacote}"/>
+			</hbmtemplate>
+		</hibernatetool>
+	</target>
+
+	<target name="gerar-dao-do-banco" if="var.is.gerar.dao.do.banco.true">
 		<hibernatetool destdir="${path.destino.root}">
 			<classpath refid="classpath"/>
 			<property key="hibernatetool.util.toolclass" value="${dao.util}"/>
@@ -80,113 +138,17 @@
 			<hbmtemplate 
 				templateprefix="${dao.templateprefix}"
 				template="${dao.template}"
-				filepattern="{package-name}/{class-name}${dao.var_sufixo_classe}.java"
+				filepattern="${dao.pacote}/{class-name}${dao.var_sufixo_classe}.java"
 				exporterclass="${dao.exporterclass}">
-				
-				<property key="jdk5" 					value="true" />
-				<property key="ejb3" 					value="true" />
-				<property key="var_sufixo_classe" 		value="${dao.var_sufixo_classe}"/>
-				<property key="var_superinterface" 		value="${dao.var_superinterface}"/>
-				<property key="var_pacote_entidade" 	value="${dao.var_pacote_entidade}"/>
-			</hbmtemplate>
-		</hibernatetool>
-	</target>
-
-	<target name="gerar-dao-impl" if="var.is.gerar.dao.impl.true">
-		<hibernatetool destdir="${path.destino.root}">
-			<classpath refid="classpath"/>
-			<property key="hibernatetool.util.toolclass" value="${dao.impl.util}"/>
-			
-			<jdbcconfiguration 
-				configurationfile="${path.arquivo.hibernate}" 
-				packagename="${dao.impl.pacote}"
-				revengfile="${path.arquivo.revengfile}"
-				detectmanytomany="true"
-				reversestrategy="${classe.reversestrategy}"
-			/>
-			
-			<hbmtemplate 
-				templateprefix="${dao.impl.templateprefix}"
-				template="${dao.impl.template}"
-				filepattern="{package-name}/{class-name}${dao.impl.var_sufixo_classe}.java"
-				exporterclass="${dao.impl.exporterclass}">
 				
 				<property key="jdk5" 						value="true" />
 				<property key="ejb3" 						value="true" />
-				<property key="var_sufixo_dao_interface" 	value="${dao.var_sufixo_classe}"/>
-				<property key="var_superclasse" 			value="${dao.impl.var_superclasse}"/>
-				<property key="var_pacote_entidade" 		value="${dao.impl.var_pacote_entidade}"/>
-				<property key="var_pacote_interface_dao"	value="${dao.impl.var_pacote_interface_dao}"/>
+				<property key="var_superclasse" 			value="${dao.var_superclasse}"/>
+				<property key="var_sufixo_classe" 			value="${dao.var_sufixo_classe}"/>
+				<property key="var_pacote_entidade" 		value="${dao.var_pacote_entidade}"/>
+				<property key="var_pacote_dao"				value="${dao.pacote}"/>
 			</hbmtemplate>
 		</hibernatetool>
 	</target>
 
-	<target name="gerar-bo" if="var.is.gerar.bo.true">
-		<hibernatetool destdir="${path.destino.root}">
-			<classpath refid="classpath"/>
-			<property key="hibernatetool.util.toolclass" value="${bo.util}"/>
-			
-			<jdbcconfiguration 
-				configurationfile="${path.arquivo.hibernate}" 
-				packagename="${bo.pacote}"
-				revengfile="${path.arquivo.revengfile}"
-				detectmanytomany="true"
-				reversestrategy="${classe.reversestrategy}"
-			/>
-			
-			<hbmtemplate 
-				templateprefix="${bo.templateprefix}"
-				template="${bo.template}"
-				filepattern="{package-name}/{class-name}${bo.var_sufixo_classe}.java"
-				exporterclass="${bo.exporterclass}">
-				
-				<property key="jdk5" 				value="true" />
-				<property key="ejb3" 				value="true" />
-				<property key="var_sufixo_classe" 	value="${bo.var_sufixo_classe}" />
-				<property key="var_superclasse" 	value="${bo.var_superclasse}"/>
-				<property key="var_pacote_dao" 		value="${bo.var_pacote_dao}"/>
-				<property key="var_pacote_entidade" value="${bo.var_pacote_entidade}"/>
-			</hbmtemplate>
-		</hibernatetool>
-	</target>
-	
-	<target name="gerar-jpa-do-hbm" if="var.is.gerar.jpa.do.hbm.true"> 
-		<hibernatetool destdir="${path.destino.root}"> 
-			<classpath refid="classpath"/>
-			<property key="hibernatetool.util.toolclass" value="${hbm2jpa.util}"/>
-			
-			<configuration> 
-				<fileset dir="${path.source.hbm}"> 
-					<include name="**/*.hbm.xml"/> 
-				</fileset> 
-			</configuration>
-
-			<hbmtemplate 
-				templateprefix="${hbm2jpa.templateprefix}"
-				template="${hbm2jpa.template}"
-				filepattern="{package-name}/{class-name}.java"
-				exporterclass="${hbm2jpa.exporterclass}">
-				
-				<property key="jdk5" 				value="true" />
-				<property key="ejb3" 				value="true" />
-			</hbmtemplate>
-		</hibernatetool> 
-	</target> 
-
-	<target name="gerar-hbm-do-jpa" if="var.is.gerar.hbm.do.jpa.true"> 
-		<hibernatetool destdir="${path.destino.root}" templatepath="br/com/ap/gerador/asi/template/"> 
-			<classpath refid="classpath"/>
-			<property key="hibernatetool.util.toolclass" value="${jpa2hbm.util}"/>
-			
-			<jpaconfiguration persistenceunit="${jpa2hbm.nome.pu}" />
-			<hbm2hbmxml />
-			<!--
-			<hbmtemplate 
-				templateprefix="br/com/ap/gerador/asi/template/hbm/"
-				template="br/com/ap/gerador/asi/template/hbm/hibernate-mapping.hbm.ftl"
-				filepattern="{package-name}/{class-name}.hbm.xml">
-			</hbmtemplate>
-			-->
-		</hibernatetool> 
-	</target> 
 </project>

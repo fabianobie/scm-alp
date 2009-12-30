@@ -31,11 +31,6 @@
         <many-to-one name="autorizacaoDebitoConta" class="br.com.linkdata.entity.AutorizacaoDebitoConta" access="field" cascade="persist,merge,delete" fetch="join">
             <column name="ID_AUTORIZACAO_DEBITO_CONTA" />
         </many-to-one>
-        <component name="controleExclusao" class="br.com.linkdata.entity.EntityEmbedded">
-            <property name="dataExclusao" type="java.util.Date" access="field">
-                <column name="DT_EXCLUSAO" />
-            </property>
-        </component>
         <property name="dataInfracao" type="timestamp" access="field">
             <column name="DT_AUTO" not-null="true" />
         </property>

@@ -18,11 +18,6 @@
                 <param name="sequence">SQ_UO</param>
             </generator>
         </id>
-        <component name="controleExclusao" class="br.com.linkdata.entity.EntityEmbedded">
-            <property name="dataExclusao" type="java.util.Date" access="field">
-                <column name="DT_EXCLUSAO" />
-            </property>
-        </component>
         <property name="cnpj" type="java.lang.String" access="field">
             <column name="NM_CNPJ" length="14" />
         </property>

@@ -18,11 +18,6 @@
                 <param name="sequence">SQ_PAIS</param>
             </generator>
         </id>
-        <component name="controleExclusao" class="br.com.linkdata.entity.EntityEmbedded">
-            <property name="dataExclusao" type="java.util.Date" access="field">
-                <column name="DT_EXCLUSAO" />
-            </property>
-        </component>
         <many-to-one name="continente" class="br.com.linkdata.entity.Continente" access="field" fetch="select">
             <column name="ID_CONTINENTE" />
         </many-to-one>

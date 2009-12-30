@@ -20,6 +20,7 @@ import org.hibernate.mapping.RootClass;
 import org.hibernate.mapping.SimpleValue;
 import org.hibernate.mapping.SingleTableSubclass;
 import org.hibernate.mapping.Table;
+import org.hibernate.mapping.Value;
 import org.hibernate.tool.hbm2x.Cfg2JavaTool;
 import org.hibernate.util.StringHelper;
 
@@ -134,14 +135,26 @@ public class AsiGeradorEntityPojoClass extends GeradorEntityPojoClass {
 	}
 	
 	private void buildAnnSequenceGenerator(StringBuffer wholeString, PersistentClass clazz) {
-		String nomeTabela = getNomeTabela();
-		if (UtilString.isVazio(nomeTabela)) {
-			nomeTabela = getNomeEntidade(clazz);
-		} else {
-			nomeTabela = UtilString.maiuscula(nomeTabela);
+		String sequenceName = "";
+		Value identifierProperty = clazz.getIdentifierProperty().getValue();
+		if (identifierProperty instanceof SimpleValue) {
+			SimpleValue sv = (SimpleValue)identifierProperty;
+			Properties properties = sv.getIdentifierGeneratorProperties();
+			if (properties != null) {
+				sequenceName = properties.getProperty("sequence");
+			}
+		}
+		if (UtilString.isVazio(sequenceName)) {
+			sequenceName = getNomeTabela();
+			if (UtilString.isVazio(sequenceName)) {
+				sequenceName = getNomeEntidade(clazz);
+			} else {
+				sequenceName = UtilString.maiuscula(sequenceName);
+			}
+			sequenceName = "SQ_"+ sequenceName;
 		}
 		wholeString.append("\n\t@" + importType("javax.persistence.SequenceGenerator") + "(name=\"generator\", sequenceName=\"" )
-				.append("SQ_").append(nomeTabela)
+				.append(sequenceName)
 				.append( "\")" );
 		//TODO HA does not support initialValue and allocationSize
 		wholeString.append( "\n    " );
@@ -222,13 +235,15 @@ public class AsiGeradorEntityPojoClass extends GeradorEntityPojoClass {
 	 * @return String
 	 */
 	public String getGetterSignature(Property p) {
-		String prefix = "get";
-		String tipo = c2j.getJavaTypeName( p, false);
-		
-		if (tipo.equalsIgnoreCase("boolean") || tipo.equals(Boolean.class.getName())) {
-			prefix = "is";
-		}
-		return prefix + beanCapitalize( p.getName() );
+		return super.getGetterSignature(p);
+//		
+//		String prefix = "get";
+//		String tipo = c2j.getJavaTypeName( p, false);
+//		
+//		if (tipo.equalsIgnoreCase("boolean") || tipo.equals(Boolean.class.getName())) {
+//			prefix = "is";
+//		}
+//		return prefix + beanCapitalize( p.getName() );
 	}
 
 	@Override

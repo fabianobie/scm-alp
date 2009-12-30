@@ -22,11 +22,6 @@
                 <param name="sequence">SQ_MOTORISTA</param>
             </generator>
         </id>
-        <component name="controleExclusao" class="br.com.linkdata.entity.EntityEmbedded">
-            <property name="dataExclusao" type="java.util.Date" access="field">
-                <column name="DT_EXCLUSAO" />
-            </property>
-        </component>
         <many-to-one name="ativo" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
             <column name="IND_DISPONIBILIDADE" />
         </many-to-one>

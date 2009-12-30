@@ -9,6 +9,17 @@
 	<meta attribute="extra-classe">
 @Inheritance(strategy = InheritanceType.JOINED)
 	</meta>
+	<meta attribute="class-code">
+	protected transient String pwd;
+	
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+	</meta>
     <class name="br.com.linkdata.entity.Usuario" table="Usuario" abstract="true" persister="org.hibernate.persister.entity.JoinedSubclassEntityPersister">
         <id name="id" type="java.lang.Long" access="field">
         	<meta attribute="scope-field">protected</meta>
