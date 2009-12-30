@@ -4,7 +4,44 @@
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	<meta attribute="extra-import">javax.persistence.Transient</meta>
+	<meta attribute="extra-import">java.util.Date</meta>
+
+	<meta attribute="class-code">
+	@Transient
+	private Date periodoInicial;
+
+	@Transient
+	private Date periodoFinal;
 	
+	/**
+	 * @return the periodoInicial
+	 */
+	public Date getPeriodoInicial() {
+		return periodoInicial;
+	}
+
+	/**
+	 * @param periodoInicial the periodoInicial to set
+	 */
+	public void setPeriodoInicial(Date periodoInicial) {
+		this.periodoInicial = periodoInicial;
+	}
+
+	/**
+	 * @return the periodoFinal
+	 */
+	public Date getPeriodoFinal() {
+		return periodoFinal;
+	}
+
+	/**
+	 * @param periodoFinal the periodoFinal to set
+	 */
+	public void setPeriodoFinal(Date periodoFinal) {
+		this.periodoFinal = periodoFinal;
+	}
+	</meta>	
     <class name="br.com.linkdata.entity.Periodo" table="Periodo">
         <id name="id" type="java.lang.Long" access="field">
             <column name="id" />

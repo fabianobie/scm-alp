@@ -45,7 +45,6 @@
 	<classpathentry kind="lib" path="build/lib-externa/spring-2.5.4.jar"/>
 	<classpathentry kind="lib" path="build/lib/hibernate-tools.jar" sourcepath="/fonte-hibernatetools"/>
 	<classpathentry kind="lib" path="C:/java/projetos/entities/bin"/>
-	<classpathentry kind="lib" path="C:/java/projetos/entities/src/main/java"/>
 	<classpathentry kind="lib" path="build/lib/ap-comum.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

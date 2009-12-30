@@ -16,11 +16,6 @@
                 <param name="sequence">SQ_ESTADO</param>
             </generator>
         </id>
-        <component name="controleExclusao" class="br.com.linkdata.entity.EntityEmbedded">
-            <property name="dataExclusao" type="java.util.Date" access="field">
-                <column name="DT_EXCLUSAO" />
-            </property>
-        </component>
         <property name="dataDesativacao" type="java.util.Date" access="field">
             <column name="DT_DESATIVACAO" />
         </property>

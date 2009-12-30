@@ -5,7 +5,38 @@
 <hibernate-mapping>
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
 	<meta attribute="implements"><![CDATA[br.com.linkdata.entity.Duplicate<ColunaModeloCaracteristica>]]></meta>
+	<meta attribute="class-code">
+	public void addValor(ModeloValorCaracteristica val){
+		if(modeloValores == null){
+			modeloValores = new HashSet&lt;ModeloValorCaracteristica&gt;();
+	  	}
+	  	modeloValores.add(val);
+  	}
+  	
+  	@Override
+	public String toString() {
+		return nome;
+	}
 
+	public ColunaModeloCaracteristica duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			ColunaModeloCaracteristica cmc = new ColunaModeloCaracteristica();
+			bag.store(this,cmc);
+			cmc.setId(this.getId());
+			cmc.setMascara(this.getMascara());
+			cmc.setNome(this.getNome());
+			cmc.setOrdem(this.getOrdem());
+			cmc.setTipoDado(this.getTipoDado().duplicate(bag));
+			cmc.setTotalizavel(this.getTotalizavel());
+			if(this.getModeloValores() != null &amp;&amp; this.getModeloValores().size() != 0){
+				for (ModeloValorCaracteristica mvc : this.getModeloValores()) {
+					cmc.addValor(mvc.duplicate(bag));
+				}
+			}
+		}
+		return (ColunaModeloCaracteristica) bag.retrieve(this);
+	}
+  	</meta>
     <class name="br.com.linkdata.entity.ColunaModeloCaracteristica" table="COLUNA_MODELO_CARACTERISTICA">
         <id name="id" type="java.lang.Long" access="field">
             <column name="ID_COLUNA" precision="12" scale="0" />

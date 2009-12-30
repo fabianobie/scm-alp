@@ -26,10 +26,10 @@
 	<target name="inicializar">
 		<antcall target="delete-pasta-destino"/>
 		<antcall target="gerar-entidade"/>
+		<antcall target="gerar-jpa-do-hbm"/>
 		<antcall target="gerar-dao-interface"/>
 		<antcall target="gerar-dao-impl"/>
 		<antcall target="gerar-bo"/>
-		<antcall target="gerar-jpa-do-hbm"/>
 	</target>
 	
 	<target name="delete-pasta-destino">
