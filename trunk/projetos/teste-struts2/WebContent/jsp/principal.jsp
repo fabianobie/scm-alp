@@ -18,6 +18,8 @@
 			<s:a action="Validacao" method="acaoCarregarValidacao">Struts Validação - NOK</s:a>
 			<br/>
 			<s:a action="FormDinamico" method="acaoCarregarFormDinamico">Form Dinâmico</s:a>
+			<br/>
+			<s:a action="DownloadFile" method="acaoCarregarDownloadFile">Download de Arquivo</s:a>
 		</s:form>
 	</body>
 </html>

@@ -47,5 +47,13 @@
 			<result name="form-dinamico">/jsp/form-dinamico/form-dinamico.jsp</result>
 			<result name="form-dinamico-resultado">/jsp/form-dinamico/form-dinamico-resultado.jsp</result>
 		</action>
+		<action name="DownloadFile!*" class="teste.action.downloadfile.DownloadFileAction">
+			<result name="download-file">/jsp/downloadfile/download-file.jsp</result>
+			<result name="download" type="stream">  
+				<param name="contentDisposition">filename="document.txt"</param>    
+				<param name="inputName">arquivo</param>  
+				<param name="contentType">application/octet-stream</param>    
+			</result>  
+		</action>
 	</package>
 </struts>
