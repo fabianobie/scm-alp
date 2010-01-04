@@ -26,20 +26,20 @@ public class UtilConversorDeFileTest extends TesteAbstrato {
 
 	/**
 	 * Test method for
-	 * {@link br.com.ap.comum.conversor.UtilConversorDeFile#converterParaArrayDeBytes(java.io.File)}.
+	 * {@link br.com.ap.comum.conversor.UtilConversorDeFile#converterParaBytes(java.io.File)}.
 	 */
 	@Test
-	public final void testConverterParaArrayDeBytes() {
+	public final void testConverterParaBytes() {
 		URL url = UtilConversorDeFileTest.class.getResource("./UtilConversorDeFileTest.class");
 		String path = url.getPath();
 		path = UtilString.substituirString(path, "bin", "source-teste");
 		path = UtilString.substituirString(path, ".class", ".java");
 		File file = new File(path);
 
-		byte[] bytes = UtilConversorDeFile.converterParaArrayDeBytes(file);
+		byte[] bytes = UtilConversorDeFile.converterParaBytes(file);
 		assertNotNull(bytes);
 		
-		bytes = UtilConversorDeFile.converterParaArrayDeBytes(null);
+		bytes = UtilConversorDeFile.converterParaBytes(null);
 		assertNull(bytes);
 		
 	}

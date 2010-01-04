@@ -66,6 +66,26 @@ public final class UtilArquivo {
 	 * Fecha um stream.
 	 * 
 	 * @param stream Stream que será fechado.
+	 * @return outputstream nulo
+	 */
+	public static OutputStream escrever(OutputStream stream, byte[] bytes) {
+		if (isReferencia(stream)) {
+			try {
+				stream.write(bytes);
+				fechar(stream);
+			} catch (IOException e) {
+				getLog().warn("Não foi possível escrever no stream", e);
+			} finally {
+				stream = null;
+			}
+		}
+		return stream;
+	}
+
+	/**
+	 * Fecha um stream.
+	 * 
+	 * @param stream Stream que será fechado.
 	 * @return inputstream nulo
 	 */
 	public static InputStream fechar(InputStream stream) {
