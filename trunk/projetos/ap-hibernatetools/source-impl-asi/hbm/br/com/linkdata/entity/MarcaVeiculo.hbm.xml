@@ -4,6 +4,7 @@
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	<meta attribute="extra-import">br.com.linkdata.entity.Label</meta>
 	
     <class name="br.com.linkdata.entity.MarcaVeiculo" table="MARCA_VEICULO">
         <id name="id" type="java.lang.Long" access="field">
@@ -14,6 +15,9 @@
             </generator>
         </id>
         <property name="descricao" type="java.lang.String" access="field">
+        	<meta attribute="meta-numero">
+	@Label(value="Número da ordem de serviço")
+        	</meta>
             <column name="DS_MARCA_VEICULO" length="80" not-null="true" unique="true" />
         </property>
         <set name="modelos" inverse="true" lazy="true" table="MODELO_VEICULO" cascade="all" fetch="select">

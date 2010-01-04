@@ -4,7 +4,8 @@
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
-	
+	<meta attribute="extra-import">br.com.linkdata.entity.Label</meta>
+		
     <class name="br.com.linkdata.entity.OrdemServico" table="OrdemServico" abstract="true" persister="org.hibernate.persister.entity.UnionSubclassEntityPersister">
         <id name="id" type="java.lang.Long" access="field">
         	<meta attribute="scope-field">protected</meta>
@@ -47,6 +48,9 @@
         </many-to-one>
         <property name="numero" type="java.lang.String" access="field">
         	<meta attribute="scope-field">protected</meta>
+        	<meta attribute="meta-numero">
+	@Label(value="Número da ordem de serviço")
+        	</meta>
             <column name="NR_ORDEM_SERVICO" length="15" unique="true" />
         </property>
         <property name="numeroNotaFiscal" type="java.lang.String" access="field">
