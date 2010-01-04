@@ -18,6 +18,7 @@ import java.util.Map;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 import br.com.ap.comum.colecao.UtilColecao;
 import br.com.ap.comum.conversor.instancia.IConversor;
@@ -44,9 +45,40 @@ public class AsiUtilitarios {
 	 */
 	public static void main(String[] args) throws Exception {
 
-		// gerarNomesParaPersistence();
-		// gerarNamedQueries();
-		listarClassesQueNaoSaoEntidades();
+		gerarNomesParaReveng();
+		//gerarNomesParaPersistence();
+		//gerarNamedQueries();
+		//listarClassesQueNaoSaoEntidades();
+	}
+
+	private static void gerarNomesParaReveng() throws Exception {
+		StringBuilder sb = new StringBuilder();
+		
+		File pasta = new File(PATH_ENTIDADES);
+		String[] arquivos = pasta.list();
+		for (String arquivo : arquivos) {
+			arquivo = arquivo.substring(0, arquivo.indexOf("."));
+
+			if (!UtilString.isVazio(arquivo)) {
+				arquivo = PACOTE + "." + arquivo;
+				Class<?> classe = Class.forName(arquivo);
+				Entity entityAnnotation = classe.getAnnotation(Entity.class);
+
+				if (UtilObjeto.isReferencia(entityAnnotation)) {
+					Table table = classe.getAnnotation(Table.class);
+					String nome = null;
+					if (table != null) {
+						nome = table.name();
+					} else {
+						nome = classe.getSimpleName();
+					}
+					nome = UtilString.minuscula(nome);
+					
+					sb.append("<table-filter match-name=\"").append(nome).append("\" exclude=\"true\" />\n");
+				}
+			}
+		}
+		System.out.println(sb.toString());
 	}
 
 	/**
