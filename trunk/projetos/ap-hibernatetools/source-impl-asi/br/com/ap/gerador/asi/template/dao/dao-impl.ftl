@@ -8,7 +8,6 @@
  */
 package ${var_pacote_dao};
 
-import ${entidade?trim};
 <#assign classbody>
 /**
  * Interface para persistência do objeto ${pojo.getDeclarationName()}

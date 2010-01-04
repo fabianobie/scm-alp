@@ -49,9 +49,6 @@ public class GeradorUtil {
 	 * @return anotações extras para um atributo.
 	 */
 	public String generateMetaColumn(PersistentClass clazz, Property property) {
-		if (clazz.getNodeName().equals("ItemContrato") && property.getName().equals("servicoMaterial")) {
-			System.out.println("foi");
-		}
 		StringBuffer resultado = getStringFactory().novoStringBuffer();
 		String metaName = "meta-" + property.getName();
 
