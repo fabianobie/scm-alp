@@ -8,15 +8,23 @@ package br.com.ap.gerador.asi;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
+import br.com.ap.comum.colecao.UtilColecao;
+import br.com.ap.comum.conversor.instancia.IConversor;
+import br.com.ap.comum.excecao.ConversorException;
 import br.com.ap.comum.objeto.UtilObjeto;
 import br.com.ap.comum.string.UtilString;
+import br.com.ap.gerador.asi.to.NamedQueryTO;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -36,7 +44,67 @@ public class AsiUtilitarios {
 	 */
 	public static void main(String[] args) throws Exception {
 
-		gerarNomesParaPersistence();
+		//gerarNomesParaPersistence();
+		gerarNamedQueries();
+	}
+
+	/**
+	 * Gera os arquivos com os named queries mapeados nas entidades.
+	 * 
+	 * @throws Exception
+	 */
+	private static void gerarNamedQueries() throws Exception {
+		StringBuilder arquivosHQL = new StringBuilder();
+		final String PASTA_DESTINO = "source-gerado/br/com/linkdata/entity/hql/";
+		
+		File pasta = new File(PATH_ENTIDADES);
+		String[] arquivos = pasta.list();
+		for (String arquivo : arquivos) {
+			arquivo = arquivo.substring(0, arquivo.indexOf("."));
+			
+			if (!UtilString.isVazio(arquivo)) {
+				File pastaDestino = new File(PASTA_DESTINO);
+				if (!pastaDestino.exists()) {
+					pastaDestino.mkdirs();
+				}
+				Class<?> classe = Class.forName(PACOTE + "." + arquivo);
+				String nomeArquivoHQL = classe.getSimpleName()+".hql.xml";
+				
+				NamedQueries namedQueries = classe.getAnnotation(NamedQueries.class);
+				
+				if (UtilObjeto.isReferencia(namedQueries)) {
+					NamedQuery[] array = namedQueries.value();
+					Collection<NamedQueryTO> c = UtilColecao.aplicarConversor(Arrays.asList(array), new IConversor<NamedQuery, NamedQueryTO>() {
+
+						@Override
+						public NamedQueryTO converter(NamedQuery anotacao)
+								throws ConversorException {
+							NamedQueryTO to = new NamedQueryTO();
+							to.setName(anotacao.name());
+							to.setQuery(anotacao.query());
+							return to;
+						}
+
+						@Override
+						public Class<NamedQueryTO> getTipoDeDestino() {
+							return NamedQueryTO.class;
+						}
+
+						@Override
+						public Class<NamedQuery> getTipoDeOrigem() {
+							return NamedQuery.class;
+						}
+					});
+					Map<String, Object> parametros = new HashMap<String, Object>();
+					parametros.put("namedQueries", c);
+					parametros.put("pacote", "br.com.linkdata.entity");
+					gerar("hql/hql.cfg.ftl", parametros, PASTA_DESTINO + nomeArquivoHQL);
+					
+					arquivosHQL.append("<mapping resource=\"").append(nomeArquivoHQL).append("\" />\n");
+				}
+			}
+		}
+		System.out.println(arquivosHQL.toString());
 	}
 
 	/**
