@@ -34,14 +34,14 @@ public final class UtilConversorDeFile extends UtilConversorAbstrato {
 	 * @param arquivo Objeto que será convertido.
 	 * @return byte[].
 	 */
-	public static byte[] converterParaArrayDeBytes(File arquivo) {
+	public static byte[] converterParaBytes(File arquivo) {
 		byte[] res = null;
 
 		if (UtilArquivo.isExiste(arquivo) && !UtilArquivo.isPasta(arquivo)) {
 			try {
 				InputStream fis = ArquivoFactory.getInstancia().novoFileInputStream(arquivo);
-				byte[] byt = new byte[(int) arquivo.length()];
-				fis.read(byt);
+				res = new byte[(int) arquivo.length()];
+				fis.read(res);
 			} catch (Exception e) {
 				getLog().warn("Não foi possível converter o File em byte[], Erro: " + e);
 			}

@@ -46,6 +46,20 @@ public class UtilArquivoTest extends TesteAbstrato {
 
 	/**
 	 * Test method for
+	 * {@link br.com.ap.comum.arquivo.UtilArquivo#escrever(java.io.OutputStream, byte[])}.
+	 */
+	@Test
+	public final void testEscrever_OutputStream() {
+		String teste = "teste";
+		
+		OutputStream o = getOutputStreamDoArquivoTemp();
+		o = UtilArquivo.escrever(o, teste.getBytes());
+		
+		assertNull(o);
+	}
+
+	/**
+	 * Test method for
 	 * {@link br.com.ap.comum.arquivo.UtilArquivo#fechar(java.io.InputStream)}.
 	 */
 	@Test
