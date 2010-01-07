@@ -13,7 +13,6 @@ import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
 import org.jbpm.pvm.internal.identity.impl.GroupImpl;
 import org.jbpm.pvm.internal.identity.impl.UserImpl;
-import org.jbpm.pvm.internal.task.TaskImpl;
 
 import br.com.ap.arquitetura.util.CRUD;
 import br.com.ap.jbpm.decorator.DeploymentDecorator;
@@ -58,7 +57,7 @@ public interface JBPMFacade {
 	 * 
 	 * @return tarefas
 	 */
-	public Collection<TaskImpl> consultarTarefa();
+	public Collection<TaskDecorator> consultarTarefa();
 
 	/**
 	 * Consulta as tarefas do usuário solicitado, incluindo as tarefas
@@ -86,6 +85,15 @@ public interface JBPMFacade {
 	 * @param task Tarefa
 	 */
 	public void salvarTarefa(TaskDecorator task);
+	
+	/**
+	 * Salva a tarefa. A tarefa somente será salva se o usuário tiver acesso à
+	 * tarefa.
+	 * 
+	 * @param task Tarefa
+	 * @param user Usuário
+	 */
+	public void salvarTarefa(TaskDecorator task, UserDecorator user);
 
 	/**
 	 * Cancela uma tarefa, ou seja, remove o assignee da tarefa passada por
@@ -94,6 +102,16 @@ public interface JBPMFacade {
 	 * @param task Tarefa
 	 */
 	public void cancelarTarefa(TaskDecorator task);
+	
+	/**
+	 * Cancela uma tarefa, ou seja, remove o assignee da tarefa passada por
+	 * parâmetro. A tarefa somente será cancelada se o usuário tiver acesso à
+	 * tarefa.
+	 * 
+	 * @param task Tarefa
+	 * @param user Usuário
+	 */
+	public void cancelarTarefa(TaskDecorator task, UserDecorator user);
 
 	/**
 	 * Completa a execução de uma tarefa e manda ela para o transitionTO
@@ -102,6 +120,16 @@ public interface JBPMFacade {
 	 * @param task Tarefa
 	 */
 	public void completarTarefa(TaskDecorator task);
+	
+	/**
+	 * Completa a execução de uma tarefa e manda ela para o transitionTO
+	 * informado. A tarefa somente será completada se o usuário tiver acesso à
+	 * tarefa.
+	 * 
+	 * @param task Tarefa
+	 * @param user Usuário
+	 */
+	public void completarTarefa(TaskDecorator task, UserDecorator user);
 
 	/**
 	 * Loca a tarefa para o usuário informado.
@@ -282,4 +310,12 @@ public interface JBPMFacade {
 	 * @param decorator Membership com group.id e user.id.
 	 */
 	public void excluirUsuarioDoGrupo(MembershipDecorator decorator);
+	
+	/**
+	 * Retorna true se qualquer usuário tiver acesso à tarefa.
+	 * 
+	 * @param task Tarefa com ID.
+	 * @return true se qualquer usuário tiver acesso à tarefa.
+	 */
+	public boolean isPossuiAcesso(TaskDecorator task);
 }

@@ -15,7 +15,6 @@ import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
 import org.jbpm.pvm.internal.identity.impl.GroupImpl;
 import org.jbpm.pvm.internal.identity.impl.UserImpl;
-import org.jbpm.pvm.internal.task.TaskImpl;
 import org.springframework.stereotype.Service;
 
 import br.com.ap.jbpm.bo.DeploymentBo;
@@ -63,8 +62,18 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
+	public void cancelarTarefa(TaskDecorator task, UserDecorator user) {
+		taskBo.cancelarTarefa(task, user);
+	}
+
+	@Override
 	public void completarTarefa(TaskDecorator task) {
 		taskBo.completarTarefa(task);
+	}
+
+	@Override
+	public void completarTarefa(TaskDecorator task, UserDecorator user) {
+		taskBo.completarTarefa(task, user);
 	}
 
 	@Override
@@ -73,15 +82,16 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public ProcessDefinition obterDefinicaoDeProcesso(ProcessDefinitionDecorator processDefinition) {
+	public ProcessDefinition obterDefinicaoDeProcesso(
+			ProcessDefinitionDecorator processDefinition) {
 		return deploymentBo.obterDefinicaoDeProcesso(processDefinition);
 	}
 
 	@Override
-	public Collection<TaskImpl> consultarTarefa() {
+	public Collection<TaskDecorator> consultarTarefa() {
 		return taskBo.consultarTarefa();
 	}
-	
+
 	@Override
 	public Collection<TaskDecorator> consultarTarefa(UserDecorator user) {
 		return taskBo.consultarTarefa(user);
@@ -99,7 +109,8 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public TaskDecorator obterFormularioInicial(ProcessDefinitionDecorator processDefinition) {
+	public TaskDecorator obterFormularioInicial(
+			ProcessDefinitionDecorator processDefinition) {
 		return deploymentBo.obterFormularioInicial(processDefinition);
 	}
 
@@ -114,12 +125,23 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
+	public void salvarTarefa(TaskDecorator task, UserDecorator user) {
+		taskBo.salvarTarefa(task, user);
+	}
+
+	@Override
 	public void locarTarefa(TaskDecorator task, UserDecorator user) {
 		taskBo.locarTarefa(task, user);
 	}
 
 	@Override
-	public ProcessInstance iniciarProcesso(ProcessDefinitionDecorator processDefinition) {
+	public boolean isPossuiAcesso(TaskDecorator task) {
+		return taskBo.isPossuiAcesso(task);
+	}
+
+	@Override
+	public ProcessInstance iniciarProcesso(
+			ProcessDefinitionDecorator processDefinition) {
 		return executionBo.iniciarProcesso(processDefinition);
 	}
 
@@ -139,7 +161,8 @@ public class JBPMFacadeImpl implements JBPMFacade {
 	}
 
 	@Override
-	public TaskDecorator obterNomeFormularioInicial(ProcessDefinitionDecorator processDefinition) {
+	public TaskDecorator obterNomeFormularioInicial(
+			ProcessDefinitionDecorator processDefinition) {
 		return deploymentBo.obterNomeFormularioInicial(processDefinition);
 	}
 

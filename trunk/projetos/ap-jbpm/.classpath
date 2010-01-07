@@ -10,5 +10,7 @@
 	<classpathentry kind="lib" path="build/lib/ap-reflexao.jar"/>
 	<classpathentry kind="lib" path="build/lib/spring-2.5.4.jar"/>
 	<classpathentry kind="lib" path="build/lib-externa/testng-5.9-jdk15.jar"/>
+	<classpathentry kind="lib" path="build/lib/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="build/lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
