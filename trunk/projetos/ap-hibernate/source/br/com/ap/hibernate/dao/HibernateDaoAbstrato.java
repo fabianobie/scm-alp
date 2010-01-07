@@ -885,6 +885,26 @@ public class HibernateDaoAbstrato<T extends Object> implements DAO<T> {
 	protected void removerAcaoSolicitada() {
 		HibernateHolder.removerAcao();
 	}
+	
+	/**
+	 * Invoca o método GET do atributo passado como parâmetro. Usado para carregar 
+	 * os atributos não retornados do banco.
+	 * 
+	 * @param <E> Tipo do objeto da coleção.
+	 * @param colecao Coleção de objetos
+	 * @param atributos Atributos que serão invocados pelo seu método get.
+	 */
+	protected <E> void invocarGet(Collection<E> colecao,
+			String... atributos) {
+		
+		if (!UtilColecao.isVazio(colecao)) {
+			for (E objeto : colecao) {
+				for (String atributo : atributos) {
+					UtilReflexaoPropriedade.get(objeto, atributo);
+				}
+			}
+		}
+	}
 
 	/**
 	 * Retorna o criterio principal do criterio informado, caso o criterio
