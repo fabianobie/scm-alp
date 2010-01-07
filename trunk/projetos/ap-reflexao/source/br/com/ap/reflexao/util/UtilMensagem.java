@@ -19,29 +19,29 @@ import br.com.ap.reflexao.constante.Arquivo;
  * @author AdrianoP
  */
 public final class UtilMensagem extends UtilMensagemAbstrato {
-    private static UtilMensagem instancia = new UtilMensagem();
+	private static UtilMensagem	instancia	= new UtilMensagem();
 
-    /**
-     * Construtor.
-     */
-    private UtilMensagem() {
-	// Construtor.
-    }
+	/**
+	 * Construtor.
+	 */
+	private UtilMensagem() {
+		// Construtor.
+	}
 
-    /**
-     * Retorna instância única do objeto. Padrão singleton
-     * 
-     * @return instância do objeto.
-     */
-    public static UtilMensagem getInstancia() {
-	return instancia;
-    }
+	/**
+	 * Retorna instância única do objeto. Padrão singleton
+	 * 
+	 * @return instância do objeto.
+	 */
+	public static UtilMensagem getInstancia() {
+		return instancia;
+	}
 
-    /**
-     * @see br.com.ap.comum.mensagem.UtilMensagemAbstrato#getProperties()
-     */
-    protected Properties getProperties() {
-	String arquivo = Arquivo.getPathArquivoMensagemProperties();
-	return getArquivoFactory().novoProperties(arquivo);
-    }
+	/**
+	 * @see br.com.ap.comum.mensagem.UtilMensagemAbstrato#getProperties()
+	 */
+	protected Properties getProperties() {
+		String arquivo = Arquivo.getPathArquivoMensagemProperties();
+		return getArquivoFactory().novoProperties(arquivo);
+	}
 }
