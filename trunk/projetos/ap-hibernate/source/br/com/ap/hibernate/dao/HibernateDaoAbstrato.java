@@ -698,6 +698,16 @@ public class HibernateDaoAbstrato<T extends Object> implements DAO<T> {
 		Class<T> tipo = getTipoDaEntidade();
 		return getSession().createCriteria(tipo);
 	}
+	
+	/**
+	 * Retorna novo criteria para entidade.
+	 * @param alias Alias da entidade
+	 * @return novo criteria para entidade.
+	 */
+	protected Criteria novoCriteria(String alias) {
+		Class<T> tipo = getTipoDaEntidade();
+		return getSession().createCriteria(tipo, alias);
+	}
 
 	/**
 	 * Retorna novo critério.
