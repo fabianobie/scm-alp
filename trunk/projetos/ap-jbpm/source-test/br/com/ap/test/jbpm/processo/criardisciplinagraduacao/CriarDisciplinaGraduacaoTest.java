@@ -6,11 +6,12 @@
 package br.com.ap.test.jbpm.processo.criardisciplinagraduacao;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
 import org.jbpm.pvm.internal.identity.impl.GroupImpl;
-import org.jbpm.pvm.internal.task.TaskImpl;
 
 import br.com.ap.comum.colecao.UtilColecao;
 import br.com.ap.comum.objeto.UtilObjeto;
@@ -91,35 +92,61 @@ public class CriarDisciplinaGraduacaoTest extends TesteAbstrato {
 		}
 		
 		//CRIANDO INSTÂNCIA DO PROCESSO
-		ProcessDefinitionDecorator pd = new ProcessDefinitionDecorator();
-		pd.setId("fluxo_criar_disciplina-1");
-		ProcessInstance pi = facade.iniciarProcesso(pd);
+		ProcessDefinitionDecorator processDefinitionDecorator = new ProcessDefinitionDecorator();
+		processDefinitionDecorator.setId("fluxo_criar_disciplina-1");
+		for (int i = 0; i < 3; i++) {
+			ProcessInstance pi = facade.iniciarProcesso(processDefinitionDecorator);
+			
+			println(pi.isActive("task_fornecer_requisitos"));
+		}
+		for (int i = 3; i <= 5; i++) {
+			TaskDecorator t = new TaskDecorator();
+			t.setId(String.valueOf(i));
+			
+			Map<String, Object> param = new HashMap<String, Object>();
+			param.put("descricao", "descricao do didi");
+			param.put("valorDecisao", "nao");
+			t.setMapaVariables(param);
+
+			facade.completarTarefa(t);
+		}
+		TaskDecorator t = new TaskDecorator();
+		t.setId(String.valueOf(2));
+		facade.completarTarefa(t);
+		t.setId(String.valueOf(7));
+		facade.completarTarefa(t);
 		
-		println(pi.isActive("task_fornecer_requisitos"));
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("valorDecisao", "sim");
+		t.setMapaVariables(param);
+		t.setId(String.valueOf(8));
 		
-		// LOCANDO A TAREFA
-		Collection<TaskImpl> tarefas = facade.consultarTarefa();
-		if (!UtilColecao.isVazio(tarefas)) {
-			for (TaskImpl tarefa : tarefas) {
-				println(tarefa.getId());
-				println(tarefa.getAssignee());
-			}
- 		}
+		facade.completarTarefa(t);
 		
-		TaskImpl tarefa = tarefas.iterator().next();
-		TaskDecorator taskdecoration = new TaskDecorator();
-		taskdecoration.setTaskImpl(tarefa);
+		//CONSULTANDO AS TAREFAS POR GRUPO DO USUÁRIO
+		userDecorator = decoratorFactory.novoUserDecorator();
+		userDecorator.setId("usuario_secretaria_ceam");
 		
-		UserDecorator userdecorator = new UserDecorator();
-		userdecorator.setGivenName("usuario_comissao_graduacao");
+		Collection<TaskDecorator> tarefas = facade.consultarTarefa(userDecorator, processDefinitionDecorator);
+		println("Consulta filtrando por acesso");
+		for (TaskDecorator tarefa : tarefas) {
+			print(tarefa.getId() +",\t");
+			print(tarefa.getActivityName() +",\t");
+			print(tarefa.getProcessDefinition().getDescription() +",\t");
+			print(tarefa.getTaskImpl().getVariable("descricao"));
+			println("");
+		}
+
+		tarefas = facade.consultarTarefa();
+		println("Consulta todos");
+		for (TaskDecorator tarefa : tarefas) {
+			print(tarefa.getId() +",\t");
+			print(tarefa.getActivityName() +",\t");
+			print(tarefa.getProcessDefinition().getDescription() +",\t");
+			print(tarefa.getTaskImpl().getVariable("descricao"));
+			println("");
+		}
 		
-		facade.locarTarefa(taskdecoration, userdecorator);
-		Collection<TaskImpl> tarefas2 = facade.consultarTarefa();
-		if (!UtilColecao.isVazio(tarefas2)) {
-			for (TaskImpl t2 : tarefas2) {
-				println(t2.getId());
-				println(t2.getAssignee());
-			}
- 		}
+		
 	}
 }

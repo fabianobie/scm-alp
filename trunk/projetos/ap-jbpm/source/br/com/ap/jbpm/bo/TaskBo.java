@@ -20,7 +20,6 @@ import org.jbpm.pvm.internal.repository.DeploymentImpl;
 import org.jbpm.pvm.internal.task.TaskImpl;
 import org.springframework.stereotype.Component;
 
-import br.com.ap.comum.colecao.Alterador;
 import br.com.ap.comum.colecao.UtilColecao;
 import br.com.ap.comum.formatador.instancia.IFormatador;
 import br.com.ap.comum.objeto.UtilObjeto;
@@ -29,7 +28,7 @@ import br.com.ap.jbpm.dao.TaskDao;
 import br.com.ap.jbpm.decorator.ProcessDefinitionDecorator;
 import br.com.ap.jbpm.decorator.TaskDecorator;
 import br.com.ap.jbpm.decorator.UserDecorator;
-import br.com.ap.jbpm.util.UtilConversor;
+import br.com.ap.jbpm.util.UtilJbpmException;
 
 /**
  * BO responsável pelas regras de negócio de task.
@@ -53,8 +52,8 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 * 
 	 * @return tarefas
 	 */
-	public Collection<TaskImpl> consultarTarefa() {
-		return getCrudDao().consultar();
+	public Collection<TaskDecorator> consultarTarefa() {
+		return getCrudDao().consultarTodos();
 	}
 
 	/**
@@ -69,9 +68,8 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 		Collection<TaskDecorator> resultado = null;
 		if (isReferencia(user)) {
 			UserImpl userImpl = user.getUserImpl();
-			Collection<TaskImpl> tasks = getCrudDao().consultarTarefa(userImpl);
-			resultado = UtilConversor.converter(tasks);
-			consultarProcessDefinitionEVariables(resultado);
+
+			resultado = getCrudDao().consultarTarefa(userImpl);
 		}
 		return resultado;
 	}
@@ -90,13 +88,11 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 		Collection<TaskDecorator> resultado = null;
 		if (isReferencia(user, processDefinition)) {
 			UserImpl userImpl = user.getUserImpl();
-
 			ProcessDefinitionImpl processDefinitionImpl = processDefinition
 					.getProcessDefinitionImpl();
-			Collection<TaskImpl> tasks = getCrudDao().consultarTarefa(userImpl,
+
+			resultado = getCrudDao().consultarTarefa(userImpl,
 					processDefinitionImpl);
-			resultado = UtilConversor.converter(tasks);
-			consultarProcessDefinitionEVariables(resultado);
 		}
 		return resultado;
 	}
@@ -108,7 +104,21 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 */
 	public void salvarTarefa(TaskDecorator decorator) {
 
-		if (isReferencia(decorator)) {
+		if (isReferencia(decorator) && isPossuiAcesso(decorator)) {
+			getCrudDao().salvarTarefa(decorator);
+		}
+	}
+
+	/**
+	 * Salva a tarefa. A tarefa somente será salva se o usuário tiver acesso à
+	 * tarefa.
+	 * 
+	 * @param task Tarefa
+	 * @param user Usuário
+	 */
+	public void salvarTarefa(TaskDecorator decorator, UserDecorator user) {
+
+		if (isReferencia(decorator) && isPossuiAcesso(decorator, user)) {
 			getCrudDao().salvarTarefa(decorator);
 		}
 	}
@@ -121,7 +131,22 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 */
 	public void cancelarTarefa(TaskDecorator decorator) {
 
-		if (isReferencia(decorator)) {
+		if (isReferencia(decorator) && isPossuiAcesso(decorator)) {
+			getCrudDao().cancelarTarefa(decorator);
+		}
+	}
+
+	/**
+	 * Cancela uma tarefa, ou seja, remove o assignee da tarefa passada por
+	 * parâmetro. A tarefa somente será cancelada se o usuário tiver acesso à
+	 * tarefa.
+	 * 
+	 * @param task Tarefa
+	 * @param user Usuário
+	 */
+	public void cancelarTarefa(TaskDecorator decorator, UserDecorator user) {
+
+		if (isReferencia(decorator) && isPossuiAcesso(decorator, user)) {
 			getCrudDao().cancelarTarefa(decorator);
 		}
 	}
@@ -134,7 +159,22 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 */
 	public void completarTarefa(TaskDecorator decorator) {
 
-		if (isReferencia(decorator)) {
+		if (isReferencia(decorator) && isPossuiAcesso(decorator)) {
+			getCrudDao().completarTarefa(decorator);
+		}
+	}
+
+	/**
+	 * Completa a execução de uma tarefa e manda ela para o transitionTO
+	 * informado. A tarefa somente será completada se o usuário tiver acesso à
+	 * tarefa.
+	 * 
+	 * @param task Tarefa
+	 * @param user Usuário
+	 */
+	public void completarTarefa(TaskDecorator decorator, UserDecorator user) {
+
+		if (isReferencia(decorator) && isPossuiAcesso(decorator, user)) {
 			getCrudDao().completarTarefa(decorator);
 		}
 	}
@@ -166,7 +206,7 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 	 */
 	public void locarTarefa(TaskDecorator task, UserDecorator user) {
 
-		if (!isTarefaLocada(task, user)) {
+		if (!isTarefaLocada(task, user) && isPossuiAcesso(task, user)) {
 			UserImpl userImpl = user.getUserImpl();
 			taskDao.locarTarefa(task, userImpl);
 		}
@@ -191,6 +231,36 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 					&& UtilString.isStringsIguais(assignee, givenName);
 		}
 		return resultado;
+	}
+
+	/**
+	 * Retorna true se qualquer usuário tiver acesso à tarefa.
+	 * 
+	 * @param task Tarefa com ID.
+	 * @return true se qualquer usuário tiver acesso à tarefa.
+	 */
+	public boolean isPossuiAcesso(TaskDecorator task) {
+		if (!getCrudDao().isPossuiAcesso(task)) {
+			throw UtilJbpmException.novaAcessoNaoPermitidoATarefa(task);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Retorna true se o usuário tiver acesso à tarefa.
+	 * 
+	 * @param task Tarefa com ID.
+	 * @param user Usuário com ID.
+	 * @return true se o usuário tiver acesso à tarefa.
+	 */
+	public boolean isPossuiAcesso(TaskDecorator task, UserDecorator user) {
+		UserImpl userImpl = user.getUserImpl();
+		if (!getCrudDao().isPossuiAcesso(task, userImpl)) {
+			throw UtilJbpmException.novaUsuarioSemAcessoATarefa(task, userImpl);
+		}
+
+		return true;
 	}
 
 	/**
@@ -272,28 +342,6 @@ public class TaskBo extends JBPMBoAbstrato<TaskImpl> {
 			}
 		}
 		return resultado;
-	}
-
-	/**
-	 * Consulta ProcessDefinition e variables para cada task da coleção.
-	 * 
-	 * @param resultado Coleção de taskDecorator
-	 */
-	protected void consultarProcessDefinitionEVariables(
-			Collection<TaskDecorator> resultado) {
-		UtilColecao.aplicarAlterador(resultado, new Alterador<TaskDecorator>() {
-			@Override
-			public TaskDecorator alterar(TaskDecorator taskDecorator) {
-				TaskImpl task = taskDecorator.getTaskImpl();
-
-				ProcessDefinition processDefinition = obterProcessDefinition(task);
-				taskDecorator.setProcessDefinition(processDefinition);
-
-				Map<String, Object> variables = obterVariables(taskDecorator);
-				taskDecorator.setMapaVariables(variables);
-				return taskDecorator;
-			}
-		});
 	}
 
 	/**

@@ -28,7 +28,7 @@ public interface TaskDao extends CrudDao<TaskImpl> {
 	 * @param user Usuário
 	 * @return tarefas
 	 */
-	public Collection<TaskImpl> consultarTarefa(UserImpl user);
+	public Collection<TaskDecorator> consultarTarefa(UserImpl user);
 
 	/**
 	 * Consulta as tarefas atribuídas a um usuário ou a ninguém de uma definição
@@ -38,7 +38,7 @@ public interface TaskDao extends CrudDao<TaskImpl> {
 	 * @param processDefinition Definição de processo
 	 * @return tarefas
 	 */
-	public Collection<TaskImpl> consultarTarefa(UserImpl user,
+	public Collection<TaskDecorator> consultarTarefa(UserImpl user,
 			ProcessDefinitionImpl processDefinition);
 
 	/**
@@ -79,4 +79,28 @@ public interface TaskDao extends CrudDao<TaskImpl> {
 	 * @return variáveis da tarefa.
 	 */
 	public Map<String, Object> obterVariables(TaskDecorator task);
+
+	/**
+	 * Retorna todas as tarefas.
+	 * 
+	 * @return todas as tarefas.
+	 */
+	public Collection<TaskDecorator> consultarTodos();
+
+	/**
+	 * Retorna true se o usuário tiver acesso à tarefa.
+	 * 
+	 * @param task Tarefa com ID.
+	 * @param user Usuário com ID.
+	 * @return true se o usuário tiver acesso à tarefa.
+	 */
+	public boolean isPossuiAcesso(TaskDecorator task, UserImpl user);
+	
+	/**
+	 * Retorna true se qualquer usuário tiver acesso à tarefa.
+	 * 
+	 * @param task Tarefa com ID.
+	 * @return true se qualquer usuário tiver acesso à tarefa.
+	 */
+	public boolean isPossuiAcesso(TaskDecorator task);
 }
