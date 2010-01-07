@@ -46,16 +46,27 @@ public class UtilMensagem extends UtilMensagemAbstrato {
 	}
 	
 	/**
+	 * Retorna a mensagem solicitada.
+	 * 
 	 * @param task Tarefa
 	 * @return acesso.nao.permitido.a.tarefa
 	 */
-	public String getAcessoNaoPermitidoATarefa(TaskDecorator task) {
-		return getMensagem(Mensagem.getAcessoNaoPermitidoATarefa(), task.getId());
+	public static String getAcessoNaoPermitidoATarefa(TaskDecorator task) {
+		return getInstancia().getMensagem(
+				Mensagem.getAcessoNaoPermitidoATarefa(), task.getId());
 	}
 
-	public String getUsuarioSemAcessoATarefa(TaskDecorator task, UserImpl user) {
+	/**
+	 * Retorna a mensagem solicitada.
+	 * 
+	 * @param task Tarefa
+	 * @param user Usuário
+	 * @return usuario.sem.acesso.a.tarefa
+	 */
+	public static String getUsuarioSemAcessoATarefa(TaskDecorator task, UserImpl user) {
 		String taskId = task.getId();
 		String userId = user.getId();
-		return getMensagem(Mensagem.getUsuarioSemAcessoATarefa(), taskId, userId);
+		return getInstancia().getMensagem(
+				Mensagem.getUsuarioSemAcessoATarefa(), taskId, userId);
 	}
 }
