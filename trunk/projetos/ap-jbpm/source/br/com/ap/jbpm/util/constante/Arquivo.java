@@ -6,11 +6,12 @@
 package br.com.ap.jbpm.util.constante;
 
 /**
- * Classe contendo as constantes que referenciam arquivos de alguma forma.
+ * Classe contendo as constantes que referenciam arquivos.
  * 
  * @author adrianop
  */
 public class Arquivo {
+	
 	/**
 	 * Construtor.
 	 */
