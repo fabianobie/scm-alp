@@ -32,6 +32,21 @@ public class UtilReflexaoGeneric extends UtilReflexaoAbstrato {
 	}
 
 	/**
+	 * Retorna a classe generic do indice da lista de generics do objeto em questão.
+	 * 
+	 * @param <T>
+	 *            Tipo do objeto passado por parâmetro.
+	 * @param objeto
+	 *            Objeto passado por parâmetro.
+	 * @param indice
+	 * 			  Índice da lista de generics.
+	 * @return Retorna o tipo de generics do objeto.
+	 */
+	public static <T extends Object> Class<?> getClasseDoTipo(T objeto, int indice) {
+		return getGenericEngine().getClasseDoTipo(objeto, indice);
+	}
+
+	/**
 	 * @return genericEngine
 	 */
 	private static GenericEngine getGenericEngine() {

@@ -31,9 +31,24 @@ public class GenericEngine extends EngineAbstrato {
 	 * @return Retorna o tipo de generics do objeto.
 	 */
 	public <T extends Object> Class<?> getClasseDoTipo(T objeto) {
+		return getClasseDoTipo(objeto, 0);
+	}
+
+	/**
+	 * Retorna a classe generic do indice da lista de generics do objeto em questão.
+	 * 
+	 * @param <T>
+	 *            Tipo do objeto passado por parâmetro.
+	 * @param objeto
+	 *            Objeto passado por parâmetro.
+	 * @param indice
+	 * 			  Índice da lista de generics.
+	 * @return Retorna o tipo de generics do objeto.
+	 */
+	public <T extends Object> Class<?> getClasseDoTipo(T objeto, int indice) {
 		Class<?> resultado = null;
 		if (isReferencia(objeto)) {
-			resultado = (Class<?>) getTipo(objeto, 0);
+			resultado = (Class<?>) getTipo(objeto, indice);
 		}
 		return resultado;
 	}
