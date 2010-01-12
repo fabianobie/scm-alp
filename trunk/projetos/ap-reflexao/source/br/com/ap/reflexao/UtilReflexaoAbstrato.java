@@ -10,12 +10,12 @@ package br.com.ap.reflexao;
 
 import java.lang.reflect.InvocationTargetException;
 
-import br.com.ap.reflexao.excecao.ReflexaoException;
-import br.com.ap.reflexao.util.UtilLog;
-import br.com.ap.reflexao.util.UtilReflexaoException;
 import br.com.ap.comum.log.LogAbstrato;
 import br.com.ap.comum.objeto.UtilObjeto;
 import br.com.ap.comum.string.UtilString;
+import br.com.ap.reflexao.excecao.ReflexaoException;
+import br.com.ap.reflexao.util.UtilLog;
+import br.com.ap.reflexao.util.UtilReflexaoException;
 
 /**
  * Classe abstrata que provê recursos aos utilitários da reflexão.
