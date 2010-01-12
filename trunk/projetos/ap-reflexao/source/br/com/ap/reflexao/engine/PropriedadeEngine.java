@@ -8,10 +8,14 @@
  */
 package br.com.ap.reflexao.engine;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 import org.apache.commons.beanutils.PropertyUtils;
+
+import br.com.ap.comum.objeto.UtilObjeto;
+import br.com.ap.reflexao.UtilReflexaoMetodo;
 
 /**
  * Classe responsável pela manipulação dos atributos de uma classe.
@@ -34,14 +38,25 @@ public class PropriedadeEngine extends EngineAbstrato {
 	 * @throws NoSuchMethodException
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
+	 * @throws NoSuchFieldException 
+	 * @throws SecurityException 
 	 */
 	public <T> T get(Object objeto, String propriedade)
 			throws IllegalAccessException, InvocationTargetException,
-			NoSuchMethodException {
+			NoSuchMethodException, SecurityException, NoSuchFieldException {
 		T resultado = null;
 
 		if (isReferencia(objeto) && !isVazio(propriedade)) {
-			resultado = (T) PropertyUtils.getProperty(objeto, propriedade);
+			
+			Class<?> classe = UtilObjeto.getClasse(objeto);
+			
+			if (UtilReflexaoMetodo.isExisteMetodoGet(classe, propriedade)) {
+				resultado = (T) PropertyUtils.getProperty(objeto, propriedade);
+			} else {
+				Field field = classe.getDeclaredField(propriedade);
+				field.setAccessible(true);
+				resultado = (T) field.get(objeto); 
+			}
 		}
 		return resultado;
 	}
@@ -116,13 +131,24 @@ public class PropriedadeEngine extends EngineAbstrato {
 	 * @throws NoSuchMethodException
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
+	 * @throws NoSuchFieldException 
+	 * @throws SecurityException 
 	 */
 	public void set(Object objeto, String propriedade, Object valor)
 			throws IllegalAccessException, InvocationTargetException,
-			NoSuchMethodException {
+			NoSuchMethodException, SecurityException, NoSuchFieldException {
 
 		if (isReferencia(objeto) && !isVazio(propriedade)) {
-			PropertyUtils.setProperty(objeto, propriedade, valor);
+			Class<?> classe = UtilObjeto.getClasse(objeto);
+			Class<?> classePropriedade = getTipoDaPropriedade(objeto, propriedade);
+			
+			if (UtilReflexaoMetodo.isExisteMetodoSet(classe, propriedade, classePropriedade)) {
+				PropertyUtils.setProperty(objeto, propriedade, valor);
+			} else {
+				Field field = classe.getDeclaredField(propriedade);
+				field.setAccessible(true);
+				field.set(objeto, valor); 
+			}
 		}
 	}
 

@@ -53,6 +53,10 @@ public final class UtilReflexaoPropriedade extends UtilReflexaoAbstrato {
 			throw erroAoInvocarMetodo(propriedade, e);
 		} catch (NoSuchMethodException e) {
 			throw metodoNaoEncontrado(objeto, propriedade);
+		} catch (SecurityException e) {
+			throw erro(e);
+		} catch (NoSuchFieldException e) {
+			throw erro(e);
 		}
 		return resultado;
 	}
@@ -144,6 +148,10 @@ public final class UtilReflexaoPropriedade extends UtilReflexaoAbstrato {
 			throw erroAoInvocarMetodo(propriedade, e);
 		} catch (NoSuchMethodException e) {
 			throw metodoNaoEncontrado(objeto, propriedade);
+		} catch (SecurityException e) {
+			erro(e);
+		} catch (NoSuchFieldException e) {
+			erro(e);
 		}
 	}
 
