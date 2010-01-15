@@ -32,12 +32,9 @@ public final class UtilReflexaoPropriedade extends UtilReflexaoAbstrato {
 	/**
 	 * Retorna o valor de uma propriedade do objeto passado por parâmetro.
 	 * 
-	 * @param <T>
-	 *            Objeto resultado da propriedade solicitada.
-	 * @param objeto
-	 *            Objeto
-	 * @param propriedade
-	 *            Propriedade solicitada.
+	 * @param <T> Objeto resultado da propriedade solicitada.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade solicitada.
 	 * @return valor de uma propriedade do objeto passado por parâmetro.
 	 * @throws ReflexaoException
 	 */
@@ -62,17 +59,40 @@ public final class UtilReflexaoPropriedade extends UtilReflexaoAbstrato {
 	}
 
 	/**
+	 * Retorna o valor de uma propriedade do objeto passado por parâmetro. O
+	 * valor é recuperado diretamente do atributo da classe.
+	 * 
+	 * @param <T> Objeto resultado da propriedade solicitada.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade solicitada.
+	 * @return valor de uma propriedade do objeto passado por parâmetro.
+	 * @throws ReflexaoException
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T getNoField(Object objeto, String propriedade)
+			throws ReflexaoException {
+		T resultado = null;
+		try {
+			resultado = (T) getPropriedadeEngine().getNoField(objeto,
+					propriedade);
+		} catch (IllegalAccessException e) {
+			throw acessoNegadoAoMetodo(propriedade, e);
+		} catch (SecurityException e) {
+			throw erro(e);
+		} catch (NoSuchFieldException e) {
+			throw erro(e);
+		}
+		return resultado;
+	}
+
+	/**
 	 * Retorna o valor de uma propriedade do objeto passado por parâmetro. A
 	 * propriedade deverá ser uma lista.
 	 * 
-	 * @param <T>
-	 *            Objeto resultado da propriedade solicitada.
-	 * @param objeto
-	 *            Objeto
-	 * @param propriedade
-	 *            Propriedade solicitada.
-	 * @param indice
-	 *            Índice da lista.
+	 * @param <T> Objeto resultado da propriedade solicitada.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade solicitada.
+	 * @param indice Índice da lista.
 	 * @return valor de uma propriedade do objeto passado por parâmetro.
 	 * @throws ReflexaoException
 	 */
@@ -99,14 +119,10 @@ public final class UtilReflexaoPropriedade extends UtilReflexaoAbstrato {
 	 * Retorna o valor de uma propriedade do objeto passado por parâmetro. A
 	 * propriedade deverá ser um mapa.
 	 * 
-	 * @param <T>
-	 *            Objeto resultado da propriedade solicitada.
-	 * @param objeto
-	 *            Objeto
-	 * @param propriedade
-	 *            Propriedade solicitada.
-	 * @param chave
-	 *            Chave do mapa.
+	 * @param <T> Objeto resultado da propriedade solicitada.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade solicitada.
+	 * @param chave Chave do mapa.
 	 * @return valor de uma propriedade do objeto passado por parâmetro.
 	 * @throws ReflexaoException
 	 */
@@ -130,12 +146,9 @@ public final class UtilReflexaoPropriedade extends UtilReflexaoAbstrato {
 	/**
 	 * Atribui um valor à propriedade do objeto.
 	 * 
-	 * @param objeto
-	 *            Objeto
-	 * @param propriedade
-	 *            Propriedade na qual o valor será atribuído.
-	 * @param valor
-	 *            Objeto que será atribuído na propriedade.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade na qual o valor será atribuído.
+	 * @param valor Objeto que será atribuído na propriedade.
 	 * @throws ReflexaoException
 	 */
 	public static void set(Object objeto, String propriedade, Object valor)
@@ -156,16 +169,34 @@ public final class UtilReflexaoPropriedade extends UtilReflexaoAbstrato {
 	}
 
 	/**
+	 * Atribui um valor à propriedade do objeto. O valor é atribuído diretamente
+	 * ao atributo da classe.
+	 * 
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade na qual o valor será atribuído.
+	 * @param valor Objeto que será atribuído na propriedade.
+	 * @throws ReflexaoException
+	 */
+	public static void setNoField(Object objeto, String propriedade,
+			Object valor) throws ReflexaoException {
+		try {
+			getPropriedadeEngine().setNoField(objeto, propriedade, valor);
+		} catch (IllegalAccessException e) {
+			throw acessoNegadoAoMetodo(propriedade, e);
+		} catch (SecurityException e) {
+			erro(e);
+		} catch (NoSuchFieldException e) {
+			erro(e);
+		}
+	}
+
+	/**
 	 * Atribui um objeto ao indice da lista.
 	 * 
-	 * @param objeto
-	 *            Objeto
-	 * @param propriedade
-	 *            Propriedade na qual o valor será atribuído.
-	 * @param indice
-	 *            Índice da lista da propriedade.
-	 * @param valor
-	 *            Valor que será adicionado na lista.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade na qual o valor será atribuído.
+	 * @param indice Índice da lista da propriedade.
+	 * @param valor Valor que será adicionado na lista.
 	 * @throws ReflexaoException
 	 */
 	public static void setEmPropriedadeIndexada(Object objeto,
@@ -188,14 +219,10 @@ public final class UtilReflexaoPropriedade extends UtilReflexaoAbstrato {
 	/**
 	 * Atribui um objeto à chave do mapa.
 	 * 
-	 * @param objeto
-	 *            Objeto
-	 * @param propriedade
-	 *            Propriedade na qual o valor será atribuído.
-	 * @param chave
-	 *            Chave do mapa.
-	 * @param valor
-	 *            Valor que será adicionado no mapa.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade na qual o valor será atribuído.
+	 * @param chave Chave do mapa.
+	 * @param valor Valor que será adicionado no mapa.
 	 * @throws ReflexaoException
 	 */
 	public static void setEmPropriedadeMapeada(Object objeto,
@@ -216,10 +243,8 @@ public final class UtilReflexaoPropriedade extends UtilReflexaoAbstrato {
 	/**
 	 * Retorna o tipo da propriedade solicitada.
 	 * 
-	 * @param objeto
-	 *            Objeto
-	 * @param propriedade
-	 *            Propriedade solicitada.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade solicitada.
 	 * @return tipo da propriedade solicitada.
 	 * @throws ReflexaoException
 	 */
@@ -247,10 +272,8 @@ public final class UtilReflexaoPropriedade extends UtilReflexaoAbstrato {
 	/**
 	 * Copia as propriedades de um objeto para outro.
 	 * 
-	 * @param origem
-	 *            Objeto de origem.
-	 * @param destino
-	 *            Objeto de destino.
+	 * @param origem Objeto de origem.
+	 * @param destino Objeto de destino.
 	 * @throws ReflexaoException
 	 */
 	public static void copiarPropriedades(Object origem, Object destino)
@@ -269,8 +292,7 @@ public final class UtilReflexaoPropriedade extends UtilReflexaoAbstrato {
 	/**
 	 * Retorna o mapa de propriedades/objetos do objeto solicitado.
 	 * 
-	 * @param objeto
-	 *            Objeto.
+	 * @param objeto Objeto.
 	 * @return Mapa contendo as propriedades e objetos.
 	 * @throws ReflexaoException
 	 */

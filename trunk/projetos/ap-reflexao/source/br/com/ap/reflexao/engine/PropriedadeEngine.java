@@ -28,18 +28,15 @@ public class PropriedadeEngine extends EngineAbstrato {
 	/**
 	 * Retorna o valor de uma propriedade do objeto passado por parâmetro.
 	 * 
-	 * @param <T>
-	 *            Objeto resultado da propriedade solicitada.
-	 * @param objeto
-	 *            Objeto
-	 * @param propriedade
-	 *            Propriedade solicitada.
+	 * @param <T> Objeto resultado da propriedade solicitada.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade solicitada.
 	 * @return valor de uma propriedade do objeto passado por parâmetro.
 	 * @throws NoSuchMethodException
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
-	 * @throws NoSuchFieldException 
-	 * @throws SecurityException 
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
 	 */
 	public <T> T get(Object objeto, String propriedade)
 			throws IllegalAccessException, InvocationTargetException,
@@ -47,16 +44,33 @@ public class PropriedadeEngine extends EngineAbstrato {
 		T resultado = null;
 
 		if (isReferencia(objeto) && !isVazio(propriedade)) {
-			
+			resultado = (T) PropertyUtils.getProperty(objeto, propriedade);
+		}
+		return resultado;
+	}
+
+	/**
+	 * Retorna o valor de uma propriedade do objeto passado por parâmetro.
+	 * 
+	 * @param <T> Objeto resultado da propriedade solicitada.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade solicitada.
+	 * @return valor de uma propriedade do objeto passado por parâmetro.
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 */
+	public <T> T getNoField(Object objeto, String propriedade)
+			throws SecurityException, NoSuchFieldException,
+			IllegalArgumentException, IllegalAccessException {
+		T resultado = null;
+
+		if (isReferencia(objeto) && !isVazio(propriedade)) {
 			Class<?> classe = UtilObjeto.getClasse(objeto);
-			
-			if (UtilReflexaoMetodo.isExisteMetodoGet(classe, propriedade)) {
-				resultado = (T) PropertyUtils.getProperty(objeto, propriedade);
-			} else {
-				Field field = classe.getDeclaredField(propriedade);
-				field.setAccessible(true);
-				resultado = (T) field.get(objeto); 
-			}
+			Field field = classe.getDeclaredField(propriedade);
+			field.setAccessible(true);
+			resultado = (T) field.get(objeto);
 		}
 		return resultado;
 	}
@@ -65,14 +79,10 @@ public class PropriedadeEngine extends EngineAbstrato {
 	 * Retorna o valor de uma propriedade do objeto passado por parâmetro. A
 	 * propriedade deverá ser uma lista.
 	 * 
-	 * @param <T>
-	 *            Objeto resultado da propriedade solicitada.
-	 * @param objeto
-	 *            Objeto
-	 * @param propriedade
-	 *            Propriedade solicitada.
-	 * @param indice
-	 *            Índice da lista.
+	 * @param <T> Objeto resultado da propriedade solicitada.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade solicitada.
+	 * @param indice Índice da lista.
 	 * @return valor de uma propriedade do objeto passado por parâmetro.
 	 * @throws NoSuchMethodException
 	 * @throws InvocationTargetException
@@ -94,14 +104,10 @@ public class PropriedadeEngine extends EngineAbstrato {
 	 * Retorna o valor de uma propriedade do objeto passado por parâmetro. A
 	 * propriedade deverá ser um mapa.
 	 * 
-	 * @param <T>
-	 *            Objeto resultado da propriedade solicitada.
-	 * @param objeto
-	 *            Objeto
-	 * @param propriedade
-	 *            Propriedade solicitada.
-	 * @param chave
-	 *            Chave do mapa.
+	 * @param <T> Objeto resultado da propriedade solicitada.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade solicitada.
+	 * @param chave Chave do mapa.
 	 * @return valor de uma propriedade do objeto passado por parâmetro.
 	 * @throws NoSuchMethodException
 	 * @throws InvocationTargetException
@@ -122,17 +128,14 @@ public class PropriedadeEngine extends EngineAbstrato {
 	/**
 	 * Atribui um valor à propriedade do objeto.
 	 * 
-	 * @param objeto
-	 *            Objeto
-	 * @param propriedade
-	 *            Propriedade na qual o valor será atribuído.
-	 * @param valor
-	 *            Objeto que será atribuído na propriedade.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade na qual o valor será atribuído.
+	 * @param valor Objeto que será atribuído na propriedade.
 	 * @throws NoSuchMethodException
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
-	 * @throws NoSuchFieldException 
-	 * @throws SecurityException 
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
 	 */
 	public void set(Object objeto, String propriedade, Object valor)
 			throws IllegalAccessException, InvocationTargetException,
@@ -140,29 +143,50 @@ public class PropriedadeEngine extends EngineAbstrato {
 
 		if (isReferencia(objeto) && !isVazio(propriedade)) {
 			Class<?> classe = UtilObjeto.getClasse(objeto);
-			Class<?> classePropriedade = getTipoDaPropriedade(objeto, propriedade);
-			
-			if (UtilReflexaoMetodo.isExisteMetodoSet(classe, propriedade, classePropriedade)) {
+			Class<?> classePropriedade = getTipoDaPropriedade(objeto,
+					propriedade);
+
+			if (UtilReflexaoMetodo.isExisteMetodoSet(classe, propriedade,
+					classePropriedade)) {
 				PropertyUtils.setProperty(objeto, propriedade, valor);
 			} else {
 				Field field = classe.getDeclaredField(propriedade);
 				field.setAccessible(true);
-				field.set(objeto, valor); 
+				field.set(objeto, valor);
 			}
+		}
+	}
+
+	/**
+	 * Atribui um valor à propriedade do objeto.
+	 * 
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade na qual o valor será atribuído.
+	 * @param valor Objeto que será atribuído na propriedade.
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 */
+	public void setNoField(Object objeto, String propriedade, Object valor)
+			throws SecurityException, NoSuchFieldException,
+			IllegalArgumentException, IllegalAccessException {
+
+		if (isReferencia(objeto) && !isVazio(propriedade)) {
+			Class<?> classe = UtilObjeto.getClasse(objeto);
+			Field field = classe.getDeclaredField(propriedade);
+			field.setAccessible(true);
+			field.set(objeto, valor);
 		}
 	}
 
 	/**
 	 * Atribui um objeto ao indice da lista.
 	 * 
-	 * @param objeto
-	 *            Objeto
-	 * @param propriedade
-	 *            Propriedade na qual o valor será atribuído.
-	 * @param indice
-	 *            Índice da lista da propriedade.
-	 * @param valor
-	 *            Valor que será adicionado na lista.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade na qual o valor será atribuído.
+	 * @param indice Índice da lista da propriedade.
+	 * @param valor Valor que será adicionado na lista.
 	 * @throws NoSuchMethodException
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
@@ -180,14 +204,10 @@ public class PropriedadeEngine extends EngineAbstrato {
 	/**
 	 * Atribui um objeto à chave do mapa.
 	 * 
-	 * @param objeto
-	 *            Objeto
-	 * @param propriedade
-	 *            Propriedade na qual o valor será atribuído.
-	 * @param chave
-	 *            Chave do mapa.
-	 * @param valor
-	 *            Valor que será adicionado no mapa.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade na qual o valor será atribuído.
+	 * @param chave Chave do mapa.
+	 * @param valor Valor que será adicionado no mapa.
 	 * @throws NoSuchMethodException
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
@@ -204,10 +224,8 @@ public class PropriedadeEngine extends EngineAbstrato {
 	/**
 	 * Retorna o tipo da propriedade solicitada.
 	 * 
-	 * @param objeto
-	 *            Objeto
-	 * @param propriedade
-	 *            Propriedade solicitada.
+	 * @param objeto Objeto
+	 * @param propriedade Propriedade solicitada.
 	 * @return tipo da propriedade solicitada.
 	 * @throws NoSuchMethodException
 	 * @throws InvocationTargetException
@@ -234,10 +252,8 @@ public class PropriedadeEngine extends EngineAbstrato {
 	/**
 	 * Copia as propriedades de um objeto para outro.
 	 * 
-	 * @param origem
-	 *            Objeto de origem.
-	 * @param destino
-	 *            Objeto de destino.
+	 * @param origem Objeto de origem.
+	 * @param destino Objeto de destino.
 	 * @throws NoSuchMethodException
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
@@ -254,8 +270,7 @@ public class PropriedadeEngine extends EngineAbstrato {
 	/**
 	 * Retorna o mapa de propriedades/objetos do objeto solicitado.
 	 * 
-	 * @param objeto
-	 *            Objeto.
+	 * @param objeto Objeto.
 	 * @return Mapa contendo as propriedades e objetos.
 	 * @throws NoSuchMethodException
 	 * @throws InvocationTargetException
