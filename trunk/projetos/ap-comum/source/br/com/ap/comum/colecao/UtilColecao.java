@@ -143,7 +143,7 @@ public final class UtilColecao {
 		if (isReferencia(colecao, objetos, comparador)) {
 			Iterator<T1> iterator = novoIterator(colecao);
 			while (iterator.hasNext()) {
-				if (!isContemElemento(objetos, iterator.next(), comparador)) {
+				if (isContemElemento(objetos, iterator.next(), comparador)) {
 					iterator.remove();
 				}
 			}
