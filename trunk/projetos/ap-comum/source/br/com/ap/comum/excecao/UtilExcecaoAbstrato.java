@@ -73,10 +73,13 @@ public abstract class UtilExcecaoAbstrato {
 	 * @return ExceptionAbstrato
 	 */
 	protected static ExceptionAbstrato novaExcecao(Throwable excecao) {
-		ExceptionAbstrato e = novaExcecao();
-		e.initCause(excecao);
+		return new ExceptionAbstrato(excecao) {
 
-		return e;
+			@Override
+			public String getMessage() {
+				return null;
+			}
+		};
 	}
 
 	/**
