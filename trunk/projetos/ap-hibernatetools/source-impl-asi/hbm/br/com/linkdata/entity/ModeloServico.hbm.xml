@@ -4,8 +4,14 @@
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
-	<meta attribute="implements">br.com.linkdata.entity.Duplicate&lt;ModeloServico&gt;</meta>
+	<meta attribute="extra-import">java.io.ByteArrayOutputStream</meta>
+	<meta attribute="extra-import">java.util.Iterator</meta>
 	<meta attribute="extra-import">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+	<meta attribute="extra-import">java.io.ObjectOutputStream</meta>
+	<meta attribute="extra-import">java.io.ByteArrayInputStream</meta>
+	<meta attribute="extra-import">java.io.ObjectInputStream</meta>
+	<meta attribute="extra-import">java.util.LinkedHashSet</meta>
+	<meta attribute="implements">br.com.linkdata.entity.Duplicate&lt;ModeloServico&gt;</meta>
 	<meta attribute="extra-classe">
 @DynaColumnsDomain(description = "Modelo de Serviço", column = "nome")
 	</meta>

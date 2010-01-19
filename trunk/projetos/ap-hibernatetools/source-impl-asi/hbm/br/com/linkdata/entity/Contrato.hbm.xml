@@ -4,6 +4,20 @@
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	<meta attribute="class-code">
+	public void addItem(ItemContrato itemContrato) {
+		getItens().add(itemContrato);
+		if (this.valor == null)
+			this.valor = itemContrato.getValorTotal();
+		else
+			this.valor.add(itemContrato.getValorTotal());
+	}
+
+	public void removeItem(ItemContrato itemContrato) {
+		getItens().remove(itemContrato);
+		this.valor.subtract(itemContrato.getValorTotal());
+	}
+	</meta>
 	
     <class name="br.com.linkdata.entity.Contrato" table="CONTRATO">
         <id name="id" type="java.lang.Long" access="field">

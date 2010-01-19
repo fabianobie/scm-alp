@@ -8,6 +8,11 @@
 	<meta attribute="extra-classe">
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 	</meta>
+	<meta attribute="class-code">
+	public boolean getProrrogavel() {
+		return prorrogavel;
+	}
+	</meta>
     <class name="br.com.linkdata.entity.Vigencia" table="VIGENCIA" abstract="true" persister="org.hibernate.persister.entity.UnionSubclassEntityPersister">
         <id name="id" type="java.lang.Long" access="field">
         	<meta attribute="scope-field">protected</meta>

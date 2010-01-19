@@ -14,26 +14,6 @@
                 <param name="sequence">SQ_PARCELA_IMPOSTO</param>
             </generator>
         </id>
-        <property name="dataPagamentoPrevisto" type="date" access="field">
-        	<meta attribute="scope-field">protected</meta>
-            <column name="DT_PAGAMENTO_PREVISTO" />
-        </property>
-        <property name="dataPagamentoRealizado" type="date" access="field">
-        	<meta attribute="scope-field">protected</meta>
-            <column name="DT_PAGAMENTO_REALIZADO" />
-        </property>
-        <property name="dataVencimento" type="date" access="field">
-        	<meta attribute="scope-field">protected</meta>
-            <column name="DT_VENCIMENTO" />
-        </property>
-        <property name="valorPago" type="java.math.BigDecimal" access="field">
-        	<meta attribute="scope-field">protected</meta>
-            <column name="VL_PARCELA_PAGA" precision="16" scale="4" />
-        </property>
-        <property name="valorPrevisto" type="java.math.BigDecimal" access="field">
-        	<meta attribute="scope-field">protected</meta>
-            <column name="VL_PARCELA_PREVISTA" precision="16" scale="4" />
-        </property>
         <many-to-one name="licenciamento" class="br.com.linkdata.entity.TaxaImposto" access="field" fetch="join">
         	<meta attribute="scope-field">protected</meta>
             <column name="ID_LICENCIAMENTO" />

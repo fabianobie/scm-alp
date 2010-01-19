@@ -4,6 +4,8 @@
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	<meta attribute="extra-import">java.util.LinkedHashSet</meta>
+	<meta attribute="extra-import">br.com.linkdata.entity.DuplicateBag</meta>
 	<meta attribute="implements"><![CDATA[java.lang.Comparable<ModeloCaracteristicaServico>]]></meta>
 	<meta attribute="implements">br.com.linkdata.entity.Duplicate&lt;ModeloCaracteristicaServico&gt;</meta>
 	<meta attribute="class-code">

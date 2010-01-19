@@ -3,6 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="extends">ExclusaoLogica</meta>
 	<meta attribute="extra-import">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
 	<meta attribute="extra-import">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
 	<meta attribute="implements">br.com.linkdata.interfaces.IPessoaFisica</meta>
@@ -60,15 +61,36 @@
         </many-to-one>
         <component name="identidade" class="br.com.linkdata.entity.Identidade">
         	<meta attribute="implements"></meta>
-			<meta attribute="class-code"></meta>
+        	<meta attribute="extends"></meta>
+			<meta attribute="class-code">
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ForeignKey(name = "FK_ESTADO_IDE")
+	@JoinColumn(name = "ID_ESTADO")
+	@NotAudited
+	private Estado estado;
+	
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+			</meta>
 			<meta attribute="extra-classe"></meta>
-			<meta attribute="extra-import"></meta>
+			<meta attribute="extra-import">javax.persistence.ManyToOne</meta>
+			<meta attribute="extra-import">org.hibernate.annotations.ForeignKey</meta>
+			<meta attribute="extra-import">javax.persistence.JoinColumn</meta>
+			<meta attribute="extra-import">org.hibernate.envers.NotAudited</meta>
+			<meta attribute="extra-import">javax.persistence.FetchType</meta>
             <property name="dataExpedicao" type="date" access="field">
                 <column name="DT_EXPEDICAO" />
             </property>
+            <!--
             <many-to-one name="estado" class="br.com.linkdata.entity.Estado" access="field" fetch="select">
                 <column name="ID_ESTADO" />
             </many-to-one>
+            -->
             <property name="numero" type="java.lang.String" access="field">
                 <column name="NR_INDENTIDADE" length="20" />
             </property>

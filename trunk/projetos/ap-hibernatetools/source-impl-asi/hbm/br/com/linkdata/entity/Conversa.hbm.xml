@@ -3,6 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="extra-import">javax.persistence.Transient</meta>
 	<meta attribute="class-code">
 	/**
 	 * Adiciona uma mensagem.
@@ -27,9 +28,30 @@
 		envolvidos.add(envolvido);
 	}
 	
+	@Transient
+	public List&lt;Envolvido&gt; getDestinatariosUltimaMensagem(Usuario usuario) {
+		List&lt;Envolvido&gt; envolvidos = new ArrayList&lt;Envolvido&gt;();
+		
+		for (Envolvido envolvido : getEnvolvidos()) {
+			if( ! envolvido.getUsuario().getId().equals(usuario.getId())){
+				envolvidos.add(envolvido);
+			}
+		}
+		return envolvidos;		
+	}
+	
+	@Transient
+	public Mensagem getUltimaMensagem() {
+	  if (mensagens!=null) {
+	    return mensagens.get(mensagens.size()-1);
+	  }
+	  return null;
+	}
 	</meta>
     <class name="br.com.linkdata.entity.Conversa" table="CONVERSA">
         <id name="id" type="java.lang.Long" access="field">
+        	<meta attribute="extra-import"/>
+			<meta attribute="class-code"/>
             <column name="ID_CONVERSA" precision="12" scale="0" />
             <generator class="sequence">
                 <param name="max_lo">49</param>

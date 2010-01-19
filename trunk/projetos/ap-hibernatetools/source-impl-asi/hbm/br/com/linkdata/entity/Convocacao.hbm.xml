@@ -27,12 +27,13 @@
         <many-to-one name="fornecedor" class="br.com.linkdata.entity.Fornecedor" access="field" fetch="select">
             <column name="ID_FORNECEDOR" />
         </many-to-one>
-        <bag name="pendencias" table="PENDENCIA" inverse="false" lazy="true" cascade="persist,merge" fetch="select">
+        <list name="pendencias" table="PENDENCIA" inverse="false" lazy="true" cascade="persist,merge" fetch="select">
             <key>
                 <column name="ID_CONVOCACAO" />
             </key>
+            <index column="ID_PENDENCIA"/>
             <one-to-many class="br.com.linkdata.entity.Pendencia" />
-        </bag>
+        </list>
         <property name="prazoResposta" type="java.lang.Integer" access="field">
             <column name="PRAZO_RESPOSTA" />
         </property>
