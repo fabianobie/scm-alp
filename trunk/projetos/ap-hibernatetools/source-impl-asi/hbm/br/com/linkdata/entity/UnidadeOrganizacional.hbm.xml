@@ -10,6 +10,11 @@
 @DynaColumns(description="Unidade Organizacional")
 @DynaColumnsDomain(description="Unidade Organizacional", column="nome")
 	</meta>
+	<meta attribute="class-code">
+	public Boolean isUtilizaEnderecoSuperior() {
+		return utilizaEnderecoSuperior;
+	}
+	</meta>
     <class name="br.com.linkdata.entity.UnidadeOrganizacional" table="UNIDADE_ORGANIZACIONAL">
         <id name="id" type="java.lang.Long" access="field">
             <column name="ID_UO" precision="12" scale="0" />

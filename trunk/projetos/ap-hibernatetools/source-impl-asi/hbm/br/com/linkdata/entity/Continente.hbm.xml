@@ -15,18 +15,8 @@
 	}
 
 	@Override
-	public String getDescricao() {
-		return descricao;
-	}
-	
-	@Override
 	public Boolean isShow() {
 		return show;
-	}
-
-	@Override
-	public void setShow(Boolean show) {
-		this.show = show;
 	}
 	</meta>
     <class name="br.com.linkdata.entity.Continente" table="CONTINENTE">

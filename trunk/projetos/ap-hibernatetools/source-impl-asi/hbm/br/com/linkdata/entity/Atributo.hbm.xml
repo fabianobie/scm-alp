@@ -3,6 +3,12 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="class-code">
+	public Atributo(String nome, String nomeColunaBD) {
+		this.nome = nome;
+		this.nomeColunaBD = nomeColunaBD;
+	}
+	</meta>
     <class name="br.com.linkdata.entity.Atributo" table="Atributo">
         <id name="id" type="java.lang.Long" access="field">
             <column name="id" />

@@ -4,6 +4,8 @@
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	<meta attribute="extra-import">javax.persistence.Transient</meta>
+	<meta attribute="extra-import">java.util.List</meta>
 	<meta attribute="class-code">
 	@Transient
 	private String nome;

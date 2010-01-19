@@ -6,6 +6,7 @@
 	<meta attribute="extra-import">org.hibernate.envers.Audited</meta>
 	<meta attribute="extra-import">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
 	<meta attribute="extra-import">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+	<meta attribute="extra-import">org.hibernate.envers.NotAudited</meta>
 	<meta attribute="extends">br.com.linkdata.entity.ExclusaoLogica</meta>
 	<meta attribute="extra-classe">
 @Audited
@@ -34,12 +35,18 @@
             <column name="DT_DESATIVACAO" />
         </property>
         <bag name="enderecos" table="ENDERECO" inverse="true" lazy="false" cascade="merge,save-update" fetch="join">
+        	<meta attribute="meta-enderecos">
+	@NotAudited
+			</meta>
             <key>
                 <column name="ID_LOCALIDADE" />
             </key>
             <one-to-many class="br.com.linkdata.entity.Endereco" />
         </bag>
         <many-to-one name="estado" class="br.com.linkdata.entity.Estado" access="field" fetch="select">
+        	<meta attribute="meta-estado">
+	@NotAudited
+			</meta>
             <column name="ID_ESTADO" />
         </many-to-one>
         <property name="idIntegracao" type="java.lang.String" access="field">

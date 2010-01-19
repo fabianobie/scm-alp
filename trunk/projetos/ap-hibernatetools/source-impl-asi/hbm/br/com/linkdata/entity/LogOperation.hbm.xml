@@ -4,6 +4,23 @@
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
+	<meta attribute="class-code">
+	public LogOperation() {
+
+	}
+
+	public LogOperation(String method) {
+		setMethod(method);
+		setSuccess(false);
+		setDate(new Date());
+	}
+	
+	public LogOperation(String method, boolean success) {
+		setMethod(method);
+		setSuccess(success);
+		setDate(new Date());
+	}
+	</meta>
 	
     <class name="br.com.linkdata.entity.LogOperation" table="LOG_OPERACAO_INTEG">
         <id name="id" type="java.lang.Long" access="field">

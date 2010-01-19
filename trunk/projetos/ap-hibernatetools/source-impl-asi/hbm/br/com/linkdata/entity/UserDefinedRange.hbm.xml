@@ -25,7 +25,7 @@
             </key>
             <one-to-many class="br.com.linkdata.entity.UserDefinedField" />
         </set>
-        <set name="userDefinedRageValues" inverse="true" lazy="true" table="USER_DEFINED_RANGE_VALUE" cascade="persist,merge,delete" fetch="select">
+        <set name="userDefinedRangeValues" inverse="true" lazy="true" table="USER_DEFINED_RANGE_VALUE" cascade="persist,merge,delete" fetch="select">
             <key>
                 <column name="ID_UDR" />
             </key>

@@ -5,6 +5,22 @@
 <hibernate-mapping>
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
 	<meta attribute="extra-import">org.hibernate.annotations.Type</meta>
+	<meta attribute="class-code">
+	public ItemContrato(){
+	}
+	
+	public ItemContrato(String numero, BigDecimal quantidade, Object servicoMaterial, UnidadeMedida unidadeMedida,
+			BigDecimal valorTotal, String descricaoDetalhada, String marca, String modelo){
+		this.numero = numero;
+		this.quantidade = quantidade;
+		this.servicoMaterial = servicoMaterial;
+		this.unidadeMedida = unidadeMedida;
+		this.valorTotal = valorTotal;
+		this.descricaoDetalhada = descricaoDetalhada;
+		this.marca = marca;
+		this.modelo = modelo;
+	}
+	</meta>
 	
     <class name="br.com.linkdata.entity.ItemContrato" table="ITEM_CONTRATO">
         <id name="id" type="java.lang.Long" access="field">

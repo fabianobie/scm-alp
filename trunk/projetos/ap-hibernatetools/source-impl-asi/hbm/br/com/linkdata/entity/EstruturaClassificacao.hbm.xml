@@ -8,6 +8,8 @@
 	<meta attribute="extra-import">org.hibernate.search.annotations.FullTextFilterDef</meta> 
 	<meta attribute="extra-import">br.com.linkdata.filter.FiltroEstruturaTipoClassificacaoFactory</meta> 
 	<meta attribute="extra-import">br.com.linkdata.filter.FiltroEstruturaTipoModeloFactory</meta>
+	<meta attribute="extra-import">java.util.List</meta>
+	<meta attribute="extra-import">java.util.ArrayList</meta>
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
 	<meta attribute="implements">br.com.linkdata.entity.Duplicate&lt;EstruturaClassificacao&gt;</meta>
 	<meta attribute="extra-classe">

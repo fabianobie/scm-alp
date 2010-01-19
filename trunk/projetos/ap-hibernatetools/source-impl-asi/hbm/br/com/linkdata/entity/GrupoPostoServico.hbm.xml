@@ -13,12 +13,6 @@
                 <param name="sequence">SQ_GRUPO_POSTO_SERVICO</param>
             </generator>
         </id>
-        <property name="descricao" type="java.lang.String" access="field">
-            <column name="DS_GRUPO_DESCRITIVO" not-null="true" />
-        </property>
-        <property name="nome" type="java.lang.String" access="field">
-            <column name="NM_GRUPO_DESCRITIVO" length="80" not-null="true" />
-        </property>
         <many-to-one name="postoServico" class="br.com.linkdata.entity.PostoServico" access="field" fetch="select">
             <column name="ID_POSTO_SERVICO" />
         </many-to-one>

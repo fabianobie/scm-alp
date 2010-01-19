@@ -4,6 +4,7 @@
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
 	<meta attribute="extends">br.com.linkdata.domain.ElementoDeDominio</meta>
+	<meta attribute="extra-import">org.jboss.seam.annotations.Role</meta>	
 	<meta attribute="extra-import">org.jboss.seam.annotations.Roles</meta>	
 	<meta attribute="extra-classe">
 @Roles( { @Role(name = "grupoNaturezaSelecionada", scope = ScopeType.CONVERSATION) })

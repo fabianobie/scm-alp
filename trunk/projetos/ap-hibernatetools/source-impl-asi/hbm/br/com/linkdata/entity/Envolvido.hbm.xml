@@ -3,56 +3,35 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
-	<meta attribute="extra-import">java.io.Serializable</meta>
 	<meta attribute="class-code">
-	/**
-	 * Classe que representa o ID da entidade em questão.
-	 */
-	public static class Id implements Serializable {
-
-		@Column(name = "ID_CONVERSA")
-		private Long idConversa;
-
-		@Column(name = "ID_USUARIO")
-		private Long idUsuario;
-
-		public Id() {
-		}
-
-		public Id(Long idConversa, Long idUsuario) {
-			this.idConversa = idConversa;
-			this.idUsuario = idUsuario;
-		}
-
-		public boolean equals(Object o) {
-			if (o != null &amp;&amp; o instanceof Id) {
-				Id objeto = (Id) o;
-				return this.idConversa.equals(objeto.idConversa)
-						&amp;&amp; this.idUsuario.equals(objeto.idUsuario);
-			} else {
-				return false;
-			}
-		}
-
-		public int hashCode() {
-			return idUsuario.hashCode() + idConversa.hashCode();
-		}
-
-		/**
-		 * Este método insere o ID da conversa persistido na Envolvido, foi
-		 * criado pois o hibernate não controla a inclusão deste objeto via
-		 * CASCADE, o ID da conversa deve ser setado manualmente após a inclusão
-		 * da conversa.
-		 * 
-		 * @param idConversa
-		 */
-		public void setIdConversa(Long idConversa) {
-			this.idConversa = idConversa;
-		}
+	public Envolvido(Conversa conversa, Usuario usuario, Boolean isArquivado) {
+		this.getId().setIdConversa(conversa.getId());
+		this.getId().setIdUsuario(usuario.getId());
+		this.isArquivado = isArquivado;
+		this.conversa = conversa;
+		this.usuario = usuario;
+		conversa.addEnvolvidos(this);
 	}
 	</meta>
     <class name="br.com.linkdata.entity.Envolvido" table="ENVOLVIDO_CONVERSA">
-        <composite-id name="id" class="br.com.linkdata.entity.Envolvido$Id" access="field">
+        <composite-id name="id" class="br.com.linkdata.entity.EnvolvidoId" access="field">
+        	<meta attribute="extra-import"/>
+        	<meta attribute="implements">java.io.Serializable</meta>
+            <meta attribute="class-code">
+	public boolean equals(Object o) {
+		if (o != null &amp;&amp; o instanceof EnvolvidoId) {
+			EnvolvidoId objeto = (EnvolvidoId) o;
+			return this.idConversa.equals(objeto.idConversa)
+					&amp;&amp; this.idUsuario.equals(objeto.idUsuario);
+		} else {
+			return false;
+		}
+	}
+	
+	public int hashCode() {
+		return idUsuario.hashCode() + idConversa.hashCode();
+	}
+            </meta>
             <key-property name="idConversa" type="java.lang.Long">
                 <column name="ID_CONVERSA" />
             </key-property>
