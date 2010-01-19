@@ -16,5 +16,20 @@ import br.com.ap.comum.excecao.RuntimeExceptionAbstrato;
  * @author adrianop
  */
 public class NegocioException extends RuntimeExceptionAbstrato {
-	//classe
+	
+	/**
+	 * Construtor.
+	 */
+	public NegocioException() {
+		super();
+	}
+
+	/**
+	 * Construtor.
+	 * 
+	 * @param mensagem Mensagem
+	 */
+	public NegocioException(String mensagem) {
+		super(mensagem);
+	}
 }
