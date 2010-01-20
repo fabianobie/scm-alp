@@ -8,13 +8,13 @@
  */
 package br.com.ap.arquitetura.negocio;
 
-import br.com.ap.arquitetura.seguranca.ControladorDeAcesso;
 import br.com.ap.arquitetura.util.UtilLog;
 import br.com.ap.comum.fabrica.ColecaoFactory;
 import br.com.ap.comum.fabrica.DataFactory;
 import br.com.ap.comum.fabrica.NumeroFactory;
 import br.com.ap.comum.log.LogAbstrato;
 import br.com.ap.comum.objeto.UtilObjeto;
+import br.com.ap.comum.seguranca.ControladorDeAcesso;
 import br.com.ap.comum.string.UtilString;
 
 /**
