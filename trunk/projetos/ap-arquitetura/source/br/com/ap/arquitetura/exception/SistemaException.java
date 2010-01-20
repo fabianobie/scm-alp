@@ -16,5 +16,20 @@ import br.com.ap.comum.excecao.RuntimeExceptionAbstrato;
  * @author adrianop
  */
 public class SistemaException extends RuntimeExceptionAbstrato {
-	//classe
+	
+	/**
+	 * Construtor.
+	 */
+	public SistemaException() {
+		super();
+	}
+
+	/**
+	 * Construtor.
+	 * 
+	 * @param mensagem Mensagem
+	 */
+	public SistemaException(String mensagem) {
+		super(mensagem);
+	}
 }
