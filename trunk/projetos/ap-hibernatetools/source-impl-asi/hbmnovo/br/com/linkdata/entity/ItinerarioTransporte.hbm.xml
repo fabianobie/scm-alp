@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.ItinerarioTransporte" table="ITINERARIO_TRANSPORTE">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_ITINERARIO_TRANSPORTE" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_ITINERARIO_TRANSPORTE</param>
+            </generator>
+        </id>
+        <many-to-one name="destino" class="br.com.linkdata.entity.TrechoItinerario" access="field" cascade="persist,merge,delete" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_TRECHO_DESTINO" />
+        </many-to-one>
+        <many-to-one name="origem" class="br.com.linkdata.entity.TrechoItinerario" access="field" cascade="persist,merge,delete" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_TRECHO_ORIGEM" />
+        </many-to-one>
+        <property name="outrosLocais" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="DS_OUTROS_LOCAIS" length="1000" />
+        </property>
+    </class>
+</hibernate-mapping>

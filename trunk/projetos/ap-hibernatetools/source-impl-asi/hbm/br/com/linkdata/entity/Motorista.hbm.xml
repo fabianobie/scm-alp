@@ -6,6 +6,8 @@
 	<meta attribute="extends">ExclusaoLogica</meta>
 	<meta attribute="extra-import">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
 	<meta attribute="extra-import">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+	<meta attribute="extra-import">org.hibernate.envers.Audited</meta>
+	<meta attribute="extra-import">org.hibernate.envers.NotAudited</meta>
 	<meta attribute="implements">br.com.linkdata.interfaces.IPessoaFisica</meta>
 	<meta attribute="extra-classe">
 @UniqueCompositeConstraint(
@@ -14,6 +16,7 @@
 		@UniqueCompositeField(fieldLabel="Matrícula", fieldName="matricula")
 	}
 )
+@Audited
 	</meta>
     <class name="br.com.linkdata.entity.Motorista" table="MOTORISTA">
         <id name="id" type="java.lang.Long" access="field">
@@ -24,12 +27,15 @@
             </generator>
         </id>
         <many-to-one name="ativo" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
+        	<meta attribute="meta-ativo">@NotAudited</meta>
             <column name="IND_DISPONIBILIDADE" />
         </many-to-one>
         <many-to-one name="carteiraNacionalHabilitacao" class="br.com.linkdata.entity.CarteiraNacionalHabilitacao" access="field" cascade="all" fetch="select">
+        	<meta attribute="meta-carteiraNacionalHabilitacao">@NotAudited</meta>
             <column name="ID_CNH" />
         </many-to-one>
         <set name="contatoMotorista" inverse="false" lazy="true" table="CONTATO_MOTORISTA" cascade="persist,merge,delete" fetch="select">
+        	<meta attribute="meta-contatoMotorista">@NotAudited</meta>
             <key>
                 <column name="ID_MOTORISTA" />
             </key>
@@ -48,19 +54,24 @@
             <column name="DT_NASCIMENTO" not-null="true" />
         </property>
         <many-to-one name="domicilioBancario" class="br.com.linkdata.entity.DomicilioBancario" access="field" cascade="persist,merge" fetch="select">
+        	<meta attribute="meta-domicilioBancario">@NotAudited</meta>
             <column name="ID_DOMICILIO_BANCARIO" />
         </many-to-one>
         <property name="email" type="java.lang.String" access="field">
             <column name="DS_EMAIL" length="80" />
         </property>
         <many-to-one name="endereco" class="br.com.linkdata.entity.Endereco" access="field" cascade="all" fetch="select">
+        	<meta attribute="meta-endereco">@NotAudited</meta>
             <column name="ID_ENDERECO" />
         </many-to-one>
         <many-to-one name="estadoCivil" class="br.com.linkdata.entity.EstadoCivil" access="field" fetch="join">
+        	<meta attribute="meta-estadoCivil">@NotAudited</meta>
             <column name="ID_ESTADO_CIVIL" />
         </many-to-one>
-        <component name="identidade" class="br.com.linkdata.entity.Identidade">
+        <component name="identidade" class="br.com.linkdata.entity.Identidade" >
         	<meta attribute="implements"></meta>
+        	<meta attribute="extra-import">org.hibernate.envers.Audited</meta>
+        	<meta attribute="extra-import">org.hibernate.envers.NotAudited</meta>
         	<meta attribute="extends"></meta>
 			<meta attribute="class-code">
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -84,17 +95,15 @@
 			<meta attribute="extra-import">org.hibernate.envers.NotAudited</meta>
 			<meta attribute="extra-import">javax.persistence.FetchType</meta>
             <property name="dataExpedicao" type="date" access="field">
+            	<meta attribute="meta-dataExpedicao">@Audited</meta>
                 <column name="DT_EXPEDICAO" />
             </property>
-            <!--
-            <many-to-one name="estado" class="br.com.linkdata.entity.Estado" access="field" fetch="select">
-                <column name="ID_ESTADO" />
-            </many-to-one>
-            -->
             <property name="numero" type="java.lang.String" access="field">
+            	<meta attribute="meta-numero">@Audited</meta>
                 <column name="NR_INDENTIDADE" length="20" />
             </property>
             <property name="orgaoExpeditor" type="java.lang.String" access="field">
+            	<meta attribute="meta-orgaoExpeditor">@Audited</meta>
                 <column name="DS_ORGAO_EXP" length="5" />
             </property>
         </component>
@@ -102,9 +111,11 @@
             <column name="NR_MATRICULA" length="12" not-null="true" />
         </property>
         <many-to-one name="motivoIndisponibilidadeMotorista" class="br.com.linkdata.entity.MotivoIndisponibilidadeMotorista" access="field" fetch="join">
+        	<meta attribute="meta-motivoIndisponibilidadeMotorista">@NotAudited</meta>
             <column name="ID_MOTIVO_INDISPONIBILIDADE" />
         </many-to-one>
         <set name="multas" inverse="false" lazy="true" table="MULTA" cascade="persist,merge,delete" fetch="select">
+        	<meta attribute="meta-multas">@NotAudited</meta>
             <key>
                 <column name="ID_MOTORISTA" />
             </key>
@@ -123,21 +134,27 @@
             <column name="DS_OBSERVACAO" length="1000" />
         </property>
         <many-to-one name="sexo" class="br.com.linkdata.entity.Sexo" access="field" fetch="join">
+        	<meta attribute="meta-sexo">@NotAudited</meta>
             <column name="ID_SEXO" />
         </many-to-one>
         <many-to-one name="situacaoMotorista" class="br.com.linkdata.entity.SituacaoMotorista" access="field" fetch="join">
+        	<meta attribute="meta-situacaoMotorista">@NotAudited</meta>
             <column name="ID_SITUACAO_MOTORISTA" />
         </many-to-one>
         <many-to-one name="telefoneCelular" class="br.com.linkdata.entity.Telefone" access="field" cascade="persist,merge" fetch="select">
+        	<meta attribute="meta-telefoneCelular">@NotAudited</meta>
             <column name="ID_TELEFONE_CELULAR" />
         </many-to-one>
         <many-to-one name="telefoneRedidencial" class="br.com.linkdata.entity.Telefone" access="field" cascade="persist,merge" fetch="select">
+        	<meta attribute="meta-telefoneRedidencial">@NotAudited</meta>
             <column name="ID_TELEFONE_RESIDENCIAL" />
         </many-to-one>
         <many-to-one name="tipoSanguineo" class="br.com.linkdata.entity.TipoSanguineo" access="field" fetch="join">
+        	<meta attribute="meta-tipoSanguineo">@NotAudited</meta>
             <column name="ID_TIPO_SANGUINEO" />
         </many-to-one>
         <many-to-one name="unidadeOrganizacional" class="br.com.linkdata.entity.UnidadeOrganizacional" access="field" fetch="select">
+        	<meta attribute="meta-unidadeOrganizacional">@NotAudited</meta>
             <column name="ID_UNIDADE_ORGANIZACIONAL" />
         </many-to-one>
     </class>

@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <union-subclass name="br.com.linkdata.entity.FornecedorPJ" extends="br.com.linkdata.entity.Fornecedor" table="FORNECEDOR_PJ">
+        <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaJuridica</meta>
+        <meta attribute="class-code" inherit="false">public void addResponsavelTecnico(ResponsavelTecnico responsavelTecnico) { getResponsaveisTecnicos().add(responsavelTecnico);
+        responsavelTecnico.setFornecedorPJ(this); } public void addContatoFornecedor(ContatoFornecedor contatoFornecedor) { getContatos().add(contatoFornecedor);
+        contatoFornecedor.setFornecedorPJ(this); } @Override public String getRazaoSocial() { return getNome(); } public void setRazaoSocial(String razaoSocial) {
+        setNome(razaoSocial); }</meta>
+        <property name="cnpj" type="java.lang.String" access="field">
+            <meta attribute="class-code" inherit="false">public void addResponsavelTecnico(ResponsavelTecnico responsavelTecnico) {
+            getResponsaveisTecnicos().add(responsavelTecnico); responsavelTecnico.setFornecedorPJ(this); } public void addContatoFornecedor(ContatoFornecedor contatoFornecedor) {
+            getContatos().add(contatoFornecedor); contatoFornecedor.setFornecedorPJ(this); } @Override public String getRazaoSocial() { return getNome(); } public void
+            setRazaoSocial(String razaoSocial) { setNome(razaoSocial); }</meta>
+            <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaJuridica</meta>
+            <column name="NR_CNPJ" length="14" />
+        </property>
+        <set name="contatos" inverse="true" lazy="true" table="CONTATO_FORNECEDOR" cascade="persist,merge" fetch="select">
+            <meta attribute="class-code" inherit="false">public void addResponsavelTecnico(ResponsavelTecnico responsavelTecnico) {
+            getResponsaveisTecnicos().add(responsavelTecnico); responsavelTecnico.setFornecedorPJ(this); } public void addContatoFornecedor(ContatoFornecedor contatoFornecedor) {
+            getContatos().add(contatoFornecedor); contatoFornecedor.setFornecedorPJ(this); } @Override public String getRazaoSocial() { return getNome(); } public void
+            setRazaoSocial(String razaoSocial) { setNome(razaoSocial); }</meta>
+            <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaJuridica</meta>
+            <key>
+                <column name="ID_FORNECEDOR" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.ContatoFornecedor" />
+        </set>
+        <property name="inscricaoEstadual" type="java.lang.String" access="field">
+            <meta attribute="class-code" inherit="false">public void addResponsavelTecnico(ResponsavelTecnico responsavelTecnico) {
+            getResponsaveisTecnicos().add(responsavelTecnico); responsavelTecnico.setFornecedorPJ(this); } public void addContatoFornecedor(ContatoFornecedor contatoFornecedor) {
+            getContatos().add(contatoFornecedor); contatoFornecedor.setFornecedorPJ(this); } @Override public String getRazaoSocial() { return getNome(); } public void
+            setRazaoSocial(String razaoSocial) { setNome(razaoSocial); }</meta>
+            <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaJuridica</meta>
+            <column name="NR_INSCR_ESTADUAL" length="20" />
+        </property>
+        <property name="inscricaoMunicipal" type="java.lang.String" access="field">
+            <meta attribute="class-code" inherit="false">public void addResponsavelTecnico(ResponsavelTecnico responsavelTecnico) {
+            getResponsaveisTecnicos().add(responsavelTecnico); responsavelTecnico.setFornecedorPJ(this); } public void addContatoFornecedor(ContatoFornecedor contatoFornecedor) {
+            getContatos().add(contatoFornecedor); contatoFornecedor.setFornecedorPJ(this); } @Override public String getRazaoSocial() { return getNome(); } public void
+            setRazaoSocial(String razaoSocial) { setNome(razaoSocial); }</meta>
+            <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaJuridica</meta>
+            <column name="NR_INSCR_MUNICIPAL" length="20" />
+        </property>
+        <property name="nacionalidade" type="java.lang.String" access="field">
+            <meta attribute="class-code" inherit="false">public void addResponsavelTecnico(ResponsavelTecnico responsavelTecnico) {
+            getResponsaveisTecnicos().add(responsavelTecnico); responsavelTecnico.setFornecedorPJ(this); } public void addContatoFornecedor(ContatoFornecedor contatoFornecedor) {
+            getContatos().add(contatoFornecedor); contatoFornecedor.setFornecedorPJ(this); } @Override public String getRazaoSocial() { return getNome(); } public void
+            setRazaoSocial(String razaoSocial) { setNome(razaoSocial); }</meta>
+            <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaJuridica</meta>
+            <column name="DS_NACIONALIDADE" length="20" />
+        </property>
+        <property name="nomeFantasia" type="java.lang.String" access="field">
+            <meta attribute="class-code" inherit="false">public void addResponsavelTecnico(ResponsavelTecnico responsavelTecnico) {
+            getResponsaveisTecnicos().add(responsavelTecnico); responsavelTecnico.setFornecedorPJ(this); } public void addContatoFornecedor(ContatoFornecedor contatoFornecedor) {
+            getContatos().add(contatoFornecedor); contatoFornecedor.setFornecedorPJ(this); } @Override public String getRazaoSocial() { return getNome(); } public void
+            setRazaoSocial(String razaoSocial) { setNome(razaoSocial); }</meta>
+            <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaJuridica</meta>
+            <column name="NM_FANTASIA" length="80" />
+        </property>
+        <property name="objetivoSocial" type="java.lang.String" access="field">
+            <meta attribute="class-code" inherit="false">public void addResponsavelTecnico(ResponsavelTecnico responsavelTecnico) {
+            getResponsaveisTecnicos().add(responsavelTecnico); responsavelTecnico.setFornecedorPJ(this); } public void addContatoFornecedor(ContatoFornecedor contatoFornecedor) {
+            getContatos().add(contatoFornecedor); contatoFornecedor.setFornecedorPJ(this); } @Override public String getRazaoSocial() { return getNome(); } public void
+            setRazaoSocial(String razaoSocial) { setNome(razaoSocial); }</meta>
+            <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaJuridica</meta>
+            <column name="DS_OBJETIVO_SOCIAL" length="80" />
+        </property>
+        <many-to-one name="porteFornecedor" class="br.com.linkdata.entity.PorteFornecedor" access="field" fetch="select">
+            <meta attribute="class-code" inherit="false">public void addResponsavelTecnico(ResponsavelTecnico responsavelTecnico) {
+            getResponsaveisTecnicos().add(responsavelTecnico); responsavelTecnico.setFornecedorPJ(this); } public void addContatoFornecedor(ContatoFornecedor contatoFornecedor) {
+            getContatos().add(contatoFornecedor); contatoFornecedor.setFornecedorPJ(this); } @Override public String getRazaoSocial() { return getNome(); } public void
+            setRazaoSocial(String razaoSocial) { setNome(razaoSocial); }</meta>
+            <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaJuridica</meta>
+            <column name="ID_PORTE_FORNECEDOR" />
+        </many-to-one>
+        <property name="registro" type="java.lang.Integer" access="field">
+            <meta attribute="class-code" inherit="false">public void addResponsavelTecnico(ResponsavelTecnico responsavelTecnico) {
+            getResponsaveisTecnicos().add(responsavelTecnico); responsavelTecnico.setFornecedorPJ(this); } public void addContatoFornecedor(ContatoFornecedor contatoFornecedor) {
+            getContatos().add(contatoFornecedor); contatoFornecedor.setFornecedorPJ(this); } @Override public String getRazaoSocial() { return getNome(); } public void
+            setRazaoSocial(String razaoSocial) { setNome(razaoSocial); }</meta>
+            <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaJuridica</meta>
+            <column name="NR_REGISTRO" precision="10" scale="0" />
+        </property>
+        <set name="responsaveisTecnicos" inverse="true" lazy="true" table="RESPONSAVEL_TECNICO" cascade="persist,merge" fetch="select">
+            <meta attribute="class-code" inherit="false">public void addResponsavelTecnico(ResponsavelTecnico responsavelTecnico) {
+            getResponsaveisTecnicos().add(responsavelTecnico); responsavelTecnico.setFornecedorPJ(this); } public void addContatoFornecedor(ContatoFornecedor contatoFornecedor) {
+            getContatos().add(contatoFornecedor); contatoFornecedor.setFornecedorPJ(this); } @Override public String getRazaoSocial() { return getNome(); } public void
+            setRazaoSocial(String razaoSocial) { setNome(razaoSocial); }</meta>
+            <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaJuridica</meta>
+            <key>
+                <column name="ID_FORNECEDOR" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.ResponsavelTecnico" />
+        </set>
+    </union-subclass>
+</hibernate-mapping>

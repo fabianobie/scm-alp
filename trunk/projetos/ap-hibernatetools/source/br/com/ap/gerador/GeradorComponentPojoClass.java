@@ -25,6 +25,4 @@ public class GeradorComponentPojoClass extends ComponentPOJOClass {
 	public GeradorComponentPojoClass(Component component, Cfg2JavaTool cfg) {
 		super(component, cfg);
 	}
-
-	
 }

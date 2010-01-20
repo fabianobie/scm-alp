@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.HistoricoSituacaoMotorista" table="HISTORICO_SITUACAO_MOTORISTA">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_HISTORICO_SITUACAO_MOTORISTA" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_HISTORICO_SITUACAO_MOTORISTA</param>
+            </generator>
+        </id>
+        <property name="dataHistorico" type="date" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="DT_HISTORICO_SITUACAO_MOTORISTA" not-null="true" />
+        </property>
+        <many-to-one name="motorista" class="br.com.linkdata.entity.Motorista" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_MOTORISTA" />
+        </many-to-one>
+        <many-to-one name="situacaoMotorista" class="br.com.linkdata.entity.SituacaoMotorista" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_SITUACAO_MOTORISTA" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

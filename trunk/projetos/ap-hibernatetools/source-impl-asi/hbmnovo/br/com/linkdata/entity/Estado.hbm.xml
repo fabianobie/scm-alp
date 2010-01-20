@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.Estado" table="ESTADO">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+        <meta attribute="extra-classe" inherit="false">@Audited</meta>
+        <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <column name="ID_ESTADO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_ESTADO</param>
+            </generator>
+        </id>
+        <property name="dataDesativacao" type="java.util.Date" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <column name="DT_DESATIVACAO" />
+        </property>
+        <property name="idIntegracao" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <column name="ID_INTEGRACAO" length="10" />
+        </property>
+        <set name="localidades" inverse="true" lazy="true" table="LOCALIDADE" cascade="persist,merge,save-update" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <key>
+                <column name="ID_ESTADO" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.Localidade" />
+        </set>
+        <property name="nome" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <column name="NM_ESTADO" length="80" not-null="true" unique="true" />
+        </property>
+        <many-to-one name="pais" class="br.com.linkdata.entity.Pais" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <column name="ID_PAIS" />
+        </many-to-one>
+        <property name="regiao" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <column name="RG_ESTADO" length="10" />
+        </property>
+        <property name="sigla" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <column name="SG_ESTADO" length="2" />
+        </property>
+        <many-to-one name="situacao" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <column name="IND_ATIVO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

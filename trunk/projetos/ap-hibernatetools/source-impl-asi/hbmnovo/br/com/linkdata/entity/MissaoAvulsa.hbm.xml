@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <union-subclass name="br.com.linkdata.entity.MissaoAvulsa" extends="br.com.linkdata.entity.Missao" table="MISSAO_AVULSA">
+        <many-to-one name="itinerarioTransporte" class="br.com.linkdata.entity.ItinerarioTransporte" access="field" cascade="persist,merge,delete" fetch="select">
+            <column name="ID_ITINERARIO_TRANSPORTE" />
+        </many-to-one>
+    </union-subclass>
+</hibernate-mapping>

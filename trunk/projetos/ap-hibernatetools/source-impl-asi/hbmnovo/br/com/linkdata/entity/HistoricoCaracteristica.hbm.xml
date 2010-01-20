@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.HistoricoCaracteristica" table="HISTORICO_CARACTERISTICA">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_HISTORICO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_HISTORICO</param>
+            </generator>
+        </id>
+        <many-to-one name="caracteristicaNova" class="br.com.linkdata.entity.CaracteristicaServico" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_CARACT_NOVA" not-null="true" />
+        </many-to-one>
+        <many-to-one name="caracteristicaVelha" class="br.com.linkdata.entity.CaracteristicaServico" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_CARACT_VELHA" not-null="true" />
+        </many-to-one>
+        <property name="dtAlteracao" type="date" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="DT_ALTERACAO" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

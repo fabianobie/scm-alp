@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.GrupoServicoManutencao" table="GRUPO_SERVICO_MANUTENCAO">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <meta attribute="extra-import" inherit="false">br.com.linkdata.entity.Label</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.entity.Label</meta>
+            <column name="ID_GRUPO_SERVICO_MANUTENCAO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_GRUPO_SERVICO_MANUTENCAO</param>
+            </generator>
+        </id>
+        <property name="descricao" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.entity.Label</meta>
+            <meta attribute="meta-numero" inherit="false">@Label(value="N&#250;mero da ordem de servi&#231;o")</meta>
+            <column name="DS_GRUPO_SERVICO_MANUTENCAO" length="80" not-null="true" unique="true" />
+        </property>
+        <set name="servicos" inverse="false" lazy="false" table="GRUPO_MANUTENCAO_SERVICO" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.entity.Label</meta>
+            <key>
+                <column name="ID_GRUPO_SERVICO_MANUTENCAO" not-null="true" />
+            </key>
+            <many-to-many entity-name="br.com.linkdata.entity.Servico">
+                <column name="ID_SERVICO" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

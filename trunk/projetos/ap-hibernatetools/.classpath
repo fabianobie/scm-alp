@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="source" path="source"/>
-	<classpathentry kind="src" output="source-gerado" path="source-gerado"/>
-	<classpathentry kind="src" output="source-impl-asi" path="source-impl-asi"/>
-	<classpathentry kind="src" output="source-impl-ceam" path="source-impl-ceam"/>
+	<classpathentry kind="src" path="source"/>
+	<classpathentry kind="src" path="source-impl-asi"/>
+	<classpathentry kind="src" path="source-impl-ceam"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ANT_LIB"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JBPM_LIB"/>

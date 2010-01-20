@@ -1,0 +1,487 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+
+<class
+    name="br.com.linkdata.entity.ModeloCaracteristicaServico"
+    table="MODELO_CARACTERISTICA_SERV"
+>
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<ModeloCaracteristicaServico></meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<ModeloCaracteristicaServico></meta>
+  <meta attribute="class-code" inherit="false">
+	public void addSubCaracteristica(
+			ModeloCaracteristicaServico caracteristicaSelecionada) {
+		if (subCaracteristicas == null) {
+			subCaracteristicas = new LinkedHashSet<ModeloCaracteristicaServico>();
+		}
+		subCaracteristicas.add(caracteristicaSelecionada);
+	}
+	
+	public void addColuna(ColunaModeloCaracteristica colunaSelecionada) {
+		if (colunas == null) {
+			colunas = new LinkedHashSet<ColunaModeloCaracteristica>();
+		}
+		colunas.add(colunaSelecionada);
+	}
+
+	public void removeColuna(ColunaModeloCaracteristica colunaSelecionada) {
+		colunas.remove(colunaSelecionada);
+	}
+
+	@Override
+	public String toString() {
+		Integer ordem = getOrdem() != null ? getOrdem() : 0;
+		return ordem + " - " + getNome();
+	}
+
+	public int compareTo(ModeloCaracteristicaServico o) {
+		return ordem.compareTo(o.ordem);
+	}
+
+	public ModeloCaracteristicaServico duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			ModeloCaracteristicaServico mcs = new ModeloCaracteristicaServico();
+			bag.store(this,mcs);
+			mcs.setId(this.getId());
+			mcs.setModeloCaracteristicaSuperior(this.getModeloCaracteristicaSuperior() == null ? null : this.getModeloCaracteristicaSuperior().duplicate(bag));
+			mcs.setNome(this.getNome());
+			mcs.setOrdem(this.getOrdem());
+			if(this.getColunas() != null && this.getColunas().size() != 0){
+				for(ColunaModeloCaracteristica cmc: this.getColunas()){
+					mcs.addColuna(cmc.duplicate(bag));
+				}
+			}
+			if(this.getSubCaracteristicas() != null && this.getSubCaracteristicas().size() != 0){
+				for(ModeloCaracteristicaServico mcs2: this.getSubCaracteristicas()){
+					mcs.addSubCaracteristica(mcs2.duplicate(bag));
+				}
+			}
+		}
+		return (ModeloCaracteristicaServico) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="extra-import" inherit="false">java.util.LinkedHashSet</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.entity.DuplicateBag</meta>
+
+	<id 
+        name="id"
+        type="java.lang.Long"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	public void addSubCaracteristica(
+			ModeloCaracteristicaServico caracteristicaSelecionada) {
+		if (subCaracteristicas == null) {
+			subCaracteristicas = new LinkedHashSet<ModeloCaracteristicaServico>();
+		}
+		subCaracteristicas.add(caracteristicaSelecionada);
+	}
+	
+	public void addColuna(ColunaModeloCaracteristica colunaSelecionada) {
+		if (colunas == null) {
+			colunas = new LinkedHashSet<ColunaModeloCaracteristica>();
+		}
+		colunas.add(colunaSelecionada);
+	}
+
+	public void removeColuna(ColunaModeloCaracteristica colunaSelecionada) {
+		colunas.remove(colunaSelecionada);
+	}
+
+	@Override
+	public String toString() {
+		Integer ordem = getOrdem() != null ? getOrdem() : 0;
+		return ordem + " - " + getNome();
+	}
+
+	public int compareTo(ModeloCaracteristicaServico o) {
+		return ordem.compareTo(o.ordem);
+	}
+
+	public ModeloCaracteristicaServico duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			ModeloCaracteristicaServico mcs = new ModeloCaracteristicaServico();
+			bag.store(this,mcs);
+			mcs.setId(this.getId());
+			mcs.setModeloCaracteristicaSuperior(this.getModeloCaracteristicaSuperior() == null ? null : this.getModeloCaracteristicaSuperior().duplicate(bag));
+			mcs.setNome(this.getNome());
+			mcs.setOrdem(this.getOrdem());
+			if(this.getColunas() != null && this.getColunas().size() != 0){
+				for(ColunaModeloCaracteristica cmc: this.getColunas()){
+					mcs.addColuna(cmc.duplicate(bag));
+				}
+			}
+			if(this.getSubCaracteristicas() != null && this.getSubCaracteristicas().size() != 0){
+				for(ModeloCaracteristicaServico mcs2: this.getSubCaracteristicas()){
+					mcs.addSubCaracteristica(mcs2.duplicate(bag));
+				}
+			}
+		}
+		return (ModeloCaracteristicaServico) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<ModeloCaracteristicaServico></meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<ModeloCaracteristicaServico></meta>
+  <meta attribute="extra-import" inherit="false">java.util.LinkedHashSet</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.entity.DuplicateBag</meta>
+    
+<column name="ID_MODELO_CARACT" precision="12" scale="0" />
+	    <generator class="sequence">
+            <param name="max_lo">49</param>
+            <param name="sequence">SQ_MODELO_CARACT</param>
+		</generator>
+    </id>
+
+
+
+
+
+	<set name="colunas" 
+	inverse="false"
+	lazy="false" 
+	table="COLUNA_MODELO_CARACTERISTICA"
+        cascade="persist,merge,delete"
+	 fetch="join"
+	>
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	public void addSubCaracteristica(
+			ModeloCaracteristicaServico caracteristicaSelecionada) {
+		if (subCaracteristicas == null) {
+			subCaracteristicas = new LinkedHashSet<ModeloCaracteristicaServico>();
+		}
+		subCaracteristicas.add(caracteristicaSelecionada);
+	}
+	
+	public void addColuna(ColunaModeloCaracteristica colunaSelecionada) {
+		if (colunas == null) {
+			colunas = new LinkedHashSet<ColunaModeloCaracteristica>();
+		}
+		colunas.add(colunaSelecionada);
+	}
+
+	public void removeColuna(ColunaModeloCaracteristica colunaSelecionada) {
+		colunas.remove(colunaSelecionada);
+	}
+
+	@Override
+	public String toString() {
+		Integer ordem = getOrdem() != null ? getOrdem() : 0;
+		return ordem + " - " + getNome();
+	}
+
+	public int compareTo(ModeloCaracteristicaServico o) {
+		return ordem.compareTo(o.ordem);
+	}
+
+	public ModeloCaracteristicaServico duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			ModeloCaracteristicaServico mcs = new ModeloCaracteristicaServico();
+			bag.store(this,mcs);
+			mcs.setId(this.getId());
+			mcs.setModeloCaracteristicaSuperior(this.getModeloCaracteristicaSuperior() == null ? null : this.getModeloCaracteristicaSuperior().duplicate(bag));
+			mcs.setNome(this.getNome());
+			mcs.setOrdem(this.getOrdem());
+			if(this.getColunas() != null && this.getColunas().size() != 0){
+				for(ColunaModeloCaracteristica cmc: this.getColunas()){
+					mcs.addColuna(cmc.duplicate(bag));
+				}
+			}
+			if(this.getSubCaracteristicas() != null && this.getSubCaracteristicas().size() != 0){
+				for(ModeloCaracteristicaServico mcs2: this.getSubCaracteristicas()){
+					mcs.addSubCaracteristica(mcs2.duplicate(bag));
+				}
+			}
+		}
+		return (ModeloCaracteristicaServico) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<ModeloCaracteristicaServico></meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<ModeloCaracteristicaServico></meta>
+  <meta attribute="extra-import" inherit="false">java.util.LinkedHashSet</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.entity.DuplicateBag</meta>
+		<key
+		> 
+<column name="ID_MODELO_CARACT" />
+		</key>
+<one-to-many class="br.com.linkdata.entity.ColunaModeloCaracteristica"
+/>
+	</set>
+    <many-to-one
+	    name="modeloCaracteristicaSuperior"
+	    class="br.com.linkdata.entity.ModeloCaracteristicaServico"
+	    
+        access="field"
+        fetch="select"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	public void addSubCaracteristica(
+			ModeloCaracteristicaServico caracteristicaSelecionada) {
+		if (subCaracteristicas == null) {
+			subCaracteristicas = new LinkedHashSet<ModeloCaracteristicaServico>();
+		}
+		subCaracteristicas.add(caracteristicaSelecionada);
+	}
+	
+	public void addColuna(ColunaModeloCaracteristica colunaSelecionada) {
+		if (colunas == null) {
+			colunas = new LinkedHashSet<ColunaModeloCaracteristica>();
+		}
+		colunas.add(colunaSelecionada);
+	}
+
+	public void removeColuna(ColunaModeloCaracteristica colunaSelecionada) {
+		colunas.remove(colunaSelecionada);
+	}
+
+	@Override
+	public String toString() {
+		Integer ordem = getOrdem() != null ? getOrdem() : 0;
+		return ordem + " - " + getNome();
+	}
+
+	public int compareTo(ModeloCaracteristicaServico o) {
+		return ordem.compareTo(o.ordem);
+	}
+
+	public ModeloCaracteristicaServico duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			ModeloCaracteristicaServico mcs = new ModeloCaracteristicaServico();
+			bag.store(this,mcs);
+			mcs.setId(this.getId());
+			mcs.setModeloCaracteristicaSuperior(this.getModeloCaracteristicaSuperior() == null ? null : this.getModeloCaracteristicaSuperior().duplicate(bag));
+			mcs.setNome(this.getNome());
+			mcs.setOrdem(this.getOrdem());
+			if(this.getColunas() != null && this.getColunas().size() != 0){
+				for(ColunaModeloCaracteristica cmc: this.getColunas()){
+					mcs.addColuna(cmc.duplicate(bag));
+				}
+			}
+			if(this.getSubCaracteristicas() != null && this.getSubCaracteristicas().size() != 0){
+				for(ModeloCaracteristicaServico mcs2: this.getSubCaracteristicas()){
+					mcs.addSubCaracteristica(mcs2.duplicate(bag));
+				}
+			}
+		}
+		return (ModeloCaracteristicaServico) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<ModeloCaracteristicaServico></meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<ModeloCaracteristicaServico></meta>
+  <meta attribute="extra-import" inherit="false">java.util.LinkedHashSet</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.entity.DuplicateBag</meta>
+<column name="ID_MOD_CARACT_SUP" />
+   </many-to-one>
+    <property
+        name="nome"
+	    type="java.lang.String"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	public void addSubCaracteristica(
+			ModeloCaracteristicaServico caracteristicaSelecionada) {
+		if (subCaracteristicas == null) {
+			subCaracteristicas = new LinkedHashSet<ModeloCaracteristicaServico>();
+		}
+		subCaracteristicas.add(caracteristicaSelecionada);
+	}
+	
+	public void addColuna(ColunaModeloCaracteristica colunaSelecionada) {
+		if (colunas == null) {
+			colunas = new LinkedHashSet<ColunaModeloCaracteristica>();
+		}
+		colunas.add(colunaSelecionada);
+	}
+
+	public void removeColuna(ColunaModeloCaracteristica colunaSelecionada) {
+		colunas.remove(colunaSelecionada);
+	}
+
+	@Override
+	public String toString() {
+		Integer ordem = getOrdem() != null ? getOrdem() : 0;
+		return ordem + " - " + getNome();
+	}
+
+	public int compareTo(ModeloCaracteristicaServico o) {
+		return ordem.compareTo(o.ordem);
+	}
+
+	public ModeloCaracteristicaServico duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			ModeloCaracteristicaServico mcs = new ModeloCaracteristicaServico();
+			bag.store(this,mcs);
+			mcs.setId(this.getId());
+			mcs.setModeloCaracteristicaSuperior(this.getModeloCaracteristicaSuperior() == null ? null : this.getModeloCaracteristicaSuperior().duplicate(bag));
+			mcs.setNome(this.getNome());
+			mcs.setOrdem(this.getOrdem());
+			if(this.getColunas() != null && this.getColunas().size() != 0){
+				for(ColunaModeloCaracteristica cmc: this.getColunas()){
+					mcs.addColuna(cmc.duplicate(bag));
+				}
+			}
+			if(this.getSubCaracteristicas() != null && this.getSubCaracteristicas().size() != 0){
+				for(ModeloCaracteristicaServico mcs2: this.getSubCaracteristicas()){
+					mcs.addSubCaracteristica(mcs2.duplicate(bag));
+				}
+			}
+		}
+		return (ModeloCaracteristicaServico) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<ModeloCaracteristicaServico></meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<ModeloCaracteristicaServico></meta>
+  <meta attribute="extra-import" inherit="false">java.util.LinkedHashSet</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.entity.DuplicateBag</meta>
+<column name="NM_MODELO" length="80" not-null="true" />
+  </property>
+
+    <property
+        name="ordem"
+	    type="java.lang.Integer"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	public void addSubCaracteristica(
+			ModeloCaracteristicaServico caracteristicaSelecionada) {
+		if (subCaracteristicas == null) {
+			subCaracteristicas = new LinkedHashSet<ModeloCaracteristicaServico>();
+		}
+		subCaracteristicas.add(caracteristicaSelecionada);
+	}
+	
+	public void addColuna(ColunaModeloCaracteristica colunaSelecionada) {
+		if (colunas == null) {
+			colunas = new LinkedHashSet<ColunaModeloCaracteristica>();
+		}
+		colunas.add(colunaSelecionada);
+	}
+
+	public void removeColuna(ColunaModeloCaracteristica colunaSelecionada) {
+		colunas.remove(colunaSelecionada);
+	}
+
+	@Override
+	public String toString() {
+		Integer ordem = getOrdem() != null ? getOrdem() : 0;
+		return ordem + " - " + getNome();
+	}
+
+	public int compareTo(ModeloCaracteristicaServico o) {
+		return ordem.compareTo(o.ordem);
+	}
+
+	public ModeloCaracteristicaServico duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			ModeloCaracteristicaServico mcs = new ModeloCaracteristicaServico();
+			bag.store(this,mcs);
+			mcs.setId(this.getId());
+			mcs.setModeloCaracteristicaSuperior(this.getModeloCaracteristicaSuperior() == null ? null : this.getModeloCaracteristicaSuperior().duplicate(bag));
+			mcs.setNome(this.getNome());
+			mcs.setOrdem(this.getOrdem());
+			if(this.getColunas() != null && this.getColunas().size() != 0){
+				for(ColunaModeloCaracteristica cmc: this.getColunas()){
+					mcs.addColuna(cmc.duplicate(bag));
+				}
+			}
+			if(this.getSubCaracteristicas() != null && this.getSubCaracteristicas().size() != 0){
+				for(ModeloCaracteristicaServico mcs2: this.getSubCaracteristicas()){
+					mcs.addSubCaracteristica(mcs2.duplicate(bag));
+				}
+			}
+		}
+		return (ModeloCaracteristicaServico) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<ModeloCaracteristicaServico></meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<ModeloCaracteristicaServico></meta>
+  <meta attribute="extra-import" inherit="false">java.util.LinkedHashSet</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.entity.DuplicateBag</meta>
+<column name="NR_ORDEM" length="2" not-null="true" />
+  </property>
+
+
+	<set name="subCaracteristicas" 
+	inverse="true"
+	lazy="false" 
+	table="MODELO_CARACTERISTICA_SERV"
+        cascade="persist,merge,delete"
+	 fetch="join"
+	>
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	public void addSubCaracteristica(
+			ModeloCaracteristicaServico caracteristicaSelecionada) {
+		if (subCaracteristicas == null) {
+			subCaracteristicas = new LinkedHashSet<ModeloCaracteristicaServico>();
+		}
+		subCaracteristicas.add(caracteristicaSelecionada);
+	}
+	
+	public void addColuna(ColunaModeloCaracteristica colunaSelecionada) {
+		if (colunas == null) {
+			colunas = new LinkedHashSet<ColunaModeloCaracteristica>();
+		}
+		colunas.add(colunaSelecionada);
+	}
+
+	public void removeColuna(ColunaModeloCaracteristica colunaSelecionada) {
+		colunas.remove(colunaSelecionada);
+	}
+
+	@Override
+	public String toString() {
+		Integer ordem = getOrdem() != null ? getOrdem() : 0;
+		return ordem + " - " + getNome();
+	}
+
+	public int compareTo(ModeloCaracteristicaServico o) {
+		return ordem.compareTo(o.ordem);
+	}
+
+	public ModeloCaracteristicaServico duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			ModeloCaracteristicaServico mcs = new ModeloCaracteristicaServico();
+			bag.store(this,mcs);
+			mcs.setId(this.getId());
+			mcs.setModeloCaracteristicaSuperior(this.getModeloCaracteristicaSuperior() == null ? null : this.getModeloCaracteristicaSuperior().duplicate(bag));
+			mcs.setNome(this.getNome());
+			mcs.setOrdem(this.getOrdem());
+			if(this.getColunas() != null && this.getColunas().size() != 0){
+				for(ColunaModeloCaracteristica cmc: this.getColunas()){
+					mcs.addColuna(cmc.duplicate(bag));
+				}
+			}
+			if(this.getSubCaracteristicas() != null && this.getSubCaracteristicas().size() != 0){
+				for(ModeloCaracteristicaServico mcs2: this.getSubCaracteristicas()){
+					mcs.addSubCaracteristica(mcs2.duplicate(bag));
+				}
+			}
+		}
+		return (ModeloCaracteristicaServico) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<ModeloCaracteristicaServico></meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<ModeloCaracteristicaServico></meta>
+  <meta attribute="extra-import" inherit="false">java.util.LinkedHashSet</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.entity.DuplicateBag</meta>
+		<key
+		> 
+<column name="ID_MOD_CARACT_SUP" />
+		</key>
+<one-to-many class="br.com.linkdata.entity.ModeloCaracteristicaServico"
+/>
+	</set>
+
+</class>
+
+</hibernate-mapping>

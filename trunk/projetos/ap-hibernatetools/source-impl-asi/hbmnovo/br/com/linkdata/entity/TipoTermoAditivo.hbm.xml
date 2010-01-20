@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.TipoTermoAditivo" table="TIPO_TERMO_ADITIVO">
+        <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+        <meta attribute="class-code" inherit="false">@Override public Object getChave() { return getCodigo(); }</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+            <meta attribute="class-code" inherit="false">@Override public Object getChave() { return getCodigo(); }</meta>
+            <column name="SQ_TIPO_TERMO_ADITIVO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_TIPO_TERMO_ADITIVO</param>
+            </generator>
+        </id>
+        <property name="codigo" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+            <meta attribute="class-code" inherit="false">@Override public Object getChave() { return getCodigo(); }</meta>
+            <column name="CD_TIPO_TERMO_ADITIVO" length="10" not-null="true" />
+        </property>
+        <property name="descricao" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+            <meta attribute="class-code" inherit="false">@Override public Object getChave() { return getCodigo(); }</meta>
+            <column name="DS_TIPO_TERMO_ADITIVO" length="80" />
+        </property>
+        <property name="show" type="java.lang.Boolean" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+            <meta attribute="class-code" inherit="false">@Override public Object getChave() { return getCodigo(); }</meta>
+            <column name="IND_SHOW" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.Anexo" table="ANEXO">
+        <meta attribute="implements" inherit="false">br.com.linkdata.entity.IAttachment</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="implements" inherit="false">br.com.linkdata.entity.IAttachment</meta>
+            <column name="ID_ANEXO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_ANEXO</param>
+            </generator>
+        </id>
+        <property name="btArray" type="br.com.linkdata.entity.BlobUserType" access="field">
+            <meta attribute="implements" inherit="false">br.com.linkdata.entity.IAttachment</meta>
+            <meta attribute="meta-btArray" inherit="false">@org.hibernate.annotations.Type(type = "br.com.linkdata.entity.BlobUserType")</meta>
+            <column name="BYTE_ARRAY" />
+        </property>
+        <property name="dsMimeType" type="java.lang.String" access="field">
+            <meta attribute="implements" inherit="false">br.com.linkdata.entity.IAttachment</meta>
+            <column name="DS_MIME_TYPE" length="100" not-null="true" />
+        </property>
+        <property name="dtUpload" type="timestamp" access="field">
+            <meta attribute="implements" inherit="false">br.com.linkdata.entity.IAttachment</meta>
+            <column name="DT_ANEXO" not-null="true" />
+        </property>
+        <property name="nmArquivo" type="java.lang.String" access="field">
+            <meta attribute="implements" inherit="false">br.com.linkdata.entity.IAttachment</meta>
+            <column name="NM_ANEXO" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

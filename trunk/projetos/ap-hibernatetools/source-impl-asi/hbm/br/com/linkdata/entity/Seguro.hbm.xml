@@ -4,7 +4,11 @@
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
-	
+	<meta attribute="extra-import">org.hibernate.envers.Audited</meta>
+	<meta attribute="extra-import">org.hibernate.envers.NotAudited</meta>
+	<meta attribute="extra-classe">
+@Audited
+	</meta>
     <class name="br.com.linkdata.entity.Seguro" table="SEGURO">
         <id name="id" type="java.lang.Long" access="field">
             <column name="ID_SEGURO" precision="12" scale="0" />
@@ -14,12 +18,14 @@
             </generator>
         </id>
         <set name="anexos" inverse="false" lazy="true" table="ANEXO" cascade="persist,merge,delete" fetch="select">
+        	<meta attribute="meta-anexos">@NotAudited</meta>
             <key>
                 <column name="ID_SEGURO" />
             </key>
             <one-to-many class="br.com.linkdata.entity.Anexo" />
         </set>
         <many-to-one name="carroReserva" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
+        	<meta attribute="meta-carroReserva">@NotAudited</meta>
             <column name="IND_CARRO_RESERVA" />
         </many-to-one>
         <property name="franquia" type="java.math.BigDecimal" access="field">
@@ -29,18 +35,22 @@
             <column name="NR_APOLICE" length="20" not-null="true" />
         </property>
         <many-to-one name="seguradora" class="br.com.linkdata.entity.Fornecedor" access="field" fetch="select">
+        	<meta attribute="meta-seguradora">@NotAudited</meta>
             <column name="ID_FORNECEDOR" />
         </many-to-one>
         <many-to-one name="seguroVidro" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
+        	<meta attribute="meta-seguroVidro">@NotAudited</meta>
             <column name="IND_SEGURO_VIDRO" />
         </many-to-one>
         <property name="valorTotal" type="java.math.BigDecimal" access="field">
             <column name="VL_TOTAL" precision="15" not-null="true" />
         </property>
         <many-to-one name="veiculo" class="br.com.linkdata.entity.Veiculo" access="field" fetch="select">
+        	<meta attribute="meta-veiculo">@NotAudited</meta>
             <column name="ID_VEICULO" />
         </many-to-one>
         <many-to-one name="vigencia" class="br.com.linkdata.entity.Vigencia" access="field" cascade="persist,merge,delete" fetch="select">
+        	<meta attribute="meta-vigencia">@NotAudited</meta>
             <column name="ID_VIGENCIA" />
         </many-to-one>
     </class>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.GroupValue" table="AUTZ_GROUP_VALUE">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <meta attribute="class-code" inherit="false">@Override public boolean equals(Object obj) { if (this == obj) return true; if (obj == null) return false; if (getClass() !=
+        obj.getClass()) return false; final GroupValue other = (GroupValue) obj; if (id != other.id) return false; return true; } public String toString(){ return
+        "GroupValue(id="+id+",value="+value+")"; }</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">@Override public boolean equals(Object obj) { if (this == obj) return true; if (obj == null) return false; if (getClass()
+            != obj.getClass()) return false; final GroupValue other = (GroupValue) obj; if (id != other.id) return false; return true; } public String toString(){ return
+            "GroupValue(id="+id+",value="+value+")"; }</meta>
+            <column name="ID_VALUE" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_GROUP_VALUE</param>
+            </generator>
+        </id>
+        <property name="entityId" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">@Override public boolean equals(Object obj) { if (this == obj) return true; if (obj == null) return false; if (getClass()
+            != obj.getClass()) return false; final GroupValue other = (GroupValue) obj; if (id != other.id) return false; return true; } public String toString(){ return
+            "GroupValue(id="+id+",value="+value+")"; }</meta>
+            <column name="ID_ENTITY" precision="12" scale="0" />
+        </property>
+        <many-to-one name="group" class="br.com.linkdata.entity.Group" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">@Override public boolean equals(Object obj) { if (this == obj) return true; if (obj == null) return false; if (getClass()
+            != obj.getClass()) return false; final GroupValue other = (GroupValue) obj; if (id != other.id) return false; return true; } public String toString(){ return
+            "GroupValue(id="+id+",value="+value+")"; }</meta>
+            <column name="ID_GROUP" />
+        </many-to-one>
+        <property name="value" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">@Override public boolean equals(Object obj) { if (this == obj) return true; if (obj == null) return false; if (getClass()
+            != obj.getClass()) return false; final GroupValue other = (GroupValue) obj; if (id != other.id) return false; return true; } public String toString(){ return
+            "GroupValue(id="+id+",value="+value+")"; }</meta>
+            <column name="VALUE" length="200" />
+        </property>
+    </class>
+</hibernate-mapping>

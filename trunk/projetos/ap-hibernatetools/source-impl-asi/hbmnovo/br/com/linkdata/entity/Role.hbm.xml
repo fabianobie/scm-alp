@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.Role" table="AUTZ_ROLE">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <meta attribute="class-code" inherit="false">public boolean equals(Object obj){ Role r = (Role) obj; boolean result = false; if(r != null){ if(r.getId() == this.id) result
+        = true; } return result; }</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public boolean equals(Object obj){ Role r = (Role) obj; boolean result = false; if(r != null){ if(r.getId() == this.id)
+            result = true; } return result; }</meta>
+            <column name="ID_ROLE" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_ROLE</param>
+            </generator>
+        </id>
+        <set name="memberships" inverse="true" lazy="true" table="AUTZ_MEMBERSHIP" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public boolean equals(Object obj){ Role r = (Role) obj; boolean result = false; if(r != null){ if(r.getId() == this.id)
+            result = true; } return result; }</meta>
+            <key>
+                <column name="ID_ROLE" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.Membership" />
+        </set>
+        <property name="name" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public boolean equals(Object obj){ Role r = (Role) obj; boolean result = false; if(r != null){ if(r.getId() == this.id)
+            result = true; } return result; }</meta>
+            <column name="NM_ROLE" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

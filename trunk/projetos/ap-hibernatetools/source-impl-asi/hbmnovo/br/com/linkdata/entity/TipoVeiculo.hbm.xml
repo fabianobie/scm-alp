@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.TipoVeiculo" table="TIPO_VEICULO">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <meta attribute="extra-import" inherit="false">br.com.linkdata.entity.Label</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.entity.Label</meta>
+            <column name="ID_TIPO_VEICULO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_TIPO_VEICULO</param>
+            </generator>
+        </id>
+        <property name="descricao" type="java.lang.String" access="field">
+            <meta attribute="meta-descricao" inherit="false">@Label(value="descri&#231;&#227;o")</meta>
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.entity.Label</meta>
+            <column name="DS_TIPO_VEICULO" length="80" not-null="true" unique="true" />
+        </property>
+    </class>
+</hibernate-mapping>

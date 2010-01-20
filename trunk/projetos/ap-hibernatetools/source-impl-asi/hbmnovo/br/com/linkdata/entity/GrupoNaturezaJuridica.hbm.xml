@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.GrupoNaturezaJuridica" table="GRUPO_NATUREZA_JURIDICA">
+        <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+        <meta attribute="class-code" inherit="false">public Object getChave() { if (getId() != null) { return getId().toString(); } else { return ""; } //return getId() + ""; }
+        public String getDescricao() { StringBuilder b = new StringBuilder(); String text = getCdGrupo(); boolean empty = text == null || text.trim().length() == 0; if (!empty) {
+        b.append(getCdGrupo()); } text = getDsGrupo(); empty = text == null || text.trim().length() == 0; if (!empty) { b.append(" - " + getDsGrupo()); } return b.toString();
+        }</meta>
+        <meta attribute="extra-classe" inherit="false">@Roles( { @Role(name = "grupoNaturezaSelecionada", scope = ScopeType.CONVERSATION) })</meta>
+        <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+        <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+            <meta attribute="class-code" inherit="false">public Object getChave() { if (getId() != null) { return getId().toString(); } else { return ""; } //return getId() + "";
+            } public String getDescricao() { StringBuilder b = new StringBuilder(); String text = getCdGrupo(); boolean empty = text == null || text.trim().length() == 0; if
+            (!empty) { b.append(getCdGrupo()); } text = getDsGrupo(); empty = text == null || text.trim().length() == 0; if (!empty) { b.append(" - " + getDsGrupo()); } return
+            b.toString(); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Roles( { @Role(name = "grupoNaturezaSelecionada", scope = ScopeType.CONVERSATION) })</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <column name="ID_GPR_NAT_JURIDICA" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_GPR_NAT_JURIDICA</param>
+            </generator>
+        </id>
+        <property name="cdGrupo" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+            <meta attribute="class-code" inherit="false">public Object getChave() { if (getId() != null) { return getId().toString(); } else { return ""; } //return getId() + "";
+            } public String getDescricao() { StringBuilder b = new StringBuilder(); String text = getCdGrupo(); boolean empty = text == null || text.trim().length() == 0; if
+            (!empty) { b.append(getCdGrupo()); } text = getDsGrupo(); empty = text == null || text.trim().length() == 0; if (!empty) { b.append(" - " + getDsGrupo()); } return
+            b.toString(); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Roles( { @Role(name = "grupoNaturezaSelecionada", scope = ScopeType.CONVERSATION) })</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <column name="CD_GRP_NAT_JURIDICA" length="10" not-null="true" />
+        </property>
+        <property name="dsGrupo" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+            <meta attribute="class-code" inherit="false">public Object getChave() { if (getId() != null) { return getId().toString(); } else { return ""; } //return getId() + "";
+            } public String getDescricao() { StringBuilder b = new StringBuilder(); String text = getCdGrupo(); boolean empty = text == null || text.trim().length() == 0; if
+            (!empty) { b.append(getCdGrupo()); } text = getDsGrupo(); empty = text == null || text.trim().length() == 0; if (!empty) { b.append(" - " + getDsGrupo()); } return
+            b.toString(); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Roles( { @Role(name = "grupoNaturezaSelecionada", scope = ScopeType.CONVERSATION) })</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <column name="DS_GPR_NAT_JURIDICA" length="160" not-null="true" />
+        </property>
+        <set name="naturezas" inverse="true" lazy="true" table="NATUREZA_JURIDICA" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+            <meta attribute="class-code" inherit="false">public Object getChave() { if (getId() != null) { return getId().toString(); } else { return ""; } //return getId() + "";
+            } public String getDescricao() { StringBuilder b = new StringBuilder(); String text = getCdGrupo(); boolean empty = text == null || text.trim().length() == 0; if
+            (!empty) { b.append(getCdGrupo()); } text = getDsGrupo(); empty = text == null || text.trim().length() == 0; if (!empty) { b.append(" - " + getDsGrupo()); } return
+            b.toString(); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Roles( { @Role(name = "grupoNaturezaSelecionada", scope = ScopeType.CONVERSATION) })</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <key>
+                <column name="ID_GRP_NAT_JUR" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.NaturezaJuridica" />
+        </set>
+        <property name="show" type="java.lang.Boolean" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+            <meta attribute="class-code" inherit="false">public Object getChave() { if (getId() != null) { return getId().toString(); } else { return ""; } //return getId() + "";
+            } public String getDescricao() { StringBuilder b = new StringBuilder(); String text = getCdGrupo(); boolean empty = text == null || text.trim().length() == 0; if
+            (!empty) { b.append(getCdGrupo()); } text = getDsGrupo(); empty = text == null || text.trim().length() == 0; if (!empty) { b.append(" - " + getDsGrupo()); } return
+            b.toString(); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Roles( { @Role(name = "grupoNaturezaSelecionada", scope = ScopeType.CONVERSATION) })</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <column name="IND_SHOW" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

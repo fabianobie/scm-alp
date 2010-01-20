@@ -17,7 +17,7 @@ ${pojo.getPackageDeclaration()}
 	<#include "annotation_entidade.ftl"/>
 </#assign>
 ${anotacoes?trim}
-${pojo.getClassModifiers()} ${pojo.getDeclarationType()} ${pojo.getDeclarationName()} ${pojo.getExtendsDeclaration()} ${util.ajustarImplements(pojo.getImplementsDeclaration())} {
+${pojo.getClassModifiers()} ${pojo.getDeclarationType()} ${pojo.getDeclarationName()} ${pojo.getExtendsDeclaration()} ${util.ajustarImplements(pojo.getExtendsDeclaration(), pojo.getImplementsDeclaration())} {
 
 <#include "atributos.ftl"/>
 <#include "metodos.ftl"/>

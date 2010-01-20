@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.Veiculo" table="VEICULO">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+        <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+        @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+        <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+        <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_VEICULO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_VEICULO</param>
+            </generator>
+        </id>
+        <set name="anexos" inverse="false" lazy="true" table="ANEXO" cascade="all" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <key>
+                <column name="ID_VEICULO" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.Anexo" />
+        </set>
+        <property name="anoFabricacao" type="java.lang.Integer" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ANO_FABRICACAO" length="4" />
+        </property>
+        <property name="anoModelo" type="java.lang.Integer" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ANO_MODELO" length="4" />
+        </property>
+        <property name="chassi" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="NR_CHASSI" length="20" />
+        </property>
+        <property name="dataAbastecimento" type="date" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="DT_ABASTECIMENTO" />
+        </property>
+        <property name="dataBaixa" type="date" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="DT_BAIXA" />
+        </property>
+        <property name="dataDesativacao" type="java.util.Date" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="DT_DESATIVACAO" />
+        </property>
+        <property name="idIntegracao" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_INTEGRACAO" />
+        </property>
+        <property name="kmAtual" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="KM_ATUAL" length="10" />
+        </property>
+        <property name="kmInicial" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="KM_INICIAL" length="10" />
+        </property>
+        <many-to-one name="localizacao" class="br.com.linkdata.entity.UnidadeOrganizacional" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_LOCALIZACAO" />
+        </many-to-one>
+        <many-to-one name="nivelTanqueCombustivel" class="br.com.linkdata.entity.NivelTanqueCombustivel" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_NIVEL_TANQUE_COMBUSTIVEL" />
+        </many-to-one>
+        <property name="numero" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="NR_VEICULO" length="80" />
+        </property>
+        <property name="numeroMotor" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="NR_MOTOR" length="20" />
+        </property>
+        <property name="numeroTicketCar" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="NR_TICKETCAR" length="80" />
+        </property>
+        <property name="observacao" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="DS_OBSERVACAO" length="1000" />
+        </property>
+        <property name="placa" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="DS_PLACA" length="7" />
+        </property>
+        <property name="renavam" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="NR_RENAVAM" length="10" />
+        </property>
+        <many-to-one name="situacao" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="IND_ATIVO" />
+        </many-to-one>
+        <many-to-one name="situacaoVeiculo" class="br.com.linkdata.entity.SituacaoVeiculo" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_SITUACAO_VEICULO" />
+        </many-to-one>
+        <many-to-one name="tipoCNH" class="br.com.linkdata.entity.TipoCNH" access="field" cascade="all" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_TIPO_CNH" />
+        </many-to-one>
+        <many-to-one name="tipoVeiculo" class="br.com.linkdata.entity.TipoVeiculo" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_TIPO_VEICULO" />
+        </many-to-one>
+        <many-to-one name="ufPlaca" class="br.com.linkdata.entity.Estado" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="Placa", fieldName="placa"),
+            @UniqueCompositeField(fieldLabel="N&#250;mero da ticketcar", fieldName="numeroTicketCar") } )</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_UF_PLACA" />
+        </many-to-one>
+        <one-to-one name="aquisicaoVeiculo" class="br.com.linkdata.entity.AquisicaoVeiculo" property-ref="veiculo" access="field" cascade="all"></one-to-one>
+        <one-to-one name="caracteristicaVeiculo" class="br.com.linkdata.entity.CaracteristicaVeiculo" property-ref="veiculo" access="field" cascade="all"></one-to-one>
+        <one-to-one name="fidelizacaoVeiculo" class="br.com.linkdata.entity.FidelizacaoVeiculo" property-ref="veiculo" access="field" cascade="all"></one-to-one>
+        <one-to-one name="garantiaVeiculo" class="br.com.linkdata.entity.GarantiaVeiculo" property-ref="veiculo" access="field" cascade="all"></one-to-one>
+    </class>
+</hibernate-mapping>

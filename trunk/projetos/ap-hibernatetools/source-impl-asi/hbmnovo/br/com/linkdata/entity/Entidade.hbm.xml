@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+
+<class
+    name="br.com.linkdata.entity.Entidade"
+    table="Entidade"
+>
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	@Transient
+	private String nome;
+	
+	@Transient
+	private String nomeCompleto;
+	
+	@Transient
+	private String tableName;
+	
+	@Transient
+	private List<Atributo> listaAtributos;
+
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	/**
+	 * @return the nomeCompleto
+	 */
+	public String getNomeCompleto() {
+		return nomeCompleto;
+	}
+
+	/**
+	 * @param nomeCompleto the nomeCompleto to set
+	 */
+	public void setNomeCompleto(String nomeCompleto) {
+		this.nomeCompleto = nomeCompleto;
+	}
+
+	/**
+	 * @return the tableName
+	 */
+	public String getTableName() {
+		return tableName;
+	}
+
+	/**
+	 * @param tableName the tableName to set
+	 */
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
+
+	/**
+	 * @return the listaAtributos
+	 */
+	public List<Atributo> getListaAtributos() {
+		return listaAtributos;
+	}
+
+	/**
+	 * @param listaAtributos the listaAtributos to set
+	 */
+	public void setListaAtributos(List<Atributo> listaAtributos) {
+		this.listaAtributos = listaAtributos;
+	}
+	</meta>
+  <meta attribute="extra-import" inherit="false">javax.persistence.Transient</meta>
+  <meta attribute="extra-import" inherit="false">java.util.List</meta>
+
+	<id 
+        name="id"
+        type="java.lang.Long"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	@Transient
+	private String nome;
+	
+	@Transient
+	private String nomeCompleto;
+	
+	@Transient
+	private String tableName;
+	
+	@Transient
+	private List<Atributo> listaAtributos;
+
+	/**
+	 * @return the nome
+	 */
+	public String getNome() {
+		return nome;
+	}
+
+	/**
+	 * @param nome the nome to set
+	 */
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	/**
+	 * @return the nomeCompleto
+	 */
+	public String getNomeCompleto() {
+		return nomeCompleto;
+	}
+
+	/**
+	 * @param nomeCompleto the nomeCompleto to set
+	 */
+	public void setNomeCompleto(String nomeCompleto) {
+		this.nomeCompleto = nomeCompleto;
+	}
+
+	/**
+	 * @return the tableName
+	 */
+	public String getTableName() {
+		return tableName;
+	}
+
+	/**
+	 * @param tableName the tableName to set
+	 */
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
+	}
+
+	/**
+	 * @return the listaAtributos
+	 */
+	public List<Atributo> getListaAtributos() {
+		return listaAtributos;
+	}
+
+	/**
+	 * @param listaAtributos the listaAtributos to set
+	 */
+	public void setListaAtributos(List<Atributo> listaAtributos) {
+		this.listaAtributos = listaAtributos;
+	}
+	</meta>
+  <meta attribute="extra-import" inherit="false">javax.persistence.Transient</meta>
+  <meta attribute="extra-import" inherit="false">java.util.List</meta>
+    
+<column name="id" />
+	    <generator class="assigned">
+		</generator>
+    </id>
+
+
+
+
+
+</class>
+
+</hibernate-mapping>

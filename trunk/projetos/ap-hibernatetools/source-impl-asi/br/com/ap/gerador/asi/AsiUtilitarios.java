@@ -43,12 +43,16 @@ public class AsiUtilitarios {
 	 * @param args Parâmetros
 	 * @throws Exception
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 
-		gerarNomesParaReveng();
-		//gerarNomesParaPersistence();
-		//gerarNamedQueries();
-		//listarClassesQueNaoSaoEntidades();
+		try {
+			//gerarNomesParaReveng();
+			//gerarNomesParaPersistence();
+			gerarNamedQueries();
+			//listarClassesQueNaoSaoEntidades();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void gerarNomesParaReveng() throws Exception {
@@ -122,6 +126,9 @@ public class AsiUtilitarios {
 				File pastaDestino = new File(PASTA_DESTINO);
 				if (!pastaDestino.exists()) {
 					pastaDestino.mkdirs();
+				}
+				if (arquivo.equalsIgnoreCase("fornecedorpf")) {
+					System.out.println("achou");
 				}
 				Class<?> classe = Class.forName(PACOTE + "." + arquivo);
 				String nomeArquivoHQL = classe.getSimpleName() + ".hql.xml";

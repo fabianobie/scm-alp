@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+
+<class
+    name="br.com.linkdata.entity.VistoriaItens"
+    table="VISTORIA_ITENS"
+>
+  <meta attribute="implements" inherit="false">Comparable<VistoriaItens></meta>
+  <meta attribute="class-code" inherit="false">
+	public VistoriaItens() {
+		//Construtor.
+	}
+
+	public VistoriaItens(VistoriaVeiculo vistoriaVeiculo,
+			ItemVistoriaVeiculo itemVistoriaVeiculo) {
+		
+		this.getId().setIdItemVistoriaVeiculo(itemVistoriaVeiculo.getId());
+		
+		this.vistoriaVeiculo = vistoriaVeiculo;
+		this.itemVistoriaVeiculo = itemVistoriaVeiculo;
+
+		vistoriaVeiculo.getVistoriasItens().add(this);
+	}
+	
+	@Override
+	public int compareTo(VistoriaItens vi) {
+		return this.getItemVistoriaVeiculo().getDescricao().compareTo(vi.getItemVistoriaVeiculo().getDescricao());
+	}
+	</meta>
+
+    <composite-id
+		name="id"
+        class="br.com.linkdata.entity.VistoriaItensId"
+        access="field"
+    >		
+	        <key-property name="idItemVistoriaVeiculo" type="java.lang.Long">
+<column name="ID_ITEM_VISTORIA_VEICULO" />
+	        </key-property>
+	        <key-property name="idVistoriaVeiculo" type="java.lang.Long">
+<column name="ID_VISTORIA_VEICULO" />
+	        </key-property>
+    </composite-id>	
+
+
+
+
+    <many-to-one
+	    name="estadoItensAvaliacao"
+	    class="br.com.linkdata.entity.EstadoItensAvaliacao"
+	    
+        access="field"
+        fetch="join"
+    >
+  <meta attribute="class-code" inherit="false">
+	public VistoriaItens() {
+		//Construtor.
+	}
+
+	public VistoriaItens(VistoriaVeiculo vistoriaVeiculo,
+			ItemVistoriaVeiculo itemVistoriaVeiculo) {
+		
+		this.getId().setIdItemVistoriaVeiculo(itemVistoriaVeiculo.getId());
+		
+		this.vistoriaVeiculo = vistoriaVeiculo;
+		this.itemVistoriaVeiculo = itemVistoriaVeiculo;
+
+		vistoriaVeiculo.getVistoriasItens().add(this);
+	}
+	
+	@Override
+	public int compareTo(VistoriaItens vi) {
+		return this.getItemVistoriaVeiculo().getDescricao().compareTo(vi.getItemVistoriaVeiculo().getDescricao());
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">Comparable<VistoriaItens></meta>
+<column name="ID_ESTADO_ITENS_AVALIACAO" />
+   </many-to-one>
+    <many-to-one
+	    name="itemVistoriaVeiculo"
+	    class="br.com.linkdata.entity.ItemVistoriaVeiculo"
+	    
+        update="false"
+        insert="false"
+        access="field"
+        fetch="join"
+    >
+  <meta attribute="class-code" inherit="false">
+	public VistoriaItens() {
+		//Construtor.
+	}
+
+	public VistoriaItens(VistoriaVeiculo vistoriaVeiculo,
+			ItemVistoriaVeiculo itemVistoriaVeiculo) {
+		
+		this.getId().setIdItemVistoriaVeiculo(itemVistoriaVeiculo.getId());
+		
+		this.vistoriaVeiculo = vistoriaVeiculo;
+		this.itemVistoriaVeiculo = itemVistoriaVeiculo;
+
+		vistoriaVeiculo.getVistoriasItens().add(this);
+	}
+	
+	@Override
+	public int compareTo(VistoriaItens vi) {
+		return this.getItemVistoriaVeiculo().getDescricao().compareTo(vi.getItemVistoriaVeiculo().getDescricao());
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">Comparable<VistoriaItens></meta>
+<column name="ID_ITEM_VISTORIA_VEICULO" />
+   </many-to-one>
+    <many-to-one
+	    name="vistoriaVeiculo"
+	    class="br.com.linkdata.entity.VistoriaVeiculo"
+	    
+        update="false"
+        insert="false"
+        access="field"
+        fetch="join"
+    >
+  <meta attribute="class-code" inherit="false">
+	public VistoriaItens() {
+		//Construtor.
+	}
+
+	public VistoriaItens(VistoriaVeiculo vistoriaVeiculo,
+			ItemVistoriaVeiculo itemVistoriaVeiculo) {
+		
+		this.getId().setIdItemVistoriaVeiculo(itemVistoriaVeiculo.getId());
+		
+		this.vistoriaVeiculo = vistoriaVeiculo;
+		this.itemVistoriaVeiculo = itemVistoriaVeiculo;
+
+		vistoriaVeiculo.getVistoriasItens().add(this);
+	}
+	
+	@Override
+	public int compareTo(VistoriaItens vi) {
+		return this.getItemVistoriaVeiculo().getDescricao().compareTo(vi.getItemVistoriaVeiculo().getDescricao());
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">Comparable<VistoriaItens></meta>
+<column name="ID_VISTORIA_VEICULO" />
+   </many-to-one>
+
+</class>
+
+</hibernate-mapping>

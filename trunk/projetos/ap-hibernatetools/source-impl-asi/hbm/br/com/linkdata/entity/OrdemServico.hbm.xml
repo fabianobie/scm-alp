@@ -5,7 +5,11 @@
 <hibernate-mapping>
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
 	<meta attribute="extra-import">br.com.linkdata.entity.Label</meta>
-		
+	<meta attribute="extra-import">org.hibernate.envers.Audited</meta>
+	<meta attribute="extra-import">org.hibernate.envers.NotAudited</meta>
+	<meta attribute="extra-classe">
+	@Audited
+	</meta>		
     <class name="br.com.linkdata.entity.OrdemServico" table="OrdemServico" abstract="true" persister="org.hibernate.persister.entity.UnionSubclassEntityPersister">
         <id name="id" type="java.lang.Long" access="field">
         	<meta attribute="scope-field">protected</meta>
@@ -16,6 +20,7 @@
             </generator>
         </id>
         <set name="anexos" inverse="false" lazy="true" table="ANEXO" cascade="persist,merge,delete" fetch="select">
+        	<meta attribute="meta-anexos">@NotAudited</meta>
         	<meta attribute="scope-field">protected</meta>
             <key>
                 <column name="ID_ORDEM_SERVICO" />
@@ -31,6 +36,7 @@
             <column name="DT_REALIZACAO" />
         </property>
         <many-to-one name="fornecedor" class="br.com.linkdata.entity.Fornecedor" access="field" fetch="select">
+        	<meta attribute="meta-fornecedor">@NotAudited</meta>
         	<meta attribute="scope-field">protected</meta>
             <column name="ID_FORNECEDOR" />
         </many-to-one>
@@ -43,6 +49,7 @@
             <column name="DS_JUSTIFICATIVA_CANCELAMENTO" length="1000" />
         </property>
         <many-to-one name="missao" class="br.com.linkdata.entity.Missao" access="field" fetch="select">
+        	<meta attribute="meta-missao">@NotAudited</meta>
         	<meta attribute="scope-field">protected</meta>
             <column name="ID_MISSAO" />
         </many-to-one>
@@ -62,10 +69,12 @@
             <column name="NR_TICKET_CAR" length="15" />
         </property>
         <many-to-one name="situacaoOrdemServico" class="br.com.linkdata.entity.SituacaoOrdemServico" access="field" fetch="select">
+        	<meta attribute="meta-situacaoOrdemServico">@NotAudited</meta>
         	<meta attribute="scope-field">protected</meta>
             <column name="ID_SITUACAO_ORDEM_SERVICO" />
         </many-to-one>
         <many-to-one name="veiculo" class="br.com.linkdata.entity.Veiculo" access="field" fetch="select">
+        	<meta attribute="meta-veiculo">@NotAudited</meta>
         	<meta attribute="scope-field">protected</meta>
             <column name="ID_VEICULO" />
         </many-to-one>

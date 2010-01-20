@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.GrupoConfiguracaoAlertaFrotas" table="GRUPO_CONFIG_ALERTA_FROTAS">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_GRUPO_CONFIG_ALERTA_FROTAS" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_GRUPO_CONFIG_ALERTA_FROTAS</param>
+            </generator>
+        </id>
+        <list name="configuracoesAlertaFrotas" inverse="false" table="CONFIGURACAO_ALERTA_FROTAS" lazy="true" cascade="persist,merge,delete" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <key>
+                <column name="ID_GRUPO_CONFIG_ALERTA_FROTAS" />
+            </key>
+            <index column="ordem" />
+            <one-to-many class="br.com.linkdata.entity.ConfiguracaoAlertaFrotas" />
+        </list>
+        <set name="emails" inverse="false" lazy="true" table="ALERTA_EMAIL_FROTAS" cascade="persist,merge" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <key>
+                <column name="ID_GRUPO_CONFIG_ALERTA_FROTAS" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.AlertaEmailFrotas" />
+        </set>
+    </class>
+</hibernate-mapping>

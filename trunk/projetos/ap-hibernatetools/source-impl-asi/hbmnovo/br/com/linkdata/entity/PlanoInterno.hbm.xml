@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.PlanoInterno" table="PLANO_INTERNO">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_PLANO_INTERNO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_PLANO_INTERNO</param>
+            </generator>
+        </id>
+        <property name="ano" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ANO_PLANO_INTERNO" length="4" not-null="true" />
+        </property>
+        <property name="codigo" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="CD_PLANO_INTERNO" length="10" not-null="true" />
+        </property>
+        <property name="objetivos" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="DS_OBJETIVO" not-null="true" />
+        </property>
+        <many-to-one name="planoTrabalhoResumido" class="br.com.linkdata.entity.PlanoTrabalhoResumido" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_PLANO_TRABALHO_RESUMIDO" />
+        </many-to-one>
+        <many-to-one name="situacao" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="IND_ATIVO" />
+        </many-to-one>
+        <property name="titulo" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="DS_TITULO" length="80" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

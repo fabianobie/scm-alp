@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.LogOperation" table="LOG_OPERACAO_INTEG">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <meta attribute="class-code" inherit="false">public LogOperation() { } public LogOperation(String method) { setMethod(method); setSuccess(false); setDate(new Date()); }
+        public LogOperation(String method, boolean success) { setMethod(method); setSuccess(success); setDate(new Date()); }</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public LogOperation() { } public LogOperation(String method) { setMethod(method); setSuccess(false); setDate(new Date());
+            } public LogOperation(String method, boolean success) { setMethod(method); setSuccess(success); setDate(new Date()); }</meta>
+            <column name="ID_LOG" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_LOG_OPER_INTEG</param>
+            </generator>
+        </id>
+        <property name="date" type="timestamp" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public LogOperation() { } public LogOperation(String method) { setMethod(method); setSuccess(false); setDate(new Date());
+            } public LogOperation(String method, boolean success) { setMethod(method); setSuccess(success); setDate(new Date()); }</meta>
+            <column name="DATA" not-null="true" />
+        </property>
+        <property name="exception" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public LogOperation() { } public LogOperation(String method) { setMethod(method); setSuccess(false); setDate(new Date());
+            } public LogOperation(String method, boolean success) { setMethod(method); setSuccess(success); setDate(new Date()); }</meta>
+            <column name="ERRO" />
+        </property>
+        <property name="identificacaoRegistro" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public LogOperation() { } public LogOperation(String method) { setMethod(method); setSuccess(false); setDate(new Date());
+            } public LogOperation(String method, boolean success) { setMethod(method); setSuccess(success); setDate(new Date()); }</meta>
+            <column name="identificacao_registro" length="200" />
+        </property>
+        <property name="method" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public LogOperation() { } public LogOperation(String method) { setMethod(method); setSuccess(false); setDate(new Date());
+            } public LogOperation(String method, boolean success) { setMethod(method); setSuccess(success); setDate(new Date()); }</meta>
+            <column name="METHOD" length="50" not-null="true" />
+        </property>
+        <property name="success" type="boolean" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public LogOperation() { } public LogOperation(String method) { setMethod(method); setSuccess(false); setDate(new Date());
+            } public LogOperation(String method, boolean success) { setMethod(method); setSuccess(success); setDate(new Date()); }</meta>
+            <column name="SUCESSO" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -3,6 +3,11 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
+	<meta attribute="extra-import">org.hibernate.envers.Audited</meta>
+	<meta attribute="extra-import">org.hibernate.envers.NotAudited</meta>
+	<meta attribute="extra-classe">
+	@Audited
+	</meta>
     <union-subclass name="br.com.linkdata.entity.OrdemServicoManutencao" extends="br.com.linkdata.entity.OrdemServico" table="ORDEM_SERVICO_MANUTENCAO">
         <property name="dataSolicitacao" type="date" access="field">
             <column name="DT_SOLICITACAO" not-null="true" />
@@ -11,18 +16,22 @@
             <column name="DS_PROBLEMA" length="1000" />
         </property>
         <many-to-one name="desejaAdicionarMateriais" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
+        	<meta attribute="meta-desejaAdicionarMateriais">@NotAudited</meta>
             <column name="IND_MATERIAL" />
         </many-to-one>
         <set name="detalhesOrdemServico" inverse="false" lazy="true" table="DetalheOrdemServico" cascade="persist,merge,delete" fetch="select">
+        	<meta attribute="meta-detalhesOrdemServico">@NotAudited</meta>
             <key>
                 <column name="ID_ORDEM_SERVICO" />
             </key>
             <one-to-many class="br.com.linkdata.entity.DetalheOrdemServico" />
         </set>
         <many-to-one name="tipoOrdemServicoManutencao" class="br.com.linkdata.entity.TipoOrdemServicoManutencao" access="field" fetch="select">
+        	<meta attribute="meta-tipoOrdemServicoManutencao">@NotAudited</meta>
             <column name="ID_TIPO_ORD_SRV_MANUTENCAO" />
         </many-to-one>
         <many-to-one name="tipoRealizacaoOrdemServicoManutencao" class="br.com.linkdata.entity.TipoRealizacaoOrdemServicoManutencao" access="field" fetch="join">
+        	<meta attribute="meta-tipoRealizacaoOrdemServicoManutencao">@NotAudited</meta>
             <column name="ID_TIPO_REALIZACAO_ORD_SRV_MAN" />
         </many-to-one>
         <property name="valorTotalOrdemServico" type="java.math.BigDecimal" access="field">

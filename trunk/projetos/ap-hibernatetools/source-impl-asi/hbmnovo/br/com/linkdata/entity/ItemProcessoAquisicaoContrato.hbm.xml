@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.ItemProcessoAquisicaoContrato" table="ITEM_PROCESSO_AQUISICAO_CT">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="ID_ITEM_PROCESSO_AQUI_CT" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_ITEM_PROCESSO_AQUI_CT</param>
+            </generator>
+        </id>
+        <property name="contratado" type="boolean" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="IN_CONTRATADO" />
+        </property>
+        <property name="descricaoDetalhada" type="br.com.linkdata.entity.ClobUserType" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="meta-descricaoDetalhada" inherit="false">@Type(type = "br.com.linkdata.entity.ClobUserType")</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="DS_DETALHADA" />
+        </property>
+        <many-to-one name="fornecedor" class="br.com.linkdata.entity.Fornecedor" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="ID_FORNECEDOR" />
+        </many-to-one>
+        <property name="marca" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="DS_MARCA" />
+        </property>
+        <property name="modelo" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="DS_MODELO" />
+        </property>
+        <property name="numeroItemLicitacao" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="NU_ITEM_LICITACAO" not-null="true" />
+        </property>
+        <many-to-one name="processoAquisicaoContrato" class="br.com.linkdata.entity.ProcessoAquisicaoContrato" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="ID_PROCESSO_AQUISICAO_CT_IPAC" />
+        </many-to-one>
+        <property name="quantidade" type="java.math.BigDecimal" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="QTD_ITEM" precision="15" not-null="true" />
+        </property>
+        <any name="servicoMaterial" id-type="long" meta-type="string">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <meta-value value="S" class="br.com.linkdata.entity.Servico" />
+            <meta-value value="M" class="br.com.linkdata.entity.Material" />
+            <column name="TYPE_SERVICO_MATERIAL" />
+            <column name="ID_SERVICO_MATERIAL" />
+        </any>
+        <many-to-one name="unidadeMedida" class="br.com.linkdata.entity.UnidadeMedida" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="ID_UNIDADE_MEDIDA" />
+        </many-to-one>
+        <property name="valorTotal" type="java.math.BigDecimal" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="VR_TOTAL" />
+        </property>
+    </class>
+</hibernate-mapping>

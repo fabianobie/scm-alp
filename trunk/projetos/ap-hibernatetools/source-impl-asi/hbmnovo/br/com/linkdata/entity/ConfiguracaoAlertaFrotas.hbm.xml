@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.ConfiguracaoAlertaFrotas" table="CONFIGURACAO_ALERTA_FROTAS">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_CONFIGURACAO_ALERTA_FROTAS" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_CONFIGURACAO_ALERTA_FROTAS</param>
+            </generator>
+        </id>
+        <property name="ordem" type="java.lang.Integer" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="NR_ORDEM" />
+        </property>
+        <property name="quantidade" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="QTD_" length="80" />
+        </property>
+        <many-to-one name="tipoAlertaFrotas" class="br.com.linkdata.entity.TipoAlertaFrotas" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_TIPO_ALERTA_FROTAS" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

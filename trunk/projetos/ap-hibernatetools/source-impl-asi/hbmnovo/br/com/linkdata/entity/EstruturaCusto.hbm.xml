@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.EstruturaCusto" table="ESTRUTURA_CUSTO">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_ESTRUTURA_CUSTO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_ESTRUTURA_CUSTO</param>
+            </generator>
+        </id>
+        <list name="itemEstruturaCusto" inverse="true" table="ITEM_ESTRUTURA_CUSTO" lazy="true" cascade="persist,merge,delete" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <key>
+                <column name="ID_ESTRUTURA_CUSTO" />
+            </key>
+            <index column="NR_ORDEM" />
+            <one-to-many class="br.com.linkdata.entity.ItemEstruturaCusto" />
+        </list>
+        <property name="numeroVersao" type="java.lang.Integer" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="NR_VERSAO" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

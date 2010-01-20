@@ -4,9 +4,12 @@
 <!-- Generated 23/12/2009 11:50:13 by Hibernate Tools 3.2.5.Beta -->
 <hibernate-mapping>
 	<meta attribute="extra-import">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+	<meta attribute="extra-import">org.hibernate.envers.Audited</meta>
+	<meta attribute="extra-import">org.hibernate.envers.NotAudited</meta>
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
 	<meta attribute="extra-classe">
 @DynaColumnsDomain(column="nome")
+@Audited
 	</meta>
 	<meta attribute="class-code">
 	public ImagemMaterial getImagemPadrao() {
@@ -56,12 +59,14 @@
             </generator>
         </id>
         <set name="apelidos" inverse="true" lazy="true" table="APELIDO_MATERIAL" cascade="all" fetch="select">
+        	<meta attribute="meta-apelidos">@NotAudited</meta>
             <key>
                 <column name="ID_MATERIAL" />
             </key>
             <one-to-many class="br.com.linkdata.entity.ApelidoMaterial" />
         </set>
         <set name="caracteristicas" inverse="true" lazy="true" table="CARACTERISTICA_MATERIAL" cascade="all" fetch="select">
+        	<meta attribute="meta-caracteristicas">@NotAudited</meta>
             <key>
                 <column name="ID_MATERIAL" />
             </key>
@@ -75,6 +80,7 @@
             <column name="DS_MODELO" />
         </property>
         <list name="imagens" inverse="true" table="IMAGEM_MATERIAL" lazy="true" cascade="all" fetch="select">
+        	<meta attribute="meta-imagens">@NotAudited</meta>
             <key>
                 <column name="ID_MATERIAL" />
             </key>
@@ -82,21 +88,25 @@
             <one-to-many class="br.com.linkdata.entity.ImagemMaterial" />
         </list>
         <many-to-one name="modeloMaterial" class="br.com.linkdata.entity.ModeloMaterial" access="field" fetch="select">
+        	<meta attribute="meta-modeloMaterial">@NotAudited</meta>
             <column name="ID_MODELO" />
         </many-to-one>
         <property name="nome" type="java.lang.String" access="field">
             <column name="NM_MODELO" length="100" not-null="true" />
         </property>
         <many-to-one name="situacaoModelo" class="br.com.linkdata.entity.SituacaoModelo" access="field" fetch="select">
+        	<meta attribute="meta-situacaoModelo">@NotAudited</meta>
             <column name="ID_SIT_MODELO" />
         </many-to-one>
         <set name="unidadesPossiveisEntrada" inverse="true" lazy="true" table="UNIDADE_POSSIVEL_MATERIAL" fetch="select">
+        	<meta attribute="meta-unidadesPossiveisEntrada">@NotAudited</meta>
             <key>
                 <column name="ID_MATERIAL" />
             </key>
             <one-to-many class="br.com.linkdata.entity.UnidadeMedidaPossivelMaterial" />
         </set>
         <set name="unidadesPossiveisSaida" inverse="true" lazy="true" table="UNIDADE_POSSIVEL_MATERIAL" fetch="select">
+        	<meta attribute="meta-unidadesPossiveisSaida">@NotAudited</meta>
             <key>
                 <column name="ID_MATERIAL" />
             </key>

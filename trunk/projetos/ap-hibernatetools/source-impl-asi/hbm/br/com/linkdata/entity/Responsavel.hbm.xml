@@ -36,8 +36,10 @@
         	<meta attribute="scope-field">protected</meta>
             <column name="NR_CPF" length="11" not-null="true" />
         </property>
-        <component name="identidade" class="br.com.linkdata.entity.Identidade">
+        <component name="identidade" class="br.com.linkdata.entity.Identidade" >
         	<meta attribute="implements"></meta>
+        	<meta attribute="extra-import">org.hibernate.envers.Audited</meta>
+        	<meta attribute="extra-import">org.hibernate.envers.NotAudited</meta>
         	<meta attribute="extends"></meta>
 			<meta attribute="class-code">
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -60,19 +62,16 @@
 			<meta attribute="extra-import">javax.persistence.JoinColumn</meta>
 			<meta attribute="extra-import">org.hibernate.envers.NotAudited</meta>
 			<meta attribute="extra-import">javax.persistence.FetchType</meta>
-        	<meta attribute="scope-field">protected</meta>
             <property name="dataExpedicao" type="date" access="field">
+            	<meta attribute="meta-dataExpedicao">@Audited</meta>
                 <column name="DT_EXPEDICAO" />
             </property>
-            <!--
-            <many-to-one name="estado" class="br.com.linkdata.entity.Estado" access="field" fetch="select">
-                <column name="ID_ESTADO" />
-            </many-to-one>
-            -->
             <property name="numero" type="java.lang.String" access="field">
+            	<meta attribute="meta-numero">@Audited</meta>
                 <column name="NR_INDENTIDADE" length="20" />
             </property>
             <property name="orgaoExpeditor" type="java.lang.String" access="field">
+            	<meta attribute="meta-orgaoExpeditor">@Audited</meta>
                 <column name="DS_ORGAO_EXP" length="5" />
             </property>
         </component>

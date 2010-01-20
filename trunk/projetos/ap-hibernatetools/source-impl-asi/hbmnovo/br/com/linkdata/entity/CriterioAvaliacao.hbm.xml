@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.CriterioAvaliacao" table="CriterioAvaliacao" abstract="true" persister="org.hibernate.persister.entity.UnionSubclassEntityPersister">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</meta>
+        <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+        <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <column name="ID_CRITERIO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_CRITERIO</param>
+            </generator>
+        </id>
+        <set name="itensAvaliados" inverse="false" lazy="true" table="ITEM_CRITERIO_AVALIACAO" cascade="persist,merge,delete" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <key>
+                <column name="ID_ITEM_CRITERIO" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.ItemCriterio" />
+        </set>
+    </class>
+</hibernate-mapping>
