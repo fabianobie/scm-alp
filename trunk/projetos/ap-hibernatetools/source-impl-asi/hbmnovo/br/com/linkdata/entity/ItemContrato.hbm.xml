@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.ItemContrato" table="ITEM_CONTRATO">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <meta attribute="class-code" inherit="false">public ItemContrato(){ } public ItemContrato(String numero, BigDecimal quantidade, Object servicoMaterial, UnidadeMedida
+        unidadeMedida, BigDecimal valorTotal, String descricaoDetalhada, String marca, String modelo){ this.numero = numero; this.quantidade = quantidade; this.servicoMaterial =
+        servicoMaterial; this.unidadeMedida = unidadeMedida; this.valorTotal = valorTotal; this.descricaoDetalhada = descricaoDetalhada; this.marca = marca; this.modelo = modelo;
+        }</meta>
+        <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public ItemContrato(){ } public ItemContrato(String numero, BigDecimal quantidade, Object servicoMaterial, UnidadeMedida
+            unidadeMedida, BigDecimal valorTotal, String descricaoDetalhada, String marca, String modelo){ this.numero = numero; this.quantidade = quantidade; this.servicoMaterial
+            = servicoMaterial; this.unidadeMedida = unidadeMedida; this.valorTotal = valorTotal; this.descricaoDetalhada = descricaoDetalhada; this.marca = marca; this.modelo =
+            modelo; }</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="ID_ITEM_CONTRATO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_ITEM_CONTRATO</param>
+            </generator>
+        </id>
+        <property name="descricaoDetalhada" type="br.com.linkdata.entity.ClobUserType" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public ItemContrato(){ } public ItemContrato(String numero, BigDecimal quantidade, Object servicoMaterial, UnidadeMedida
+            unidadeMedida, BigDecimal valorTotal, String descricaoDetalhada, String marca, String modelo){ this.numero = numero; this.quantidade = quantidade; this.servicoMaterial
+            = servicoMaterial; this.unidadeMedida = unidadeMedida; this.valorTotal = valorTotal; this.descricaoDetalhada = descricaoDetalhada; this.marca = marca; this.modelo =
+            modelo; }</meta>
+            <meta attribute="meta-descricaoDetalhada" inherit="false">@Type(type = "br.com.linkdata.entity.BlobUserType")</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="DS_DETALHADA" />
+        </property>
+        <property name="marca" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public ItemContrato(){ } public ItemContrato(String numero, BigDecimal quantidade, Object servicoMaterial, UnidadeMedida
+            unidadeMedida, BigDecimal valorTotal, String descricaoDetalhada, String marca, String modelo){ this.numero = numero; this.quantidade = quantidade; this.servicoMaterial
+            = servicoMaterial; this.unidadeMedida = unidadeMedida; this.valorTotal = valorTotal; this.descricaoDetalhada = descricaoDetalhada; this.marca = marca; this.modelo =
+            modelo; }</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="DS_MARCA" />
+        </property>
+        <property name="modelo" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public ItemContrato(){ } public ItemContrato(String numero, BigDecimal quantidade, Object servicoMaterial, UnidadeMedida
+            unidadeMedida, BigDecimal valorTotal, String descricaoDetalhada, String marca, String modelo){ this.numero = numero; this.quantidade = quantidade; this.servicoMaterial
+            = servicoMaterial; this.unidadeMedida = unidadeMedida; this.valorTotal = valorTotal; this.descricaoDetalhada = descricaoDetalhada; this.marca = marca; this.modelo =
+            modelo; }</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="DS_MODELO" />
+        </property>
+        <property name="numero" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public ItemContrato(){ } public ItemContrato(String numero, BigDecimal quantidade, Object servicoMaterial, UnidadeMedida
+            unidadeMedida, BigDecimal valorTotal, String descricaoDetalhada, String marca, String modelo){ this.numero = numero; this.quantidade = quantidade; this.servicoMaterial
+            = servicoMaterial; this.unidadeMedida = unidadeMedida; this.valorTotal = valorTotal; this.descricaoDetalhada = descricaoDetalhada; this.marca = marca; this.modelo =
+            modelo; }</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="NU_ITEM" length="30" />
+        </property>
+        <property name="quantidade" type="java.math.BigDecimal" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public ItemContrato(){ } public ItemContrato(String numero, BigDecimal quantidade, Object servicoMaterial, UnidadeMedida
+            unidadeMedida, BigDecimal valorTotal, String descricaoDetalhada, String marca, String modelo){ this.numero = numero; this.quantidade = quantidade; this.servicoMaterial
+            = servicoMaterial; this.unidadeMedida = unidadeMedida; this.valorTotal = valorTotal; this.descricaoDetalhada = descricaoDetalhada; this.marca = marca; this.modelo =
+            modelo; }</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="QTD_ITEM" precision="15" />
+        </property>
+        <any name="servicoMaterial" id-type="long" meta-type="string">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public ItemContrato(){ } public ItemContrato(String numero, BigDecimal quantidade, Object servicoMaterial, UnidadeMedida
+            unidadeMedida, BigDecimal valorTotal, String descricaoDetalhada, String marca, String modelo){ this.numero = numero; this.quantidade = quantidade; this.servicoMaterial
+            = servicoMaterial; this.unidadeMedida = unidadeMedida; this.valorTotal = valorTotal; this.descricaoDetalhada = descricaoDetalhada; this.marca = marca; this.modelo =
+            modelo; }</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <meta-value value="S" class="br.com.linkdata.entity.Servico" />
+            <meta-value value="M" class="br.com.linkdata.entity.Material" />
+            <column name="TYPE_SERVICO_MATERIAL" />
+            <column name="ID_SERVICO_MATERIAL" />
+        </any>
+        <many-to-one name="unidadeMedida" class="br.com.linkdata.entity.UnidadeMedida" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public ItemContrato(){ } public ItemContrato(String numero, BigDecimal quantidade, Object servicoMaterial, UnidadeMedida
+            unidadeMedida, BigDecimal valorTotal, String descricaoDetalhada, String marca, String modelo){ this.numero = numero; this.quantidade = quantidade; this.servicoMaterial
+            = servicoMaterial; this.unidadeMedida = unidadeMedida; this.valorTotal = valorTotal; this.descricaoDetalhada = descricaoDetalhada; this.marca = marca; this.modelo =
+            modelo; }</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="ID_UNIDADE_MEDIDA" />
+        </many-to-one>
+        <property name="valorTotal" type="java.math.BigDecimal" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public ItemContrato(){ } public ItemContrato(String numero, BigDecimal quantidade, Object servicoMaterial, UnidadeMedida
+            unidadeMedida, BigDecimal valorTotal, String descricaoDetalhada, String marca, String modelo){ this.numero = numero; this.quantidade = quantidade; this.servicoMaterial
+            = servicoMaterial; this.unidadeMedida = unidadeMedida; this.valorTotal = valorTotal; this.descricaoDetalhada = descricaoDetalhada; this.marca = marca; this.modelo =
+            modelo; }</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="VR_TOTAL" />
+        </property>
+    </class>
+</hibernate-mapping>

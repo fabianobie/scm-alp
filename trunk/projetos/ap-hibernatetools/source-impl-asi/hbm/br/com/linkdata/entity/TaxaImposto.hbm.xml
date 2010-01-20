@@ -6,6 +6,8 @@
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
 	<meta attribute="extra-import">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
 	<meta attribute="extra-import">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+	<meta attribute="extra-import">org.hibernate.envers.Audited</meta>
+	<meta attribute="extra-import">org.hibernate.envers.NotAudited</meta>
 	<meta attribute="extra-classe">
 @UniqueCompositeConstraint(
 	fields={
@@ -13,6 +15,7 @@
 		@UniqueCompositeField(fieldLabel="Veículo", fieldName="veiculo")
 	}
 )
+@Audited
 	</meta>
     <class name="br.com.linkdata.entity.TaxaImposto" table="TAXA_IMPOSTO">
         <id name="id" type="java.lang.Long" access="field">
@@ -23,6 +26,7 @@
             </generator>
         </id>
         <set name="anexos" inverse="false" lazy="true" table="ANEXO" cascade="persist,merge,delete" fetch="select">
+        	<meta attribute="meta-anexos">@NotAudited</meta>
             <key>
                 <column name="ID_TAXA_IMPOSTO" />
             </key>
@@ -32,17 +36,21 @@
             <column name="ANO_TAXA_IMPOSTO" length="4" not-null="true" />
         </property>
         <many-to-one name="ipva" class="br.com.linkdata.entity.IPVA" access="field" cascade="persist,merge,delete" fetch="select">
+        	<meta attribute="meta-ipva">@NotAudited</meta>
             <column name="ID_IPVA" />
         </many-to-one>
         <property name="valorTotal" type="java.math.BigDecimal" access="field">
             <column name="VL_TOTAL_TAXA_IMPOSTO" precision="15" not-null="true" />
         </property>
         <many-to-one name="veiculo" class="br.com.linkdata.entity.Veiculo" access="field" fetch="select">
+        	<meta attribute="meta-veiculo">@NotAudited</meta>
             <column name="ID_VEICULO" />
         </many-to-one>
         <one-to-one name="licenciamento" class="br.com.linkdata.entity.ParcelaImposto" property-ref="licenciamento" access="field" cascade="persist,merge,delete">
+        	<meta attribute="meta-licenciamento">@NotAudited</meta>
         </one-to-one>
-        <one-to-one name="seguroObrigatorio" class="br.com.linkdata.entity.ParcelaImposto" property-ref="seguroObrigatorio" access="field"
-        cascade="persist,merge,delete"></one-to-one>
+        <one-to-one name="seguroObrigatorio" class="br.com.linkdata.entity.ParcelaImposto" property-ref="seguroObrigatorio" access="field" cascade="persist,merge,delete">
+        	<meta attribute="meta-seguroObrigatorio">@NotAudited</meta>
+        </one-to-one>
     </class>
 </hibernate-mapping>

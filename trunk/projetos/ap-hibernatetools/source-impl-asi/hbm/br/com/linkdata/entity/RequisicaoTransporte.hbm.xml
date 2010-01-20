@@ -5,6 +5,8 @@
 <hibernate-mapping>
 	<meta attribute="extends">br.com.linkdata.entity.Entity</meta>
 	<meta attribute="extra-import">javax.persistence.Transient</meta>
+	<meta attribute="extra-import">org.hibernate.envers.Audited</meta>
+	<meta attribute="extra-import">org.hibernate.envers.NotAudited</meta>
 	<meta attribute="class-code">
 	@Transient
 	public void addPassageiro(Passageiro passageiro) {
@@ -20,6 +22,9 @@
 	public void removePassageiro(Passageiro passageiro) {
 		getPassageiros().remove(passageiro);
 	}
+	</meta>
+	<meta attribute="extra-classe">
+@Audited
 	</meta>
     <class name="br.com.linkdata.entity.RequisicaoTransporte" table="REQUISICAO_TRANSPORTE">
         <id name="id" type="java.lang.Long" access="field">
@@ -42,12 +47,14 @@
             <column name="IND_DISPONIBILIDADE_VEICULO" not-null="true" />
         </property>
         <many-to-one name="itinerarioTransporte" class="br.com.linkdata.entity.ItinerarioTransporte" access="field" cascade="persist,merge,delete" fetch="select">
+        	<meta attribute="meta-itinerarioTransporte">@NotAudited</meta>
             <column name="ID_ITINERARIO_TRANSPORTE" />
         </many-to-one>
         <property name="justificativaCancelamentoDevolucao" type="java.lang.String" access="field">
             <column name="DS_JUSTIFICATIVA_CAN_DEV" length="1000" />
         </property>
         <set name="missoesTransporte" inverse="true" lazy="true" table="MISSAO_REQUISICAO" fetch="select">
+        	<meta attribute="meta-missoesTransporte">@NotAudited</meta>
             <key>
                 <column name="ID_REQUISICAO_TRANSPORTE" not-null="true" />
             </key>
@@ -62,6 +69,7 @@
             <column name="DS_OBJETIBOS" length="1000" />
         </property>
         <set name="passageiros" inverse="false" lazy="true" table="REQUISICAO_TRANSPORTE_PASSAGEIRO" cascade="persist,merge" fetch="select">
+        	<meta attribute="meta-passageiros">@NotAudited</meta>
             <key>
                 <column name="ID_REQUISICAO_TRANSPORTE" not-null="true" />
             </key>
@@ -70,12 +78,15 @@
             </many-to-many>
         </set>
         <many-to-one name="prioridade" class="br.com.linkdata.entity.Prioridade" access="field" fetch="join">
+        	<meta attribute="meta-prioridade">@NotAudited</meta>
             <column name="ID_PRIORIDADE" />
         </many-to-one>
         <many-to-one name="situacaoRequisicaoTransporte" class="br.com.linkdata.entity.SituacaoRequisicaoTransporte" access="field" fetch="join">
+        	<meta attribute="meta-situacaoRequisicaoTransporte">@NotAudited</meta>
             <column name="ID_SITUACAO_REQUISICAO_TRANSP" />
         </many-to-one>
         <many-to-one name="solicitante" class="br.com.linkdata.entity.Funcionario" access="field" fetch="select">
+        	<meta attribute="meta-solicitante">@NotAudited</meta>
             <column name="ID_FUNCIONARIO" />
         </many-to-one>
     </class>

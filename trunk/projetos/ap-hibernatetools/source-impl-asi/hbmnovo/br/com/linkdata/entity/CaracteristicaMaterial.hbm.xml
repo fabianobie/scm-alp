@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+
+<class
+    name="br.com.linkdata.entity.CaracteristicaMaterial"
+    table="CARACTERISTICA_MATERIAL"
+>
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<CaracteristicaMaterial></meta>
+  <meta attribute="class-code" inherit="false">
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(CaracteristicaMaterial o) {
+		return caracteristicaModelo.getOrdem().compareTo(o.getCaracteristicaModelo().getOrdem());
+	}
+	</meta>
+
+	<id 
+        name="id"
+        type="java.lang.Long"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(CaracteristicaMaterial o) {
+		return caracteristicaModelo.getOrdem().compareTo(o.getCaracteristicaModelo().getOrdem());
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<CaracteristicaMaterial></meta>
+    
+<column name="ID_CARACT_MATERIAL" precision="12" scale="0" />
+	    <generator class="sequence">
+            <param name="max_lo">49</param>
+            <param name="sequence">SQ_CARACT_MATERIAL</param>
+		</generator>
+    </id>
+
+
+
+
+    <many-to-one
+	    name="caracteristicaModelo"
+	    class="br.com.linkdata.entity.CaracteristicaModelo"
+	    
+        access="field"
+        fetch="select"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(CaracteristicaMaterial o) {
+		return caracteristicaModelo.getOrdem().compareTo(o.getCaracteristicaModelo().getOrdem());
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<CaracteristicaMaterial></meta>
+<column name="ID_CARACT_MODELO" />
+   </many-to-one>
+    <many-to-one
+	    name="material"
+	    class="br.com.linkdata.entity.Material"
+	    
+        access="field"
+        fetch="select"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(CaracteristicaMaterial o) {
+		return caracteristicaModelo.getOrdem().compareTo(o.getCaracteristicaModelo().getOrdem());
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<CaracteristicaMaterial></meta>
+<column name="ID_MATERIAL" />
+   </many-to-one>
+    <property
+        name="ordem"
+	    type="java.lang.Integer"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(CaracteristicaMaterial o) {
+		return caracteristicaModelo.getOrdem().compareTo(o.getCaracteristicaModelo().getOrdem());
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<CaracteristicaMaterial></meta>
+<column name="NR_ORDEM" length="2" not-null="true" />
+  </property>
+
+    <property
+        name="valor"
+	    type="java.lang.String"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(CaracteristicaMaterial o) {
+		return caracteristicaModelo.getOrdem().compareTo(o.getCaracteristicaModelo().getOrdem());
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<CaracteristicaMaterial></meta>
+<column name="DS_VALOR" precision="500" scale="0" />
+  </property>
+
+
+</class>
+
+</hibernate-mapping>

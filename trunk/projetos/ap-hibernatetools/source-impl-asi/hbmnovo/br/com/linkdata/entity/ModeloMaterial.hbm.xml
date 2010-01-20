@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.ModeloMaterial" table="MODELO_MATERIAL">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <meta attribute="class-code" inherit="false">public void addCaracteristica(CaracteristicaModelo caracteristica) { getCaracteristicas().add(caracteristica); } public void
+        addClassificacao(EstruturaClassificacao classificacao) { getClassificacoes().add(classificacao); } public void addEstrutura(EstruturaClassificacao estrutura) {
+        getClassificacoes().add(estrutura); } public void removeEstrutura(EstruturaClassificacao estrutura) { getClassificacoes().remove(estrutura); }</meta>
+        <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description="Modelo de Material", column="nome")</meta>
+        <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public void addCaracteristica(CaracteristicaModelo caracteristica) { getCaracteristicas().add(caracteristica); } public
+            void addClassificacao(EstruturaClassificacao classificacao) { getClassificacoes().add(classificacao); } public void addEstrutura(EstruturaClassificacao estrutura) {
+            getClassificacoes().add(estrutura); } public void removeEstrutura(EstruturaClassificacao estrutura) { getClassificacoes().remove(estrutura); }</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description="Modelo de Material", column="nome")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <column name="ID_MODELO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_MODELO</param>
+            </generator>
+        </id>
+        <property name="apelido" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public void addCaracteristica(CaracteristicaModelo caracteristica) { getCaracteristicas().add(caracteristica); } public
+            void addClassificacao(EstruturaClassificacao classificacao) { getClassificacoes().add(classificacao); } public void addEstrutura(EstruturaClassificacao estrutura) {
+            getClassificacoes().add(estrutura); } public void removeEstrutura(EstruturaClassificacao estrutura) { getClassificacoes().remove(estrutura); }</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description="Modelo de Material", column="nome")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <column name="APELIDO" length="100" />
+        </property>
+        <list name="caracteristicas" inverse="true" table="CARACTERISTICA_MODELO" lazy="true" cascade="persist,merge,delete" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public void addCaracteristica(CaracteristicaModelo caracteristica) { getCaracteristicas().add(caracteristica); } public
+            void addClassificacao(EstruturaClassificacao classificacao) { getClassificacoes().add(classificacao); } public void addEstrutura(EstruturaClassificacao estrutura) {
+            getClassificacoes().add(estrutura); } public void removeEstrutura(EstruturaClassificacao estrutura) { getClassificacoes().remove(estrutura); }</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description="Modelo de Material", column="nome")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <key>
+                <column name="ID_MODELO" />
+            </key>
+            <index column="NR_ORDEM" />
+            <one-to-many class="br.com.linkdata.entity.CaracteristicaModelo" />
+        </list>
+        <set name="classificacoes" inverse="false" lazy="true" table="MODELO_MAT_ESTRUTURA" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public void addCaracteristica(CaracteristicaModelo caracteristica) { getCaracteristicas().add(caracteristica); } public
+            void addClassificacao(EstruturaClassificacao classificacao) { getClassificacoes().add(classificacao); } public void addEstrutura(EstruturaClassificacao estrutura) {
+            getClassificacoes().add(estrutura); } public void removeEstrutura(EstruturaClassificacao estrutura) { getClassificacoes().remove(estrutura); }</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description="Modelo de Material", column="nome")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <key>
+                <column name="ID_MODELO" not-null="true" />
+            </key>
+            <many-to-many entity-name="br.com.linkdata.entity.EstruturaClassificacao">
+                <column name="ID_ESTR_CLASSIFICACAO" not-null="true" />
+            </many-to-many>
+        </set>
+        <property name="dataCadastro" type="java.util.Date" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public void addCaracteristica(CaracteristicaModelo caracteristica) { getCaracteristicas().add(caracteristica); } public
+            void addClassificacao(EstruturaClassificacao classificacao) { getClassificacoes().add(classificacao); } public void addEstrutura(EstruturaClassificacao estrutura) {
+            getClassificacoes().add(estrutura); } public void removeEstrutura(EstruturaClassificacao estrutura) { getClassificacoes().remove(estrutura); }</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description="Modelo de Material", column="nome")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <column name="DT_CADASTRO" />
+        </property>
+        <property name="descricao" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public void addCaracteristica(CaracteristicaModelo caracteristica) { getCaracteristicas().add(caracteristica); } public
+            void addClassificacao(EstruturaClassificacao classificacao) { getClassificacoes().add(classificacao); } public void addEstrutura(EstruturaClassificacao estrutura) {
+            getClassificacoes().add(estrutura); } public void removeEstrutura(EstruturaClassificacao estrutura) { getClassificacoes().remove(estrutura); }</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description="Modelo de Material", column="nome")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <column name="DS_MODELO" />
+        </property>
+        <property name="nome" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public void addCaracteristica(CaracteristicaModelo caracteristica) { getCaracteristicas().add(caracteristica); } public
+            void addClassificacao(EstruturaClassificacao classificacao) { getClassificacoes().add(classificacao); } public void addEstrutura(EstruturaClassificacao estrutura) {
+            getClassificacoes().add(estrutura); } public void removeEstrutura(EstruturaClassificacao estrutura) { getClassificacoes().remove(estrutura); }</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description="Modelo de Material", column="nome")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <column name="NM_MODELO" length="100" not-null="true" unique="true" />
+        </property>
+        <many-to-one name="situacaoModelo" class="br.com.linkdata.entity.SituacaoModelo" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public void addCaracteristica(CaracteristicaModelo caracteristica) { getCaracteristicas().add(caracteristica); } public
+            void addClassificacao(EstruturaClassificacao classificacao) { getClassificacoes().add(classificacao); } public void addEstrutura(EstruturaClassificacao estrutura) {
+            getClassificacoes().add(estrutura); } public void removeEstrutura(EstruturaClassificacao estrutura) { getClassificacoes().remove(estrutura); }</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description="Modelo de Material", column="nome")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <column name="ID_SIT_MODELO" />
+        </many-to-one>
+        <many-to-one name="unidadeMedidaElementar" class="br.com.linkdata.entity.UnidadeMedida" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">public void addCaracteristica(CaracteristicaModelo caracteristica) { getCaracteristicas().add(caracteristica); } public
+            void addClassificacao(EstruturaClassificacao classificacao) { getClassificacoes().add(classificacao); } public void addEstrutura(EstruturaClassificacao estrutura) {
+            getClassificacoes().add(estrutura); } public void removeEstrutura(EstruturaClassificacao estrutura) { getClassificacoes().remove(estrutura); }</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description="Modelo de Material", column="nome")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <column name="ID_UNIDADE_MEDIDA" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

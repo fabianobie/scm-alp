@@ -1,3 +1,4 @@
+${pojo.class}
 <#if ejb3>
 <#if pojo.hasIdentifierProperty()>
 <#if property.equals(clazz.identifierProperty)>

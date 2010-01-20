@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+
+<class
+    name="br.com.linkdata.entity.ApelidoMaterial"
+    table="APELIDO_MATERIAL"
+>
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<ApelidoMaterial></meta>
+  <meta attribute="class-code" inherit="false">
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(ApelidoMaterial o) {
+		return apelido.compareTo(o.apelido);
+	}
+	</meta>
+
+	<id 
+        name="id"
+        type="java.lang.Long"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(ApelidoMaterial o) {
+		return apelido.compareTo(o.apelido);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<ApelidoMaterial></meta>
+    
+<column name="ID_APELIDO" precision="12" scale="0" />
+	    <generator class="sequence">
+            <param name="max_lo">49</param>
+            <param name="sequence">SQ_APELIDO</param>
+		</generator>
+    </id>
+
+
+
+
+    <property
+        name="apelido"
+	    type="java.lang.String"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(ApelidoMaterial o) {
+		return apelido.compareTo(o.apelido);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<ApelidoMaterial></meta>
+<column name="DS_APELIDO" length="100" not-null="true" />
+  </property>
+
+    <many-to-one
+	    name="material"
+	    class="br.com.linkdata.entity.Material"
+	    
+        access="field"
+        fetch="select"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	/**
+	 * @see java.lang.Comparable#compareTo(java.lang.Object)
+	 */
+	public int compareTo(ApelidoMaterial o) {
+		return apelido.compareTo(o.apelido);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">java.lang.Comparable<ApelidoMaterial></meta>
+<column name="ID_MATERIAL" precision="12" scale="0" />
+   </many-to-one>
+
+</class>
+
+</hibernate-mapping>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.Group" table="AUTZ_GROUP">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_GROUP" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_GROUP</param>
+            </generator>
+        </id>
+        <property name="name" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="NM_GROUP" length="200" />
+        </property>
+        <property name="nmClass" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="NM_CLASS" length="300" />
+        </property>
+        <property name="nmField" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="NM_FIELD" length="50" />
+        </property>
+        <many-to-one name="parent" class="br.com.linkdata.entity.Group" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_PARENT_GROUP" />
+        </many-to-one>
+        <set name="values" inverse="true" lazy="false" table="AUTZ_GROUP_VALUE" cascade="persist,merge,delete" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <key>
+                <column name="ID_GROUP" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.GroupValue" />
+        </set>
+    </class>
+</hibernate-mapping>

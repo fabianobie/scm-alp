@@ -6,6 +6,7 @@
 	<property name="var.is.gerar.dao.do.hbm.${is.gerar.dao.do.hbm}" value="true"/>
 	<property name="var.is.gerar.dao.do.banco.${is.gerar.dao.do.banco}" value="true"/>
 	<property name="var.is.gerar.hbm.da.entidade.${is.gerar.hbm.da.entidade}" value="true"/>
+	<property name="var.is.copiar.entidades.para.asi.${is.copiar.entidades.para.asi}" value="true"/>
 
 	<path id="classpath">
 		<fileset dir="${classpath.lib}">
@@ -29,6 +30,7 @@
 		<antcall target="gerar-entidade-do-banco"/>
 		<antcall target="gerar-dao-do-hbm"/>
 		<antcall target="gerar-dao-do-banco"/>
+		<antcall target="copiar-entidades-para-asi"/>
 	</target>
 	
 	<target name="delete-pasta-destino">
@@ -149,6 +151,14 @@
 				<property key="var_pacote_dao"				value="${dao.pacote}"/>
 			</hbmtemplate>
 		</hibernatetool>
+	</target>
+	
+	<target name="copiar-entidades-para-asi" if="var.is.copiar.entidades.para.asi.true">
+		<copy todir="${path.entidade.asi.original}">
+			<fileset dir="${path.destino.root}">
+				<include name="**/*.java"/>
+			</fileset>
+		</copy>
 	</target>
 
 </project>

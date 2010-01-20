@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.ModeloDocumento" table="MODELO_DOC">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description = "Modelo de Documento", column = "nmDocumento")</meta>
+        <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+        <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description = "Modelo de Documento", column = "nmDocumento")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="ID_MODELO_DOC" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_MODELO_DOC</param>
+            </generator>
+        </id>
+        <property name="arquivo" type="br.com.linkdata.entity.BlobUserType" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description = "Modelo de Documento", column = "nmDocumento")</meta>
+            <meta attribute="meta-arquivo" inherit="false">@Type(type = "br.com.linkdata.entity.BlobUserType")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="ARQUIVO" />
+        </property>
+        <property name="dtInicioVigencia" type="date" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description = "Modelo de Documento", column = "nmDocumento")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="DT_INICIO_VIGENCIA" />
+        </property>
+        <property name="idTipoDocumento" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description = "Modelo de Documento", column = "nmDocumento")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="ID_TP_DOC" length="10" not-null="true" />
+        </property>
+        <property name="nmDocumento" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description = "Modelo de Documento", column = "nmDocumento")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="NM_DOCUMENTO" length="100" />
+        </property>
+        <many-to-one name="situacao" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description = "Modelo de Documento", column = "nmDocumento")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="IND_ATIVO" />
+        </many-to-one>
+        <property name="versao" type="java.lang.Integer" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-classe" inherit="false">@DynaColumnsDomain(description = "Modelo de Documento", column = "nmDocumento")</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.annotations.Type</meta>
+            <column name="VERSAO" length="2" />
+        </property>
+    </class>
+</hibernate-mapping>

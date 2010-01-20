@@ -1,0 +1,416 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.Fornecedor" table="Fornecedor" persister="org.hibernate.persister.entity.UnionSubclassEntityPersister">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+        addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+        responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+        <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+        ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+        fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+        <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+        <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+        <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+        <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+        <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+        <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+        <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+        <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_FORNECEDOR" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_FORNECEDOR</param>
+            </generator>
+        </id>
+        <set name="abrangencias" inverse="false" lazy="true" table="ABRANGENCIA" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <key>
+                <column name="ID_ABRANGENCIA" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.Abrangencia" />
+        </set>
+        <property name="dataCRC" type="java.util.Date" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="DT_CRC" />
+        </property>
+        <property name="dataCadastro" type="java.util.Date" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="DT_CADASTRO" />
+        </property>
+        <set name="domiciliosBancarios" inverse="false" lazy="true" table="DOMICILIO_BANCARIO" cascade="persist,merge,delete" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <key>
+                <column name="ID_FORNECEDOR" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.DomicilioBancario" />
+        </set>
+        <property name="email" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="DS_EMAIL" length="80" />
+        </property>
+        <many-to-one name="endereco" class="br.com.linkdata.entity.Endereco" access="field" cascade="all" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_ENDERECO" />
+        </many-to-one>
+        <many-to-one name="fax" class="br.com.linkdata.entity.Telefone" access="field" cascade="persist,merge,delete" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_FAX" />
+        </many-to-one>
+        <property name="nome" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="NM_FORNECEDOR" length="80" not-null="true" />
+        </property>
+        <property name="numeroCRC" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="NR_CRC" length="20" />
+        </property>
+        <property name="numeroTicketCar" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="NR_TICKET_CAR" />
+        </property>
+        <property name="observacao" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="DS_OBSERVACAO" length="500" />
+        </property>
+        <property name="paginaWeb" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="DS_PAGINA_WEB" length="80" />
+        </property>
+        <set name="responsaveisLegais" inverse="true" lazy="true" table="RESPONSAVEL_LEGAL" cascade="persist,merge" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <key>
+                <column name="ID_FORNECEDOR" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.ResponsavelLegal" />
+        </set>
+        <many-to-one name="situacaoCadastro" class="br.com.linkdata.entity.SituacaoCadastro" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_SITUACAO_CADASTRO" />
+        </many-to-one>
+        <many-to-one name="situacaoFornecedor" class="br.com.linkdata.entity.SituacaoFornecedor" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_SITUACAO_FORNECEDOR" />
+        </many-to-one>
+        <many-to-one name="telefonePrimario" class="br.com.linkdata.entity.Telefone" access="field" cascade="persist,merge,delete" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_TELEFONE_PRI" />
+        </many-to-one>
+        <many-to-one name="telefoneSecundario" class="br.com.linkdata.entity.Telefone" access="field" cascade="persist,merge,delete" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_TELEFONE_SEC" />
+        </many-to-one>
+        <many-to-one name="tipoCadastroFornecedor" class="br.com.linkdata.entity.TipoCadastroFornecedor" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_TIPO_CAD_FORNECEDOR" />
+        </many-to-one>
+        <many-to-one name="tipoFornecedor" class="br.com.linkdata.entity.TipoFornecedor" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="scope-field" inherit="false">protected</meta>
+            <meta attribute="class-code" inherit="false">public void addAbrangencia(Abrangencia abrangencia) { getAbrangencias().add(abrangencia); } public void
+            addDomicilioBancario(DomicilioBancario domicilioBancario) { getDomiciliosBancarios().add(domicilioBancario); } public void addResponsavelLegal(ResponsavelLegal
+            responsavelLegal) { getResponsaveisLegais().add(responsavelLegal); responsavelLegal.setFornecedor(this); }</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) @Roles( { @Role(name = "fornecedorSelecionado", scope =
+            ScopeType.CONVERSATION) , @Role(name = "fornecedor", scope = ScopeType.CONVERSATION) } ) @DynaColumns @DynaColumnsDomain(column="nome") @UniqueCompositeConstraint(
+            fields={ @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumns</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.dynacolumns.DynaColumnsDomain</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <column name="ID_TIPO_FORNECEDOR" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

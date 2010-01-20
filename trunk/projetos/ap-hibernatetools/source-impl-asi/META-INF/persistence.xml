@@ -30,6 +30,7 @@
 		<class>br.com.linkdata.entity.CarteiraNacionalHabilitacao</class>
 		<class>br.com.linkdata.entity.CBO</class>
 		<class>br.com.linkdata.entity.Cidade</class>
+		<class>br.com.linkdata.entity.ClassificacaoDocumento</class>
 		<class>br.com.linkdata.entity.CodigoPostal</class>
 		<class>br.com.linkdata.entity.ColunaModeloCaracteristica</class>
 		<class>br.com.linkdata.entity.Comprador</class>
@@ -221,6 +222,7 @@
 		<class>br.com.linkdata.entity.TipoDado</class>
 		<class>br.com.linkdata.entity.TipoDia</class>
 		<class>br.com.linkdata.entity.TipoDiariaMissao</class>
+		<class>br.com.linkdata.entity.TipoDocumento</class>
 		<class>br.com.linkdata.entity.TipoDocumentoHabilitacao</class>
 		<class>br.com.linkdata.entity.TipoDotacao</class>
 		<class>br.com.linkdata.entity.TipoEstrutura</class>

@@ -403,7 +403,7 @@ public class GeradorUtil {
 		annotations.setLength( annotations.length() - 2 );
 	}
 	
-	public String ajustarImplements(String implementation) {
+	public String ajustarImplements(String extendz, String implementation) {
 		if (!UtilString.isVazio(implementation)) {
 			implementation = UtilString.trim(implementation);
 			implementation = UtilString.remover(implementation, Serializable.class.getName());
@@ -417,6 +417,10 @@ public class GeradorUtil {
 			if (implementation.equalsIgnoreCase("implements")) {
 				implementation = "";
 			}
+		}
+		
+		if (UtilString.isVazio(extendz) && UtilString.isVazio(implementation)) {
+			implementation = "implements java.io.Serializable";
 		}
 		return implementation;
 	}

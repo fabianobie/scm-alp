@@ -1,0 +1,714 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+
+<class
+    name="br.com.linkdata.entity.EstruturaClassificacao"
+    table="ESTRUTURA_CLASSIFICACAO"
+>
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<EstruturaClassificacao></meta>
+  <meta attribute="class-code" inherit="false">
+	private transient List<EstruturaClassificacao> nodes;
+	
+	public List<EstruturaClassificacao> getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List<EstruturaClassificacao> nodes) {
+		this.nodes = nodes;
+	}
+
+	public void addNodes(EstruturaClassificacao node){
+		if(this.nodes == null){
+			nodes = new ArrayList<EstruturaClassificacao>();
+		}
+	    this.nodes.add(node);	
+	}
+	
+	public boolean isLastNode() {
+		return nodes == null || nodes.size() == 0;
+	}
+	
+	public String toString() {
+		return getTipoEstrutura().getNome() + ": " + this.codigo + " - "
+				+ this.nome;
+	}
+	
+	public int compareTo(EstruturaClassificacao o) {
+		return nome.compareTo(o.getNome());
+	}
+	
+	@Override
+	public EstruturaClassificacao duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			EstruturaClassificacao ec = new EstruturaClassificacao();
+			bag.store(this,ec);
+			ec.setCodigo(this.getCodigo());
+			ec.setDescricao(this.getDescricao());
+			ec.setEstruturaClassificacaoSuperior(ec.getEstruturaClassificacaoSuperior() == null ? null : ec.getEstruturaClassificacaoSuperior().duplicate(bag));
+			ec.setHierarquia(this.getHierarquia());
+			ec.setId(this.getId());
+			if(this.getNodes() != null && this.getNodes().size() != 0){
+				for(EstruturaClassificacao ec2: this.getNodes()){
+					ec.addNodes(ec2.duplicate(bag));
+				}
+			}
+			ec.setNome(this.getNome());
+			ec.setTipoEstrutura(this.getTipoEstrutura() == null ? null : this.getTipoEstrutura().duplicate(bag));
+			ec.setTipoModelo(this.getTipoModelo() == null ? null : this.getTipoModelo().duplicate(bag));
+		}
+		return (EstruturaClassificacao) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="extra-classe" inherit="false">
+@Indexed(index="EstruturaClassificacao")
+@FullTextFilterDefs({
+	@FullTextFilterDef(name= "estruturaTipoClassificacaoFiltro", impl = FiltroEstruturaTipoClassificacaoFactory.class),
+	@FullTextFilterDef(name= "estruturaTipoModeloFiltro", impl = FiltroEstruturaTipoModeloFactory.class)
+})
+	</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.Indexed</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDefs</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDef</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoClassificacaoFactory</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoModeloFactory</meta>
+  <meta attribute="extra-import" inherit="false">java.util.List</meta>
+  <meta attribute="extra-import" inherit="false">java.util.ArrayList</meta>
+
+	<id 
+        name="id"
+        type="java.lang.Long"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	private transient List<EstruturaClassificacao> nodes;
+	
+	public List<EstruturaClassificacao> getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List<EstruturaClassificacao> nodes) {
+		this.nodes = nodes;
+	}
+
+	public void addNodes(EstruturaClassificacao node){
+		if(this.nodes == null){
+			nodes = new ArrayList<EstruturaClassificacao>();
+		}
+	    this.nodes.add(node);	
+	}
+	
+	public boolean isLastNode() {
+		return nodes == null || nodes.size() == 0;
+	}
+	
+	public String toString() {
+		return getTipoEstrutura().getNome() + ": " + this.codigo + " - "
+				+ this.nome;
+	}
+	
+	public int compareTo(EstruturaClassificacao o) {
+		return nome.compareTo(o.getNome());
+	}
+	
+	@Override
+	public EstruturaClassificacao duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			EstruturaClassificacao ec = new EstruturaClassificacao();
+			bag.store(this,ec);
+			ec.setCodigo(this.getCodigo());
+			ec.setDescricao(this.getDescricao());
+			ec.setEstruturaClassificacaoSuperior(ec.getEstruturaClassificacaoSuperior() == null ? null : ec.getEstruturaClassificacaoSuperior().duplicate(bag));
+			ec.setHierarquia(this.getHierarquia());
+			ec.setId(this.getId());
+			if(this.getNodes() != null && this.getNodes().size() != 0){
+				for(EstruturaClassificacao ec2: this.getNodes()){
+					ec.addNodes(ec2.duplicate(bag));
+				}
+			}
+			ec.setNome(this.getNome());
+			ec.setTipoEstrutura(this.getTipoEstrutura() == null ? null : this.getTipoEstrutura().duplicate(bag));
+			ec.setTipoModelo(this.getTipoModelo() == null ? null : this.getTipoModelo().duplicate(bag));
+		}
+		return (EstruturaClassificacao) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<EstruturaClassificacao></meta>
+  <meta attribute="extra-classe" inherit="false">
+@Indexed(index="EstruturaClassificacao")
+@FullTextFilterDefs({
+	@FullTextFilterDef(name= "estruturaTipoClassificacaoFiltro", impl = FiltroEstruturaTipoClassificacaoFactory.class),
+	@FullTextFilterDef(name= "estruturaTipoModeloFiltro", impl = FiltroEstruturaTipoModeloFactory.class)
+})
+	</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.Indexed</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDefs</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDef</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoClassificacaoFactory</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoModeloFactory</meta>
+  <meta attribute="extra-import" inherit="false">java.util.List</meta>
+  <meta attribute="extra-import" inherit="false">java.util.ArrayList</meta>
+    
+<column name="ID_ESTR_CLASSIFICACAO" precision="12" scale="0" />
+	    <generator class="sequence">
+            <param name="max_lo">49</param>
+            <param name="sequence">SQ_ESTR_CLASSIFICACAO</param>
+		</generator>
+    </id>
+
+
+
+
+    <property
+        name="codigo"
+	    type="java.lang.String"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	private transient List<EstruturaClassificacao> nodes;
+	
+	public List<EstruturaClassificacao> getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List<EstruturaClassificacao> nodes) {
+		this.nodes = nodes;
+	}
+
+	public void addNodes(EstruturaClassificacao node){
+		if(this.nodes == null){
+			nodes = new ArrayList<EstruturaClassificacao>();
+		}
+	    this.nodes.add(node);	
+	}
+	
+	public boolean isLastNode() {
+		return nodes == null || nodes.size() == 0;
+	}
+	
+	public String toString() {
+		return getTipoEstrutura().getNome() + ": " + this.codigo + " - "
+				+ this.nome;
+	}
+	
+	public int compareTo(EstruturaClassificacao o) {
+		return nome.compareTo(o.getNome());
+	}
+	
+	@Override
+	public EstruturaClassificacao duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			EstruturaClassificacao ec = new EstruturaClassificacao();
+			bag.store(this,ec);
+			ec.setCodigo(this.getCodigo());
+			ec.setDescricao(this.getDescricao());
+			ec.setEstruturaClassificacaoSuperior(ec.getEstruturaClassificacaoSuperior() == null ? null : ec.getEstruturaClassificacaoSuperior().duplicate(bag));
+			ec.setHierarquia(this.getHierarquia());
+			ec.setId(this.getId());
+			if(this.getNodes() != null && this.getNodes().size() != 0){
+				for(EstruturaClassificacao ec2: this.getNodes()){
+					ec.addNodes(ec2.duplicate(bag));
+				}
+			}
+			ec.setNome(this.getNome());
+			ec.setTipoEstrutura(this.getTipoEstrutura() == null ? null : this.getTipoEstrutura().duplicate(bag));
+			ec.setTipoModelo(this.getTipoModelo() == null ? null : this.getTipoModelo().duplicate(bag));
+		}
+		return (EstruturaClassificacao) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<EstruturaClassificacao></meta>
+  <meta attribute="extra-classe" inherit="false">
+@Indexed(index="EstruturaClassificacao")
+@FullTextFilterDefs({
+	@FullTextFilterDef(name= "estruturaTipoClassificacaoFiltro", impl = FiltroEstruturaTipoClassificacaoFactory.class),
+	@FullTextFilterDef(name= "estruturaTipoModeloFiltro", impl = FiltroEstruturaTipoModeloFactory.class)
+})
+	</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.Indexed</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDefs</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDef</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoClassificacaoFactory</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoModeloFactory</meta>
+  <meta attribute="extra-import" inherit="false">java.util.List</meta>
+  <meta attribute="extra-import" inherit="false">java.util.ArrayList</meta>
+<column name="CD_ESTR_CLASSIFICACAO" length="20" not-null="true" />
+  </property>
+
+    <property
+        name="descricao"
+	    type="java.lang.String"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	private transient List<EstruturaClassificacao> nodes;
+	
+	public List<EstruturaClassificacao> getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List<EstruturaClassificacao> nodes) {
+		this.nodes = nodes;
+	}
+
+	public void addNodes(EstruturaClassificacao node){
+		if(this.nodes == null){
+			nodes = new ArrayList<EstruturaClassificacao>();
+		}
+	    this.nodes.add(node);	
+	}
+	
+	public boolean isLastNode() {
+		return nodes == null || nodes.size() == 0;
+	}
+	
+	public String toString() {
+		return getTipoEstrutura().getNome() + ": " + this.codigo + " - "
+				+ this.nome;
+	}
+	
+	public int compareTo(EstruturaClassificacao o) {
+		return nome.compareTo(o.getNome());
+	}
+	
+	@Override
+	public EstruturaClassificacao duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			EstruturaClassificacao ec = new EstruturaClassificacao();
+			bag.store(this,ec);
+			ec.setCodigo(this.getCodigo());
+			ec.setDescricao(this.getDescricao());
+			ec.setEstruturaClassificacaoSuperior(ec.getEstruturaClassificacaoSuperior() == null ? null : ec.getEstruturaClassificacaoSuperior().duplicate(bag));
+			ec.setHierarquia(this.getHierarquia());
+			ec.setId(this.getId());
+			if(this.getNodes() != null && this.getNodes().size() != 0){
+				for(EstruturaClassificacao ec2: this.getNodes()){
+					ec.addNodes(ec2.duplicate(bag));
+				}
+			}
+			ec.setNome(this.getNome());
+			ec.setTipoEstrutura(this.getTipoEstrutura() == null ? null : this.getTipoEstrutura().duplicate(bag));
+			ec.setTipoModelo(this.getTipoModelo() == null ? null : this.getTipoModelo().duplicate(bag));
+		}
+		return (EstruturaClassificacao) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<EstruturaClassificacao></meta>
+  <meta attribute="extra-classe" inherit="false">
+@Indexed(index="EstruturaClassificacao")
+@FullTextFilterDefs({
+	@FullTextFilterDef(name= "estruturaTipoClassificacaoFiltro", impl = FiltroEstruturaTipoClassificacaoFactory.class),
+	@FullTextFilterDef(name= "estruturaTipoModeloFiltro", impl = FiltroEstruturaTipoModeloFactory.class)
+})
+	</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.Indexed</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDefs</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDef</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoClassificacaoFactory</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoModeloFactory</meta>
+  <meta attribute="extra-import" inherit="false">java.util.List</meta>
+  <meta attribute="extra-import" inherit="false">java.util.ArrayList</meta>
+<column name="DS_ESTR_CLASSIFICACAO" length="2000" />
+  </property>
+
+    <many-to-one
+	    name="estruturaClassificacaoSuperior"
+	    class="br.com.linkdata.entity.EstruturaClassificacao"
+	    
+        access="field"
+        fetch="select"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="scope-field" inherit="false">protected</meta>
+  <meta attribute="class-code" inherit="false">
+	private transient List<EstruturaClassificacao> nodes;
+	
+	public List<EstruturaClassificacao> getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List<EstruturaClassificacao> nodes) {
+		this.nodes = nodes;
+	}
+
+	public void addNodes(EstruturaClassificacao node){
+		if(this.nodes == null){
+			nodes = new ArrayList<EstruturaClassificacao>();
+		}
+	    this.nodes.add(node);	
+	}
+	
+	public boolean isLastNode() {
+		return nodes == null || nodes.size() == 0;
+	}
+	
+	public String toString() {
+		return getTipoEstrutura().getNome() + ": " + this.codigo + " - "
+				+ this.nome;
+	}
+	
+	public int compareTo(EstruturaClassificacao o) {
+		return nome.compareTo(o.getNome());
+	}
+	
+	@Override
+	public EstruturaClassificacao duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			EstruturaClassificacao ec = new EstruturaClassificacao();
+			bag.store(this,ec);
+			ec.setCodigo(this.getCodigo());
+			ec.setDescricao(this.getDescricao());
+			ec.setEstruturaClassificacaoSuperior(ec.getEstruturaClassificacaoSuperior() == null ? null : ec.getEstruturaClassificacaoSuperior().duplicate(bag));
+			ec.setHierarquia(this.getHierarquia());
+			ec.setId(this.getId());
+			if(this.getNodes() != null && this.getNodes().size() != 0){
+				for(EstruturaClassificacao ec2: this.getNodes()){
+					ec.addNodes(ec2.duplicate(bag));
+				}
+			}
+			ec.setNome(this.getNome());
+			ec.setTipoEstrutura(this.getTipoEstrutura() == null ? null : this.getTipoEstrutura().duplicate(bag));
+			ec.setTipoModelo(this.getTipoModelo() == null ? null : this.getTipoModelo().duplicate(bag));
+		}
+		return (EstruturaClassificacao) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<EstruturaClassificacao></meta>
+  <meta attribute="extra-classe" inherit="false">
+@Indexed(index="EstruturaClassificacao")
+@FullTextFilterDefs({
+	@FullTextFilterDef(name= "estruturaTipoClassificacaoFiltro", impl = FiltroEstruturaTipoClassificacaoFactory.class),
+	@FullTextFilterDef(name= "estruturaTipoModeloFiltro", impl = FiltroEstruturaTipoModeloFactory.class)
+})
+	</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.Indexed</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDefs</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDef</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoClassificacaoFactory</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoModeloFactory</meta>
+  <meta attribute="extra-import" inherit="false">java.util.List</meta>
+  <meta attribute="extra-import" inherit="false">java.util.ArrayList</meta>
+<column name="ID_ESTR_CLASS_SUP" />
+   </many-to-one>
+    <property
+        name="hierarquia"
+	    type="java.lang.String"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	private transient List<EstruturaClassificacao> nodes;
+	
+	public List<EstruturaClassificacao> getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List<EstruturaClassificacao> nodes) {
+		this.nodes = nodes;
+	}
+
+	public void addNodes(EstruturaClassificacao node){
+		if(this.nodes == null){
+			nodes = new ArrayList<EstruturaClassificacao>();
+		}
+	    this.nodes.add(node);	
+	}
+	
+	public boolean isLastNode() {
+		return nodes == null || nodes.size() == 0;
+	}
+	
+	public String toString() {
+		return getTipoEstrutura().getNome() + ": " + this.codigo + " - "
+				+ this.nome;
+	}
+	
+	public int compareTo(EstruturaClassificacao o) {
+		return nome.compareTo(o.getNome());
+	}
+	
+	@Override
+	public EstruturaClassificacao duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			EstruturaClassificacao ec = new EstruturaClassificacao();
+			bag.store(this,ec);
+			ec.setCodigo(this.getCodigo());
+			ec.setDescricao(this.getDescricao());
+			ec.setEstruturaClassificacaoSuperior(ec.getEstruturaClassificacaoSuperior() == null ? null : ec.getEstruturaClassificacaoSuperior().duplicate(bag));
+			ec.setHierarquia(this.getHierarquia());
+			ec.setId(this.getId());
+			if(this.getNodes() != null && this.getNodes().size() != 0){
+				for(EstruturaClassificacao ec2: this.getNodes()){
+					ec.addNodes(ec2.duplicate(bag));
+				}
+			}
+			ec.setNome(this.getNome());
+			ec.setTipoEstrutura(this.getTipoEstrutura() == null ? null : this.getTipoEstrutura().duplicate(bag));
+			ec.setTipoModelo(this.getTipoModelo() == null ? null : this.getTipoModelo().duplicate(bag));
+		}
+		return (EstruturaClassificacao) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<EstruturaClassificacao></meta>
+  <meta attribute="extra-classe" inherit="false">
+@Indexed(index="EstruturaClassificacao")
+@FullTextFilterDefs({
+	@FullTextFilterDef(name= "estruturaTipoClassificacaoFiltro", impl = FiltroEstruturaTipoClassificacaoFactory.class),
+	@FullTextFilterDef(name= "estruturaTipoModeloFiltro", impl = FiltroEstruturaTipoModeloFactory.class)
+})
+	</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.Indexed</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDefs</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDef</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoClassificacaoFactory</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoModeloFactory</meta>
+  <meta attribute="extra-import" inherit="false">java.util.List</meta>
+  <meta attribute="extra-import" inherit="false">java.util.ArrayList</meta>
+<column name="DS_HIERQ_CLASSIFICACAO" length="2000" not-null="true" />
+  </property>
+
+    <property
+        name="nome"
+	    type="java.lang.String"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	private transient List<EstruturaClassificacao> nodes;
+	
+	public List<EstruturaClassificacao> getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List<EstruturaClassificacao> nodes) {
+		this.nodes = nodes;
+	}
+
+	public void addNodes(EstruturaClassificacao node){
+		if(this.nodes == null){
+			nodes = new ArrayList<EstruturaClassificacao>();
+		}
+	    this.nodes.add(node);	
+	}
+	
+	public boolean isLastNode() {
+		return nodes == null || nodes.size() == 0;
+	}
+	
+	public String toString() {
+		return getTipoEstrutura().getNome() + ": " + this.codigo + " - "
+				+ this.nome;
+	}
+	
+	public int compareTo(EstruturaClassificacao o) {
+		return nome.compareTo(o.getNome());
+	}
+	
+	@Override
+	public EstruturaClassificacao duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			EstruturaClassificacao ec = new EstruturaClassificacao();
+			bag.store(this,ec);
+			ec.setCodigo(this.getCodigo());
+			ec.setDescricao(this.getDescricao());
+			ec.setEstruturaClassificacaoSuperior(ec.getEstruturaClassificacaoSuperior() == null ? null : ec.getEstruturaClassificacaoSuperior().duplicate(bag));
+			ec.setHierarquia(this.getHierarquia());
+			ec.setId(this.getId());
+			if(this.getNodes() != null && this.getNodes().size() != 0){
+				for(EstruturaClassificacao ec2: this.getNodes()){
+					ec.addNodes(ec2.duplicate(bag));
+				}
+			}
+			ec.setNome(this.getNome());
+			ec.setTipoEstrutura(this.getTipoEstrutura() == null ? null : this.getTipoEstrutura().duplicate(bag));
+			ec.setTipoModelo(this.getTipoModelo() == null ? null : this.getTipoModelo().duplicate(bag));
+		}
+		return (EstruturaClassificacao) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<EstruturaClassificacao></meta>
+  <meta attribute="extra-classe" inherit="false">
+@Indexed(index="EstruturaClassificacao")
+@FullTextFilterDefs({
+	@FullTextFilterDef(name= "estruturaTipoClassificacaoFiltro", impl = FiltroEstruturaTipoClassificacaoFactory.class),
+	@FullTextFilterDef(name= "estruturaTipoModeloFiltro", impl = FiltroEstruturaTipoModeloFactory.class)
+})
+	</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.Indexed</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDefs</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDef</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoClassificacaoFactory</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoModeloFactory</meta>
+  <meta attribute="extra-import" inherit="false">java.util.List</meta>
+  <meta attribute="extra-import" inherit="false">java.util.ArrayList</meta>
+<column name="NM_ESTR_CLASSIFICACAO" not-null="true" />
+  </property>
+
+    <many-to-one
+	    name="tipoEstrutura"
+	    class="br.com.linkdata.entity.TipoEstrutura"
+	    
+        access="field"
+        fetch="select"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	private transient List<EstruturaClassificacao> nodes;
+	
+	public List<EstruturaClassificacao> getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List<EstruturaClassificacao> nodes) {
+		this.nodes = nodes;
+	}
+
+	public void addNodes(EstruturaClassificacao node){
+		if(this.nodes == null){
+			nodes = new ArrayList<EstruturaClassificacao>();
+		}
+	    this.nodes.add(node);	
+	}
+	
+	public boolean isLastNode() {
+		return nodes == null || nodes.size() == 0;
+	}
+	
+	public String toString() {
+		return getTipoEstrutura().getNome() + ": " + this.codigo + " - "
+				+ this.nome;
+	}
+	
+	public int compareTo(EstruturaClassificacao o) {
+		return nome.compareTo(o.getNome());
+	}
+	
+	@Override
+	public EstruturaClassificacao duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			EstruturaClassificacao ec = new EstruturaClassificacao();
+			bag.store(this,ec);
+			ec.setCodigo(this.getCodigo());
+			ec.setDescricao(this.getDescricao());
+			ec.setEstruturaClassificacaoSuperior(ec.getEstruturaClassificacaoSuperior() == null ? null : ec.getEstruturaClassificacaoSuperior().duplicate(bag));
+			ec.setHierarquia(this.getHierarquia());
+			ec.setId(this.getId());
+			if(this.getNodes() != null && this.getNodes().size() != 0){
+				for(EstruturaClassificacao ec2: this.getNodes()){
+					ec.addNodes(ec2.duplicate(bag));
+				}
+			}
+			ec.setNome(this.getNome());
+			ec.setTipoEstrutura(this.getTipoEstrutura() == null ? null : this.getTipoEstrutura().duplicate(bag));
+			ec.setTipoModelo(this.getTipoModelo() == null ? null : this.getTipoModelo().duplicate(bag));
+		}
+		return (EstruturaClassificacao) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<EstruturaClassificacao></meta>
+  <meta attribute="extra-classe" inherit="false">
+@Indexed(index="EstruturaClassificacao")
+@FullTextFilterDefs({
+	@FullTextFilterDef(name= "estruturaTipoClassificacaoFiltro", impl = FiltroEstruturaTipoClassificacaoFactory.class),
+	@FullTextFilterDef(name= "estruturaTipoModeloFiltro", impl = FiltroEstruturaTipoModeloFactory.class)
+})
+	</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.Indexed</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDefs</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDef</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoClassificacaoFactory</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoModeloFactory</meta>
+  <meta attribute="extra-import" inherit="false">java.util.List</meta>
+  <meta attribute="extra-import" inherit="false">java.util.ArrayList</meta>
+<column name="ID_TP_ESTRUTURA" />
+   </many-to-one>
+    <many-to-one
+	    name="tipoModelo"
+	    class="br.com.linkdata.entity.TipoModelo"
+	    
+        access="field"
+        fetch="select"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+  <meta attribute="class-code" inherit="false">
+	private transient List<EstruturaClassificacao> nodes;
+	
+	public List<EstruturaClassificacao> getNodes() {
+		return nodes;
+	}
+
+	public void setNodes(List<EstruturaClassificacao> nodes) {
+		this.nodes = nodes;
+	}
+
+	public void addNodes(EstruturaClassificacao node){
+		if(this.nodes == null){
+			nodes = new ArrayList<EstruturaClassificacao>();
+		}
+	    this.nodes.add(node);	
+	}
+	
+	public boolean isLastNode() {
+		return nodes == null || nodes.size() == 0;
+	}
+	
+	public String toString() {
+		return getTipoEstrutura().getNome() + ": " + this.codigo + " - "
+				+ this.nome;
+	}
+	
+	public int compareTo(EstruturaClassificacao o) {
+		return nome.compareTo(o.getNome());
+	}
+	
+	@Override
+	public EstruturaClassificacao duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			EstruturaClassificacao ec = new EstruturaClassificacao();
+			bag.store(this,ec);
+			ec.setCodigo(this.getCodigo());
+			ec.setDescricao(this.getDescricao());
+			ec.setEstruturaClassificacaoSuperior(ec.getEstruturaClassificacaoSuperior() == null ? null : ec.getEstruturaClassificacaoSuperior().duplicate(bag));
+			ec.setHierarquia(this.getHierarquia());
+			ec.setId(this.getId());
+			if(this.getNodes() != null && this.getNodes().size() != 0){
+				for(EstruturaClassificacao ec2: this.getNodes()){
+					ec.addNodes(ec2.duplicate(bag));
+				}
+			}
+			ec.setNome(this.getNome());
+			ec.setTipoEstrutura(this.getTipoEstrutura() == null ? null : this.getTipoEstrutura().duplicate(bag));
+			ec.setTipoModelo(this.getTipoModelo() == null ? null : this.getTipoModelo().duplicate(bag));
+		}
+		return (EstruturaClassificacao) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<EstruturaClassificacao></meta>
+  <meta attribute="extra-classe" inherit="false">
+@Indexed(index="EstruturaClassificacao")
+@FullTextFilterDefs({
+	@FullTextFilterDef(name= "estruturaTipoClassificacaoFiltro", impl = FiltroEstruturaTipoClassificacaoFactory.class),
+	@FullTextFilterDef(name= "estruturaTipoModeloFiltro", impl = FiltroEstruturaTipoModeloFactory.class)
+})
+	</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.Indexed</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDefs</meta>
+  <meta attribute="extra-import" inherit="false">org.hibernate.search.annotations.FullTextFilterDef</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoClassificacaoFactory</meta>
+  <meta attribute="extra-import" inherit="false">br.com.linkdata.filter.FiltroEstruturaTipoModeloFactory</meta>
+  <meta attribute="extra-import" inherit="false">java.util.List</meta>
+  <meta attribute="extra-import" inherit="false">java.util.ArrayList</meta>
+<column name="ID_TP_MODELO" />
+   </many-to-one>
+
+</class>
+
+</hibernate-mapping>

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.Convocacao" table="Convocacao" abstract="true" persister="org.hibernate.persister.entity.UnionSubclassEntityPersister">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</meta>
+        <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+        <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <column name="ID_CONVOCACAO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_CONVOCACAO</param>
+            </generator>
+        </id>
+        <property name="dataHora" type="timestamp" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <column name="DT_CONVOCACAO" />
+        </property>
+        <many-to-one name="formaConvocacao" class="br.com.linkdata.entity.FormaConvocacao" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <column name="ID_FORMA_CONVOCACAO" />
+        </many-to-one>
+        <many-to-one name="fornecedor" class="br.com.linkdata.entity.Fornecedor" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <column name="ID_FORNECEDOR" />
+        </many-to-one>
+        <list name="pendencias" inverse="false" table="PENDENCIA" lazy="true" cascade="persist,merge" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <key>
+                <column name="ID_CONVOCACAO" />
+            </key>
+            <index column="ID_PENDENCIA" />
+            <one-to-many class="br.com.linkdata.entity.Pendencia" />
+        </list>
+        <property name="prazoResposta" type="java.lang.Integer" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <column name="PRAZO_RESPOSTA" />
+        </property>
+        <many-to-one name="processoAquisicaoContrato" class="br.com.linkdata.entity.ProcessoAquisicaoContrato" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <column name="ID_PROCESSO_AQUISICAO" />
+        </many-to-one>
+        <many-to-one name="tipoDia" class="br.com.linkdata.entity.TipoDia" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="extra-classe" inherit="false">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Inheritance</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.InheritanceType</meta>
+            <column name="ID_TIPO_DIA" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+
+<class
+    name="br.com.linkdata.entity.TipoClassificacaoModelo"
+    table="TIPO_CLASSIFICACAO_MODELO"
+>
+  <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<TipoClassificacaoModelo></meta>
+  <meta attribute="class-code" inherit="false">
+	@Override
+	public Object getChave() {
+		return getCodigo();
+	}
+
+	public TipoClassificacaoModelo duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			TipoClassificacaoModelo tcm = new TipoClassificacaoModelo();
+			try {
+				PropertyUtils.copyProperties(tcm,this);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			bag.store(this,tcm);
+		}
+		return (TipoClassificacaoModelo) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="extra-import" inherit="false">org.apache.commons.beanutils.PropertyUtils</meta>
+
+	<id 
+        name="id"
+        type="java.lang.Long"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+  <meta attribute="class-code" inherit="false">
+	@Override
+	public Object getChave() {
+		return getCodigo();
+	}
+
+	public TipoClassificacaoModelo duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			TipoClassificacaoModelo tcm = new TipoClassificacaoModelo();
+			try {
+				PropertyUtils.copyProperties(tcm,this);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			bag.store(this,tcm);
+		}
+		return (TipoClassificacaoModelo) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<TipoClassificacaoModelo></meta>
+  <meta attribute="extra-import" inherit="false">org.apache.commons.beanutils.PropertyUtils</meta>
+    
+<column name="ID_TP_CLASS_MODELO" precision="12" scale="0" />
+	    <generator class="sequence">
+            <param name="max_lo">49</param>
+            <param name="sequence">SQ_TP_CLASS_MODELO</param>
+		</generator>
+    </id>
+
+
+
+
+    <property
+        name="codigo"
+	    type="java.lang.String"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+  <meta attribute="class-code" inherit="false">
+	@Override
+	public Object getChave() {
+		return getCodigo();
+	}
+
+	public TipoClassificacaoModelo duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			TipoClassificacaoModelo tcm = new TipoClassificacaoModelo();
+			try {
+				PropertyUtils.copyProperties(tcm,this);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			bag.store(this,tcm);
+		}
+		return (TipoClassificacaoModelo) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<TipoClassificacaoModelo></meta>
+  <meta attribute="extra-import" inherit="false">org.apache.commons.beanutils.PropertyUtils</meta>
+<column name="CD_TP_CLASS_MODELO" length="10" not-null="true" />
+  </property>
+
+    <property
+        name="descricao"
+	    type="java.lang.String"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+  <meta attribute="class-code" inherit="false">
+	@Override
+	public Object getChave() {
+		return getCodigo();
+	}
+
+	public TipoClassificacaoModelo duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			TipoClassificacaoModelo tcm = new TipoClassificacaoModelo();
+			try {
+				PropertyUtils.copyProperties(tcm,this);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			bag.store(this,tcm);
+		}
+		return (TipoClassificacaoModelo) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<TipoClassificacaoModelo></meta>
+  <meta attribute="extra-import" inherit="false">org.apache.commons.beanutils.PropertyUtils</meta>
+<column name="DS_TP_CLASS_MODELO" length="80" not-null="true" />
+  </property>
+
+    <property
+        name="explicacao"
+	    type="java.lang.String"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+  <meta attribute="class-code" inherit="false">
+	@Override
+	public Object getChave() {
+		return getCodigo();
+	}
+
+	public TipoClassificacaoModelo duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			TipoClassificacaoModelo tcm = new TipoClassificacaoModelo();
+			try {
+				PropertyUtils.copyProperties(tcm,this);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			bag.store(this,tcm);
+		}
+		return (TipoClassificacaoModelo) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<TipoClassificacaoModelo></meta>
+  <meta attribute="extra-import" inherit="false">org.apache.commons.beanutils.PropertyUtils</meta>
+<column name="EXPLICACAO" length="150" />
+  </property>
+
+    <property
+        name="show"
+	    type="java.lang.Boolean"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+  <meta attribute="class-code" inherit="false">
+	@Override
+	public Object getChave() {
+		return getCodigo();
+	}
+
+	public TipoClassificacaoModelo duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			TipoClassificacaoModelo tcm = new TipoClassificacaoModelo();
+			try {
+				PropertyUtils.copyProperties(tcm,this);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			bag.store(this,tcm);
+		}
+		return (TipoClassificacaoModelo) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<TipoClassificacaoModelo></meta>
+  <meta attribute="extra-import" inherit="false">org.apache.commons.beanutils.PropertyUtils</meta>
+<column name="IND_SHOW" not-null="true" />
+  </property>
+
+    <property
+        name="situacao"
+	    type="java.lang.String"
+        access="field"
+    >
+  <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+  <meta attribute="class-code" inherit="false">
+	@Override
+	public Object getChave() {
+		return getCodigo();
+	}
+
+	public TipoClassificacaoModelo duplicate(DuplicateBag bag) {
+		if(bag.fits(this)){
+			TipoClassificacaoModelo tcm = new TipoClassificacaoModelo();
+			try {
+				PropertyUtils.copyProperties(tcm,this);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			bag.store(this,tcm);
+		}
+		return (TipoClassificacaoModelo) bag.retrieve(this);
+	}
+	</meta>
+  <meta attribute="implements" inherit="false">br.com.linkdata.entity.Duplicate<TipoClassificacaoModelo></meta>
+  <meta attribute="extra-import" inherit="false">org.apache.commons.beanutils.PropertyUtils</meta>
+<column name="SITUACAO" length="2" />
+  </property>
+
+
+</class>
+
+</hibernate-mapping>

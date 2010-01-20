@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.FidelizacaoVeiculo" table="FIDELIZACAO_VEICULO">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_FIDELIZACAO_VEICULO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_FIDELIZACAO_VEICULO</param>
+            </generator>
+        </id>
+        <property name="cargoAutoridade" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="DS_CARGO_AUTORIDADE" length="80" not-null="true" />
+        </property>
+        <many-to-one name="motorista" class="br.com.linkdata.entity.Motorista" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_MOTORISTA" />
+        </many-to-one>
+        <property name="nomeAutoridade" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="NM_AUTORIDADE" length="80" not-null="true" />
+        </property>
+        <many-to-one name="veiculo" class="br.com.linkdata.entity.Veiculo" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_VEICULO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

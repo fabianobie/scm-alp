@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.UserDefinedRange" table="USER_DEFINED_RANGE">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_UDR" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_UDR</param>
+            </generator>
+        </id>
+        <property name="column" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="NM_CAMPO" />
+        </property>
+        <many-to-one name="userDefinedEntity" class="br.com.linkdata.entity.UserDefinedEntity" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_UDE" />
+        </many-to-one>
+        <set name="userDefinedFields" inverse="true" lazy="true" table="USER_DEFINED_FIELD" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <key>
+                <column name="ID_UDR" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.UserDefinedField" />
+        </set>
+        <set name="userDefinedRangeValues" inverse="true" lazy="true" table="USER_DEFINED_RANGE_VALUE" cascade="persist,merge,delete" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <key>
+                <column name="ID_UDR" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.UserDefinedRangeValue" />
+        </set>
+    </class>
+</hibernate-mapping>

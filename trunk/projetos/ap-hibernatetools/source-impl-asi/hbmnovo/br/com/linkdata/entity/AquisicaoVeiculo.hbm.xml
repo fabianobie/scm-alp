@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.AquisicaoVeiculo" table="AQUISICAO_VEICULO">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_AQUISICAO_VEICULO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_AQUISICAO_VEICULO</param>
+            </generator>
+        </id>
+        <property name="adquirente" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="NM_ADQUIRENTE" length="80" />
+        </property>
+        <property name="dataAquisicao" type="date" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="DT_AQUISICAO" />
+        </property>
+        <many-to-one name="tipoAquisicaoVeiculo" class="br.com.linkdata.entity.TipoAquisicaoVeiculo" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_TIPO_AQUISICAO_VEICULO" />
+        </many-to-one>
+        <many-to-one name="veiculo" class="br.com.linkdata.entity.Veiculo" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <column name="ID_VEICULO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

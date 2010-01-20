@@ -14,7 +14,6 @@
     ${pojo.getPropertySetModifiers(property)} void setId(${pojo.getJavaTypeName(property, jdk5)} id) {
         this.id = id;
     }
-
 <#else>
 	/**
 	 * @return O valor do atributo ${property.name}
@@ -29,7 +28,6 @@
 	${pojo.getPropertySetModifiers(property)} void set${pojo.getPropertyName(property)}(${pojo.getJavaTypeName(property, jdk5)} ${property.name}) {
         this.${property.name} = ${property.name};
     }
-    
 </#if>
 </#if>
 </#foreach>

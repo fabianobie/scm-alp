@@ -50,12 +50,19 @@ public class GeradorEntityPojoClass extends EntityPOJOClass {
 	public String getImplementsDeclaration() {
 		String resultado = StringFactory.getInstancia().novaString();
 		String implementz = getImplements();
-		implementz = UtilString.remover(implementz, Serializable.class.getName());
+		String extendz = getExtends();
+		if (!UtilString.isVazio(extendz)) {
+			implementz = UtilString.remover(implementz, Serializable.class.getName());
+		}
 		implementz = UtilString.trim(implementz);
 		
 		if (!UtilString.isVazio(implementz)) {
 			resultado = "implements " + importType(implementz);
 		}
+		
+//		if (UtilString.isVazio(extendz, resultado)) {
+//			resultado = "implements " + importType("java.io.Serializable");
+//		}
 		return resultado;
 	}
 	

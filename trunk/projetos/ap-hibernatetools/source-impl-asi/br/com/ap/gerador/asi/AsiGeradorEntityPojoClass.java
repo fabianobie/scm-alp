@@ -6,11 +6,14 @@
 package br.com.ap.gerador.asi;
 
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
+import org.hibernate.cfg.Configuration;
 import org.hibernate.id.MultipleHiLoPerTableGenerator;
 import org.hibernate.id.PersistentIdentifierGenerator;
+import org.hibernate.mapping.Column;
 import org.hibernate.mapping.Component;
 import org.hibernate.mapping.KeyValue;
 import org.hibernate.mapping.MetaAttribute;
@@ -61,6 +64,22 @@ public class AsiGeradorEntityPojoClass extends GeradorEntityPojoClass {
 		}
 		return resultado.toString();
 	}
+	
+	public String generateCollectionAnnotation(Property property, Configuration cfg) {
+		
+		if (property.getName().equals("valores")) {
+			Iterator<Column> iterator = ((org.hibernate.mapping.Set)property.getValue()).getKey().getColumnIterator();
+			while (iterator.hasNext()) {
+				Column c = iterator.next();
+				if (c.getName().equals("ID_VALORCARAC_CS")) {
+					c.setName("ID_CARACT_SERVICO");
+				}
+			}
+			
+		}
+		return super.generateCollectionAnnotation(property, cfg);
+	}
+
 	public String generateAnnIdGenerator() {
 		KeyValue identifier = clazz.getIdentifier();
 		String strategy = null;

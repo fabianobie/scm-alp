@@ -11,20 +11,4 @@ ALTER TABLE frotasweb.localidade drop CONSTRAINT fk_situacao_cidade;
 ALTER TABLE frotasweb.localidade ADD CONSTRAINT fk_localidade_situacao_cidade FOREIGN KEY(ind_ativo) REFERENCES frotasweb.sim_nao(id_sim_nao);
 
 HBM'S >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-Onde o estado do component Identidade foi comentado:
-FornecedorPF.hbm.xml
-Responsavel.hbm.xml
-Motorista.hbm.xml
-
-Mudei o sequence class de native para sequence em todos os hbm's.
-
-O CustomAuditoria tem mais um monte de atributos que não foram gerados, as vezes o hbm não está atualizado com a Entidade atual.
-
-alteradas depois de finalizado
-    U  C:/java/projetos/entities/src/main/java/br/com/linkdata/entity/CaracteristicaVeiculo.java
-    U  C:/java/projetos/entities/src/main/java/br/com/linkdata/entity/Material.java
-    U  C:/java/projetos/entities/src/main/java/br/com/linkdata/entity/MarcaVeiculo.java
-    U  C:/java/projetos/entities/src/main/java/br/com/linkdata/entity/Veiculo.java
-    U  C:/java/projetos/entities/src/main/java/br/com/linkdata/entity/Parcela.java
-    U  C:/java/projetos/entities/src/main/java/br/com/linkdata/entity/UnidadeMedida.java
-    U  C:/java/projetos/entities/src/main/java/br/com/linkdata/entity/UnidadeOrganizacional.java
+Remover o queryname findByIdOrNomeCount da entidade FiltroModeloDocumento

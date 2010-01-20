@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.RoleFunction" table="AUTZ_ROLE_FUNCTION">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="ID_ROLE_FUNCTION" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_ROLE_FUNCTION</param>
+            </generator>
+        </id>
+        <set name="actions" inverse="true" lazy="false" table="AUTZ_ROLE_FUNC_ACT" cascade="persist,delete" fetch="join">
+            <key>
+                <column name="ID_ROLE_FUNCTION" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.RoleFunctionAction" />
+        </set>
+        <property name="functionId" type="java.lang.String" access="field">
+            <column name="ID_FUNCTION" />
+        </property>
+        <property name="moduleId" type="java.lang.String" access="field">
+            <column name="ID_MODULE" />
+        </property>
+        <many-to-one name="systemAccess" class="br.com.linkdata.entity.SystemAccess" access="field" fetch="join">
+            <column name="ID_SYSTEM_ACCESS" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

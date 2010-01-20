@@ -14,6 +14,7 @@
 	<table-filter match-name="jbpm_.*" exclude="true" />
 	<table-filter match-name="autz_.*" exclude="true" />
 	<table-filter match-name=".*_aud" exclude="true" />
+	<table-filter match-name="ttpool.*" exclude="true" />
 	<table-filter match-name="aquisicao_local_entrega" exclude="true" />
 	<table-filter match-name="grupo_man_servico_email" exclude="true" />
 	<table-filter match-name="grupo_manutencao_servico" exclude="true" />
@@ -54,6 +55,7 @@
 	<table-filter match-name="carteira_nac_habilitacao" exclude="true" />
 	<table-filter match-name="cbo" exclude="true" />
 	<table-filter match-name="cidade" exclude="true" />
+	<table-filter match-name="classificacao_documento" exclude="true" />
 	<table-filter match-name="codigo_postal" exclude="true" />
 	<table-filter match-name="coluna_modelo_caracteristica" exclude="true" />
 	<table-filter match-name="comprador" exclude="true" />
@@ -245,6 +247,7 @@
 	<table-filter match-name="tipo_dado" exclude="true" />
 	<table-filter match-name="tipo_dia" exclude="true" />
 	<table-filter match-name="tipo_diaria_missao" exclude="true" />
+	<table-filter match-name="tipo_documento" exclude="true" />
 	<table-filter match-name="tp_doc_habilitacao" exclude="true" />
 	<table-filter match-name="tipo_dotacao" exclude="true" />
 	<table-filter match-name="tipo_estrutura" exclude="true" />
@@ -303,6 +306,12 @@
 	</table-filter>
 
 <!-- RELAÇÃO DE TABELAS ####################################################################### -->
-
+	<table name="motivo_faturamento_rejeitado">
+		<meta attribute="extends"/>
+	</table>
+	
+	<table name="periodo_faturamento_ordem_servico_abast_ticket_car">
+		<meta attribute="extends"/>
+	</table>
 <!-- FIM RELAÇÃO DE TABELAS ################################################################### -->
 </hibernate-reverse-engineering>

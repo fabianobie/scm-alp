@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.AgregacaoIndice" table="AGREGACAO_INDICE">
+        <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+            <column name="ID_AGREGACAO_INDICE" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_AGREGACAO_INDICE</param>
+            </generator>
+        </id>
+        <property name="codigo" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+            <column name="CD_AGREGACAO_INDICE" length="10" not-null="true" />
+        </property>
+        <property name="descricao" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+            <column name="DS_AGREGACAO_INDICE" length="80" not-null="true" />
+        </property>
+        <property name="show" type="java.lang.Boolean" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.domain.ElementoDeDominio</meta>
+            <column name="IND_SHOW" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

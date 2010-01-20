@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.Localidade" table="LOCALIDADE">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+        <meta attribute="extra-classe" inherit="false">@Audited @UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="C&#243;digo", fieldName="codigo"),
+        @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+        <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+        <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+        <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+        <meta attribute="extra-import" inherit="false">org.hibernate.envers.NotAudited</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited @UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="C&#243;digo", fieldName="codigo"),
+            @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.NotAudited</meta>
+            <column name="ID_LOCALIDADE" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_LOCALIDADE</param>
+            </generator>
+        </id>
+        <property name="codigo" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited @UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="C&#243;digo", fieldName="codigo"),
+            @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.NotAudited</meta>
+            <column name="CD_LOCALIDADE" length="10" not-null="true" />
+        </property>
+        <property name="codigoDDD" type="java.lang.Integer" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited @UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="C&#243;digo", fieldName="codigo"),
+            @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.NotAudited</meta>
+            <column name="CD_DDD" precision="2" scale="0" />
+        </property>
+        <property name="dataDesativacao" type="java.util.Date" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited @UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="C&#243;digo", fieldName="codigo"),
+            @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.NotAudited</meta>
+            <column name="DT_DESATIVACAO" />
+        </property>
+        <bag name="enderecos" table="ENDERECO" inverse="true" lazy="false" cascade="merge,save-update" fetch="join">
+            <meta attribute="meta-enderecos" inherit="false">@NotAudited</meta>
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited @UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="C&#243;digo", fieldName="codigo"),
+            @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.NotAudited</meta>
+            <key>
+                <column name="ID_LOCALIDADE" />
+            </key>
+            <one-to-many class="br.com.linkdata.entity.Endereco" />
+        </bag>
+        <many-to-one name="estado" class="br.com.linkdata.entity.Estado" access="field" fetch="select">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited @UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="C&#243;digo", fieldName="codigo"),
+            @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="meta-estado" inherit="false">@NotAudited</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.NotAudited</meta>
+            <column name="ID_ESTADO" />
+        </many-to-one>
+        <property name="idIntegracao" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited @UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="C&#243;digo", fieldName="codigo"),
+            @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.NotAudited</meta>
+            <column name="ID_INTEGRACAO" />
+        </property>
+        <property name="nome" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited @UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="C&#243;digo", fieldName="codigo"),
+            @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.NotAudited</meta>
+            <column name="NM_LOCALIDADE" length="80" not-null="true" />
+        </property>
+        <many-to-one name="situacao" class="br.com.linkdata.entity.SimNao" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.ExclusaoLogica</meta>
+            <meta attribute="extra-classe" inherit="false">@Audited @UniqueCompositeConstraint( fields={ @UniqueCompositeField(fieldLabel="C&#243;digo", fieldName="codigo"),
+            @UniqueCompositeField(fieldLabel="Nome", fieldName="nome") } )</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.Audited</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeConstraint</meta>
+            <meta attribute="extra-import" inherit="false">br.com.linkdata.businessrule.uniqueconstraint.UniqueCompositeField</meta>
+            <meta attribute="extra-import" inherit="false">org.hibernate.envers.NotAudited</meta>
+            <column name="IND_ATIVO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

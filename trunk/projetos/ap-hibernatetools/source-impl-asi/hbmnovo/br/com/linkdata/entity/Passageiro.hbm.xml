@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
+<hibernate-mapping>
+    <class name="br.com.linkdata.entity.Passageiro" table="PASSAGEIRO">
+        <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+        <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaFisica</meta>
+        <meta attribute="class-code" inherit="false">@Override @Deprecated /** * M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para
+        esse campo negocialmente falando */ public EstadoCivil getEstadoCivil() { // TODO Auto-generated method stub return null; } @Override @Deprecated /** * M&#233;todo
+        adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse campo negocialmente falando */ public Endereco getEndereco() { // TODO
+        Auto-generated method stub return null; } @Override @Deprecated /** * M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse
+        campo negocialmente falando */ public String getNacionalidade() { // TODO Auto-generated method stub return null; } @Override @Deprecated /** * M&#233;todo adicionado para
+        obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse campo negocialmente falando */ public String getCpf() { // TODO Auto-generated method stub return
+        null; } @Override @Deprecated /** * M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse campo negocialmente falando */
+        @Embedded public Identidade getIdentidade() { // TODO Auto-generated method stub return null; } @SuppressWarnings("unchecked") @Override public boolean equals(Object obj)
+        { if (obj instanceof Passageiro) { Passageiro pass = (Passageiro) obj; return pass.getId() == this.getId() ? pass.getId() == null ? pass
+        .getNome().equalsIgnoreCase(this.getNome()) ? true : false : true : false; } return false; }</meta>
+        <meta attribute="extra-classe" inherit="false">@Roles( { @Role(name = "passageiroRequisicaoTransporte", scope = ScopeType.CONVERSATION), @Role(name =
+        "passageiroSelecionado", scope = ScopeType.CONVERSATION) })</meta>
+        <meta attribute="extra-import" inherit="false">javax.persistence.Embedded</meta>
+        <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+        <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+        <id name="id" type="java.lang.Long" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">@Override @Deprecated /** * M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto *
+            para esse campo negocialmente falando */ public EstadoCivil getEstadoCivil() { // TODO Auto-generated method stub return null; } @Override @Deprecated /** *
+            M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse campo negocialmente falando */ public Endereco getEndereco() { //
+            TODO Auto-generated method stub return null; } @Override @Deprecated /** * M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto *
+            para esse campo negocialmente falando */ public String getNacionalidade() { // TODO Auto-generated method stub return null; } @Override @Deprecated /** * M&#233;todo
+            adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse campo negocialmente falando */ public String getCpf() { // TODO Auto-generated
+            method stub return null; } @Override @Deprecated /** * M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse campo
+            negocialmente falando */ @Embedded public Identidade getIdentidade() { // TODO Auto-generated method stub return null; } @SuppressWarnings("unchecked") @Override
+            public boolean equals(Object obj) { if (obj instanceof Passageiro) { Passageiro pass = (Passageiro) obj; return pass.getId() == this.getId() ? pass.getId() == null ?
+            pass .getNome().equalsIgnoreCase(this.getNome()) ? true : false : true : false; } return false; }</meta>
+            <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaFisica</meta>
+            <meta attribute="extra-classe" inherit="false">@Roles( { @Role(name = "passageiroRequisicaoTransporte", scope = ScopeType.CONVERSATION), @Role(name =
+            "passageiroSelecionado", scope = ScopeType.CONVERSATION) })</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Embedded</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <column name="ID_PASSAGEIRO" precision="12" scale="0" />
+            <generator class="sequence">
+                <param name="max_lo">49</param>
+                <param name="sequence">SQ_PASSAGEIRO</param>
+            </generator>
+        </id>
+        <property name="nome" type="java.lang.String" access="field">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">@Override @Deprecated /** * M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto *
+            para esse campo negocialmente falando */ public EstadoCivil getEstadoCivil() { // TODO Auto-generated method stub return null; } @Override @Deprecated /** *
+            M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse campo negocialmente falando */ public Endereco getEndereco() { //
+            TODO Auto-generated method stub return null; } @Override @Deprecated /** * M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto *
+            para esse campo negocialmente falando */ public String getNacionalidade() { // TODO Auto-generated method stub return null; } @Override @Deprecated /** * M&#233;todo
+            adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse campo negocialmente falando */ public String getCpf() { // TODO Auto-generated
+            method stub return null; } @Override @Deprecated /** * M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse campo
+            negocialmente falando */ @Embedded public Identidade getIdentidade() { // TODO Auto-generated method stub return null; } @SuppressWarnings("unchecked") @Override
+            public boolean equals(Object obj) { if (obj instanceof Passageiro) { Passageiro pass = (Passageiro) obj; return pass.getId() == this.getId() ? pass.getId() == null ?
+            pass .getNome().equalsIgnoreCase(this.getNome()) ? true : false : true : false; } return false; }</meta>
+            <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaFisica</meta>
+            <meta attribute="extra-classe" inherit="false">@Roles( { @Role(name = "passageiroRequisicaoTransporte", scope = ScopeType.CONVERSATION), @Role(name =
+            "passageiroSelecionado", scope = ScopeType.CONVERSATION) })</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Embedded</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <column name="NM_PASSAGEIRO" length="80" not-null="true" />
+        </property>
+        <many-to-one name="telefoneContato" class="br.com.linkdata.entity.Telefone" access="field" cascade="persist,merge,delete" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">@Override @Deprecated /** * M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto *
+            para esse campo negocialmente falando */ public EstadoCivil getEstadoCivil() { // TODO Auto-generated method stub return null; } @Override @Deprecated /** *
+            M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse campo negocialmente falando */ public Endereco getEndereco() { //
+            TODO Auto-generated method stub return null; } @Override @Deprecated /** * M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto *
+            para esse campo negocialmente falando */ public String getNacionalidade() { // TODO Auto-generated method stub return null; } @Override @Deprecated /** * M&#233;todo
+            adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse campo negocialmente falando */ public String getCpf() { // TODO Auto-generated
+            method stub return null; } @Override @Deprecated /** * M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse campo
+            negocialmente falando */ @Embedded public Identidade getIdentidade() { // TODO Auto-generated method stub return null; } @SuppressWarnings("unchecked") @Override
+            public boolean equals(Object obj) { if (obj instanceof Passageiro) { Passageiro pass = (Passageiro) obj; return pass.getId() == this.getId() ? pass.getId() == null ?
+            pass .getNome().equalsIgnoreCase(this.getNome()) ? true : false : true : false; } return false; }</meta>
+            <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaFisica</meta>
+            <meta attribute="extra-classe" inherit="false">@Roles( { @Role(name = "passageiroRequisicaoTransporte", scope = ScopeType.CONVERSATION), @Role(name =
+            "passageiroSelecionado", scope = ScopeType.CONVERSATION) })</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Embedded</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <column name="ID_TELEFONE" />
+        </many-to-one>
+        <many-to-one name="tipoPassageiro" class="br.com.linkdata.entity.TipoPassageiro" access="field" fetch="join">
+            <meta attribute="extends" inherit="false">br.com.linkdata.entity.Entity</meta>
+            <meta attribute="class-code" inherit="false">@Override @Deprecated /** * M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto *
+            para esse campo negocialmente falando */ public EstadoCivil getEstadoCivil() { // TODO Auto-generated method stub return null; } @Override @Deprecated /** *
+            M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse campo negocialmente falando */ public Endereco getEndereco() { //
+            TODO Auto-generated method stub return null; } @Override @Deprecated /** * M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto *
+            para esse campo negocialmente falando */ public String getNacionalidade() { // TODO Auto-generated method stub return null; } @Override @Deprecated /** * M&#233;todo
+            adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse campo negocialmente falando */ public String getCpf() { // TODO Auto-generated
+            method stub return null; } @Override @Deprecated /** * M&#233;todo adicionado para obdecer a interface IPessoaFisica, n&#227;o h&#225; requisto * para esse campo
+            negocialmente falando */ @Embedded public Identidade getIdentidade() { // TODO Auto-generated method stub return null; } @SuppressWarnings("unchecked") @Override
+            public boolean equals(Object obj) { if (obj instanceof Passageiro) { Passageiro pass = (Passageiro) obj; return pass.getId() == this.getId() ? pass.getId() == null ?
+            pass .getNome().equalsIgnoreCase(this.getNome()) ? true : false : true : false; } return false; }</meta>
+            <meta attribute="implements" inherit="false">br.com.linkdata.interfaces.IPessoaFisica</meta>
+            <meta attribute="extra-classe" inherit="false">@Roles( { @Role(name = "passageiroRequisicaoTransporte", scope = ScopeType.CONVERSATION), @Role(name =
+            "passageiroSelecionado", scope = ScopeType.CONVERSATION) })</meta>
+            <meta attribute="extra-import" inherit="false">javax.persistence.Embedded</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Roles</meta>
+            <meta attribute="extra-import" inherit="false">org.jboss.seam.annotations.Role</meta>
+            <column name="ID_TIPO_PASSAGEIRO" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
