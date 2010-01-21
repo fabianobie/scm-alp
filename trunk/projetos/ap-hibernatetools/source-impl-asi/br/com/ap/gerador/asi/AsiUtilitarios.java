@@ -47,8 +47,8 @@ public class AsiUtilitarios {
 
 		try {
 			//gerarNomesParaReveng();
-			//gerarNomesParaPersistence();
-			gerarNamedQueries();
+			gerarNomesParaPersistence();
+			//gerarNamedQueries();
 			//listarClassesQueNaoSaoEntidades();
 		} catch (Exception e) {
 			e.printStackTrace();
