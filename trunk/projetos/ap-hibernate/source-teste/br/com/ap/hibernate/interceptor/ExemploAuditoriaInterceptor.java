@@ -20,7 +20,6 @@ import org.hibernate.type.Type;
 import teste.entidade.Campo;
 import teste.entidade.Tabela;
 import br.com.ap.comum.array.UtilArray;
-import br.com.ap.comum.javabean.entidade.Entidade;
 
 /**
  * @author adrianop
@@ -34,7 +33,7 @@ public class ExemploAuditoriaInterceptor extends
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	protected <T extends Entidade> T doMontarEntidadeDeAuditoria(
+	protected <T extends Object> T doMontarEntidadeDeAuditoria(
 			Object entidade, Object entidadeAntiga, Serializable acao) {
 
 		Table table = getAnotacaoDeTabela(entidade);
