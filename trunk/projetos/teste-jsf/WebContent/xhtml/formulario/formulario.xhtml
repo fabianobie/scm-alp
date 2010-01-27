@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition template="/xhtml/layout/layout-tela.xhtml">
+		<ui:define name="body">
+			<h:form id="form">
+				<h:panelGrid columns="1">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="inputTextString" for="txtInputTextString" />
+						<h:inputText id="txtInputTextString" value="#{FormularioAction.inputTextString}" />
+						
+						<h:outputLabel value="inputTextData" for="txtInputTextData" />
+						<h:inputText id="txtInputTextData" value="#{FormularioAction.inputTextData}" label="inputTextData">
+							<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" type="date"/>
+						</h:inputText>
+						
+						<h:outputLabel value="inputTextNumerico" for="txtInputTextNumerico" />
+						<h:inputText id="txtInputTextNumerico" value="#{FormularioAction.inputTextNumerico}" label="inputTextData" >
+							<f:convertNumber locale="pt_BR" 
+								maxFractionDigits="2"
+								maxIntegerDigits="3"
+								minFractionDigits="2"
+								minIntegerDigits="3"/>
+						</h:inputText>
+						
+						<h:outputLabel value="inputSecret" for="txtInputSecret" />
+						<h:inputSecret id="txtInputSecret" value="#{FormularioAction.inputSecret}" />
+						
+						<h:outputLabel value="inputTextarea" for="txtInputTextarea" />
+						<h:inputTextarea id="txtInputTextarea" value="#{FormularioAction.inputTextarea}" cols="100" rows="2" label="inputTextarea"/>
+						
+						<h:outputLabel value="selectManyCheckbox" for="chkSelectManyCheckbox"/>
+						<h:selectManyCheckbox id="chkSelectManyCheckbox" value="#{FormularioAction.selectManyCheckbox}">
+							<f:selectItem itemValue="01" itemLabel="Opção 1"/>
+							<f:selectItem itemValue="02" itemLabel="Opção 2"/>
+							<f:selectItem itemValue="03" itemLabel="Opção 3"/>
+						</h:selectManyCheckbox>
+						
+						<h:outputLabel value="selectManyListbox" for="cboSelectManyListbox"/>
+						<h:selectManyListbox id="cboSelectManyListbox" value="#{FormularioAction.selectManyListbox}" size="2">
+							<f:selectItem itemValue="01" itemLabel="Opção 1"/>
+							<f:selectItem itemValue="02" itemLabel="Opção 2"/>
+							<f:selectItem itemValue="03" itemLabel="Opção 3"/>
+						</h:selectManyListbox>
+						
+						<h:outputLabel value="selectManyMenu" for="cboSelectManyMenu"/>
+						<h:selectManyMenu id="cboSelectManyMenu" value="#{FormularioAction.selectManyMenu}">
+							<f:selectItem itemValue="01" itemLabel="Opção 1"/>
+							<f:selectItem itemValue="02" itemLabel="Opção 2"/>
+							<f:selectItem itemValue="03" itemLabel="Opção 3"/>
+						</h:selectManyMenu>
+						
+						<h:outputLabel value="selectBooleanCheckbox" for="chkSelectBooleanCheckbox"/>
+						<h:selectBooleanCheckbox id="chkSelectBooleanCheckbox" value="#{FormularioAction.selectBooleanCheckbox}"/>
+						
+						<h:outputLabel value="selectOneListbox" for="cboSelectOneListbox"/>
+						<h:selectOneListbox id="cboSelectOneListbox" value="#{FormularioAction.selectOneListbox}">
+							<f:selectItem itemValue="01" itemLabel="Opção 1"/>
+							<f:selectItem itemValue="02" itemLabel="Opção 2"/>
+							<f:selectItem itemValue="03" itemLabel="Opção 3"/>
+						</h:selectOneListbox>
+						
+						<h:outputLabel value="selectOneMenu" for="cboSelectOneMenu"/>
+						<h:selectOneMenu id="cboSelectOneMenu" value="#{FormularioAction.selectOneMenu}">
+							<f:selectItem itemValue="01" itemLabel="Opção 1"/>
+							<f:selectItem itemValue="02" itemLabel="Opção 2"/>
+							<f:selectItem itemValue="03" itemLabel="Opção 3"/>
+						</h:selectOneMenu>
+						
+						<h:outputLabel value="selectOneRadio" for="cboSelectOneRadio"/>
+						<h:selectOneRadio id="cboSelectOneRadio" value="#{FormularioAction.selectOneRadio}">
+							<f:selectItem itemValue="01" itemLabel="Opção 1"/>
+							<f:selectItem itemValue="02" itemLabel="Opção 2"/>
+							<f:selectItem itemValue="03" itemLabel="Opção 3"/>
+						</h:selectOneRadio>
+						
+						<h:outputLabel value="selectItems" for="cboSelectItems"/>
+						<h:selectOneMenu id="cboSelectItems" value="#{FormularioAction.selectItems}">
+							<f:selectItems value="#{FormularioAction.listaSelectItems}"/>
+						</h:selectOneMenu>
+					</h:panelGrid>
+					
+					<h:panelGroup>
+						<h:commandButton action="#{FormularioAction.acaoEnviar}" value="Enviar" />  
+						<h:commandLink action="#{FormularioAction.acaoEnviar}" value="Enviar" />
+					</h:panelGroup>
+				</h:panelGrid>
+				<hr/>
+				<h:commandLink action="#{PrincipalAction.acaoPrincipal}" value="Voltar" immediate="true"/>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>
