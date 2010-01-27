@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich"
+	  xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition template="/xhtml/layout/layout-tela.xhtml">
+		<ui:define name="stylesheet">
+			.dr-mpnl-pnl{
+				border: 1px solid #FFF;
+				border-top: 1px solid #FFF;
+			}
+			
+			.dr-mpnl-pnl-h{
+				background-color: none;
+				border-color: #FFF;
+				border-width: 1px;
+				border-top: #FFF;
+				border-bottom: #FFF;
+			}
+		</ui:define>
+		<ui:define name="body">
+			<h:form id="form">
+				<a4j:status id="status_carregando"
+					onstart="Richfaces.showModalPanel('form:panel');" 
+					onstop="Richfaces.hideModalPanel('form:panel')"/>
+				<rich:modalPanel id="panel"
+					width="150" 
+					height="100" 
+					moveable="false"
+					resizeable="false"
+					styleClass="ajaxStatus">
+					<center>
+						<h:graphicImage value="/imagem/ajax_process.gif"/>
+					</center>
+				</rich:modalPanel>
+	            
+				<a4j:commandButton value="Envia" action="#{StatusAction.acaoExecutar}" />
+				
+				<hr/>
+				<h:commandLink action="#{PrincipalAction.acaoPrincipal}" value="Voltar" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

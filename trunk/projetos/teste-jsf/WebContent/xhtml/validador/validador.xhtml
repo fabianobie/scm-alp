@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:testejsf="http://testejsf/tags">
+
+	<ui:composition template="/xhtml/layout/layout-tela.xhtml">
+		<ui:define name="body">
+			<h:form id="form">
+				<h:panelGrid columns="1">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Required" for="txtStringRequired" />
+						<h:inputText id="txtStringRequired" required="true" label="Required" value="Default"/>
+					
+						<h:outputLabel value="Data (dd/MM/yyyy)" for="txtStringData" />
+						<h:inputText id="txtStringData" label="Data">
+							<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy" type="date"/>
+						</h:inputText>
+
+						<h:outputLabel value="Hora (hh:mm)" for="txtStringHora" />
+						<h:inputText id="txtStringHora" label="Hora">
+							<f:convertDateTime locale="pt_BR" pattern="hh:mm" type="time"/>
+						</h:inputText>
+
+						<h:outputLabel value="Inteiro" for="txtInteiro" />
+						<h:inputText id="txtInteiro" label="Inteiro">
+							<f:convertNumber locale="pt_BR" type="number"/>
+						</h:inputText>
+
+						<h:outputLabel value="Real" for="txtReal" />
+						<h:inputText id="txtReal" label="Real">
+							<f:convertNumber locale="pt_BR" pattern="##0,00" maxFractionDigits="2" maxIntegerDigits="3"/>
+						</h:inputText>
+
+						<h:outputLabel value="DoubleRange 0-5" for="txtDoubleRange" />
+						<h:inputText id="txtDoubleRange" label="DoubleRange">
+							<f:validateDoubleRange minimum="0" maximum="5"/>
+						</h:inputText>
+
+						<h:outputLabel value="Length 0-10" for="txtLength" title="Usado para textos"/>
+						<h:inputText id="txtLength" label="Length">
+							<f:validateLength minimum="0" maximum="10"/>
+						</h:inputText>
+
+						<h:outputLabel value="LongRange 0-10" for="txtLongRange" title="Usado para números"/>
+						<h:inputText id="txtLongRange" label="LongRange">
+							<f:validateLongRange minimum="0" maximum="10"/>
+						</h:inputText>
+
+						<h:outputLabel value="CPF (personalizado)" for="txtCPF"/>
+						<h:inputText id="txtCPF" label="CPF">
+							<f:validator validatorId="CPFValidator"/>
+						</h:inputText>
+
+						<h:outputLabel value="Opçoes (M,F) (personalizado)" for="txtOpcoes" title="Validador personalizado com opções"/>
+						<h:inputText id="txtOpcoes" label="Opçoes">
+							<testejsf:opcoesValidator opcoes="M,F"/>
+						</h:inputText>
+					</h:panelGrid>
+					<h:commandButton action="#{ValidadorAction.acaoEnviar}" value="Enviar" />		
+				</h:panelGrid>
+				
+				<hr/>
+				<h:commandLink action="#{PrincipalAction.acaoPrincipal}" value="Voltar" immediate="true"/>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

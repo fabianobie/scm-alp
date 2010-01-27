@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://testejsf/tags">
+
+	<ui:composition template="xhtml/layout/layout-tela.xhtml">
+		<ui:define name="body">
+			<h:form id="form">
+				<hr/>
+				Java Server Faces:<br/>
+				<h:commandLink action="#{PrincipalAction.acaoPrincipal}" value="Principal" />
+				<br/>
+				<h:commandLink action="#{FormularioAction.acaoCarregar}" value="Formulário" />
+				<br/>
+				<h:commandLink action="#{MensagemAction.acaoCarregar}" value="Mensagens" />
+				<br/>
+				<h:commandLink action="#{EventoAction.acaoCarregar}" value="Eventos de Formulário" />
+				<br/>
+				<h:commandLink action="#{ValidadorAction.acaoCarregar}" value="Validador" />
+				<br/>
+				<h:commandLink action="#{ConversorAction.acaoCarregar}" value="Conversor" />
+				<br/>
+				<h:commandLink action="#{ComponenteAction.acaoCarregar}" value="Componente" />
+				<br/>
+				<h:commandLink action="#{PainelAction.acaoCarregar}" value="Paineis" />
+				<br/>
+				<h:commandLink action="#{DataTableAction.acaoCarregar}" value="DataTable" />
+				<br/>
+				<h:commandLink action="#{ListenerAction.acaoCarregar}" value="Listener" />
+				<br/>
+				<h:commandLink action="#{PhaseListenerAction.acaoCarregar}" value="PhaseListener" />
+				<br/>
+				<h:commandLink action="#{ELAction.acaoCarregar}" value="EL Personalizadas" />
+				<br/>
+				<h:commandLink action="#{CrudAction.acaoCarregar}" value="CRUD" />
+				<br/>
+				<hr/>
+				Facelets:<br/>
+				<h:commandLink action="#{FaceletAction.acaoCarregarComposicao}" value="Composição Facelet - NOK" />
+				<br/>
+				<hr/>
+				RichFaces:<br/>
+				<h:commandLink action="#{JQueryAction.acaoCarregar}" value="JQuery" />
+				<br/>
+				<h:commandLink action="#{StatusAction.acaoCarregar}" value="Status" />
+				<br/>
+				<h:commandLink action="#{PaginacaoAction.acaoCarregar}" value="Paginação" />
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>
