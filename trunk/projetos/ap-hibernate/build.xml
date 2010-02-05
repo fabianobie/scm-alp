@@ -13,6 +13,7 @@
 		<antcall target="package-bin"/>
 		<antcall target="package-src"/>
 		<antcall target="package-dep"/>
+		<antcall target="copiar-para-dependentes"/>
 	</target>
 			
 	<target name="compile">
@@ -46,5 +47,9 @@
 			<fileset dir="${source.lib}" excludes="${package.dep.exclude}">
 			</fileset>
 		</zip>
+	</target>
+	
+	<target name="copiar-para-dependentes">
+		<copy file="${package.path}${package.bin.name}" todir="C:/java/projetos-pessoais/ap-jbpm/projeto/build/lib/"/>
 	</target>
 </project>

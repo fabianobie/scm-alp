@@ -52,6 +52,15 @@ public abstract class InterceptorAbstrato extends EmptyInterceptor {
 	}
 
 	/**
+	 * Retorna o session factory do hibernate.
+	 * 
+	 * @return session factory.
+	 */
+	protected void setSessionFactory(SessionFactory sessionFactory) {
+		HibernateHolder.setSessionFactory(sessionFactory);
+	}
+
+	/**
 	 * Retorna o valor da propriedade da entidade do tipo pojo. Se o valor da
 	 * propriedade não exisitr no metadata da classe o respectivo valor será
 	 * recuperado por reflexão. A reflexão é usada para recuperar o valor dos

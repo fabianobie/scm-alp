@@ -21,6 +21,7 @@ import org.hibernate.Transaction;
 import org.hibernate.type.Type;
 
 import br.com.ap.comum.fabrica.ColecaoFactory;
+import br.com.ap.comum.javabean.entidade.Entidade;
 import br.com.ap.comum.objeto.UtilObjeto;
 import br.com.ap.comum.validador.UtilValidadorDeNumerosIguais;
 import br.com.ap.hibernate.annotation.Auditoria;
@@ -55,7 +56,7 @@ public abstract class AuditoriaAnnotationInterceptorAbstrato extends
 
 		if (isAuditarInclusao(entidade)) {
 			Serializable acao = getValorDaPropriedadeDeAcao(Acao.getInclusao());
-			Object e = doMontarEntidadeDeAuditoria(entidade, null, acao);
+			Entidade e = doMontarEntidadeDeAuditoria(entidade, null, acao);
 			if (isReferencia(e)) {
 				getSession().save(e);
 			}
@@ -76,7 +77,7 @@ public abstract class AuditoriaAnnotationInterceptorAbstrato extends
 			HibernateHolder.setAcaoDeExclusao();
 
 			Serializable acao = getValorDaPropriedadeDeAcao(Acao.getExclusao());
-			Object e = doMontarEntidadeDeAuditoria(entidade, null, acao);
+			Entidade e = doMontarEntidadeDeAuditoria(entidade, null, acao);
 			if (isReferencia(e)) {
 				getSession().save(e);
 			}
@@ -122,7 +123,7 @@ public abstract class AuditoriaAnnotationInterceptorAbstrato extends
 			Object entidadeAntiga = getSession().get(classeEntidadeAntiga, pk);
 
 			if (entidade != entidadeAntiga) {
-				Object e = doMontarEntidadeDeAuditoria(entidade,
+				Entidade e = doMontarEntidadeDeAuditoria(entidade,
 				        entidadeAntiga, acao);
 				if (isReferencia(e)) {
 					Session sessao = getSession();
@@ -176,7 +177,7 @@ public abstract class AuditoriaAnnotationInterceptorAbstrato extends
 	 * @param acao Ação executada. (Ex: Acao.getInclusao())
 	 * @return Entidade que representa a auditoria.
 	 */
-	protected abstract <T extends Object> T doMontarEntidadeDeAuditoria(
+	protected abstract <T extends Entidade> T doMontarEntidadeDeAuditoria(
 	        Object entidade, Object entidadeAntiga, Serializable acao);
 
 	/**
