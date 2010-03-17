@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 19/01/2010 11:40:23 by Hibernate Tools 3.2.5.Beta -->
-<hibernate-mapping>
-    <union-subclass name="br.com.linkdata.entity.ConvocacaoAutomaticaAssinatura" extends="br.com.linkdata.entity.Convocacao" table="CONVOCACAO_AUTOMATICA_ASS"></union-subclass>
-</hibernate-mapping>
