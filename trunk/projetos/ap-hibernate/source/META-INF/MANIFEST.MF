@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-Created-By: Adriano Pamplona
-Implementation-Title: Arquitetura STJ
-Implementation-Version: 1.0.0
-
